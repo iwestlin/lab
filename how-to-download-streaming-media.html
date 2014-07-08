@@ -1,0 +1,327 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>/* Fonts */
+@font-face{
+  font-family: octicons-anchor;
+  src: url(data:x-font-woff;charset=utf-8;base64,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) format('woff');
+}
+
+/* Body */
+html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+
+body{
+  color:#4d4d4c;
+  font-family:Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman',
+              "Hiragino Sans GB", "STXihei", "微软雅黑", serif;
+  font-size:12px;
+  line-height:1.5em;
+  background:#fefefe;
+  width: 45em;
+  margin: 10px auto;
+  padding: 30px;
+  border: 1px solid #ddd;
+  outline: 1300px solid #f8f8f8;
+}
+
+/* Links */
+a{ color: #06d; text-decoration:none; }
+a:hover{ color: #06e; text-decoration: underline; }
+a:active{ color:#faa700; }
+a:focus{ outline: thin dotted; }
+a:hover, a:active{ outline: 0; }
+
+::-moz-selection { background:rgba(255,255,0,0.3); color:#000 }
+::selection { background:rgba(255,255,0,0.3); color:#000 }
+
+a::-moz-selection { background:rgba(255,255,0,0.3); color:#0645ad }
+a::selection { background:rgba(255,255,0,0.3); color:#0645ad }
+
+/* Header Anchor Links*/
+a.headeranchor-link {
+  color:#111;
+  border: 0;
+  margin-left: -20px;
+  padding-right: 6px;
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+span.headeranchor {
+  font: normal normal 16px octicons-anchor;
+  line-height: 1;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+a.headeranchor-link:hover { text-decoration: none;}
+a.headeranchor-link:visited { color:#4d4d4c; }
+a.headeranchor-link:active { color:#4d4d4c; }
+a.headeranchor-link:hover span.headeranchor:before { content: '\f05c'; }
+h1:hover a span.headeranchor:before { content: '\f05c'; }
+h2:hover a span.headeranchor:before { content: '\f05c'; }
+h3:hover a span.headeranchor:before { content: '\f05c'; }
+h4:hover a span.headeranchor:before { content: '\f05c'; }
+h5:hover a span.headeranchor:before { content: '\f05c'; }
+h6:hover a span.headeranchor:before { content: '\f05c'; }
+
+/* Paragraphs */
+p { margin:1em 0; }
+
+/* Images */
+img {
+  max-width:100%;
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+  vertical-align: middle;
+}
+
+/* Headers */
+h1,h2,h3,h4,h5,h6 {
+  font-weight:normal;
+  color:#111;
+  line-height: 1.7;
+  position: relative;
+}
+h4,h5,h6{ font-weight: bold; }
+h1 { font-size:2.5em; border-bottom: 1px solid #ddd;}
+h2 { font-size:2em; border-bottom:1px solid #eee; padding-bottom: 5px; }
+h3 { font-size:1.5em; }
+h4 { font-size:1.2em; }
+h5 { font-size:1em; }
+h6 { font-size:0.9em; }
+
+/* Block Quotes */
+blockquote {
+  color:#666666;
+  margin:0;
+  padding-left: 3em;
+  border-left: 0.5em #EEE solid;
+}
+hr { display: block; height: 2px; border: 0; border-top: 1px solid #aaa;border-bottom: 1px solid #eee; margin: 1em 0; padding: 0; }
+
+/* Raw Blocks */
+span.backtick {
+  border:1px solid #EAEAEA;
+  border-radius:3px;
+  background:#F8F8F8;
+  padding:0 3px 0 3px;
+}
+
+pre, code, kbd, samp {
+  color: #000;
+  font-family: monospace;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 0.88em;
+  background-color: #F8F8F8;
+  border: 1px solid #CCC;
+}
+
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  padding: 10px;
+}
+
+pre code { border: 0 }
+
+code { padding: 0 3px 0 3px; }
+
+/* Multimarkdown Critic Blocks */
+span.critic_mark { background: #ff0; }
+span.critic_delete { color: #c82829; text-decoration: line-through; }
+span.critic_insert { color: #718c00 ; text-decoration: underline; }
+span.critic_comment { color: #8e908c; font-style: italic; }
+
+/* Inlines */
+b, strong { font-weight: bold; }
+
+ins { background: #ff9; color: #000; text-decoration: none; }
+
+mark { background: #ff0; color: #000; font-style: italic; font-weight: bold; }
+
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+dfn { font-style: italic; }
+
+/* Lists */
+ul, ol { margin: 0.5em 0; padding: 0 0 0 2em; }
+li p:last-child { margin:0 }
+li.task-list-item { list-style-type: none; margin-left: -1.5em; }
+li.task-list-item input { margin-right: .5em; }
+li.task-list-item ul, li.task-list-item ol { margin-left: 1.5em; }
+dd { margin: 0 0 0 2em; }
+
+/* Tables */
+table { border-collapse: collapse; border: 1px solid #ddd; }
+table tr:nth-child(2n) { background-color: #f8f8f8; }
+td, th { border: 1px solid #ddd; padding: 6px 13px; }
+
+/* Codehilite Tables */
+table.codehilitetable { border: 0; border-spacing: 0; width: 100%; }
+td.linenos, td.code, table.codehilitetable td { border: 0; padding: 0; }
+table.codehilitetable td:not(.linenos) div.linenodiv { padding: 0 !important; }
+td.code { width: 100%; }
+table.codehilitetable td.linenos div pre, td div.linenodiv pre {
+  border: 0;
+  border-top: 1px solid #CCC;
+  border-left: 1px solid #CCC;
+  border-right: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+table.codehilitetable td.code div pre {
+  border: 0;
+  border-top: 1px solid #CCC;
+  border-right: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+/* Media */
+@media only screen and (min-width: 480px) {
+  body{ font-size:14px; }
+}
+
+@media only screen and (min-width: 768px) {
+  body{ font-size:16px; }
+}
+
+@media print {
+  * { background: transparent !important; color: black !important; filter:none !important; -ms-filter: none !important; }
+  body{ font-size:12pt; max-width:100%; outline:none; border: 0;}
+  a, a:visited { text-decoration: underline; }
+  a.headeranchor-link { display: none; }
+  hr { height: 1px; border:0; border-bottom:1px solid black; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
+  pre, blockquote { border: 1px solid #999; padding-right: 1em; page-break-inside: avoid; }
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+}
+
+.toc {
+  position: fixed;
+  font-size: 14px;
+  top: 0px;
+  left: -330px;
+  width: 270px;
+  height: 100%;
+  overflow: -y: scroll;
+  padding: 0 0 0 100px;
+  box-shadow: 1px 0 3px rgba(0,0,0,0.25);
+  transition: all .66s ease-in-out;
+  opacity: .4;
+}
+.toc:hover {
+  left: -120px;
+  transition: all .2s ease-in-out;
+  opacity: .8;
+}
+.toc:before {
+  content: '目录';
+  float: right;
+  font-size: 16px;
+  font-weight: bold;
+}
+.toc:hover:before {
+  display: none;
+}
+.toc ul {
+  list-style-type: none;
+}</style><title>Streaming-media</title></head><body><div class="toc">
+<ul>
+<li><a href="#_1">怎样下载流视频</a><ul>
+<li><a href="#_2">第〇种：使用软件或浏览器扩展</a></li>
+<li><a href="#-">第一种：右键 - 审查元素</a></li>
+<li><a href="#_3">第二种：屏幕录像软件</a></li>
+<li><a href="#-potplayer">第三种：神器 - PotPlayer</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>怎样下载流视频</h1>
+<p><em>声明：</em>本文为本人原创，首发于本人博客<a href="http://blog.westling.im/2014/06/07/how-to-download-streaming-media/">「北纬四十」</a>。本文仅提供方法，对于利用文中方法可能带来的一切侵权行为，本人概不负责。本文欢迎转载，转载请保留此段声明。</p>
+<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>第〇种：使用软件或浏览器扩展</h2>
+<p>这种方法最为简单也最为多样化，在搜索引擎中搜索「在线视频 下载软件」或者「下载在线视频 扩展/插件」，能搜出一大把软件或浏览器扩展。本文不在此做详细介绍，仅推荐三种浏览器扩展，三款扩展皆在优酷中测试有效（测试时间2014-05-19）：</p>
+<blockquote>
+<ul>
+<li><a href="https://addons.mozilla.org/zh-tw/firefox/addon/netvideohunter-video-downloade/">NetVideoHunter for firefox</a></li>
+<li><a href="https://chrome.google.com/webstore/detail/nmooccaahcnklpchbhngkbliaejhndmo">FLVCD在线视频解析右键扩展 for chrome</a></li>
+<li><a href="https://chrome.google.com/webstore/detail/lfmhcpmkbdkbgbmkjoiopeeegenkdikp">FVD Downloader for chrome</a></li>
+</ul>
+</blockquote>
+<p>对了,再补充一个下载在线音乐的扩展——<a href="https://chrome.google.com/webstore/detail/%E5%A3%B0%E6%B5%B7%E7%9B%97/idleenniidjlnmnjkjmmnocnkmjibadd">声海盗</a>。</p>
+<p>使用浏览器扩展下载流媒体的好处是方便快捷，但不一定支持所有网站。<br />
+推荐指数：★★★★</p>
+<h2 id="-"><a name="user-content--" href="#-" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>第一种：右键 - 审查元素</h2>
+<p>现代浏览器基本都有「审查元素」的功能，这里以chrome为例。<br />
+<img alt="Developer Tools" src="http://pic-share.qiniudn.com/0519-1.png" /><br />
+「审查元素」实际上是chrome的开发者工具，主要用来给前端工程师查看网页源码和做测试，除了能用<em>右键-审查元素</em>、<em>设置-工具-开发者工具</em>这两种方法打开外，也可以用快捷键<code>ctrl+shift+i</code>打开。<br />
+这里以爱奇艺为例：打开任意视频播放页面，开启开发者工具后，刷新页面，播放视频。然后点击<code>Network</code>，再点击<code>Size</code>从大到小排列，最后直接选取最大的f4v文件，点击即可下载：<br />
+<img alt="Network" src="http://pic-share.qiniudn.com/0519-2.png" /><br />
+<em>需要注意</em>的是，此方法可能对一些视频网站无效，也有可能一些视频由于尺寸过大会被分为若干个f4v文件。<br />
+推荐指数：★★★</p>
+<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>第二种：屏幕录像软件</h2>
+<p>这种方法可以说是最让视频网站头疼也最无从防范的了，也可以说，这种方法比较流氓，无视一切视频加密手段……<br />
+这里推荐一个屏幕录像软件——「屏幕录像专家」。它可以选择录像的范围、编码以及格式，非常适合录制视频教程，但录制在线视频的时候由于生成的并非原始流媒体，所以画质、音质等会比其它方法下载到的资源低。所以比较适合在其他方法都失效的情况下使用。<br />
+<img alt="屏幕录像专家" src="http://pic-share.qiniudn.com/0519-3.png" /><br />
+推荐指数：★★☆</p>
+<h2 id="-potplayer"><a name="user-content--potplayer" href="#-potplayer" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>第三种：神器 - PotPlayer</h2>
+<p>这种方法是作者灵机一动，脑洞大开的产物。<br />
+缘故是在帮同学下视频的时候，使用扩展或控制台都没法下载，用录像软件的话又太麻烦且质量不高；不过在审查元素（步骤如图）的时候发现了这个：<br />
+<img alt="Elements" src="http://pic-share.qiniudn.com/0519-4.png" /><br />
+注意到红框内的这个链接：<code>rtmp://video.cas.cn/fmsApp/13b2b252d37.flv</code>，这不正是我想要的视频文件地址吗！<br />
+然而，直接将此链接黏贴到浏览器却无法访问，用其它方法也无法下载。于是我搜索了一下<a href="https://en.wikipedia.org/wiki/Real_Time_Messaging_Protocol">rtmp</a>，它实际上是<a href="https://en.wikipedia.org/wiki/Iptv">IPTV</a>的一种，而我们常用的<em>北邮人IPTV</em>不正是可以在PotPlaye上直接播放吗<sup id="fnref:iptv"><a class="footnote-ref" href="#fn:iptv" rel="footnote">1</a></sup>……<br />
+于是，我将这个链接复制进PotPlayer中，直接就能播放！<br />
+<img alt="pp" src="http://pic-share.qiniudn.com/0519-5.png" /><br />
+而到了PotPlayer里，事情就好办多了。使用PotPlayer录制视频：<br />
+设置视频编码、码率、格式、存档文件夹等必要信息以后，点击开始，播放视频，就可以自动录制了，这时把播放器窗口最小化、关掉声音都行！<br />
+<img alt="capture" src="http://pic-share.qiniudn.com/0519-6.png" /><br />
+为了节省时间，可以选用快放功能<sup id="fnref:fast"><a class="footnote-ref" href="#fn:fast" rel="footnote">2</a></sup>，这样就可以用较短的时间录完较长的视频了。考虑到各处网络条件不同，应选用适当的快放倍率，在防止卡顿的前提下节省时间。<br />
+<img alt="fast" src="http://pic-share.qiniudn.com/0519-7.png" /><br />
+当然，也有通过rtmp链接直接下载视频文件的方法<sup id="fnref:otherway"><a class="footnote-ref" href="#fn:otherway" rel="footnote">3</a></sup>。<br />
+推荐指数：★★★☆</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:iptv">
+<p>参见：<a href="http://www.oiegg.com/viewthread.php?tid=1519679&#160;"><a href="http://www.oiegg.com/viewthread.php?tid=1519679&#160;"><a href="http://www.oiegg.com/viewthread.php?tid=1519679&#160;">http://www.oiegg.com/viewthread.php?tid=1519679&#160;</a></a></a><a class="footnote-backref" href="#fnref:iptv" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:fast">
+<p>亲测使用快放功能对录制视频的结果无影响。&#160;<a class="footnote-backref" href="#fnref:fast" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:otherway">
+<p>参见：<a href="http://blog.ilc.edu.tw/blog/blog/3639/post/35645/266782"><a href="http://blog.ilc.edu.tw/blog/blog/3639/post/35645/266782"><a href="http://blog.ilc.edu.tw/blog/blog/3639/post/35645/266782">http://blog.ilc.edu.tw/blog/blog/3639/post/35645/266782</a></a></a> （未亲测）&#160;<a class="footnote-backref" href="#fnref:otherway" rev="footnote" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></body></html>
