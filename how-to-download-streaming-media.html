@@ -249,6 +249,7 @@ table.codehilitetable td.code div pre {
 }
 .toc:before {
   content: '目录';
+  padding-right: 4px;
   float: right;
   font-size: 16px;
   font-weight: bold;
@@ -258,21 +259,25 @@ table.codehilitetable td.code div pre {
 }
 .toc ul {
   list-style-type: none;
+}
+
+img {
+  margin: 10px;
+  box-shadow: 2px 2px 10px;
 }</style><title>Streaming-media</title></head><body><div class="toc">
 <ul>
-<li><a href="#_1">怎样下载流视频</a><ul>
-<li><a href="#_2">第〇种：使用软件或浏览器扩展</a></li>
-<li><a href="#-">第一种：右键 - 审查元素</a></li>
-<li><a href="#_3">第二种：屏幕录像软件</a></li>
-<li><a href="#-potplayer">第三种：神器 - PotPlayer</a></li>
+<li><a href="#_1">怎样下载在线视频</a><ul>
+<li><a href="#_2">使用软件或浏览器扩展</a></li>
+<li><a href="#-">右键 - 审查元素</a></li>
+<li><a href="#_3">屏幕录像软件</a></li>
+<li><a href="#-potplayer">神器 - PotPlayer</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>怎样下载流视频</h1>
-<p><em>声明：</em>本文为本人原创，首发于本人博客<a href="http://blog.westling.im/2014/06/07/how-to-download-streaming-media/">「北纬四十」</a>。本文仅提供方法，对于利用文中方法可能带来的一切侵权行为，本人概不负责。本文欢迎转载，转载请保留此段声明。</p>
-<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>第〇种：使用软件或浏览器扩展</h2>
-<p>这种方法最为简单也最为多样化，在搜索引擎中搜索「在线视频 下载软件」或者「下载在线视频 扩展/插件」，能搜出一大把软件或浏览器扩展。本文不在此做详细介绍，仅推荐三种浏览器扩展，三款扩展皆在优酷中测试有效（测试时间2014-05-19）：</p>
+<h1 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>怎样下载在线视频</h1>
+<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>使用软件或浏览器扩展</h2>
+<p>这种方法最为简单也最为多样化，在搜索引擎中搜索「在线视频 下载软件」或者「下载在线视频 扩展/插件」，能搜出许多软件或浏览器扩展。本文不在此做详细介绍，仅推荐三种浏览器扩展，皆在优酷中测试有效（测试时间2014-05-19）：</p>
 <blockquote>
 <ul>
 <li><a href="https://addons.mozilla.org/zh-tw/firefox/addon/netvideohunter-video-downloade/">NetVideoHunter for firefox</a></li>
@@ -280,48 +285,35 @@ table.codehilitetable td.code div pre {
 <li><a href="https://chrome.google.com/webstore/detail/lfmhcpmkbdkbgbmkjoiopeeegenkdikp">FVD Downloader for chrome</a></li>
 </ul>
 </blockquote>
-<p>对了,再补充一个下载在线音乐的扩展——<a href="https://chrome.google.com/webstore/detail/%E5%A3%B0%E6%B5%B7%E7%9B%97/idleenniidjlnmnjkjmmnocnkmjibadd">声海盗</a>。</p>
+<p>再补充一个下载在线音乐的扩展——<a href="https://chrome.google.com/webstore/detail/%E5%A3%B0%E6%B5%B7%E7%9B%97/idleenniidjlnmnjkjmmnocnkmjibadd">声海盗</a>。</p>
 <p>使用浏览器扩展下载流媒体的好处是方便快捷，但不一定支持所有网站。<br />
 推荐指数：★★★★</p>
-<h2 id="-"><a name="user-content--" href="#-" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>第一种：右键 - 审查元素</h2>
+<h2 id="-"><a name="user-content--" href="#-" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>右键 - 审查元素</h2>
 <p>现代浏览器基本都有「审查元素」的功能，这里以chrome为例。<br />
 <img alt="Developer Tools" src="http://pic-share.qiniudn.com/0519-1.png" /><br />
-「审查元素」实际上是chrome的开发者工具，主要用来给前端工程师查看网页源码和做测试，除了能用<em>右键-审查元素</em>、<em>设置-工具-开发者工具</em>这两种方法打开外，也可以用快捷键<code>ctrl+shift+i</code>打开。<br />
+「审查元素」实际上是chrome的开发者工具，主要用来给前端工程师查看网页源码和做测试，除了能用<em>右键-审查元素</em>、<em>设置-工具-开发者工具</em>这两种方法打开外，也可以用快捷键<kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>i</kbd>打开。<br />
 这里以爱奇艺为例：打开任意视频播放页面，开启开发者工具后，刷新页面，播放视频。然后点击<code>Network</code>，再点击<code>Size</code>从大到小排列，最后直接选取最大的f4v文件，点击即可下载：<br />
 <img alt="Network" src="http://pic-share.qiniudn.com/0519-2.png" /><br />
 <em>需要注意</em>的是，此方法可能对一些视频网站无效，也有可能一些视频由于尺寸过大会被分为若干个f4v文件。<br />
 推荐指数：★★★</p>
-<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>第二种：屏幕录像软件</h2>
-<p>这种方法可以说是最让视频网站头疼也最无从防范的了，也可以说，这种方法比较流氓，无视一切视频加密手段……<br />
-这里推荐一个屏幕录像软件——「屏幕录像专家」。它可以选择录像的范围、编码以及格式，非常适合录制视频教程，但录制在线视频的时候由于生成的并非原始流媒体，所以画质、音质等会比其它方法下载到的资源低。所以比较适合在其他方法都失效的情况下使用。<br />
+<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>屏幕录像软件</h2>
+<p>这种方法可以说是最让视频网站头疼也最无从防范的了，换句话说，这种方法比较流氓，无视一切视频加密手段……<br />
+这里推荐一款屏幕录像软件——「屏幕录像专家」。它可以选择录像的范围、编码以及格式，非常适合录制教程视频，但录制在线视频的时候由于生成的并非原始流媒体，所以画质、音质等会比其它方法下载到的资源低。所以比较适合在其他方法都失效的情况下使用。<br />
 <img alt="屏幕录像专家" src="http://pic-share.qiniudn.com/0519-3.png" /><br />
 推荐指数：★★☆</p>
-<h2 id="-potplayer"><a name="user-content--potplayer" href="#-potplayer" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>第三种：神器 - PotPlayer</h2>
-<p>这种方法是作者灵机一动，脑洞大开的产物。<br />
-缘故是在帮同学下视频的时候，使用扩展或控制台都没法下载，用录像软件的话又太麻烦且质量不高；不过在审查元素（步骤如图）的时候发现了这个：<br />
-<img alt="Elements" src="http://pic-share.qiniudn.com/0519-4.png" /><br />
-注意到红框内的这个链接：<code>rtmp://video.cas.cn/fmsApp/13b2b252d37.flv</code>，这不正是我想要的视频文件地址吗！<br />
-然而，直接将此链接黏贴到浏览器却无法访问，用其它方法也无法下载。于是我搜索了一下<a href="https://en.wikipedia.org/wiki/Real_Time_Messaging_Protocol">rtmp</a>，它实际上是<a href="https://en.wikipedia.org/wiki/Iptv">IPTV</a>的一种，而我们常用的<em>北邮人IPTV</em>不正是可以在PotPlaye上直接播放吗<sup id="fnref:iptv"><a class="footnote-ref" href="#fn:iptv" rel="footnote">1</a></sup>……<br />
-于是，我将这个链接复制进PotPlayer中，直接就能播放！<br />
-<img alt="pp" src="http://pic-share.qiniudn.com/0519-5.png" /><br />
+<h2 id="-potplayer"><a name="user-content--potplayer" href="#-potplayer" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>神器 - PotPlayer</h2>
+<p>这种方法是本人灵机一动脑洞大开的产物，如有雷同，来干我啊。<br />
+有一次在帮同学下视频的时候，使用扩展或控制台都没法下载，用录像软件的话又太麻烦且质量不高；不过在审查元素（步骤如图）的时候发现了这个：<br />
+<img alt="Inspect Elements" src="http://pic-share.qiniudn.com/0519-4.png" /><br />
+注意到红框内的这个链接：<code>rtmp://video.cas.cn/fmsApp/13b2b252d37.flv</code>，正是我们想要下载的视频文件地址。<br />
+然而，直接将此链接黏贴到浏览器却无法访问，用其它方法也无法下载。于是谷歌了一下<a href="https://en.wikipedia.org/wiki/Real_Time_Messaging_Protocol">rtmp</a>，它实际上是<a href="https://en.wikipedia.org/wiki/Iptv">IPTV</a>的一种，而 PotPlayer 具有直接播放 IPTV 的功能。<br />
+于是，将这个链接复制进PotPlayer中，成功播放！<br />
+<img alt="PotPlayer" src="http://pic-share.qiniudn.com/0519-5.png" /><br />
 而到了PotPlayer里，事情就好办多了。使用PotPlayer录制视频：<br />
 设置视频编码、码率、格式、存档文件夹等必要信息以后，点击开始，播放视频，就可以自动录制了，这时把播放器窗口最小化、关掉声音都行！<br />
-<img alt="capture" src="http://pic-share.qiniudn.com/0519-6.png" /><br />
-为了节省时间，可以选用快放功能<sup id="fnref:fast"><a class="footnote-ref" href="#fn:fast" rel="footnote">2</a></sup>，这样就可以用较短的时间录完较长的视频了。考虑到各处网络条件不同，应选用适当的快放倍率，在防止卡顿的前提下节省时间。<br />
-<img alt="fast" src="http://pic-share.qiniudn.com/0519-7.png" /><br />
-当然，也有通过rtmp链接直接下载视频文件的方法<sup id="fnref:otherway"><a class="footnote-ref" href="#fn:otherway" rel="footnote">3</a></sup>。<br />
-推荐指数：★★★☆</p>
-<div class="footnote">
-<hr />
-<ol>
-<li id="fn:iptv">
-<p>参见：<a href="http://www.oiegg.com/viewthread.php?tid=1519679&#160;"><a href="http://www.oiegg.com/viewthread.php?tid=1519679&#160;"><a href="http://www.oiegg.com/viewthread.php?tid=1519679&#160;">http://www.oiegg.com/viewthread.php?tid=1519679&#160;</a></a></a><a class="footnote-backref" href="#fnref:iptv" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-<li id="fn:fast">
-<p>亲测使用快放功能对录制视频的结果无影响。&#160;<a class="footnote-backref" href="#fnref:fast" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
-</li>
-<li id="fn:otherway">
-<p>参见：<a href="http://blog.ilc.edu.tw/blog/blog/3639/post/35645/266782"><a href="http://blog.ilc.edu.tw/blog/blog/3639/post/35645/266782"><a href="http://blog.ilc.edu.tw/blog/blog/3639/post/35645/266782">http://blog.ilc.edu.tw/blog/blog/3639/post/35645/266782</a></a></a> （未亲测）&#160;<a class="footnote-backref" href="#fnref:otherway" rev="footnote" title="Jump back to footnote 3 in the text">&#8617;</a></p>
-</li>
-</ol>
-</div></body></html>
+<img alt="录制视频" src="http://pic-share.qiniudn.com/0519-6.png" /><br />
+为了节省时间，可以选用快放功能，这样就可以用较短的时间录完较长的视频了。考虑到各处网络条件不同，应选用适当的快放倍率，在防止卡顿的前提下节省时间。<br />
+<img alt="快放" src="http://pic-share.qiniudn.com/0519-7.png" /><br />
+当然，也有通过rtmp链接直接下载视频文件的方法，不过需要安装相应软件，大家可自行搜索。<br />
+PotPlayer 能否下载其它协议的流视频本人并未测试，期待大家能够发掘它更多更强大的功能。<br />
+推荐指数：★★★☆</p></body></html>
