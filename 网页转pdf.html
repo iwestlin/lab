@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>web page to pdf - using convertapi.com</title>
+    <style type="text/css">
+    body {
+      margin: 0 auto;
+      width: 500px;
+    }
+    a {
+    	text-decoration: none;
+    	color: blue;
+    }
+    input {
+    	width: 300px;
+    }
+    #LabelMessage {
+    	color: red;
+    }
+    </style>
+    <script type="text/javascript" src="http://cdnjscn.b0.upaiyun.com/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <p>请输入网址:</p><input type="text" id="txtUrl" name="txtUrl" value="http://www.oiegg.com/index.php" />
+    <p>请输入apikey：</p><input id="txtApiKey" type="text" value="348604161" />
+    <br />
+    <br />
+    <a id="CreatePdf" style="cursor:pointer;">创建PDF</a>
+    <a id="CreateImage" style="cursor:pointer;">创建截图</a> 
+
+    <h2>
+        <a id="HyperLinkFile"></a>
+    </h2>
+    <span id="LabelMessage"></span>
+    <br />
+    <br />
+
+    <script>
+    var serviceUrl;
+    var convertParameter;
+
+
+    jQuery(document).ready(function(){
+        jQuery('#CreatePdf').click(function() {
+            serviceUrl = "http://do.convertapi.com/Web2Pdf/json?";
+            Convert();
+            });
+        jQuery('#CreateImage').click(function() {
+            serviceUrl = "http://do.convertapi.com/Web2Image/json?";
+            Convert();
+            });       
+    });
+
+    function Convert() {
+        convertParameter = "storefile=true&OutputFileName=result&PageNo=false";
+        convertParameter = convertParameter  + "&curl=" + encodeURI(jQuery('#txtUrl').val());
+        convertParameter = convertParameter  + "&ApiKey=" + jQuery('#txtApiKey').val();
+        convertParameter = convertParameter  + "&callback=?"
+    
+        document.getElementById("LabelMessage").innerHTML = '<br >请稍候<br></br>所需时间一般少于30秒';
+        document.getElementById("HyperLinkFile").innerHTML = '';
+
+        jQuery.getJSON(serviceUrl + convertParameter , function(data){
+            if (data.Result == true) {
+                document.getElementById("LabelMessage").innerHTML = '';
+                document.getElementById("HyperLinkFile").href = data.FileUrl;
+                document.getElementById("HyperLinkFile").innerHTML = data.OutputFileName + " (" + data.FileSize +" bytes)";
+            } else {
+                document.getElementById("LabelMessage").innerHTML = "Error:<br />" + data.Error;
+            }
+        });
+    }
+    </script>
+</body>
+
+</html>
