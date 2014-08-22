@@ -1,0 +1,548 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>/* Body */
+html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+
+body{
+  color:#4d4d4c;
+  font-family:Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman',
+              "Hiragino Sans GB", "STXihei", "微软雅黑", serif;
+  font-size:12px;
+  line-height:1.5em;
+  background:#fefefe;
+  width: 45em;
+  margin: 10px auto;
+  padding: 30px;
+  border: 1px solid #ddd;
+  outline: 1300px solid #f8f8f8;
+}
+
+/* Links */
+a{ color: #06d; text-decoration:none; }
+a:hover{ color: #06e; text-decoration: underline; }
+a:active{ color:#faa700; }
+a:focus{ outline: thin dotted; }
+a:hover, a:active{ outline: 0; }
+
+::-moz-selection { background:rgba(255,255,0,0.3); color:#000 }
+::selection { background:rgba(255,255,0,0.3); color:#000 }
+
+a::-moz-selection { background:rgba(255,255,0,0.3); color:#0645ad }
+a::selection { background:rgba(255,255,0,0.3); color:#0645ad }
+
+/* Paragraphs */
+p { margin:1em 0; }
+
+/* Images */
+img {
+  max-width:100%;
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+  vertical-align: middle;
+}
+
+/* Headers */
+h1,h2,h3,h4,h5,h6 {
+  font-weight:normal;
+  color:#111;
+  line-height: 1.7;
+  position: relative;
+}
+h4,h5,h6{ font-weight: bold; }
+h1 { font-size:2.5em; border-bottom: 1px solid #ddd;}
+h2 { font-size:2em; border-bottom:1px solid #eee; padding-bottom: 5px; }
+h3 { font-size:1.5em; }
+h4 { font-size:1.2em; }
+h5 { font-size:1em; }
+h6 { font-size:0.9em; }
+
+/* Block Quotes */
+blockquote {
+  color:#666666;
+  margin:0;
+  padding-left: 3em;
+  border-left: 0.5em #EEE solid;
+}
+hr { display: block; height: 2px; border: 0; border-top: 1px solid #aaa;border-bottom: 1px solid #eee; margin: 1em 0; padding: 0; }
+
+/* Raw Blocks */
+span.backtick {
+  border:1px solid #EAEAEA;
+  border-radius:3px;
+  background:#F8F8F8;
+  padding:0 3px 0 3px;
+}
+
+pre, code, kbd, samp {
+  color: #000;
+  font-family: monospace;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 0.88em;
+  background-color: #F8F8F8;
+  border: 1px solid #CCC;
+}
+
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  padding: 10px;
+}
+
+pre code { border: 0 }
+
+code { padding: 0 3px 0 3px; }
+
+/* Multimarkdown Critic Blocks */
+span.critic_mark { background: #ff0; }
+span.critic_delete { color: #c82829; text-decoration: line-through; }
+span.critic_insert { color: #718c00 ; text-decoration: underline; }
+span.critic_comment { color: #8e908c; font-style: italic; }
+
+/* Inlines */
+b, strong { font-weight: bold; }
+
+ins { background: #ff9; color: #000; text-decoration: none; }
+
+mark { background: #ff0; color: #000; font-style: italic; font-weight: bold; }
+
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+dfn { font-style: italic; }
+
+/* Lists */
+ul, ol { margin: 0.5em 0; padding: 0 0 0 2em; }
+li p:last-child { margin:0 }
+li.task-list-item { list-style-type: none; margin-left: -1.5em; }
+li.task-list-item input { margin-right: .5em; }
+li.task-list-item ul, li.task-list-item ol { margin-left: 1.5em; }
+dd { margin: 0 0 0 2em; }
+
+/* Tables */
+table { border-collapse: collapse; border: 1px solid #ddd; }
+table tr:nth-child(2n) { background-color: #f8f8f8; }
+td, th { border: 1px solid #ddd; padding: 6px 13px; }
+
+/* Codehilite Tables */
+table.codehilitetable { border: 0; border-spacing: 0; width: 100%; }
+td.linenos, td.code, table.codehilitetable td { border: 0; padding: 0; }
+table.codehilitetable td:not(.linenos) div.linenodiv { padding: 0 !important; }
+td.code { width: 100%; }
+table.codehilitetable td.linenos div pre, td div.linenodiv pre {
+  border: 0;
+  border-top: 1px solid #CCC;
+  border-left: 1px solid #CCC;
+  border-right: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+table.codehilitetable td.code div pre {
+  border: 0;
+  border-top: 1px solid #CCC;
+  border-right: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+/* Media */
+@media only screen and (min-width: 480px) {
+  body{ font-size:14px; }
+}
+
+@media only screen and (min-width: 768px) {
+  body{ font-size:16px; }
+}
+
+@media print {
+  * { background: transparent !important; color: black !important; filter:none !important; -ms-filter: none !important; }
+  body{ font-size:12pt; max-width:100%; outline:none; border: 0;}
+  a, a:visited { text-decoration: underline; }
+  hr { height: 1px; border:0; border-bottom:1px solid black; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
+  pre, blockquote { border: 1px solid #999; padding-right: 1em; page-break-inside: avoid; }
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+}
+
+.toc {
+  position: fixed;
+  font-size: 14px;
+  top: 0px;
+  left: -330px;
+  width: 270px;
+  height: 100%;
+  overflow: -y: scroll;
+  padding: 0 0 0 100px;
+  box-shadow: 1px 0 3px rgba(0,0,0,0.25);
+  transition: all .66s ease-in-out;
+  opacity: .4;
+}
+.toc:hover {
+  left: -120px;
+  transition: all .2s ease-in-out;
+  opacity: .8;
+}
+.toc:before {
+  content: '目录';
+  padding-right: 4px;
+  float: right;
+  font-size: 16px;
+  font-weight: bold;
+}
+.toc:hover:before {
+  display: none;
+}
+.toc ul {
+  list-style-type: none;
+}
+
+img {
+  margin: 10px;
+  box-shadow: 2px 2px 10px;
+}</style><title>中文编程书籍索引</title></head><body><div class="toc">
+<ul>
+<li><a href="#_1">参与交流</a></li>
+<li><a href="#_2">目录</a></li>
+<li><a href="#_3">语言无关类</a><ul>
+<li><a href="#_4">操作系统</a></li>
+<li><a href="#web">WEB服务器</a></li>
+<li><a href="#_5">版本控制</a></li>
+<li><a href="#nosql">NoSQL</a></li>
+<li><a href="#mysql">MySQL</a></li>
+<li><a href="#_6">项目相关</a></li>
+<li><a href="#web_1">Web</a></li>
+</ul>
+</li>
+<li><a href="#_7">编程艺术</a></li>
+<li><a href="#_8">语言相关类</a><ul>
+<li><a href="#cc">C/C++</a></li>
+<li><a href="#css">CSS</a></li>
+<li><a href="#dart">Dart</a></li>
+<li><a href="#java">Java</a></li>
+<li><a href="#javascript">JavaScript</a></li>
+<li><a href="#php">PHP</a></li>
+<li><a href="#ios">iOS</a></li>
+<li><a href="#python">Python</a></li>
+<li><a href="#ruby">Ruby</a></li>
+<li><a href="#shell">Shell</a></li>
+<li><a href="#go">Go</a></li>
+<li><a href="#groovy">Groovy</a></li>
+<li><a href="#lisp">LISP</a></li>
+<li><a href="#haskell">Haskell</a></li>
+<li><a href="#scala">Scala</a></li>
+<li><a href="#_9">读书笔记及其它</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>出处：<a href="https://code.csdn.net/JustJavaC/free-programming-books-zh_cn">free-programming-books-zh_CN</a></p>
+<ul>
+<li>国外程序员在 <a href="http://stackoverflow.com/a/1713/343194">stackoverflow</a> 推荐的程序员必读书籍，<a href="http://justjavac.com/other/2012/05/15/qualified-programmer-should-read-what-books.html" title="一个合格的程序员应该读过哪些书">中文版</a>。</li>
+<li><a href="http://stackoverflow.com/q/38210/343194">stackoverflow</a> 上的程序员应该阅读的非编程类书籍有哪些？ <a href="https://code.csdn.net/JustJavaC/free-programming-books-zh_cn/tree/master/what-non-programming-books-should-programmers-read.md">中文版</a></li>
+<li><a href="https://github.com/vhf/free-programming-books">github</a> 上的一个流行的编程书籍索引  <a href="https://github.com/vhf/free-programming-books/blob/master/free-programming-books-zh.md">中文版</a></li>
+</ul>
+<h2 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>参与交流</h2>
+<p>欢迎大家讲珍藏已久的经典免费书籍共享出来，您可以：</p>
+<ul>
+<li>使用 <a href="https://github.com/justjavac/free-programming-books-zh_CN/issues">Issues</a> 以及 Pull Request </li>
+<li>微博 <a href="http://weibo.com/justjavac">http://weibo.com/justjavac</a></li>
+</ul>
+<h2 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>目录</h2>
+<ul>
+<li>
+<p>语言无关类</p>
+</li>
+<li>
+<p>操作系统</p>
+</li>
+<li>WEB服务器</li>
+<li>版本控制</li>
+<li>NoSQL</li>
+<li>MySQL</li>
+<li>项目相关</li>
+<li>Web</li>
+<li>
+<p>编程艺术</p>
+</li>
+<li>
+<p>语言相关类</p>
+</li>
+<li>
+<p>C/C++</p>
+</li>
+<li>CSS</li>
+<li>Dart</li>
+<li>Java</li>
+<li>JavaScript</li>
+<li>PHP</li>
+<li>iOS</li>
+<li>Python</li>
+<li>Ruby</li>
+<li>Shell</li>
+<li>Go</li>
+<li>Groovy</li>
+<li>
+<p>LISP</p>
+</li>
+<li>
+<p>读书笔记及其它</p>
+</li>
+</ul>
+<h2 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>语言无关类</h2>
+<h3 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>操作系统</h3>
+<ul>
+<li><a href="http://i.linuxtoy.org/docs/guide/index.html">开源世界旅行手册</a></li>
+<li><a href="http://vbird.dic.ksu.edu.tw/">鸟哥的Linux私房菜</a> (简体)</li>
+<li><a href="http://sourceforge.net/apps/trac/elpi/wiki/ALP">Linux 系统高级编程</a></li>
+<li><a href="http://billie66.github.io/TLCL/index.html">The Linux Command Line</a> (中英文版)</li>
+</ul>
+<h3 id="web"><a name="user-content-web" href="#web" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>WEB服务器</h3>
+<ul>
+<li><a href="http://tengine.taobao.org/book/index.html">Nginx开发从入门到精通</a> (淘宝团队出品)</li>
+</ul>
+<h3 id="_5"><a name="user-content-_5" href="#_5" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>版本控制</h3>
+<ul>
+<li><a href="http://rogerdudler.github.io/git-guide/index.zh.html">git - 简易指南</a></li>
+<li><a href="http://gitref.justjavac.com">Git 参考手册</a></li>
+<li><a href="http://git-scm.com/book/zh">Pro Git</a></li>
+<li><a href="http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/zh_cn/">Git Magic</a></li>
+<li><a href="http://www.worldhello.net/gotgithub/index.html">GotGitHub</a></li>
+<li><a href="http://mercurial.selenic.com/wiki/ChineseTutorial">Mercurial 使用教程</a></li>
+<li><a href="http://bucunzai.net/hginit/">HgInit (中文版)</a></li>
+</ul>
+<h3 id="nosql"><a name="user-content-nosql" href="#nosql" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>NoSQL</h3>
+<ul>
+<li><a href="http://www.yankay.com/wp-content/NoSql_Database_Note.html">NoSQL数据库笔谈</a> (<a href="http://yankaycom-wordpress.stor.sinaapp.com/uploads/2012/12/NoSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%B0%88v2.pdf">PDF</a>)</li>
+<li><a href="http://www.redisdoc.com/en/latest/">Redis 命令参考</a></li>
+<li><a href="http://www.redisbook.com/en/latest/">Redis 设计与实现</a></li>
+<li><a href="https://github.com/justinyhuang/the-little-mongodb-book-cn/blob/master/mongodb.md">The Little MongoDB Book</a></li>
+<li><a href="https://github.com/JasonLai256/the-little-redis-book/blob/master/cn/redis.md">The Little Redis Book</a></li>
+<li><a href="http://docs.neo4j.org.cn/">Neo4j 简体中文手册 v1.8</a></li>
+<li><a href="http://neo4j.tw/">Neo4j .rb 中文資源</a> </li>
+</ul>
+<h3 id="mysql"><a name="user-content-mysql" href="#mysql" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>MySQL</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/leoo2sk/archive/2011/07/10/mysql-index.html">MySQL索引背后的数据结构及算法原理</a></li>
+</ul>
+<h3 id="_6"><a name="user-content-_6" href="#_6" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>项目相关</h3>
+<ul>
+<li><a href="http://article.yeeyan.org/view/2251/94882">持续集成（第二版）</a> (译言网)</li>
+<li><a href="http://www.ibm.com/developerworks/cn/java/j-ap/">让开发自动化系列专栏</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/java/j-cq/">追求代码质量</a></li>
+<li><a href="https://github.com/fool2fish/selenium-doc">selenium 中文文档</a></li>
+<li><a href="http://local.joelonsoftware.com/wiki/Chinese_(Simplified)">Joel谈软件</a></li>
+<li><a href="http://local.joelonsoftware.com/wiki/%E9%A6%96%E9%A0%81">約耳談軟體(Joel on Software)</a></li>
+</ul>
+<h3 id="web_1"><a name="user-content-web_1" href="#web_1" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Web</h3>
+<ul>
+<li><a href="http://www.20thingsilearned.com/zh-CN/home">关于浏览器和网络的 20 项须知</a> </li>
+<li><a href="http://knowledge.ecomfe.com/">前端知识体系</a></li>
+<li><a href="http://jinlong.github.io/blog/2013/08/29/devtoolsecrets/">浏览器开发工具的秘密</a></li>
+<li><a href="http://open.chrome.360.cn/extension_dev/overview.html">Chrome扩展开发文档</a></li>
+<li><a href="http://www.gruntjs.org/">Grunt中文文档</a></li>
+</ul>
+<h2 id="_7"><a name="user-content-_7" href="#_7" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>编程艺术</h2>
+<ul>
+<li><a href="https://github.com/julycoding/The-Art-Of-Programming-by-July">程序员编程艺术</a></li>
+<li><a href="http://www.oschina.net/translate/what-every-programmer-should-know-about-memory-part1?print">每个程序员都应该了解的内存知识(译)</a>【第一部分】</li>
+</ul>
+<h2 id="_8"><a name="user-content-_8" href="#_8" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>语言相关类</h2>
+<h3 id="cc"><a name="user-content-cc" href="#cc" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>C/C++</h3>
+<ul>
+<li><a href="https://github.com/forhappy/A-Detailed-Cplusplus-Concurrency-Tutorial">C++ 并发编程指南</a> (<a href="http://weibo.com/1702076100">@傅海平ICT</a>)</li>
+<li><a href="http://learn.akae.cn/media/index.html">Linux C编程一站式学习</a> (宋劲杉, 北京亚嵌教育研究中心)</li>
+<li><a href="https://github.com/leeyiw/cgdb-manual-in-chinese">CGDB中文手册</a></li>
+<li><a href="https://github.com/anjuke/zguide-cn">ZMQ 指南</a></li>
+<li><a href="http://www.ituring.com.cn/book/1203">How to Think Like a Computer Scientist</a> (中英文版)</li>
+</ul>
+<h3 id="css"><a name="user-content-css" href="#css" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>CSS</h3>
+<ul>
+<li><a href="http://zh.learnlayout.com/">学习CSS布局</a></li>
+<li><a href="https://github.com/chadluo/CSS-Guidelines/blob/master/README.md">通用 CSS 笔记、建议与指导</a></li>
+</ul>
+<h3 id="dart"><a name="user-content-dart" href="#dart" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Dart</h3>
+<ul>
+<li><a href="http://dart.lidian.info/wiki/Language_Tour">Dart 语言导览</a></li>
+</ul>
+<h3 id="java"><a name="user-content-java" href="#java" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Java</h3>
+<ul>
+<li>
+<p><a href="http://www.ibm.com/developerworks/cn/java/j-rtj/?ca=j-h-p">实时 Java 系列</a></p>
+</li>
+<li>
+<p>使用 Eclipse 和 Java SE 6 创建独立 Web Services 应用程序</p>
+<ul>
+<li><a href="http://www.ibm.com/developerworks/cn/education/webservices/ws-eclipse-javase1/index.html">第 1 部分: Web Services 服务端应用程序</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/webservices/tutorials/ws-jse/index.html">第 2 部分: Web 服务客户端应用程序</a></li>
+</ul>
+</li>
+<li>JavaServer Faces 1.2 入门<ul>
+<li><a href="http://www.ibm.com/developerworks/cn/education/java/j-jsf1/index.html">第 1 部分: 构建基本应用程序</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/education/java/j-jsf2/index.html">第 2 部分: JSF 生命周期、转换、检验和阶段监听器</a></li>
+</ul>
+</li>
+<li>用 Eclipse Europa 进行 Web 开发<ul>
+<li><a href="http://www.ibm.com/developerworks/cn/education/opensource/os-eclipse-europa1/index.html">第 1 部分: Eclipse Java EE</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/education/opensource/os-eclipse-europa2/index.html">第 2 部分: PHP 开发工具</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/education/opensource/os-eclipse-europa3/index.html">第 3 部分: Ruby Development Toolkit 和 RadRails</a></li>
+</ul>
+</li>
+<li>使用 JavaServer Faces 构建 Apache Geronimo 应用程序<ul>
+<li><a href="http://www.ibm.com/developerworks/cn/education/opensource/os-ag-jsf1/index.html">第 1 部分: 使用 Eclipse 和 Apache MyFaces Core 构建基本的应用程序</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/education/opensource/os-ag-jsf2/index.html">第 2 部分: 在 JavaServer Faces 中使用 Tomahawk</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/education/opensource/os-ag-jsf3/index.html">第 3 部分: 使用 ajax4jsf 添加 Ajax 功能</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/education/opensource/os-ag-jsf4/index.html">第 4 部分: 使用 Apache Trinidad 组件扩展 JSF</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/education/opensource/os-ag-jsf5/index.html">第 5 部分: 将 JSF 应用程序与 Spring 集成</a></li>
+</ul>
+</li>
+<li>Apache Geronimo 和 Spring 框架<ul>
+<li><a href="http://www.ibm.com/developerworks/cn/education/opensource/os-ag-springframe1/index.html">第 1 部分: 开发方法学</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/education/opensource/os-ag-springframe2/index.html">第 2 部分: 构建第一个应用程序</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/education/opensource/os-ag-springframe3/index.html">第 3 部分: 集成 DAO 与 ORM</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/education/opensource/os-ag-springframe4/index.html">第 4 部分: 混合使用 Spring AOP 和 Spring Web Flow</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/education/opensource/os-ag-springframe5/index.html">第 5 部分: Spring MVC</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/education/opensource/os-ag-springframe6/index.html">第 6 部分: Spring MVC：使用 Web 视图技术</a></li>
+</ul>
+</li>
+<li>终极 mashup —— Web 服务和语义 Web<ul>
+<li><a href="http://www.ibm.com/developerworks/cn/education/xml/x-ultimashup1/index.html">第 1 部分: 使用与组合 Web 服务</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/education/xml/x-ultimashup2/index.html">第 2 部分: 管理 Mashup 数据缓存</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/education/xml/x-ultimashup3/index.html">第 3 部分: 理解 RDF 和 RDFs</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/education/xml/x-ultimashup4/index.html">第 4 部分: 创建本体</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/education/xml/x-ultimashup5/index.html">第 5 部分: 切换 Web 服务</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="javascript"><a name="user-content-javascript" href="#javascript" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>JavaScript</h3>
+<ul>
+<li><a href="http://chajn.org/jsguide/javascriptguide.html">Google JavaScript 代码风格指南</a></li>
+<li><a href="https://github.com/adamlu/javascript-style-guide">Airbnb JavaScript 规范</a></li>
+<li><a href="https://github.com/justjavac/12-javascript-quirks">javascript 的 12 个怪癖</a></li>
+<li><a href="http://bonsaiden.github.io/JavaScript-Garden/zh/">JavaScript 秘密花园</a></li>
+<li><a href="http://icodeit.org/jsccp/">JavaScript核心概念及实践</a> (PDF) (此书已由人民邮电出版社出版发行，但作者依然免费提供PDF版本，希望开发者们去购买，支持作者)</li>
+<li><a href="http://justjavac.com/named-function-expressions-demystified.html">命名函数表达式探秘</a>  (注:原文由<a href="http://www.cn-cuckoo.com">为之漫笔</a>翻译，原始地址无法打开，所以此处地址为我博客上的备份)</li>
+<li><a href="http://www.oschina.net/translate/learning-javascript-design-patterns">学用 JavaScript 设计模式</a> (开源中国)</li>
+<li>Node.js<ul>
+<li><a href="http://www.nodebeginner.org/index-zh-cn.html">Node入门</a></li>
+<li><a href="http://nqdeng.github.io/7-days-nodejs/">七天学会NodeJS</a></li>
+<li><a href="https://github.com/nodejs-tw/nodejs-wiki-book">Nodejs Wiki Book</a> (繁体中文)</li>
+<li><a href="http://sofish.github.io/express-guide/">express.js 指南</a></li>
+<li><a href="https://github.com/turingou/koa-guide">koa 中文文档</a></li>
+</ul>
+</li>
+<li>backbone.js<ul>
+<li><a href="http://www.the5fire.com/backbone-js-tutorials-pdf-download.html">backbone.js入门教程</a> (PDF)</li>
+<li><a href="https://github.com/the5fire/backbonejs-learning-note">Backbone.js入门教程第二版</a></li>
+<li><a href="http://feliving.github.io/developing-backbone-applications">Developing Backbone.js Applications(中文版)</a></li>
+</ul>
+</li>
+<li>AngularJS<ul>
+<li><a href="https://github.com/mgechev/angularjs-style-guide/blob/master/README-zh-cn.md">AngularJS最佳实践和风格指南</a></li>
+<li><a href="https://github.com/basestyle/angularjs-cn">AngularJS中译本</a> </li>
+</ul>
+</li>
+<li><a href="http://www.360weboy.com/handbook/zepto/index.html">zepto 简明中文手册</a> </li>
+</ul>
+<h3 id="php"><a name="user-content-php" href="#php" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>PHP</h3>
+<ul>
+<li><a href="http://www.laruence.com/2010/06/21/1608.html">PHP调试技术手册</a>(PDF)</li>
+<li><a href="http://www.blogkun.com/project.html">XDebug 2中文手册(译)</a> (CHM)</li>
+<li><a href="https://github.com/wulijun/php-the-right-way">PHP之道</a></li>
+<li><a href="https://github.com/justjavac/PHP-Best-Practices-zh_CN">PHP 最佳实践</a></li>
+<li><a href="http://www.blogkun.com/php/2013/12/21/php-security-best-practices/">PHP安全最佳实践</a> </li>
+<li><a href="https://github.com/reeze/tipi">深入理解PHP内核</a></li>
+<li><a href="http://www.walu.cc/phpbook/">PHP扩展开发及内核应用</a></li>
+<li><a href="http://codeigniter.org.cn/user_guide/index.html">CodeIgniter 用户指南</a></li>
+<li><a href="http://www.golaravel.com/docs/">Laravel4 中文文档</a></li>
+<li><a href="http://symfony-docs-chs.readthedocs.org/en/latest/">Symfony2中文文档</a> (未译完)</li>
+<li><a href="http://phalcon.5iunix.net/">Phalcon中文文档</a>（翻译进行中）</li>
+<li><a href="http://yiibook.com/">YiiBook几本Yii框架的在线教程</a></li>
+</ul>
+<h3 id="ios"><a name="user-content-ios" href="#ios" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>iOS</h3>
+<ul>
+<li><a href="https://github.com/qinjx/30min_guides/blob/master/ios.md">iOS开发60分钟入门</a></li>
+</ul>
+<h3 id="python"><a name="user-content-python" href="#python" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Python</h3>
+<ul>
+<li><a href="http://woodpecker.org.cn/abyteofpython_cn/chinese/">简明Python教程</a></li>
+<li><a href="http://liam0205.me/Python-tutorial-zh_cn/">Python入门教程</a> (<a href="http://liam0205.me/attachment/Python/The_Python_Tutorial_zh-cn.pdf">PDF</a>)</li>
+<li><a href="http://article.yeeyan.org/view/311527/287706">Python的神奇方法指南</a></li>
+<li><a href="http://django-chinese-docs.readthedocs.org/en/latest/">Django 文档中文版</a></li>
+<li><a href="https://github.com/brantyoung/zh-django-best-practices">Django 最佳实践</a></li>
+<li><a href="http://djangobook.py3k.cn/2.0/">The Django Book 中文版</a></li>
+<li><a href="http://webpy.org/tutorial3.zh-cn">web.py 0.3 新手指南</a></li>
+<li><a href="http://webpy.org/cookbook/index.zh-cn">Web.py Cookbook 简体中文版</a></li>
+<li><a href="http://symfony-docs-chs.readthedocs.org/en/latest/">Symfony2中文文档</a> (未译完)</li>
+<li><a href="http://woodpecker.org.cn/diveintopython/">Dive Into Python 中文版</a></li>
+<li><a href="http://bottlepy.org/docs/dev-cn/">Bottle 文档中文版</a></li>
+<li><a href="http://docs.torriacg.org/docs/flask/">Flask 文档中文版</a></li>
+</ul>
+<h3 id="ruby"><a name="user-content-ruby" href="#ruby" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Ruby</h3>
+<ul>
+<li><a href="https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhCN.md">Ruby 风格指南</a></li>
+<li><a href="https://github.com/JuanitoFatas/rails-style-guide/blob/master/README-zhCN.md">Rails 风格指南</a></li>
+<li><a href="http://lrthw.github.io/">笨方法學 Ruby</a></li>
+<li><a href="http://railstutorial-china.org/">Ruby on Rails Tutorial 原书第 2 版</a> (本书网页版免费提供，电子版以 PDF、EPub 和 Mobi 格式提供购买，仅售 9.9 美元)</li>
+</ul>
+<h3 id="shell"><a name="user-content-shell" href="#shell" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Shell</h3>
+<ul>
+<li><a href="https://github.com/qinjx/30min_guides/blob/master/shell.md">Shell脚本编程30分钟入门</a></li>
+</ul>
+<h3 id="go"><a name="user-content-go" href="#go" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Go</h3>
+<ul>
+<li><a href="https://github.com/Unknwon/go-fundamental-programming">Go编程基础</a></li>
+<li><a href="https://github.com/Unknwon/the-way-to-go_ZH_CN">Go入门指南</a></li>
+<li><a href="http://mikespook.com/learning-go/">学习Go语言</a> (<a href="http://xxiyy.qiniudn.com/%E5%AD%A6%E4%B9%A0%20Go%20%E8%AF%AD%E8%A8%80(Golang).pdf?download">PDF</a>)</li>
+<li><a href="https://github.com/astaxie/build-web-application-with-golang">Go Web 编程</a> (此书已经出版，希望开发者们去购买，支持作者的创作)</li>
+<li><a href="https://github.com/astaxie/Go-in-Action">Go实战开发</a> (当我收录此项目时，作者已经写完第三章，如果读完前面章节觉得有帮助，可以给作者<a href="https://me.alipay.com/astaxie">捐赠</a>，以鼓励作者的继续创作)</li>
+<li><a href="https://github.com/astaxie/NPWG_zh">Network programming with Go 中文翻译版本</a></li>
+</ul>
+<h3 id="groovy"><a name="user-content-groovy" href="#groovy" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Groovy</h3>
+<ul>
+<li><a href="http://www.ibm.com/developerworks/cn/java/j-pg/">实战 Groovy 系列</a></li>
+</ul>
+<h3 id="lisp"><a name="user-content-lisp" href="#lisp" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>LISP</h3>
+<ul>
+<li><a href="http://acl.readthedocs.org/en/latest/">ANSI Common Lisp 中文翻譯版</a></li>
+</ul>
+<h3 id="haskell"><a name="user-content-haskell" href="#haskell" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Haskell</h3>
+<ul>
+<li><a href="http://rwh.readthedocs.org/en/latest/">Real World Haskell 中文版</a></li>
+</ul>
+<h3 id="scala"><a name="user-content-scala" href="#scala" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Scala</h3>
+<ul>
+<li><a href="http://twitter.github.io/scala_school/zh_cn/index.html">Scala课堂</a> (Twitter的Scala中文教程)</li>
+</ul>
+<h3 id="_9"><a name="user-content-_9" href="#_9" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>读书笔记及其它</h3>
+<ul>
+<li><a href="https://github.com/fool2fish/dragon-book-exercise-answers">编译原理（紫龙书）中文第2版习题答案</a></li>
+<li><a href="http://hawstein.com/posts/make-thiner-programming-pearls.html">把《编程珠玑》读薄</a></li>
+<li><a href="https://github.com/XiaolongJason/ReadingNote/blob/master/Effective%20C%2B%2B/Effective%20C%2B%2B.md">Effective C++读书笔记</a></li>
+<li><a href="https://github.com/qyuhen/book">Golang 学习笔记、Python 学习笔记、C 学习笔记</a> (PDF)</li>
+<li><a href="https://github.com/code4craft/jsoup-learning">Jsoup 学习笔记</a></li>
+<li><a href="https://github.com/lzjun567/note">学习笔记: Vim、Python、memcached</a></li>
+<li><a href="http://www.ituring.com.cn/activity/details/2004">图灵开放书翻译计划&ndash;C++、Python、Java等</a></li>
+</ul></body></html>
