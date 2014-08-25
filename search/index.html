@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="寻找最美的答案，百度和谷歌便捷的搜索引擎首页">
+<meta name="keywords" content="寻找_答案_搜索引擎_首页">
+<title>综合搜索</title>
+<script type="text/javascript">
+	!function(){
+
+		//不同时间换肤
+		var link=document.createElement('link');
+		link.rel="stylesheet";
+		link.type="text/css";
+		link.setAttribute('id','id_css');
+
+		!function changeCss(){
+			var oClock=new Date();
+			var currentTime=parseInt(''+oClock.getHours()+toDouble(oClock.getMinutes())+toDouble(oClock.getSeconds()));
+			if (currentTime>=60000 && currentTime<80000) {
+				link.href='css/pink.css';
+			}
+			else if (currentTime>=80000 && currentTime<120000) {
+				link.href='css/yellow.css';
+			}
+			else if (currentTime>=120000 && currentTime<170000) {
+				link.href='css/blue.css';
+			}
+			else if (currentTime>=170000 && currentTime<190000) {
+				link.href='css/orange.css';
+			}
+			else if (currentTime>=190000 || currentTime<60000) {
+				link.href='css/purple.css';
+			};
+		}();
+
+		document.getElementsByTagName('head')[0].appendChild(link);
+
+		function toDouble(num){
+			if (num<10) return '0'+num;
+			else return num;
+		};
+	}();
+
+</script>
+</head>
+
+<body>
+	<div class="header" id="id_header">
+		<div class="logo">
+			<div class="smile"></div>
+		</div>
+
+		<div class="search">
+			<input type="text" name="keyword" class="search_input" />
+			<input type="button" name="baidu_btn" class="search_google_btn" value="谷歌搜索" />
+			<input type="button" name="google_btn" class="search_baidu_btn" value="百度一下" />
+			<div class="search_refresh">&times;</div>
+		</div>
+		<div class="toolNav">
+			<ul class="toolNav_option">
+				<li class="active">网页</li>
+				<li>图片</li>
+				<li>翻译</li>
+				<li>百科</li>
+				<li>地图</li>
+			</ul>
+			<div class="toolNav_sildeBox"></div>
+		</div>
+	</div><!-- header-end -->
+
+	<div class="footer">
+		<div class="footer_wrap">
+			<p >现在时间是</p>
+			<p class="footer_time" id="id_time"></p>
+			<p id="id_tips"></p>
+			<p class="footer_copyright">Copyright © 2013 &nbsp;&nbsp; Design&Code by <a href="http://dengo.org" title="dengo" target="_blank">DenGo</a> &nbsp;&nbsp; <a
+			href="http://dengo.org/archives/876" style="color:#727272;" target="_blank">使用帮助</a> 
+			</p>
+		</div>
+	</div><!-- fonter-end -->
+	<script type="text/javascript" src="js/goui-min.js"></script>
+	<script type="text/javascript" src="js/dengo-min.js"></script>
+	<script type="text/javascript" src="js/gb2312-min.js"></script>
+</body>
+</html>
