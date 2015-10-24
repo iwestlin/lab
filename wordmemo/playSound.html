@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<audio id="sound">
+  <source src="jeans.mp3" type="audio/mp3" />
+</audio>
+<button id="jeans">jeans</button>
+<script type="text/javascript">
+	var jeans = document.getElementById('jeans');
+	var sound = document.getElementById('sound');
+	jeans.onclick = function() {
+		sound.play();
+	}
+</script>
+</body>
+</html>
