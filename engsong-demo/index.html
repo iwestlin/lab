@@ -40,6 +40,9 @@
         font-weight: bold;
         text-align: center;
     }
+    .table-view li:active {
+        background-color: #CCCCCC;
+    }
     </style>
 </head>
 
@@ -68,30 +71,12 @@
 
         </div>
         <br>
-        <div class="card">
-            <ul class="table-view">
-                <li class="table-view-cell" id="rightAnswer">
-                    <a class="" href="">
-                        <strong>牛仔裤</strong>
-                    </a>
-                </li>
-                <li class="table-view-cell">
-                    <a class="" href="">
-                        <strong>错误</strong>
-                    </a>
-                </li>
-                <li class="table-view-cell">
-                    <a class="" href="">
-                        <strong>错误</strong>
-                    </a>
-                </li>
-                <li class="table-view-cell">
-                    <a class="" href="">
-                        <strong>错误</strong>
-                    </a>
-                </li>
-            </ul>
-        </div>
+        <ul class="table-view">
+            <li class="table-view-cell" id="rightAnswer">牛仔裤</li>
+            <li class="table-view-cell">错误</li>
+            <li class="table-view-cell">错误</li>
+            <li class="table-view-cell">错误</li>
+        </ul>
         <div id="answerResult"></div>
     </div>
     <nav class="bar bar-tab">
@@ -123,22 +108,32 @@
     var soundJeans = document.getElementById('soundJeans');
     var answerResult = document.getElementById('answerResult');
 
-    (function() {
-        for (var i = 0; i < choices.length; i++) {
-            choices[i].onclick = function() {
-                answerResult.innerHTML = '回答错误！';
-            }
-        }
-        rightAnswer.onclick = function() {
-            answerResult.innerHTML = '回答正确！';
-        }
-    })();
+    function qingkonghuida() {
+        answerResult.innerHTML = '';
+    }
 
-    (function() {
-        laba.onclick = function() {
+    for (var i = 0; i < choices.length; i++) {
+        // choices[i].onclick = function() {
+        //     answerResult.innerHTML = '回答错误！';
+        // }
+        choices[i].addEventListener('touchend', function() {
+            answerResult.innerHTML = '回答错误！';
+            setTimeout(qingkonghuida, 2000);
+        })
+    }
+    // rightAnswer.onclick = function() {
+    // answerResult.innerHTML = '回答正确！';
+    // }
+    rightAnswer.addEventListener('touchend', function() {
+        answerResult.innerHTML = '回答正确！';
+        setTimeout(qingkonghuida, 2000);
+    })
+
+    laba.onclick = function() {
             soundJeans.play();
         }
-    })();
+        // laba.addEventListener('touchstart',function(){
+        //      soundJeans.play();
     </script>
 </body>
 
