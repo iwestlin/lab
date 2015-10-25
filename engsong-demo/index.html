@@ -34,6 +34,12 @@
         position: relative;
         top: 6px;
     }
+    #answerResult {
+        font-size: 14px;
+        color: red;
+        font-weight: bold;
+        text-align: center;
+    }
     </style>
 </head>
 
@@ -61,6 +67,7 @@
             </h4>
 
         </div>
+        <br>
         <div class="card">
             <ul class="table-view">
                 <li class="table-view-cell" id="rightAnswer">
@@ -85,6 +92,7 @@
                 </li>
             </ul>
         </div>
+        <div id="answerResult"></div>
     </div>
     <nav class="bar bar-tab">
         <a class="tab-item active" href="#">
@@ -113,15 +121,16 @@
     var rightAnswer = document.getElementById('rightAnswer');
     var laba = document.getElementById('laba');
     var soundJeans = document.getElementById('soundJeans');
+    var answerResult = document.getElementById('answerResult');
 
     (function() {
         for (var i = 0; i < choices.length; i++) {
             choices[i].onclick = function() {
-                alert('回答错误！');
+                answerResult.innerHTML = '回答错误！';
             }
         }
         rightAnswer.onclick = function() {
-            alert('回答正确！')
+            answerResult.innerHTML = '回答正确！';
         }
     })();
 
