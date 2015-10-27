@@ -4,11 +4,19 @@
 <head>
     <meta charset="utf-8">
     <title>英歌颂 - EngSong.com</title>
+
+    <!-- Sets initial viewport load and disables zooming  -->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link href="css/ratchet.min.css" rel="stylesheet">
-    <script src="js/ratchet.min.js"></script>
+
+    <!-- Include the compiled Ratchet CSS -->
+    <link href="css/ratchet.css" rel="stylesheet">
+
+    <!-- Include the compiled Ratchet JS -->
+    <script src="js/ratchet.js"></script>
     <style type="text/css">
     body {
         font-family: PingFang SC, Verdana, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
@@ -40,9 +48,11 @@
 
 <body>
 
+    <!-- Make sure all your bars are the first things in your <body> -->
     <header class="bar bar-nav">
         <a class="icon icon-left-nav pull-left"></a>
         <a class="icon icon-right-nav pull-right"></a>
+        <!-- <h1 class="title">jeans</h1> -->
         <div class="segmented-control">
             <a class="control-item active">选项</a>
             <a class="control-item">详解</a>
@@ -50,6 +60,7 @@
         </div>
     </header>
 
+    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
     <div class="content">
         <div class="content-padded">
             <h1>jeans</h1>
@@ -62,9 +73,9 @@
         <br>
         <ul class="table-view">
             <li class="table-view-cell" id="rightAnswer">牛仔裤</li>
-            <li class="table-view-cell">灰尘</li>
-            <li class="table-view-cell">衬衫</li>
-            <li class="table-view-cell">杯子</li>
+            <li class="table-view-cell">错误</li>
+            <li class="table-view-cell">错误</li>
+            <li class="table-view-cell">错误</li>
         </ul>
         <div id="answerResult"></div>
     </div>
@@ -96,7 +107,6 @@
     var laba = document.getElementById('laba');
     var soundJeans = document.getElementById('soundJeans');
     var answerResult = document.getElementById('answerResult');
-    var timer;
 
     function qingkonghuida() {
         answerResult.innerHTML = '';
@@ -108,8 +118,7 @@
         // }
         choices[i].addEventListener('touchend', function() {
             answerResult.innerHTML = '回答错误！';
-            jieshuyanshi();
-            yanshi();
+            setTimeout(qingkonghuida, 2000);
         })
     }
     // rightAnswer.onclick = function() {
@@ -117,17 +126,8 @@
     // }
     rightAnswer.addEventListener('touchend', function() {
         answerResult.innerHTML = '回答正确！';
-        jieshuyanshi();
-        yanshi();
+        setTimeout(qingkonghuida, 2000);
     })
-
-    function yanshi() {
-        timer = setTimeout(qingkonghuida, 2000);
-    }
-
-    function jieshuyanshi() {
-        clearTimeout(timer);
-    }
 
     laba.onclick = function() {
             soundJeans.play();
