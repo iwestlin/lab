@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>YJSeng.com - 研究僧</title>
+    <meta name="Resource-type" content="Document" />
+    <link rel="stylesheet" type="text/css" href="javascript.fullPage.css" />
+    <link rel="stylesheet" href="./themes/default/default.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="./nivo-slider.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+    <style>
+    /* Reset CSS
+		 * --------------------------------------- */
+    
+    body,
+    div,
+    dl,
+    dt,
+    dd,
+    ul,
+    ol,
+    li,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    pre,
+    form,
+    fieldset,
+    input,
+    textarea,
+    p,
+    blockquote,
+    th,
+    td {
+        padding: 0;
+        margin: 0;
+    }
+    a {
+        text-decoration: none;
+    }
+    table {
+        border-spacing: 0;
+    }
+    fieldset,
+    img {
+        border: 0;
+    }
+    address,
+    caption,
+    cite,
+    code,
+    dfn,
+    em,
+    strong,
+    th,
+    var {
+        font-weight: normal;
+        font-style: normal;
+    }
+    strong {
+        font-weight: bold;
+    }
+    ol,
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    caption,
+    th {
+        text-align: left;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-weight: normal;
+        font-size: 100%;
+        margin: 0;
+        padding: 0;
+        color: #444;
+    }
+    q:before,
+    q:after {
+        content: '';
+    }
+    abbr,
+    acronym {
+        border: 0;
+    }
+    /* Custom CSS
+		 * --------------------------------------- */
+    
+    body {
+        font-family: PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans;
+    }
+    h1 {
+        font-size: 6em;
+    }
+    #title {
+        text-align: center;
+    }
+    p {
+        font-size: 2em;
+    }
+    .content {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        text-align: center;
+    }
+    #description {
+        display: block;
+        text-align: center;
+    }
+    /* Section 1
+		 * --------------------------------------- */
+    
+    #section0 {
+        background-color: #E4E4E4;
+    }
+    #section0 h1 {
+        color: #444;
+    }
+    #section0 p {
+        color: #333;
+        opacity: 0.6;
+    }
+    /* Section 2
+		 * --------------------------------------- */
+    
+    #section1 {
+        background-color: #9AC649;
+    }
+    #section1 h1 {
+        color: #fff;
+    }
+    #section1 p {
+        opacity: 0.6;
+    }
+    #section1 p a {
+        color: white;
+        border-bottom: 1px dashed white;
+    }
+    /* Section 3
+		 * --------------------------------------- */
+    
+    #section2 {
+        background-color: #67AAD9;
+    }
+    #section2 h1 {
+        color: #F2F2F2;
+    }
+    #section2 p {
+        opacity: 0.6;
+    }
+    #section2 p a {
+        color: white;
+        border-bottom: 1px dashed white;
+    }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="fullpage">
+        <div class="section " id="section0">
+            <!-- <div class="content"> -->
+            <div id="wrapper">
+                <h1 id="title">研究僧</h1>
+                <div class="slider-wrapper theme-default">
+                    <div id="slider" class="nivoSlider">
+                        <img src="images/1.jpg" data-thumb="images/1.jpg" alt="" />
+                        <img src="images/2.jpg" data-thumb="images/2.jpg" alt="" />
+                        <img src="images/3.jpg" data-thumb="images/3.jpg" alt="" />
+                        <img src="images/4.jpg" data-thumb="images/4.jpg" alt="" />
+                    </div>
+                    <div id="description">
+                        图片出处：<a href="http://www.weibo.com/1878798072/BnbFIh5Yz">LiNEARTS</a>
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
+        </div>
+        <div class="section" id="section1">
+            <div class="slide" id="slide1">
+                <div class="content">
+                    <h1>系列图书</h1>
+                    <p>
+                        <a href="">点击购买！</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="section2">
+            <div class="content">
+                <h1>图书配套背单词手机网站</h1>
+                <p>
+                    <a href="">去看看！</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="javascript.fullPage.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="./jquery.nivo.slider.js"></script>
+    <script type="text/javascript">
+    $(window).load(function() {
+        $('#slider').nivoSlider();
+    });
+    fullpage.initialize('#fullpage', {});
+    </script>
+
+</body>
+
+</html>
