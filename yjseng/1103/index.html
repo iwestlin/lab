@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>研究僧</title>
+    <link rel="stylesheet" href="reset.css">
+    <style type="text/css">
+    #logo {
+        width: 300px;
+        height: 150px;
+        background-color: #1EBADC;
+        color: #f4f4f4;
+        float: left;
+    }
+    #logo h1 {
+        font-size: 4em;
+    }
+    #logo h4 {
+        font-size: 1.5em;
+    }
+    .center {
+        text-align: center;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    #nav {
+        width: 100%;
+        height: 150px;
+        background-color: lightblue;
+    }
+    #nav ul {
+        position: absolute;
+        left: 350px;
+        top: 60px;
+    }
+    #nav li {
+        float: left;
+        padding-right: 20px;
+        padding-left: 20px;
+        font-size: 1.5em;
+        color: #ffffff;
+        /*border-radius: 2px;*/
+    }
+    #nav li:hover {
+        cursor: pointer;
+        border-bottom: 2px solid white;
+    }
+    li.one {
+        background-color: #eb2f04;
+    }
+    li.two {
+        background-color: #689c54;
+    }
+    li.three {
+        background-color: #46a9a3;
+    }
+    li.four {
+        background-color: #ac16d9;
+    }
+
+    #login {
+        position: absolute;
+        right: 60px;
+        top: 60px;
+        font-size: 1.5em;
+        background-color: #1EBADC;
+        padding: 3px;
+        border-radius: 2px;
+    }
+    #login a {
+        color: white;
+    }
+    #login:hover {
+        -webkit-transform: rotate(8deg);
+        -ms-transform: rotate(8deg);
+        -o-transform: rotate(8deg);
+        transform: rotate(8deg);
+    }
+    #books {
+        width: 100%;
+        height: 600px;
+    }
+    #booksimage {
+        padding-right: 100px;
+    }
+
+    #downloads {
+        width: 100%;
+        height: 600px;
+        background-color: #39b64c;
+        font-size: 2em;
+    }
+    #downloads li a {
+        color: #F0F0F0;
+    }
+    #downloads li {
+        padding: 5px;
+    }
+
+    #culture {
+        width: 100%;
+        height: 600px;
+        background-color: #0ae5cc;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <header role='banner'>
+            <div id="logo">
+                <div class="center">
+                    <h1>研究僧</h1>
+                    <h4>专攻考研英语</h4>
+
+                </div>
+            </div>
+            <div id="nav">
+                <ul>
+                    <li class="one">首页</li>
+                    <li class="two">精品教材</li>
+                    <li class="three">资料下载</li>
+                    <li class="four">关于我们</li>
+                </ul>
+            </div>
+            <div id="login">
+                <span class="register">
+                    <a href="">注册</a>
+                </span>
+                <span>|</span>
+                <span class="login">
+                    <a href="">登录</a>
+                </span>
+            </div>
+        </header>
+
+        <div id="books">
+            <div class="center">
+                <a href="https://detail.tmall.com/item.htm?id=520711607175">
+                    <img src="books.jpg" alt="" id="booksimage">
+                </a>
+                <img src="scan.jpg" alt="" id="scanimage">
+            </div>
+        </div>
+
+        <div id="downloads">
+            <ul class="center">
+                <li><a href="">资料下载1</a></li>
+                <li><a href="">资料下载2</a></li>
+                <li><a href="">资料下载3</a></li>
+                <li><a href="">资料下载4</a></li>
+                <li><a href="">资料下载5</a></li>
+                <li><a href="">资料下载6</a></li>
+                <li><a href="">资料下载7</a></li>
+            </ul>
+        </div>
+
+        <div id="culture">
+            <div class="center">
+                <img src="monk.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
