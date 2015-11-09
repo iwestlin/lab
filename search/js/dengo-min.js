@@ -139,24 +139,24 @@ window.onload = function() {
         v = a.value;
         switch (o) {
             case 0:
-                window.open("http://www.google.com/search?q=" + v + "", "_blank");
+                window.open("https://www.google.com/search?q=" + v + "", "_blank");
                 break;
             case 1:
-                window.open("http://www.google.com/search?q=" + v + "&biw=1600&bih=809&sei=n7qkUeCdHYbtiAfknoDACw&tbm=isch", "_blank");
+                window.open("https://www.google.com/search?q=" + v + "&biw=1600&bih=809&sei=n7qkUeCdHYbtiAfknoDACw&tbm=isch", "_blank");
                 break;
             case 2:
                 var i = new RegExp("[\u4e00-\u9fa5]", "i");
                 if (i.test(v)) {
-                    window.open("http://translate.google.cn/#auto/en/" + v + "", "_blank")
+                    window.open("https://translate.google.cn/#auto/en/" + v + "", "_blank")
                 } else {
-                    window.open("http://translate.google.cn/#auto/zh-CN/" + v + "", "_blank")
+                    window.open("https://translate.google.cn/#auto/zh-CN/" + v + "", "_blank")
                 }
                 break;
             case 3:
-                window.open("http://zh.wikipedia.org/wiki/" + v + "", "_blank");
+                window.open("https://zh.wikipedia.org/wiki/" + v + "", "_blank");
                 break;
             case 4:
-                window.open("http://maps.google.com/maps?q=" + v + "&rdo_search=on&biw=1600&bih=809&ie=UTF-8&hl=zh-CN&sa=N&tab=il", "_blank")
+                window.open("https://maps.google.com/maps?q=" + v + "&rdo_search=on&biw=1600&bih=809&ie=UTF-8&hl=zh-CN&sa=N&tab=il", "_blank")
         }
     }
     d();
