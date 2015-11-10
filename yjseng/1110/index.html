@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>门户 - 研究僧</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="./default/default.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="./nivo-slider.css" type="text/css" media="screen" />
+    <style type="text/css">
+    #logo {
+        width: 200px;
+        height: 100px;
+        background-color: #1EBADC;
+        color: #f4f4f4;
+        float: left;
+    }
+    #logo h1 {
+        font-size: 2em;
+        line-height: 100px;
+        text-align: center;
+    }
+    .center {
+        text-align: center;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 2em;
+        color: #f1f1f1;
+    }
+/*    #header {
+        position: fixed;
+        top: 0;
+        z-index: 1000;
+    }*/
+    #nav {
+        width: 100%;
+        height: 100px;
+        background-color: white;
+    }
+    #nav ul {
+        position: absolute;
+        left: 45%;
+        top: 35px;
+    }
+    #nav li {
+        float: left;
+        padding-right: 20px;
+        padding-left: 20px;
+        font-size: 1.5em;
+        color: #000000;
+        border-bottom: 2px solid black;
+    }
+    #nav li.active {
+        border-color: #1EBADC;
+    }
+    #nav li:hover {
+        cursor: pointer;
+        border-bottom: 2px solid #1EBADC;
+    }
+    #login {
+        position: absolute;
+        right: 30px;
+        top: 35px;
+        font-size: 1.5em;
+        background-color: #1EBADC;
+        padding: 3px;
+        border-radius: 2px;
+    }
+    #login a {
+        color: white;
+    }
+    #login a:hover {
+        border-bottom: 2px solid black;
+    }
+    #lunbo {
+        width: 100%;
+    }
+    #lunbo .slider-wrapper {
+        position: relative;
+    }
+    .slider-wrapper .nivo-controlNav {
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+        padding: 5px;
+        z-index: 100;
+        background-color: rgba(0,0,0,0.7);
+    }
+    #slider {
+        margin-bottom: 2px;
+    }
+    #wrapper {
+        position: relative;
+    }
+    #downloads {
+        width: 66%;
+        height: 600px;
+        background-color: #3D9931;
+    }
+    #downloads .title {
+        text-align: center;
+        font-size: 2em;
+        color: white;
+        padding: 5px;
+        border-bottom: 2px solid white;
+        width: 96%;
+        margin: 0 auto;
+    }
+    #downloads .col {
+        -webkit-column-count: 2;
+        -webkit-column-gap: 5px;
+        -webkit-column-rule: 2px solid white;
+        -moz-column-count: 2;
+        -moz-column-gap: 5px;
+        -moz-column-rule: 2px solid white;
+        color: white;
+        font-size: 1.5em;
+    }
+    .col li {
+        list-style: none;
+        padding: 7px;
+        padding-left: 18px;
+        overflow: hidden;
+    }
+    #ad {
+        width: 34%;
+        height: 600px;
+        background-color: #4E61F2;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    #footer {
+        color: #000000;
+        text-align: center;
+        position: relative;
+        top: 50px;
+    }
+    #footer hr {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    #cover {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2000;
+      background-color: rgba(0,0,0,0.3);
+    }
+    #denglu {
+      display: none;
+      position: absolute;
+      top: 38%;
+      left: 44%;
+      z-index: 2001;
+      border: 1px dashed #ffffff;
+      padding: 20px;
+      /*background-color: #2D2D2D;*/
+    }
+    #denglu .tab {
+      margin-bottom: 20px;
+    }
+    #denglu .tab a {
+      background-color: rgba(0,0,0,0.7);
+      width: 100px;
+      height: 40px;
+      display: inline-block;
+      text-align: center;
+      color: white;
+      font-size: 1.5em;
+      margin-left: 5px;
+      line-height: 40px
+    }
+    #denglu .tab .active {
+      border-bottom: 2px solid #ffffff;
+    }
+    #denglu input {
+      width: 200px;
+      height: 30px;
+      margin: 5px;
+    }
+    #denglu button {
+      width: 200px;
+      height: 40px;
+      background-color: #3879D9;
+      color: white;
+      margin: 5px;
+      font-size: 1.5em;
+      border: 0;
+      border-radius: 2px;
+    }
+    #close {
+      position: absolute;
+      right: -14px;
+      top: -30px;
+      font-size: 3em;
+      z-index: 2002;
+      color: white;
+      border-radius: 10px;
+    }
+    #close:hover {
+      cursor: pointer;
+    }
+    </style>
+</head>
+
+<body>
+  <div id="cover"></div>
+
+  <div id="denglu">
+    <div id="close">×</div>
+    <div class="tab">
+      <a href="#" id="zhucemianban" class="">注册</a>
+      <a href="#" id="denglumianban" class="">登录</a>
+    </div>
+    <div class="input">
+      <input type="text" name="username" placeholder="用户名" />
+      <br>
+      <input type="password" name="password" placeholder="密码" />
+      <br>
+      <button type="submit">提交</button>
+    </div>
+  </div>
+
+  <div id="zhuce"></div>
+    <div id="header">
+        <div id="logo">
+            <h1>LOGO</h1>
+        </div>
+        <div id="nav">
+            <ul>
+                <li class="active">
+                    <a href="index.html">门户</a>
+                </li>
+                <li>
+                    <a href="downloads.html">藏经阁</a>
+                </li>
+                <li>练功房</li>
+                <li>众僧</li>
+            </ul>
+        </div>
+        <div id="login">
+            <span class="register">
+                <a href="#" onclick="register()">注册</a>
+            </span>
+            <span>|</span>
+            <span class="login">
+                <a href="#" onclick="login()">登录</a>
+            </span>
+        </div>
+    </div>
+    <div id="lunbo">
+        <div class="slider-wrapper theme-default">
+            <div id="slider" class="nivoSlider">
+                <img src="images/1.jpg" data-thumb="images/1.jpg" alt="" />
+                <a href="#">
+                    <img src="images/2.jpg" data-thumb="images/2.jpg" alt="" />
+                </a>
+                <img src="images/3.jpg" data-thumb="images/3.jpg" alt="" />
+                <!-- img的title可写入内容在文档中展示 -->
+                <img src="images/4.jpg" data-thumb="images/4.jpg" alt="" />
+            </div>
+            <!-- <div id="htmlcaption" class="nivo-html-caption">
+                注意id与上面img的title相同
+            </div> -->
+        </div>
+    </div>
+    <div id="wrapper">
+        <div id="downloads">
+            <div class="title">
+                <a href="downloads.html" style="color:white;">资料下载</a>
+            </div>
+            <div class="col">
+                <li>item1</li>
+                <li>item2</li>
+                <li>item3</li>
+                <li>item4</li>
+                <li>item5</li>
+                <li>item6</li>
+                <li>item7</li>
+                <li>item8</li>
+                <li>item9</li>
+                <li>item10</li>
+                <li>item11</li>
+                <li>item12</li>
+                <li>item13</li>
+                <li>item1</li>
+                <li>item2</li>
+                <li>item3</li>
+                <li>item4</li>
+                <li>item5</li>
+                <li>item6</li>
+                <li>item7</li>
+                <li>item8</li>
+                <li>item9</li>
+                <li>item10</li>
+                <li>item11</li>
+                <li>item12</li>
+                <li>item13</li>
+            </div>
+        </div>
+        <div id="ad">
+            <div class="center">
+                <hr>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <hr />
+        <br />©2015 研究僧
+    </div>
+
+    <script type="text/javascript" src="./scripts/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="./jquery.nivo.slider.pack.js"></script>
+    <script type="text/javascript">
+$(window).load(function() { $('#slider').nivoSlider(); });
+
+
+    var cover = document.getElementById('cover');
+    var denglu = document.getElementById('denglu');
+    var zhucemianban = document.getElementById('zhucemianban');
+    var denglumianban = document.getElementById('denglumianban');
+    var close = document.getElementById('close');
+    close.onclick = function() {
+      denglu.style.display = 'none';
+      cover.style.display = 'none';
+    }
+    zhucemianban.onclick = function() {
+      zhucemianban.className = 'active';
+      denglumianban.className = '';
+    }
+    denglumianban.onclick = function() {
+      zhucemianban.className = '';
+      denglumianban.className = 'active';
+    }
+
+    function login() {
+      denglu.style.display = 'block';
+      cover.style.display = 'block';
+      zhucemianban.className = '';
+      denglumianban.className = 'active';
+    }
+
+    function register() {
+      denglu.style.display = 'block';
+      cover.style.display = 'block';
+      zhucemianban.className = 'active';
+      denglumianban.className = '';
+    }
+    </script>
+</body>
+
+</html>
