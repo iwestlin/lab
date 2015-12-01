@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>首页 - 研究僧</title>
+  <meta name="author" content="Alvaro Trigo Lopez" />
+  <meta name="description" content="fullPage full-screen backgrounds." />
+  <meta name="keywords" content="fullpage,jquery,demo,screen,fullscreen,backgrounds,full-screen" />
+  <meta name="Resource-type" content="Document" />
+
+
+  <link rel="stylesheet" type="text/css" href="jquery.fullPage.css" />
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <style>
+
+  </style>
+
+  <!--[if IE]>
+    <script type="text/javascript">
+       var console = { log: function() {} };
+    </script>
+  <![endif]-->
+
+  <script src="jquery.min.js"></script>
+  <script src="jquery-ui.min.js"></script>
+
+  <script type="text/javascript" src="jquery.fullPage.js"></script>
+
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('#fullpage').fullpage({
+      verticalCentered: false,
+      navigation: true,
+      navigationPosition: 'right',
+      navigationTooltips: ['1', '2', '3']
+    });
+  });
+  </script>
+
+</head>
+
+<body>
+
+
+  <div id="fullpage">
+    <div class="section " id="section0">
+      <div id="header">
+        <div id="logo">
+          研究僧
+        </div>
+        <div id="login">
+          <a href="#">登录</a>
+          <a href="#">注册</a>
+        </div>
+      </div>
+      <div class="content">
+        <h2>资料下载</h2>
+        <div class="lesson" id="lesson1">
+          <h3>数学</h3>
+        </div>
+        <div class="lesson" id="lesson2">
+          <h3>英语</h3>
+        </div>
+        <div class="lesson" id="lesson3">
+          <h3>政治</h3>
+        </div>
+      </div>
+      <div class="info">
+        <p>「研究僧」是一个专注考研资料和经验分享的网站。</p>
+        <p>在这里，你可以获取最新的考研资料，</p>
+        <p>并和大家一起分享考研心路，让考研之旅不再孤单。</p>
+      </div>
+    </div>
+    <div class="section" id="section1">
+      <div class="content">
+        <h2>论坛</h2>
+        <div class="tile" id="tile1">
+          <h3>经验分享</h3>
+        </div>
+        <div class="tile" id="tile2">
+          <h3>外刊阅读</h3>
+        </div>
+        <div class="tile" id="tile3">
+          <h3>考试交友</h3>
+        </div>
+        <div class="tile" id="tile4">
+          <h3>你问我答</h3>
+        </div>
+      </div>
+      <div class="info">
+        <p>论坛分类介绍</p>
+      </div>
+      <!-- <div class="slide" id="slide1">
+        <h1>Slide Backgrounds</h1>
+      </div>
+      <div class="slide" id="slide2">
+        <h1>Totally customizable</h1>
+      </div> -->
+    </div>
+    <div class="section" id="section2">
+      <div class="content">
+        <h2>考研经</h2>
+        <div class="books">考研书籍</div>
+        <div class="comic">研究僧系列漫画</div>
+        <div class="readmore">查看详情</div>
+      </div>
+      <div class="footer">
+        <p>©2015 研究僧</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
