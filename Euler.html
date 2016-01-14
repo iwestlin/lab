@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text" id="number" placeholder="请输入一个大于1的整数">
+  <button onclick="calc()">小于这个数且与之互质的正整数共有</button>
+  <input type="text" id="result"></input>个
+
+  <script>
+  function isPrime(i) {
+    for (var a = 2; a < i; a++) //a<(i/2)?
+    {
+      if (i % a == 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function getPrimes(n) {
+    var current = n;
+    for (var b = 2; b <= n; b++) {
+      if (isPrime(b) && (n % b) == 0) {
+        // console.log('current=' + current + ' b=' + b);
+        current = current * (1 - 1 / b);
+      }
+    }
+    return Math.round(current); //需要四舍五入，否则↓
+    // return current; //有时候会返回类似12.000000000000002这样的数字(当n=21)
+  }
+
+  var number = document.getElementById('number');
+  var result = document.getElementById('result');
+  function calc() {
+    result.value = getPrimes(number.value);
+  }
+  </script>
+</body>
+
+</html>
