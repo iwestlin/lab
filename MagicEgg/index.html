@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Magic Egg</title>
+</head>
+
+<body>
+  <h5>JavaScript代码来自：<a href="https://imququ.com/post/what-is-this.html">这里</a>
+  </h5>
+  <hr>
+  <div id="egg"></div>
+  <script type="text/javascript" src="wtf.js"></script>
+  <script type="text/javascript">
+  window.onload = function() {
+    var t, a, e, o, r, n, i, d, s, l, u = 128,
+      c = [],
+      f = W("#egg");
+    if (!f.length) return !1;
+    if (t = function(t, a, e) {
+        var o, r, n, i, d = 0,
+          s = 0,
+          l = 0,
+          f = a * t,
+          p = (a + 1) * t,
+          h = e * t,
+          v = (e + 1) * t;
+        for (o = f; p > o; o++)
+          for (r = h; v > r; r++) n = c[o * u + r], d += n[0], s += n[1], l += n[2];
+        return i = t * t, "rgb(" + Math.round(d / i) + ", " + Math.round(s / i) + ", " + Math.round(l / i) + ")"
+      }, a = function(a, e, o, r, n) {
+        var i, d, s, l = [],
+          u = Math.pow(2, a),
+          c = 512 / u,
+          p = 0 === a ? 1 : 2;
+        for (i = 0; p > i; i++)
+          for (d = 0; p > d; d++) s = t(c / 4, n / c + i, r / c + d), l.push('<div data-level="', a, '" data-size="', c, '" data-row="', i, '" data-col="', d, '" class="l', a, '" style="background:', s, ";top:", n + c * i, "px;left:", r + c * d, 'px;"></div>');
+        f.insertAdjacentHTML("beforeend", l.join(""))
+      }, e = document.createElement("canvas"), e.getContext) {
+      for (o = e.getContext("2d"), r = new Image, n = [], i = 0; 7 >= i; i++) d = 512 / Math.pow(2, i), s = d / 2, n.push("div.l", i, " {position:absolute;width:", d, "px;height:", d, "px;border-radius:", s, "px;}");
+      Dom.insertCssText(n.join("")), l = !1, f.delegate("div", "mouseenter", function() {
+        if (l) return !1;
+        l = !0;
+        var t = W(this),
+          e = 0 | t.attr("data-level"),
+          o = 0 | t.attr("data-row"),
+          r = 0 | t.attr("data-col"),
+          n = parseInt(t.css("left")),
+          i = parseInt(t.css("top"));
+        return e >= 6 ? !1 : void t.animate({
+          opacity: .5
+        }, 150, function() {
+          t.removeNode(), a(e + 1, o, r, n, i)
+        })
+      }).delegate("div", "mouseleave", function() {
+        l = !1
+      }).css({
+        width: "512px",
+        height: "512px",
+        position: "relative"
+      }), r.onload = function() {
+        var t, e, n, i, d;
+        for (o.drawImage(r, 0, 0), t = o.getImageData(0, 0, u, u), e = 0; u * u * 4 > e; e += 4) n = t.data[e], i = t.data[e + 1], d = t.data[e + 2], c.push([n, i, d]);
+        a(0, 0, 0, 0, 0)
+      }, r.src = "saber.jpg"
+    } else f.css("color", "red").html("\u8bf7\u4f7f\u7528\u652f\u6301Canvas(Chrome\u3001Firefox\u3001Safari\u3001Opera\u3001IE9+)\u7684\u6d4f\u89c8\u5668\u6d4f\u89c8\u672c\u9875!")
+  };
+  </script>
+</body>
+
+</html>
