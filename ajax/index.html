@@ -23,10 +23,9 @@
   }
 
   var url = '1.jpg';
-  document.getElementById('img');
+  var img = document.getElementById('img');
   function addImg() {
     img.src = url;
-    console.log('run');
   }
   var loop = setInterval(function() {
     httpRequest(url, addImg);
