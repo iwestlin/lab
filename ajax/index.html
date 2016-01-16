@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <img src="" alt="" id="img">
+
+  <script type="text/javascript">
+  function httpRequest(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4) {
+        callback();
+        clearInterval(loop);
+      }
+    }
+    xhr.send();
+  }
+
+  var url = '1.jpg';
+  document.getElementById('img');
+  function addImg() {
+    img.src = url;
+    console.log('run');
+  }
+  var loop = setInterval(function() {
+    httpRequest(url, addImg);
+  }, 3000);
+  </script>
+</body>
+
+</html>
