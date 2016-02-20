@@ -118,20 +118,20 @@ window.onload = function() {
         v = a.value;
         switch (o) {
             case 0:
-                window.open("http://www.baidu.com/s?word=" + v + "", "_blank");
+                window.open("https://www.baidu.com/s?word=" + v + "", "_blank");
                 break;
             case 1:
-                window.open("http://image.baidu.com/i?tn=baiduimage&ie=utf-8&word=" + v + "", "_blank");
+                window.open("https://image.baidu.com/i?tn=baiduimage&ie=utf-8&word=" + v + "", "_blank");
                 break;
             case 2:
-                window.open("http://fanyi.baidu.com/#auto2auto|" + v + "", "_blank");
+                window.open("https://fanyi.baidu.com/#auto2auto|" + v + "", "_blank");
                 break;
             case 3:
                 v = encodeToGb2312(v);
-                window.open("http://baike.baidu.com/search?word=" + v + "", "_blank");
+                window.open("https://baike.baidu.com/search?word=" + v + "", "_blank");
                 break;
             case 4:
-                window.open("http://map.baidu.com/?newmap=1&ie=utf-8&s=s%26wd%3D" + v + "", "_blank")
+                window.open("https://map.baidu.com/?newmap=1&ie=utf-8&s=s%26wd%3D" + v + "", "_blank")
         }
     }
 
