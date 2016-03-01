@@ -1,0 +1,262 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>/* Body */
+html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+
+body{
+  color:#4d4d4c;
+  font-family:Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman',
+              "Hiragino Sans GB", "STXihei", "微软雅黑", serif;
+  font-size:12px;
+  line-height:1.5em;
+  background:#fefefe;
+  width: 45em;
+  margin: 10px auto;
+  padding: 30px;
+  border: 1px solid #ddd;
+  outline: 1300px solid #f8f8f8;
+}
+
+/* Links */
+a{ color: #06d; text-decoration:none; }
+a:hover{ color: #06e; text-decoration: underline; }
+a:active{ color:#faa700; }
+a:focus{ outline: thin dotted; }
+a:hover, a:active{ outline: 0; }
+
+::-moz-selection { background:rgba(255,255,0,0.3); color:#000 }
+::selection { background:rgba(255,255,0,0.3); color:#000 }
+
+a::-moz-selection { background:rgba(255,255,0,0.3); color:#0645ad }
+a::selection { background:rgba(255,255,0,0.3); color:#0645ad }
+
+/* Paragraphs */
+p { margin:1em 0; }
+
+/* Images */
+img {
+  max-width:100%;
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+  vertical-align: middle;
+}
+
+/* Headers */
+h1,h2,h3,h4,h5,h6 {
+  font-weight:normal;
+  color:#111;
+  line-height: 1.7;
+  position: relative;
+}
+h4,h5,h6{ font-weight: bold; }
+h1 { font-size:2.5em; border-bottom: 1px solid #ddd;}
+h2 { font-size:2em; border-bottom:1px solid #eee; padding-bottom: 5px; }
+h3 { font-size:1.5em; }
+h4 { font-size:1.2em; }
+h5 { font-size:1em; }
+h6 { font-size:0.9em; }
+
+/* Block Quotes */
+blockquote {
+  color:#666666;
+  margin:0;
+  padding-left: 3em;
+  border-left: 0.5em #EEE solid;
+}
+hr { display: block; height: 2px; border: 0; border-top: 1px solid #aaa;border-bottom: 1px solid #eee; margin: 1em 0; padding: 0; }
+
+/* Raw Blocks */
+span.backtick {
+  border:1px solid #EAEAEA;
+  border-radius:3px;
+  background:#F8F8F8;
+  padding:0 3px 0 3px;
+}
+
+pre, code, kbd, samp {
+  color: #000;
+  font-family: anonymous,monospace;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 0.88em;
+  background-color: #F8F8F8;
+  border: 1px solid #CCC;
+}
+
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  padding: 10px;
+}
+
+pre code { border: 0 }
+
+code { padding: 0 3px 0 3px; }
+
+/* Multimarkdown Critic Blocks */
+span.critic_mark { background: #ff0; }
+span.critic_delete { color: #c82829; text-decoration: line-through; }
+span.critic_insert { color: #718c00 ; text-decoration: underline; }
+span.critic_comment { color: #8e908c; font-style: italic; }
+
+/* Inlines */
+b, strong { font-weight: bold; }
+
+ins { background: #ff9; color: #000; text-decoration: none; }
+
+mark { background: #ff0; color: #000; font-style: italic; font-weight: bold; }
+
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+dfn { font-style: italic; }
+
+/* Lists */
+ul, ol { margin: 0.5em 0; padding: 0 0 0 2em; }
+li p:last-child { margin:0 }
+li.task-list-item { list-style-type: none; margin-left: -1.5em; }
+li.task-list-item input { margin-right: .5em; }
+li.task-list-item ul, li.task-list-item ol { margin-left: 1.5em; }
+dd { margin: 0 0 0 2em; }
+
+/* Tables */
+table { border-collapse: collapse; border: 1px solid #ddd; }
+table tr:nth-child(2n) { background-color: #f8f8f8; }
+td, th { border: 1px solid #ddd; padding: 6px 13px; }
+
+/* Codehilite Tables */
+table.codehilitetable { border: 0; border-spacing: 0; width: 100%; }
+td.linenos, td.code, table.codehilitetable td { border: 0; padding: 0; }
+table.codehilitetable td:not(.linenos) div.linenodiv { padding: 0 !important; }
+td.code { width: 100%; }
+table.codehilitetable td.linenos div pre, td div.linenodiv pre {
+  border: 0;
+  border-top: 1px solid #CCC;
+  border-left: 1px solid #CCC;
+  border-right: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+table.codehilitetable td.code div pre {
+  border: 0;
+  border-top: 1px solid #CCC;
+  border-right: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+/* Media */
+@media only screen and (min-width: 480px) {
+  body{ font-size:14px; }
+}
+
+@media only screen and (min-width: 768px) {
+  body{ font-size:16px; }
+}
+
+@media print {
+  * { background: transparent !important; color: black !important; filter:none !important; -ms-filter: none !important; }
+  body{ font-size:12pt; max-width:100%; outline:none; border: 0;}
+  a, a:visited { text-decoration: underline; }
+  hr { height: 1px; border:0; border-bottom:1px solid black; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
+  pre, blockquote { border: 1px solid #999; padding-right: 1em; page-break-inside: avoid; }
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+}
+
+.toc {
+  position: fixed;
+  font-size: 14px;
+  top: 0px;
+  left: -330px;
+  width: 270px;
+  height: 100%;
+  overflow: -y: scroll;
+  padding: 0 0 0 100px;
+  box-shadow: 1px 0 3px rgba(0,0,0,0.25);
+  transition: all .66s ease-in-out;
+  opacity: .4;
+}
+.toc:hover {
+  left: -120px;
+  transition: all .2s ease-in-out;
+  opacity: .8;
+}
+.toc:before {
+  content: '目录';
+  padding-right: 4px;
+  float: right;
+  font-size: 16px;
+  font-weight: bold;
+}
+.toc:hover:before {
+  display: none;
+}
+.toc ul {
+  list-style-type: none;
+}
+
+img {
+  margin: 10px;
+  box-shadow: 2px 2px 10px;
+}</style><title>提高电脑工作效率 - 第一课</title></head><body><article class="markdown-body"><h2 id="-"><a name="user-content--" href="#-" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>提高电脑工作效率 - 软件篇</h2>
+<h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>前言</h3>
+<blockquote>
+<p>人类发明计算机的初衷，就是把自己从大量重复性工作中解放出来。<br />
+——William Zhou</p>
+</blockquote>
+<p>所以，如果你发现自己正在重复某种单调的具有特定模式的电脑工作，那么你最好先停下来想想：我在干什么？怎样让电脑帮我完成工作？</p>
+<h3 id="everything"><a name="user-content-everything" href="#everything" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Everything</h3>
+<p>先介绍一款史上最强悍的软件，可能没有之一：Everything</p>
+<p>你有没有这样的困惑：「我前几天保存的文件放在哪个文件夹了？」或者，如果你的桌面和我一样混乱，那么你可能也会遇到「我明明把文件保存在桌面啊，眼都花了怎么就是找不着呢？」类似的情况。Everything就是为了解决这样的问题应运而生的。</p>
+<p>Everything运行在windows系统上，安装包只有0.5M，<a href="http://dlsw.baidu.com/sw-search-sp/soft/1a/17239/Everything-1.3.4.686.x64-Setup.1418106344.exe">下载地址</a><br />
+下载后双击安装，语言选择简体中文，按照默认设置一路next点下去就行了。</p>
+<p>这款软件的功能写在它的名字上：find everything，第一次启动后，它会快速索引磁盘内的所有文件，在十秒钟之内，它就会列出磁盘中所有存在的文件。建完了索引，以后再运行它都是秒开。<br />
+<img alt="电脑里的所有文件 注意左下角" src="http://7fvfmf.com1.z0.glb.clouddn.com/2016-03-01_183350.png" /></p>
+<p>如果仅仅是列出所有文件，它还称不上是最强悍的软件，它变态之处在于：无论你搜索什么，它都能在一秒内列出所有文件名满足你搜索条件的文件。<br />
+举个例子：<br />
+<img alt="搜索测试" src="http://7fvfmf.com1.z0.glb.clouddn.com/everythingtest.png" /></p>
+<p>最后是这款软件的杀手锏：它支持正则表达式搜索。（什么是正则表达式？它是人类为了解放生产力的又一伟大发明，关于它以后有机会另开一文）<br />
+比如我想搜索硬盘中文件名带有「测试」的PDF文件：<br />
+<img alt="搜PDF测试" src="http://7fvfmf.com1.z0.glb.clouddn.com/everythingtest2.png" /></p>
+<p>此外，Everything还提供HTTP/FTP服务器等功能，不过一般用户不怎么需要用到。</p>
+<h3 id="launchy"><a name="user-content-launchy" href="#launchy" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>Launchy</h3>
+<p>Launchy是一款运行在windows下的快速启动软件。如果说Everything是对文件系统的索引，那么Launchy就是对快捷方式的索引。Everything解决了找不到文件的难题，Launchy则提供了快速打开软件的优雅方式。</p>
+<p>Launchy大小4.3M，官方下载链接在<a href="http://launchy.net/downloads/win/Launchy2.5.exe">这里</a>。</p>
+<p>安装好之后，Launchy默认的启动快捷键是<kbd>alt</kbd>+<kbd>space</kbd>，软件启动后会自动索引开始菜单中的快捷方式，然后你可以在输入框中试着输入一些字符：<br />
+<img alt="launchy" src="http://7fvfmf.com1.z0.glb.clouddn.com/launchy1.jpg" /><br />
+选中要启动的软件，按<kbd>enter</kbd>就可以启动了！</p>
+<p>从此以后，人们再也不需要从满桌面的快捷方式找要启动的软件了。</p>
+<p>难道Launchy能做到的就只有这样吗？一个启动快捷方式的快捷方式？当然不是。<br />
+它可以做科学计算：<br />
+<img alt="launchy calc" src="http://7fvfmf.com1.z0.glb.clouddn.com/launchy2.jpg" /></p>
+<p>还可以快速进行网页搜索：<br />
+<img alt="launchy search" src="http://7fvfmf.com1.z0.glb.clouddn.com/launchy3.jpg" /></p>
+<p>甚至可以运行windows命令行：<br />
+<img alt="launchy cmd" src="http://7fvfmf.com1.z0.glb.clouddn.com/launchy4.jpg" /></p>
+<p>更多功能，留给大家自行发现吧！</p>
+<h3 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link"  aria-hidden="true"><span class="headeranchor"></span></a>总结</h3>
+<p>这两款软件使用得当，会给生产力带来很大提升，在此衷心推荐给大家，希望大家的工作能像它们一样，Simple and Fast，做到这两点，也就做到了优秀。</p></article></body></html>
