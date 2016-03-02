@@ -59,6 +59,17 @@
     line-height: 90px;
     text-align: center;
   }
+  #clouds {
+    position: absolute;
+    top: 0;
+    /*left: 0;*/
+    opacity: 0.7;
+    animation: piaoapiao 30s linear infinite;
+  }
+  @keyframes piaoapiao {
+    0% {right: -1188px}
+    100% {right: 1920px}
+  }
   </style>
 
   <script src="./jquery.min.js"></script>
@@ -83,33 +94,34 @@
   <div id="fullpage">
     <div class="section " id="section0">
       <div class="img">
-        <img src="./imgs/bg1.png" alt="">
+        <img src="http://7fvfmf.com1.z0.glb.clouddn.com/chimewbg1.png" alt="">
       </div>
+      <img src="http://7fvfmf.com1.z0.glb.clouddn.com/chimewclouds.png" alt="" id="clouds">
 
     </div>
     <div class="section" id="section1">
       <div class="img">
-        <img src="./imgs/bg2.png" alt="">
+        <img src="http://7fvfmf.com1.z0.glb.clouddn.com/chimewbg2.png" alt="">
       </div>
       <div class="shouji">
-        <img src="./imgs/shouji.png" alt="">
-        <img src="./imgs/shouji0.png" alt="" class="shoujiping" id="shouji0">
-        <img src="./imgs/shouji1.png" alt="" class="shoujiping" id="shouji1">
-        <img src="./imgs/shouji2.png" alt="" class="shoujiping" id="shouji2">
+        <img src="http://7fvfmf.com1.z0.glb.clouddn.com/chimewshouji.png" alt="">
+        <img src="http://7fvfmf.com1.z0.glb.clouddn.com/chimewshouji0.png" alt="" class="shoujiping" id="shouji0">
+        <img src="http://7fvfmf.com1.z0.glb.clouddn.com/chimewshouji1.png" alt="" class="shoujiping" id="shouji1">
+        <img src="http://7fvfmf.com1.z0.glb.clouddn.com/chimewshouji2.png" alt="" class="shoujiping" id="shouji2">
       </div>
-      <img id="finger" src="./imgs/finger.png" alt="">
+      <img id="finger" src="http://7fvfmf.com1.z0.glb.clouddn.com/chimewfinger2.png" alt="">
 
     </div>
     <div class="section" id="section2">
 
       <div class="img">
-        <img src="./imgs/bg3.png" alt="">
+        <img src="http://7fvfmf.com1.z0.glb.clouddn.com/chimewbg3.png" alt="">
       </div>
     </div>
     <div class="section" id="section3">
       <h2>OUR TEAM</h2>
       <div class="img">
-        <img src="./imgs/bg4.png" alt="">
+        <img src="http://7fvfmf.com1.z0.glb.clouddn.com/chimewbg4.png" alt="">
       </div>
       <div class="footer">
         <p>©2016 奇喵背词 (京ICP备16001231号-2)</p>
