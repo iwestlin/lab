@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>奇喵背词 - 官方网站</title>
+  <meta name="description" content="95后专属的应试刷题APP" />
+  <meta name="keywords" content="考研,英语,背单词,APP,精智教育" />
+  <link rel="stylesheet" type="text/css" href="./jquery.fullPage.css" />
+  <link rel="stylesheet" type="text/css" href="./index.css" />
+  <style>
+  .section .img {
+    margin: 0 auto;
+    width: 1280px;
+  }
+  #finger {
+    position: absolute;
+    top: 50%;
+    left: 51%;
+    z-index: 2;
+  }
+  .shouji {
+    position: absolute;
+    left: 28%;
+    top: 300px;
+  }
+  .shoujiping {
+    position: absolute;
+    top: 68px;
+    left: 228px;
+  }
+  #shouji1 {
+    animation: jingzhi 9s infinite;
+  }
+  @keyframes jingzhi {
+    0% {opacity: 0}
+    33% {opacity: 0}
+    36% {opacity: 1}
+    66% {opacity: 1}
+    70% {opacity: 0}
+    100% {opacity: 0}
+  }
+  #shouji2 {
+    animation: jingzhii 9s infinite;
+  }
+  @keyframes jingzhii {
+    0% {opacity: 0}
+    33% {opacity: 0}
+    66% {opacity: 0}
+    70% {opacity: 1}
+    96% {opacity: 1}
+    100% {opacity: 0}
+  }
+  #fp-nav ul li a span {
+    background-color: #fff;
+  }
+  #section3 h2 {
+    background-color: #fff;
+    height: 90px;
+    line-height: 90px;
+    text-align: center;
+  }
+  </style>
+
+  <script src="./jquery.min.js"></script>
+  <script type="text/javascript" src="./jquery.fullPage.js"></script>
+
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('#fullpage').fullpage({
+      verticalCentered: false,
+      navigation: true,
+      navigationPosition: 'right',
+      navigationTooltips: ['1', '2', '3', '4']
+    });
+  });
+  </script>
+
+</head>
+
+<body>
+
+
+  <div id="fullpage">
+    <div class="section " id="section0">
+      <div class="img">
+        <img src="./imgs/bg1.png" alt="">
+      </div>
+
+    </div>
+    <div class="section" id="section1">
+      <div class="img">
+        <img src="./imgs/bg2.png" alt="">
+      </div>
+      <div class="shouji">
+        <img src="./imgs/shouji.png" alt="">
+        <img src="./imgs/shouji0.png" alt="" class="shoujiping" id="shouji0">
+        <img src="./imgs/shouji1.png" alt="" class="shoujiping" id="shouji1">
+        <img src="./imgs/shouji2.png" alt="" class="shoujiping" id="shouji2">
+      </div>
+      <img id="finger" src="./imgs/finger.png" alt="">
+
+    </div>
+    <div class="section" id="section2">
+
+      <div class="img">
+        <img src="./imgs/bg3.png" alt="">
+      </div>
+    </div>
+    <div class="section" id="section3">
+      <h2>OUR TEAM</h2>
+      <div class="img">
+        <img src="./imgs/bg4.png" alt="">
+      </div>
+      <div class="footer">
+        <p>©2016 奇喵背词 (京ICP备16001231号-2)</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
