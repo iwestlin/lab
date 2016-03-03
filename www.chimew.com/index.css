@@ -174,7 +174,7 @@ h2 {
 }
 #section3 .footer {
   width: 100%;
-  height: 100px;
+  height: 70px;
   position: absolute;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.3);
@@ -182,5 +182,5 @@ h2 {
   color: white;
 }
 .footer p {
-  line-height: 100px;
+  line-height: 70px;
 }

@@ -8,19 +8,18 @@
   <link rel="stylesheet" type="text/css" href="./jquery.fullPage.css" />
   <link rel="stylesheet" type="text/css" href="./index.css" />
   <style>
-  .section .img {
+  div.img {
     margin: 0 auto;
     width: 1280px;
   }
   #finger {
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 51%;
-    z-index: 2;
   }
   .shouji {
     position: absolute;
-    left: 28%;
+    left: 25%;
     top: 300px;
   }
   .shoujiping {
@@ -62,13 +61,22 @@
   #clouds {
     position: absolute;
     top: 0;
-    /*left: 0;*/
     opacity: 0.7;
     animation: piaoapiao 30s linear infinite;
   }
   @keyframes piaoapiao {
     0% {right: -1188px}
     100% {right: 1920px}
+  }
+
+  @media screen and (max-height: 900px) {
+    div.img {
+      width: 1133px;
+      margin: 0 auto;
+    }
+    div.img img {
+      width: 1133px;
+    }
   }
   </style>
 
