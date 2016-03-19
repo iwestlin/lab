@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>stay young stay simple</title>
+  <style type="text/css">
+  body {
+    width: 300px;
+    margin: 0 auto;
+    margin-top: 50px;
+  }
+  #output {
+    margin-top: 50px;
+  }
+  </style>
+</head>
+
+<body>
+
+  <textarea name="text" id="text" cols="40" rows="10" onchange="test()"></textarea>
+  <div id="output"></div>
+
+  <script src="./jquery.min.js"></script>
+  <script type="text/javascript" src="./jquery.qrcode.min.js"></script>
+  <script>
+  var text = document.getElementById('text');
+
+  function test() {
+    $('canvas').remove();
+    jQuery(function() {
+      jQuery('#output').qrcode({
+        width: 300,
+        height: 300,
+        text: text.value
+      });
+    })
+  }
+  </script>
+
+</body>
+
+</html>

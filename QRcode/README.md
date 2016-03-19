@@ -1,0 +1,1 @@
+original code from [here](https://github.com/jeromeetienne/jquery-qrcode/blob/master/examples%2Fdemo.html)
