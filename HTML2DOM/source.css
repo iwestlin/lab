@@ -1,0 +1,112 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+img {
+	border: 0;
+}
+body {
+	font: 62.5% "Lucida Grande", Lucida, Verdana, sans-serif;
+	text-align: center;
+}
+
+h1 {
+	padding: 0.25em;
+	margin: 0;
+	background: gray;
+	color: white;
+	text-align: left;
+	font-size: 2em;
+
+}
+h2 {
+	font-size: 1.5em;
+	padding: 0.3em;
+	margin: 1em 0 0.5em 0;
+	border: 1px solid #bfbfbf;
+	-moz-border-radius: 0.5em;
+	-moz-border-radius-topright: 0em
+}
+
+h3 {
+	font-size: 1.7em;
+}
+
+h4 {
+	margin-top: 2em;
+	font-size: 1.3em;
+}
+p {
+	margin: 1em 0;
+}
+ul {
+	margin-left: 3em;
+}
+li {
+	margin: 0.5em;	
+}
+code {
+	font: 1em "Courier New", Courier, mono;
+}
+
+
+/* some general form styles */
+form {
+    display:block;
+    position:relative;
+    margin-bottom: 3em;
+}
+fieldset {
+    padding:1em;
+}
+form div {
+    margin:1em;
+}
+label {
+    font-size: 1.2em;
+}
+input {
+    width: 100%;
+	background-color: #db006e;
+}
+.buttons {
+    margin-top:1em;
+    padding-top:2em;
+    border-top: 1px dotted black;
+    text-align: center;
+}
+
+.buttons input {
+    width: 50%;
+}
+
+
+
+#content {
+	text-align: left;
+	width: 480px;
+	margin: 0 auto;
+	margin-top: 3em;
+}
+
+ul#nav {	background: #efefef;	padding: 0.5em;	margin:0 0 2em 0;
+	
+	display: none; /* For screenshots */}ul#nav li {	font-weight: bold;	margin: 0.5em;	margin-top: 1em;	display: inline;}
+
+.clear {
+	clear: both;
+}
+
+#where-from {
+	padding: 1em;
+	margin-top: 3em;
+	background: #db006e;
+	color: white;
+	font-weight: bold;
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+	font-size: 1.1em;
+	
+}
+#where-from a {
+	color: white;
+}

@@ -1,0 +1,14 @@
+textarea {
+	width: 100% !important;
+	height: 40em;
+	border: 1px solid black;
+}
+textarea#source {
+	height: 20em;
+}
+input {
+	margin: 1em 0;
+}
+lable {
+	display: block;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>DOM Generation</title>
+  <link rel="stylesheet" href="./source.css">
+  <link rel="stylesheet" href="./chapter.css">
+  <link rel="stylesheet" href="./style.css">
+  <style>
+  input {
+    background-color: #fff
+  }
+  </style>
+  <script src="./ADS-final-verbose.js"></script>
+  <script src="./myLogger.js"></script>
+  <script src="./generateDOM.js"></script>
+  <script src="./load.js"></script>
+</head>
+
+<body>
+  <div id="content">
+    <form id="generator" action="">
+      <fieldset>
+        <h2>Source</h2>
+        <label for="source">Enter an HTML document fragment</label>
+        <textarea id="source" cols="30" rows="15">
+&lt;li id = "$commentId" class="$commentClass" style="background-color:white"&gt;
+&lt;a href="$countHref" class="counter" title="$countTitle" onclick="window.open(this.href); return false;"&gt;$countContent&lt;/a&gt;
+&lt;span class="commentauthor"&gt;&lt;a href="$authorHref" rel="external nofollow"&gt;$authorContent&lt;/a&gt;&lt;/span&gt;
+&lt;small class="comment-meta"&gt;
+&lt;a href="$metaHref" title="$metaTitle"&gt;$metaContent&lt;/a&gt;
+&lt;/small&gt;
+&lt;div class="comment-content"&gt;
+$commentContent
+&lt;/div&gt;
+&lt;/li&gt;
+        </textarea>
+        <input id="generate" type="button" value="&#8595; generate &#8595;">
+        <h2>DOM Code</h2>
+        <label for="result">and voila! DOM goodness:</label>
+        <textarea id="result" cols="30" rows="15"></textarea>
+      </fieldset>
+    </form>
+  </div>
+</body>
+
+</html>

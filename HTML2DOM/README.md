@@ -1,0 +1,1 @@
+code from [@iamamused](https://github.com/iamamused/foED-AdvancED-DOM-Scripting)
