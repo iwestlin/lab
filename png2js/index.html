@@ -7,7 +7,18 @@
 </head>
 
 <body>
+<p>code from <a href="https://imququ.com/post/code2png-encoder.html">here</a></p>
+<h2>来找找MD5函数的定义在哪里？</h2>
+<input type="text" id="text">
+<button onclick="haha()">MD5</button>
+<span id='result'></span>
   <script type="text/javascript">
+  var text = document.getElementById('text');
+  var result = document.getElementById('result');
+  function haha() {
+    result.innerHTML = md5(text.value);
+  }
+
   var Decode = function(b) {
     var e;
     e = [];
@@ -35,10 +46,11 @@
   var img = new Image();
   img.onload = function() {
     Function(Decode(img))();
-    document.write("hello的md5值是：" + md5('hello'));
+    // document.write("hello的md5值是：" + md5('hello'));
   };
-  img.crossOrigin = '*'; //如果不加此行则会因跨域安全策略请求失败无法加载图片
+  img.crossOrigin = '*'; //如果不加此行则可能会因跨域安全策略请求失败无法加载图片
   img.src = location.href + 'code.png';
+  // img.src = 'http://7fvfmf.com1.z0.glb.clouddn.com/md5code.png';
   </script>
 </body>
 
