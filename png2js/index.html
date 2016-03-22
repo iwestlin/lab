@@ -35,7 +35,7 @@
   var img = new Image();
   img.onload = function() {
     Function(Decode(img))();
-    console.log(md5('hello'));
+    document.write("hello的md5值是：" + md5('hello'));
   };
   img.crossOrigin = '*'; //如果不加此行则会因跨域安全策略请求失败无法加载图片
   img.src = location.href + 'code.png';
