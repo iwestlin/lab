@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>document</title>
+  <base target="_blank">
+  <style type="text/css">
+  a {
+    text-decoration: none;
+  }
+  </style>
+</head>
+
+<body>
+  输入要获取的短语，每行一个：
+  <br>
+  <textarea name="" id="duanyu" cols="30" rows="10"></textarea>
+  <br>
+  <button onclick="haha()">获取读音</button>
+  <br>
+  <script type="text/javascript">
+  function haha() {
+      var duanyu = document.getElementById('duanyu').value;
+      var duanyuarr = duanyu.split('\n');
+
+      for (var i = duanyuarr.length - 1; i >= 0; i--) {
+        var url = "http://fanyi.baidu.com/gettts?lan=uk&text=" + encodeURI(duanyuarr[i]) + "&source=web";
+        var a = document.createElement('a');
+        a.href = url;
+        a.innerHTML = duanyuarr[i].replace(/ /g, '_');
+        document.body.appendChild(a);
+        var br = document.createElement('br');
+        document.body.appendChild(br);
+      }
+  }
+  </script>
+</body>
+
+</html>

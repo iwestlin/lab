@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>document</title>
+</head>
+<body>
+  输入要获取读音的单词，每行一个：
+  <br>
+  <textarea name="" id="danci" cols="30" rows="10"></textarea>
+  <br>
+  <button onclick="haha()">获取读音</button>
+  <br>
+  <script type="text/javascript">
+  var danci;
+  var danciarr;
+  function haha() {
+      danci = document.getElementById('danci').value;
+      danciarr = danci.split('\n');
+
+      for (var i = danciarr.length - 1; i >= 0; i--) {
+        var url = 'http://words-audio.oss.aliyuncs.com/us%2F' + danciarr[i].substr(0, 1).toLowerCase() + '%2F' + danciarr[i].substr(0, 2).toLowerCase() + '%2F' + danciarr[i].toLowerCase() + '.mp3';
+        var a = document.createElement('a');
+        a.href = url;
+        a.innerHTML = danciarr[i];
+        document.body.appendChild(a);
+        var br = document.createElement('br');
+        document.body.appendChild(br);
+      }
+  }
+  </script>
+</html>

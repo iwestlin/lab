@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>document</title>
+</head>
+原有词库的所有单词：
+<textarea name="" id="two" cols="30" rows="10"></textarea>
+要添加的词库所有单词：
+<textarea name="" id="one" cols="30" rows="10"></textarea>
+<button onclick="haha()">筛选</button>
+
+<body>
+  <script type="text/javascript">
+  function haha() {
+    var str = document.getElementById("one").value;
+    str = str.replace(/\n\n+/g, "\n");
+    var a = str.split("\n");
+    var str2 = document.getElementById("two").value;
+    str2 = str2.replace(/\n\n+/g, "\n");
+    var b = str2.split("\n");
+    var result = a.filter(function(item) {
+      return (b.indexOf(item) == (-1));
+    });
+    document.write(result.join('<br>'));
+  }
+  </script>
+</body>
+
+</html>
