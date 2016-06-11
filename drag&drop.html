@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <style type="text/css">
+    span {
+        display: block;
+        ;
+        width: 488px;
+        height: 70px;
+        padding: 10px;
+        border: 1px solid #aaaaaa;
+    }
+    </style>
+    <script type="text/javascript">
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    var dragIcon = document.createElement('img');
+    
+    dragIcon.src = 'http://www.oiegg.com/images/logo.gif';
+    // dragIcon.onload = function () {
+    // 	document.body.appendChild(dragIcon);
+    // }
+    // dragIcon.width = 100;
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+        ev.dataTransfer.setDragImage(dragIcon, -10, -10);
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+    }
+    </script>
+</head>
+
+<body>
+    <p>请把 W3School 的图片拖放到矩形中：</p>
+    <span id="" ondrop="drop(event)" ondragover="allowDrop(event)"></span>
+    <br />
+    <img id="a" src="http://www.w3school.com.cn/i/w3school_banner.gif" draggable="true" ondragstart="drag(event)" />
+    <!-- event是html中的关键字，不能更改。 -->
+</body>
+
+</html>
