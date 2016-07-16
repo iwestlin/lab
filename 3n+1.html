@@ -5,40 +5,39 @@
     <title>3n+1问题</title>
     <style type="text/css">
     body {
-      font-family: STFangSong, Helvetica, Arial, Vernada, Tahoma, STXihei, "Microsoft YaHei", "Songti SC", SimSun, Heiti, sans-serif;
-      width: 600px;
-      margin: 0 auto;
-      margin-top: 30px;
-      border: 1px dashed gray;
-      padding: 20px;
+        font-family: STFangSong, Helvetica, Arial, Vernada, Tahoma, STXihei, "Microsoft YaHei", "Songti SC", SimSun, Heiti, sans-serif;
+        width: 600px;
+        margin: 0 auto;
+        margin-top: 30px;
+        border: 1px dashed gray;
+        padding: 20px;
     }
+    
     .quote {
-      border-left: 4px solid lightblue;
-      padding-left: 10px;
+        border-left: 4px solid lightblue;
+        padding-left: 10px;
     }
     </style>
 </head>
 
 <body>
     <div class="quote">
-      任意写出一个正整数N，并且按照以下的规律进行变换：
-      如果是个奇数，则下一步变成3N+1。
-      如果是个偶数，则下一步变成N/2。
-      无论N是多少，最后都会变成1。
+        任意写出一个正整数N，并且按照以下的规律进行变换： 如果是个奇数，则下一步变成3N+1。 如果是个偶数，则下一步变成N/2。 无论N是多少，最后都会变成1。
     </div>
     <h2>请输入一个正整数：</h2>
     <input id="in"></input>
     <button onclick="fuckme()">运行</button>
     <pre></pre>
     <script type="text/javascript">
-    var res = '';
+    var r = '';
     var p = document.getElementsByTagName('pre')[0];
+    var i = document.getElementById('in');
 
     function fuckme() {
-        var num = document.getElementById('in').value;
-        res = '';
+        var num = i.value;
+        r = '';
         wtf(num);
-        p.innerText = res;
+        p.innerText = r;
     }
 
     function isPositiveInt(num) {
@@ -62,21 +61,30 @@
     function wtf(num) {
         var number = parseInt(num);
         if (number == 1) {
-            res += ('结果为1，运行结束' + '\n');
+            r += ('结果为1，运行结束' + '\n');
             return;
         }
         if (isPositiveInt(number)) {
             if (isPositiveEven(number)) {
                 var next = parseInt(number / 2);
-                res += (number + '为偶数，除以2等于' + number / 2 + '\n');
+                r += (number + '为偶数，除以2等于' + number / 2 + '\n');
                 wtf(next);
             } else {
                 var next = parseInt(number * 3 + 1);
-                res += (number + '为奇数，乘以3再加1等于' + next + '\n');
+                r += (number + '为奇数，乘以3再加1等于' + next + '\n');
                 wtf(next);
             }
         } else {
-            res += ('请输入一个正整数！' + '\n');
+            r += ('请输入一个正整数！' + '\n');
+        }
+    }
+
+    document.onkeydown = function(e) {
+        if (!e) {
+            e = window.event;
+        }
+        if ((e.keyCode || e.which) == 13) {
+            fuckme();
         }
     }
     </script>
