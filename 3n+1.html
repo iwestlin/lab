@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>3n+1问题</title>
+    <style type="text/css">
+    body {
+    	font-family: STFangSong, Helvetica, Arial, Vernada, Tahoma, STXihei, "Microsoft YaHei", "Songti SC", SimSun, Heiti, sans-serif;
+    	width: 600px;
+    	margin: 0 auto;
+    	margin-top: 50px;
+    	text-align: center;
+    }
+    .quote {
+    	border-left: 4px solid lightblue;
+    	padding-left: 10px;
+    }
+    </style>
+</head>
+
+<body>
+		<div class="quote">
+			任意写出一个正整数N，并且按照以下的规律进行变换：
+			如果是个奇数，则下一步变成3N+1。
+			如果是个偶数，则下一步变成N/2。
+			无论N是多少，最后都会变成1。
+		</div>
+    <h2>请输入一个正整数：</h2>
+    <input id="in"></input>
+    <button onclick="fuckme()">运行</button>
+    <pre></pre>
+    <script type="text/javascript">
+    var res = '';
+    var p = document.getElementsByTagName('pre')[0];
+
+    function fuckme() {
+        var num = document.getElementById('in').value;
+
+        res = '';
+        wtf(num, res);
+        // console.log(res);
+        p.innerText = res;
+        // wtf(num);
+    }
+
+    function isPositiveInt(num) {
+        var reg = /^[0-9]+$/;
+        if (reg.test(num)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function isPositiveEven(num) {
+        var half = num / 2;
+        if (isPositiveInt(half)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function wtf(num) {
+        var number = parseInt(num);
+        if (number == 1) {
+            res += ('结果为1，运行结束' + '\n');
+            return;
+        }
+        if (isPositiveInt(number)) {
+            if (isPositiveEven(number)) {
+                var next = parseInt(number / 2);
+                res += (number + '为偶数，除以2等于' + number / 2 + '\n');
+                wtf(next);
+            } else {
+                var next = parseInt(number * 3 + 1);
+                res += (number + '为奇数，乘以3再加1等于' + next + '\n');
+                wtf(next);
+            }
+        } else {
+            res += ('请输入一个正整数！' + '\n');
+        }
+    }
+    </script>
+</body>
+
+</html>
