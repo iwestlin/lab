@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>document</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+  * {
+    padding: 0;
+    margin: 0;
+  }
+  
+  body {
+    width: 320px;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  
+  button {
+    padding: 5px 10px 5px 10px;
+  }
+  
+  hr {
+    margin: 5px 0px;
+  }
+  
+  .wrap {
+    height: 320px;
+    position: relative;
+  }
+  
+  .tower {
+    width: 100px;
+    display: inline-block;
+    text-align: center;
+    font-size: 30px;
+    position: absolute;
+    bottom: 10px;
+  }
+  
+  #b {
+    left: 105px;
+  }
+  
+  #c {
+    left: 210px;
+  }
+  
+  .tray {
+    width: 10px;
+    display: inline-block;
+    word-wrap: break-word;
+    font-size: 20px;
+  }
+  
+  .quote {
+    border-left: 4px solid #b4d7e4;
+    padding-left: 10px;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="quote">
+    有三根相邻的柱子，标号分别为a，b，c。其中柱子b，c上什么都没有。 而柱子a上从下到上按金字塔状叠放着n个不同大小的圆盘，要把所有盘子一个一个移动到柱子c上。 并且每次移动时，同一根柱子上都不能出现大盘子放在小盘子上方的情况。
+  </div>
+  <hr />
+  <span>盘子数量：</span>
+  <select id="trayNumber">
+    <option>1</option>
+    <option>2</option>
+    <option selected="selected">3</option>
+    <option>4</option>
+    <option>5</option>
+    <option>6</option>
+    <option>7</option>
+    <option>8</option>
+    <option>9</option>
+  </select>
+  <br />
+  <span>每步所需时间：（单位毫秒）</span>
+  <select id="delay">
+    <option>300</option>
+    <option selected="selected">500</option>
+    <option>1000</option>
+    <option>1500</option>
+    <option>2000</option>
+    <option>3000</option>
+  </select>
+  <hr />
+  <button id="go">运行</button>
+  <span>运行时不要点击其他按钮</span>
+  <hr />
+  <div class="wrap">
+    <div id="a" class="tower">
+      <p class="tray">123</p>
+      <hr />a</div>
+    <div id="b" class="tower">
+      <p class="tray"></p>
+      <hr />b</div>
+    <div id="c" class="tower">
+      <p class="tray"></p>
+      <hr />c</div>
+  </div>
+  <script type="text/javascript">
+  var go = document.getElementById('go');
+  var trayNumber = document.getElementById('trayNumber');
+  var delay = document.getElementById('delay');
+  var a = document.querySelector('#a .tray');
+  var b = document.querySelector('#b .tray');
+  var c = document.querySelector('#c .tray');
+  var i = 0;
+
+  go.onclick = function() {
+    i = 0;
+    var number = parseInt(trayNumber.value);
+    var delays = parseInt(delay.value);
+    myhanoi(number, 'a', 'b', 'c', delays);
+  }
+
+  trayNumber.onchange = function() {
+    var n = this.value;
+    a.innerText = onetwothree(n);
+    b.innerText = '';
+    c.innerText = '';
+  }
+
+  String.prototype.deleteBegin = function() {
+    return this.slice(1, this.length)
+  }
+  String.prototype.addBegin = function(str) {
+    return str + this;
+  }
+
+  function onetwothree(str) {
+    var n = parseInt(str);
+    var i = 1,
+      s = '';
+    while (i <= n) {
+      s = s.concat(i++)
+    }
+    return s;
+  }
+
+  function myhanoi(num, src, mid, tar, del) {
+    if (num > 0) {
+      myhanoi(num - 1, src, tar, mid, del);
+      i++;
+      setTimeout(function() {
+        var source = document.querySelector('#' + src + ' .tray');
+        source.innerText = source.innerText.deleteBegin();
+        var target = document.querySelector('#' + tar + ' .tray');
+        target.innerText = target.innerText.addBegin(num);
+      }, del * i);
+      myhanoi(num - 1, mid, src, tar, del);
+    }
+  }
+  </script>
+</body>
+
+</html>
