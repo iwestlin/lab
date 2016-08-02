@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Texas Holdem - 德州扑克</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+  body {
+    width: 90%;
+    max-width: 900px;
+    border: 1px dashed #666;
+    margin: 0 auto;
+    margin-top: 10px;
+    padding: 10px;
+    font-family: 'PingFang SC';
+  }
+  .quote {
+    border-left: 4px solid #b4d7e4;
+    padding-left: 10px;
+  }
+  .poker {
+    border: 1px solid #666;
+    border-radius: .1em;
+    box-shadow: .2em .2em .5em #333;
+    width: 66px;
+    height: 100px;
+    padding-left: 5px;
+    position: relative;
+    display: inline-block;
+    font-size: 1.5em;
+    margin-top: 7px;
+  }
+  .poker:after {
+    position: absolute;
+    top: 17%;
+    left: 17%;
+    font-size: 2em;
+  }
+  .spade {
+    color: black;
+  }
+  .spade:after {
+    content: '♠';
+  }
+  .heart {
+    color: red;
+  }
+  .heart:after {
+    content: '♥';
+  }
+  .club {
+    color: black;
+  }
+  .club:after {
+    content: '♣';
+  }
+  .diamond {
+    color: red;
+  }
+  .diamond:after {
+    content: '♦';
+  }
+  </style>
+</head>
+
+<body>
+<div class="quote">
+  德克萨斯扑克全称Texas Hold'em poker，中文简称德州扑克。它是一种玩家对玩家的公共牌类游戏。德州扑克一共有52张牌，没有王牌。每个玩家分两张牌作为“底牌”，五张由荷官陆续朝上发出的公共牌。开始的时候，每个玩家会有两张面朝下的底牌。经过所有押注圈后，若仍不能分出胜负，游戏会进入“摊牌”阶段，也就是让所剩的玩家亮出各自的底牌以较高下，持大牌者获胜。
+</div>
+<hr>
+<div class="spade poker">A</div>
+<div class="heart poker">A</div>
+<div class="club poker">A</div>
+<div class="diamond poker">A</div>
+<div class="spade poker">K</div>
+<div class="heart poker">K</div>
+<div class="club poker">K</div>
+<div class="diamond poker">K</div>
+<br>
+<div class="spade poker">Q</div>
+<div class="heart poker">Q</div>
+<div class="club poker">Q</div>
+<div class="diamond poker">Q</div>
+<div class="spade poker">J</div>
+<div class="heart poker">J</div>
+<div class="club poker">J</div>
+<div class="diamond poker">J</div>
+<br>
+<div class="spade poker">10</div>
+<div class="heart poker">10</div>
+<div class="club poker">10</div>
+<div class="diamond poker">10</div>
+<div class="spade poker">9</div>
+<div class="heart poker">9</div>
+<div class="club poker">9</div>
+<div class="diamond poker">9</div>
+<br>
+<div class="spade poker">8</div>
+<div class="heart poker">8</div>
+<div class="club poker">8</div>
+<div class="diamond poker">8</div>
+<div class="spade poker">7</div>
+<div class="heart poker">7</div>
+<div class="club poker">7</div>
+<div class="diamond poker">7</div>
+<br>
+<div class="spade poker">6</div>
+<div class="heart poker">6</div>
+<div class="club poker">6</div>
+<div class="diamond poker">6</div>
+<div class="spade poker">5</div>
+<div class="heart poker">5</div>
+<div class="club poker">5</div>
+<div class="diamond poker">5</div>
+<br>
+<div class="spade poker">4</div>
+<div class="heart poker">4</div>
+<div class="club poker">4</div>
+<div class="diamond poker">4</div>
+<div class="spade poker">3</div>
+<div class="heart poker">3</div>
+<div class="club poker">3</div>
+<div class="diamond poker">3</div>
+<br>
+<div class="spade poker">2</div>
+<div class="heart poker">2</div>
+<div class="club poker">2</div>
+<div class="diamond poker">2</div>
+
+  <script type="text/javascript">
+  var levels = ['高牌', '对子', '两对', '三条', '顺子', '同花', '葫芦', '四条', '同花顺'];
+  var suits = ['黑桃', '红桃', '梅花', '方块'];
+  var sizes = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+
+  var arr = [
+    ['红桃', '6'],
+    ['红桃', 'Q'],
+    ['红桃', '3'],
+    ['红桃', '4'],
+    ['红桃', '5']
+  ];
+  var arr2 = [
+    ['方块', 'A'],
+    ['梅花', '9'],
+    ['红桃', '6'],
+    ['黑桃', 'K'],
+    ['梅花', '10']
+  ];
+
+  function myArray(num) {
+    var a = [];
+    for (var i = 0; i < num; i++) {
+      a[i] = 0;
+    }
+    return a;
+  }
+
+  function arraylize(arr) {
+    var mysuits = myArray(4);
+    var mysizes = myArray(13);
+    for (var i = 0; i < arr.length; i++) {
+      if (suits.indexOf(arr[i][0]) > -1) {
+        mysuits[suits.indexOf(arr[i][0])] += 1;
+      }
+      if (sizes.indexOf(arr[i][1]) > -1) {
+        mysizes[sizes.indexOf(arr[i][1])] += 1;
+      }
+    }
+    console.log('mysuits:'+mysuits+'  mysizes:'+mysizes);
+    return [mysuits, mysizes];
+  }
+
+  function detect(arr) {
+    var i, arrValue;
+    if (detectTonghua(arr[0])) {
+      i = 5;
+    } else {
+      i = 0;
+    }
+    arrValue = arr[1].reverse().join('');
+    console.log('i:'+i+'  arrValue:'+arrValue);
+    return [i, arrValue];
+  }
+
+  function detectTonghua(mysuits) {
+    for (var i = 0; i < mysuits.length; i++) {
+      if (mysuits[i] == 5) {
+        return true;
+      }
+    }
+  }
+
+  function getValue(arr) {
+    var result = detect(arraylize(arr));
+    var resultValue = result[0] * 1e13 + parseInt(result[1]);
+    console.log('resultValue:'+resultValue);
+    return resultValue;
+  }
+
+  function compare(arr1, arr2) {
+    var value1 = getValue(arr1);
+    var value2 = getValue(arr2);
+    if (value1 > value2) {
+      console.log('前者大！');
+    } else if (value1 == value2) {
+      console.log('一样大！');
+    } else {
+      console.log('后者大！');
+    }
+  }
+
+  compare(arr, arr2);
+  </script>
+</body>
+
+</html>
