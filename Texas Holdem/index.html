@@ -21,6 +21,10 @@
     font-size: 16px;
   }
   
+  button:hover {
+    cursor: pointer;
+  }
+  
   hr {
     margin-top: 10px;
   }
@@ -46,6 +50,10 @@
     display: inline-block;
     font-size: 1.5em;
     margin-top: 7px;
+  }
+  
+  .container .poker:hover {
+    cursor: pointer;
   }
   
   .poker:after {
@@ -119,6 +127,7 @@
     top: 30px;
     left: 20px;
   }
+  
   #info {
     padding: .3em;
     font-family: sans-serif;
@@ -205,7 +214,6 @@
     <tbody id="info">
     </tbody>
   </table>
-
   <script type="text/javascript">
   var pokers = document.querySelectorAll('.container .poker');
   var selected = myArray(52);
@@ -246,8 +254,7 @@
       var result = detect(arraylize(cardsValues[i]));
       var value = result[1];
       var type = levels[result[0]];
-      s += '<tr><td>'+(i+1)+'</td><td>'+type+'</td><td>'
-        +value+'</td></tr>';
+      s += '<tr><td>' + (i + 1) + '</td><td>' + type + '</td><td>' + value + '</td></tr>';
     }
     info.innerHTML = '';
     info.innerHTML = s;
@@ -258,6 +265,7 @@
   for (var i = 0; i < pokers.length; i++) {
     pokers[i].onclick = triggerSelected(i);
   }
+
   function triggerSelected(i) {
     return function() {
       if (selected[i] == 0) {
@@ -325,7 +333,7 @@
     var continueNum = 0;
     for (var i = 0; i < mysizes.length; i++) {
       if (mysizes[i] == 1) {
-        if (mysizes[i+1] == 1) {
+        if (mysizes[i + 1] == 1) {
           continueNum++;
         }
       }
@@ -388,55 +396,54 @@
   function detect(arr) { //判断牌型为levels[i]
     var i = 0; //初始值为高牌
     var arrValue = arr[1].join('');
+
     function toNum(i) {
-      return 12-parseInt(arr[1].indexOf(i));
+      return 12 - parseInt(arr[1].indexOf(i));
     }
     if (detectTonghua(arr[0])) { //同花,同类可直接比大小
       i = 5;
-      myArrValue = i*1e13 + parseInt(arrValue);
+      myArrValue = i * 1e13 + parseInt(arrValue);
     }
     if (detectShunzi(arr[1])) { //顺子，可比
       i = 4;
-      myArrValue = i*1e13 + parseInt(arrValue);
+      myArrValue = i * 1e13 + parseInt(arrValue);
     }
     if (detectTonghua(arr[0]) && detectShunzi(arr[1])) { //同花顺，可比
       i = 8;
-      myArrValue = i*1e13 + parseInt(arrValue);
+      myArrValue = i * 1e13 + parseInt(arrValue);
     }
     if (detectSitiao(arr[1])) { //四条，不可比
       i = 7;
-      myArrValue = i*1e13 + toNum(4)*100 + toNum(1);
+      myArrValue = i * 1e13 + toNum(4) * 100 + toNum(1);
     }
     if (detectHulu(arr[1])) { //葫芦，不可比
       i = 6;
-      myArrValue = i*1e13 + toNum(3)*100 + toNum(2);
+      myArrValue = i * 1e13 + toNum(3) * 100 + toNum(2);
     }
     if (detectSantiao(arr[1])) { //三条，不可比
       i = 3;
-      myArrValue = i*1e13 + toNum(3)*1e11 + parseInt(arrValue)/100;
+      myArrValue = i * 1e13 + toNum(3) * 1e11 + parseInt(arrValue) / 100;
     }
     if (detectLiangdui(arr[1])) { //两对，不可比
       i = 2;
       var arrCopy = arr[1].slice(0);
       arrCopy[arrCopy.indexOf(1)] = 0;
-      myArrValue = i*1e13 + parseInt(arrCopy) + toNum(1)/100;
+      myArrValue = i * 1e13 + parseInt(arrCopy) + toNum(1) / 100;
     }
     if (detectDuizi(arr[1])) { //对子，不可比
       i = 1;
-      myArrValue = i*1e13 + toNum(2)*1e11 + parseInt(arrValue)/100;
+      myArrValue = i * 1e13 + toNum(2) * 1e11 + parseInt(arrValue) / 100;
     }
     // console.log('i:' + i + '  arrValue:' + arrValue);
     return [i, myArrValue];
   }
 
-// detect(arraylize(arr1));
-// detect(arraylize(arr2));
+  // detect(arraylize(arr1));
+  // detect(arraylize(arr2));
 
-$(document).ready(function() 
-    { 
-      $("#myTable").tablesorter();
-    } 
-); 
+  $(document).ready(function() {
+    $("#myTable").tablesorter();
+  });
   </script>
 </body>
 
