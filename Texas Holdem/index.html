@@ -387,40 +387,40 @@
     }
     if (detectTonghua(arr[0])) { //同花,同类可直接比大小
       i = 5;
-      arrValue = i*1e13 + parseInt(arrValue);
+      myArrValue = i*1e13 + parseInt(arrValue);
     }
     if (detectShunzi(arr[1])) { //顺子，可比
       i = 4;
-      arrValue = i*1e13 + parseInt(arrValue);
+      myArrValue = i*1e13 + parseInt(arrValue);
     }
     if (detectTonghua(arr[0]) && detectShunzi(arr[1])) { //同花顺，可比
       i = 8;
-      arrValue = i*1e13 + parseInt(arrValue);
+      myArrValue = i*1e13 + parseInt(arrValue);
     }
     if (detectSitiao(arr[1])) { //四条，不可比
       i = 7;
-      arrValue = i*1e13 + toNum(4)*100 + toNum(1);
+      myArrValue = i*1e13 + toNum(4)*100 + toNum(1);
     }
     if (detectHulu(arr[1])) { //葫芦，不可比
       i = 6;
-      arrValue = i*1e13 + toNum(3)*100 + toNum(2);
+      myArrValue = i*1e13 + toNum(3)*100 + toNum(2);
     }
     if (detectSantiao(arr[1])) { //三条，不可比
       i = 3;
-      arrValue = i*1e13 + toNum(3)*1e11 + parseInt(arrValue)/100;
+      myArrValue = i*1e13 + toNum(3)*1e11 + parseInt(arrValue)/100;
     }
     if (detectLiangdui(arr[1])) { //两对，不可比
       i = 2;
       var arrCopy = arr[1].slice(0);
       arrCopy[arrCopy.indexOf(1)] = 0;
-      arrValue = i*1e13 + parseInt(arrCopy) + toNum(1)/100;
+      myArrValue = i*1e13 + parseInt(arrCopy) + toNum(1)/100;
     }
     if (detectDuizi(arr[1])) { //对子，不可比
       i = 1;
-      arrValue = i*1e13 + toNum(2)*1e11 + parseInt(arrValue)/100;
+      myArrValue = i*1e13 + toNum(2)*1e11 + parseInt(arrValue)/100;
     }
     // console.log('i:' + i + '  arrValue:' + arrValue);
-    return [i, arrValue];
+    return [i, myArrValue];
   }
 
 // detect(arraylize(arr1));
