@@ -396,6 +396,7 @@
   function detect(arr) { //判断牌型为levels[i]
     var i = 0; //初始值为高牌
     var arrValue = arr[1].join('');
+    var myArrValue = parseInt(arrValue);
 
     function toNum(i) {
       return 12 - parseInt(arr[1].indexOf(i));
