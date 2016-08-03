@@ -9,6 +9,7 @@
     margin: 0;
     padding: 0;
   }
+  
   body {
     width: 90%;
     max-width: 935px;
@@ -18,16 +19,20 @@
     padding: 10px;
     font-family: 'PingFang SC';
   }
+  
   hr {
     margin-top: 10px;
   }
+  
   .quote {
     border-left: 7px solid #b4d7e4;
     padding-left: 10px;
   }
+  
   .container {
     position: relative;
   }
+  
   .poker {
     border: 1px solid #666;
     border-radius: .1em;
@@ -83,11 +88,13 @@
   .container .selected {
     background-color: rgba(0, 0, 0, .3);
   }
+  
   .mybutton {
     position: absolute;
     bottom: 0px;
     right: 0px;
   }
+  
   .mybutton button {
     width: 307px;
     text-align: center;
@@ -98,6 +105,7 @@
     box-shadow: .2em .2em .5em #333;
     background-color: white;
   }
+  
   .cards span {
     font-size: 1.5em;
     display: inline-block;
@@ -105,7 +113,14 @@
     top: 30px;
     left: 20px;
   }
+  #info {
+    padding: .3em;
+    font-family: sans-serif;
+  }
   </style>
+  <script type="text/javascript" src="jquery-latest.js"></script>
+  <script type="text/javascript" src="jquery.tablesorter.js"></script>
+  <link rel="stylesheet" href="themes/blue/style.css">
 </head>
 
 <body>
@@ -113,94 +128,130 @@
     德克萨斯扑克全称Texas Hold'em poker，中文简称德州扑克。它是一种玩家对玩家的公共牌类游戏。德州扑克一共有52张牌，没有王牌。每个玩家分两张牌作为“底牌”，五张由荷官陆续朝上发出的公共牌。开始的时候，每个玩家会有两张面朝下的底牌。经过所有押注圈后，若仍不能分出胜负，游戏会进入“摊牌”阶段，也就是让所剩的玩家亮出各自的底牌以较高下，持大牌者获胜。
   </div>
   <hr>
-<div class="container">
-  <div id="黑桃_A" class="spade poker">A</div>
-  <div id="红桃_A" class="heart poker">A</div>
-  <div id="梅花_A" class="club poker">A</div>
-  <div id="方块_A" class="diamond poker">A</div>
-  <div id="黑桃_K" class="spade poker">K</div>
-  <div id="红桃_K" class="heart poker">K</div>
-  <div id="梅花_K" class="club poker">K</div>
-  <div id="方块_K" class="diamond poker">K</div>
-  <div id="黑桃_Q" class="spade poker">Q</div>
-  <div id="红桃_Q" class="heart poker">Q</div>
-  <div id="梅花_Q" class="club poker">Q</div>
-  <div id="方块_Q" class="diamond poker">Q</div>
-  <div id="黑桃_J" class="spade poker">J</div>
-  <div id="红桃_J" class="heart poker">J</div>
-  <div id="梅花_J" class="club poker">J</div>
-  <div id="方块_J" class="diamond poker">J</div>
-  <div id="黑桃_10" class="spade poker">10</div>
-  <div id="红桃_10" class="heart poker">10</div>
-  <div id="梅花_10" class="club poker">10</div>
-  <div id="方块_10" class="diamond poker">10</div>
-  <div id="黑桃_9" class="spade poker">9</div>
-  <div id="红桃_9" class="heart poker">9</div>
-  <div id="梅花_9" class="club poker">9</div>
-  <div id="方块_9" class="diamond poker">9</div>
-  <div id="黑桃_8" class="spade poker">8</div>
-  <div id="红桃_8" class="heart poker">8</div>
-  <div id="梅花_8" class="club poker">8</div>
-  <div id="方块_8" class="diamond poker">8</div>
-  <div id="黑桃_7" class="spade poker">7</div>
-  <div id="红桃_7" class="heart poker">7</div>
-  <div id="梅花_7" class="club poker">7</div>
-  <div id="方块_7" class="diamond poker">7</div>
-  <div id="黑桃_6" class="spade poker">6</div>
-  <div id="红桃_6" class="heart poker">6</div>
-  <div id="梅花_6" class="club poker">6</div>
-  <div id="方块_6" class="diamond poker">6</div>
-  <div id="黑桃_5" class="spade poker">5</div>
-  <div id="红桃_5" class="heart poker">5</div>
-  <div id="梅花_5" class="club poker">5</div>
-  <div id="方块_5" class="diamond poker">5</div>
-  <div id="黑桃_4" class="spade poker">4</div>
-  <div id="红桃_4" class="heart poker">4</div>
-  <div id="梅花_4" class="club poker">4</div>
-  <div id="方块_4" class="diamond poker">4</div>
-  <div id="黑桃_3" class="spade poker">3</div>
-  <div id="红桃_3" class="heart poker">3</div>
-  <div id="梅花_3" class="club poker">3</div>
-  <div id="方块_3" class="diamond poker">3</div>
-  <div id="黑桃_2" class="spade poker">2</div>
-  <div id="红桃_2" class="heart poker">2</div>
-  <div id="梅花_2" class="club poker">2</div>
-  <div id="方块_2" class="diamond poker">2</div>
-  <div id="方块_2" class="mybutton">
-    <button id="select">选定</button>
-    <button id="calc">判断</button>
+  <div class="container">
+    <div id="黑桃_A" class="spade poker">A</div>
+    <div id="红桃_A" class="heart poker">A</div>
+    <div id="梅花_A" class="club poker">A</div>
+    <div id="方块_A" class="diamond poker">A</div>
+    <div id="黑桃_K" class="spade poker">K</div>
+    <div id="红桃_K" class="heart poker">K</div>
+    <div id="梅花_K" class="club poker">K</div>
+    <div id="方块_K" class="diamond poker">K</div>
+    <div id="黑桃_Q" class="spade poker">Q</div>
+    <div id="红桃_Q" class="heart poker">Q</div>
+    <div id="梅花_Q" class="club poker">Q</div>
+    <div id="方块_Q" class="diamond poker">Q</div>
+    <div id="黑桃_J" class="spade poker">J</div>
+    <div id="红桃_J" class="heart poker">J</div>
+    <div id="梅花_J" class="club poker">J</div>
+    <div id="方块_J" class="diamond poker">J</div>
+    <div id="黑桃_10" class="spade poker">10</div>
+    <div id="红桃_10" class="heart poker">10</div>
+    <div id="梅花_10" class="club poker">10</div>
+    <div id="方块_10" class="diamond poker">10</div>
+    <div id="黑桃_9" class="spade poker">9</div>
+    <div id="红桃_9" class="heart poker">9</div>
+    <div id="梅花_9" class="club poker">9</div>
+    <div id="方块_9" class="diamond poker">9</div>
+    <div id="黑桃_8" class="spade poker">8</div>
+    <div id="红桃_8" class="heart poker">8</div>
+    <div id="梅花_8" class="club poker">8</div>
+    <div id="方块_8" class="diamond poker">8</div>
+    <div id="黑桃_7" class="spade poker">7</div>
+    <div id="红桃_7" class="heart poker">7</div>
+    <div id="梅花_7" class="club poker">7</div>
+    <div id="方块_7" class="diamond poker">7</div>
+    <div id="黑桃_6" class="spade poker">6</div>
+    <div id="红桃_6" class="heart poker">6</div>
+    <div id="梅花_6" class="club poker">6</div>
+    <div id="方块_6" class="diamond poker">6</div>
+    <div id="黑桃_5" class="spade poker">5</div>
+    <div id="红桃_5" class="heart poker">5</div>
+    <div id="梅花_5" class="club poker">5</div>
+    <div id="方块_5" class="diamond poker">5</div>
+    <div id="黑桃_4" class="spade poker">4</div>
+    <div id="红桃_4" class="heart poker">4</div>
+    <div id="梅花_4" class="club poker">4</div>
+    <div id="方块_4" class="diamond poker">4</div>
+    <div id="黑桃_3" class="spade poker">3</div>
+    <div id="红桃_3" class="heart poker">3</div>
+    <div id="梅花_3" class="club poker">3</div>
+    <div id="方块_3" class="diamond poker">3</div>
+    <div id="黑桃_2" class="spade poker">2</div>
+    <div id="红桃_2" class="heart poker">2</div>
+    <div id="梅花_2" class="club poker">2</div>
+    <div id="方块_2" class="diamond poker">2</div>
+    <div id="方块_2" class="mybutton">
+      <button id="select">选定</button>
+      <button id="calc">计算</button>
+    </div>
   </div>
-</div>
-<hr>
-<div id="chosen"></div>
+  <hr>
+  <div id="chosen"></div>
+  <table id="myTable" class="tablesorter">
+    <thead>
+      <tr>
+        <th>玩家</th>
+        <th>牌型</th>
+        <th>大小</th>
+      </tr>
+    </thead>
+    <tbody id="info">
+    </tbody>
+  </table>
 
   <script type="text/javascript">
   var pokers = document.querySelectorAll('.container .poker');
   var selected = myArray(52);
   var player = 0;
   var selectButton = document.getElementById('select');
-  selectButton.onclick = function () {
+  var calcButton = document.getElementById('calc');
+  var chosen = document.getElementById('chosen');
+  var info = document.getElementById('info');
+  selectButton.onclick = function() {
     var selectedPokers = document.querySelectorAll('.container .selected');
     if (selectedPokers.length != 5) {
       alert('请选择5张牌');
       return;
     }
-    var chosen = document.getElementById('chosen');
     var s = ''
     s += '<div class="cards">';
     for (var i = 0; i < selectedPokers.length; i++) {
-      s +=  selectedPokers[i].outerHTML;
+      s += selectedPokers[i].outerHTML;
     }
     player++;
     s += '<span>是 Player ' + player + ' 所选中的牌</span><hr /></div>';
     chosen.innerHTML += s;
   }
+  calcButton.onclick = function() {
+    var cards = document.querySelectorAll('#chosen .cards');
+    var cardsValues = [];
+    for (var i = 0; i < cards.length; i++) {
+      var cardsValue = [];
+      var mycards = cards[i].getElementsByClassName('poker');
+      for (var j = 0; j < mycards.length; j++) {
+        cardsValue.push(mycards[j].id.split('_'));
+      }
+      cardsValues.push(cardsValue);
+    }
+    // console.log(cardsValues);
+    var s = '';
+    for (var i = 0; i < cardsValues.length; i++) {
+      var result = detect(arraylize(cardsValues[i]));
+      var value = result[1];
+      var type = levels[result[0]];
+      s += '<tr><td>'+(i+1)+'</td><td>'+type+'</td><td>'
+        +value+'</td></tr>';
+    }
+    info.innerHTML = '';
+    info.innerHTML = s;
+    $("#myTable").trigger("update");
+  }
+
 
   for (var i = 0; i < pokers.length; i++) {
     pokers[i].onclick = triggerSelected(i);
   }
-
-
   function triggerSelected(i) {
     return function() {
       if (selected[i] == 0) {
@@ -216,22 +267,22 @@
 
   var levels = ['高牌', '对子', '两对', '三条', '顺子', '同花', '葫芦', '四条', '同花顺'];
   var suits = ['黑桃', '红桃', '梅花', '方块'];
-  var sizes = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+  var sizes = ["A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2"];
 
-  var arr = [
-    ['红桃', '6'],
-    ['红桃', 'Q'],
-    ['红桃', '3'],
-    ['红桃', '4'],
-    ['红桃', '5']
-  ];
-  var arr2 = [
-    ['方块', 'A'],
-    ['梅花', '9'],
-    ['红桃', '6'],
-    ['黑桃', 'K'],
-    ['梅花', '10']
-  ];
+  // var arr1 = [
+  //   ['红桃', '6'],
+  //   ['红桃', 'Q'],
+  //   ['红桃', '3'],
+  //   ['红桃', '4'],
+  //   ['黑桃', '3']
+  // ];
+  // var arr2 = [
+  //   ['方块', 'A'],
+  //   ['梅花', 'A'],
+  //   ['红桃', 'A'],
+  //   ['黑桃', 'A'],
+  //   ['梅花', '10']
+  // ];
 
   function myArray(num) {
     var a = [];
@@ -252,20 +303,8 @@
         mysizes[sizes.indexOf(arr[i][1])] += 1;
       }
     }
-    console.log('mysuits:' + mysuits + '  mysizes:' + mysizes);
+    // console.log('mysuits:' + mysuits + '  mysizes:' + mysizes);
     return [mysuits, mysizes];
-  }
-
-  function detect(arr) {
-    var i, arrValue;
-    if (detectTonghua(arr[0])) {
-      i = 5;
-    } else {
-      i = 0;
-    }
-    arrValue = arr[1].reverse().join('');
-    console.log('i:' + i + '  arrValue:' + arrValue);
-    return [i, arrValue];
   }
 
   function detectTonghua(mysuits) {
@@ -276,26 +315,122 @@
     }
   }
 
-  function getValue(arr) {
-    var result = detect(arraylize(arr));
-    var resultValue = result[0] * 1e13 + parseInt(result[1]);
-    console.log('resultValue:' + resultValue);
-    return resultValue;
+  function detectShunzi(mysizes) {
+    var continueNum = 0;
+    for (var i = 0; i < mysizes.length; i++) {
+      if (mysizes[i] == 1) {
+        if (mysizes[i+1] == 1) {
+          continueNum++;
+        }
+      }
+    }
+    return (continueNum == 4);
   }
 
-  function compare(arr1, arr2) {
-    var value1 = getValue(arr1);
-    var value2 = getValue(arr2);
-    if (value1 > value2) {
-      console.log('前者大！');
-    } else if (value1 == value2) {
-      console.log('一样大！');
-    } else {
-      console.log('后者大！');
+  function detectSitiao(mysizes) {
+    var maxNum = Math.max(...mysizes);
+    if (maxNum == 4) {
+      return true;
     }
   }
 
-  // compare(arr, arr2);
+  function detectHulu(mysizes) {
+    var maxNum = Math.max(...mysizes);
+    var mysizesCopy = mysizes.slice(0);
+    if (maxNum == 3) {
+      mysizesCopy[mysizesCopy.indexOf(maxNum)] = 0;
+      if (Math.max(...mysizesCopy) == 2) {
+        return true;
+      }
+    }
+  }
+
+  function detectSantiao(mysizes) {
+    var maxNum = Math.max(...mysizes);
+    var mysizesCopy = mysizes.slice(0);
+    if (maxNum == 3) {
+      mysizesCopy[mysizesCopy.indexOf(maxNum)] = 0;
+      if (Math.max(...mysizesCopy) < 2) {
+        return true;
+      }
+    }
+  }
+
+  function detectLiangdui(mysizes) {
+    var maxNum = Math.max(...mysizes);
+    var mysizesCopy = mysizes.slice(0);
+    if (maxNum == 2) {
+      mysizesCopy[mysizesCopy.indexOf(maxNum)] = 0;
+      if (Math.max(...mysizesCopy) == 2) {
+        return true;
+      }
+    }
+  }
+
+  function detectDuizi(mysizes) {
+    var maxNum = Math.max(...mysizes);
+    var mysizesCopy = mysizes.slice(0);
+    if (maxNum == 2) {
+      mysizesCopy[mysizesCopy.indexOf(maxNum)] = 0;
+      if (Math.max(...mysizesCopy) < 2) {
+        return true;
+      }
+    }
+  }
+
+
+  function detect(arr) { //判断牌型为levels[i]
+    var i = 0; //初始值为高牌
+    var arrValue = arr[1].join('');
+    function toNum(i) {
+      return 12-parseInt(arr[1].indexOf(i));
+    }
+    if (detectTonghua(arr[0])) { //同花,同类可直接比大小
+      i = 5;
+      arrValue = i*1e13 + parseInt(arrValue);
+    }
+    if (detectShunzi(arr[1])) { //顺子，可比
+      i = 4;
+      arrValue = i*1e13 + parseInt(arrValue);
+    }
+    if (detectTonghua(arr[0]) && detectShunzi(arr[1])) { //同花顺，可比
+      i = 8;
+      arrValue = i*1e13 + parseInt(arrValue);
+    }
+    if (detectSitiao(arr[1])) { //四条，不可比
+      i = 7;
+      arrValue = i*1e13 + toNum(4)*100 + toNum(1);
+    }
+    if (detectHulu(arr[1])) { //葫芦，不可比
+      i = 6;
+      arrValue = i*1e13 + toNum(3)*100 + toNum(2);
+    }
+    if (detectSantiao(arr[1])) { //三条，不可比
+      i = 3;
+      arrValue = i*1e13 + toNum(3)*1e11 + parseInt(arrValue)/100;
+    }
+    if (detectLiangdui(arr[1])) { //两对，不可比
+      i = 2;
+      var arrCopy = arr[1].slice(0);
+      arrCopy[arrCopy.indexOf(1)] = 0;
+      arrValue = i*1e13 + parseInt(arrCopy) + toNum(1)/100;
+    }
+    if (detectDuizi(arr[1])) { //对子，不可比
+      i = 1;
+      arrValue = i*1e13 + toNum(2)*1e11 + parseInt(arrValue)/100;
+    }
+    // console.log('i:' + i + '  arrValue:' + arrValue);
+    return [i, arrValue];
+  }
+
+// detect(arraylize(arr1));
+// detect(arraylize(arr2));
+
+$(document).ready(function() 
+    { 
+      $("#myTable").tablesorter();
+    } 
+); 
   </script>
 </body>
 
