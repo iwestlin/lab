@@ -236,6 +236,7 @@
   var info = document.getElementById('info');
   var myPokers = document.getElementsByClassName('pokers')[0];
   var player = 0;
+  var z = 0;
   var levels = ['High card', 'One Pair', 'Two Pairs', 'Three of a kind', 'Straight', 'Flush', 'Fullhouse', 'Four of a Kind', 'Straight Flush'];
   var suits = ['spade', 'heart', 'club', 'diamond'];
   var values = ["A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2"];
@@ -246,6 +247,7 @@
     for (var i = 0; i < selectedPokers.length; i++) {
       selectedPokers[i].className = selectedPokers[i].className.replace(/selected/g, '');
     }
+    z = 0;
     randomPokers();
   }
   reset.onclick = myreset;
@@ -253,7 +255,7 @@
   function myselect() {
     var selectedPokers = document.querySelectorAll('.pokers .selected');
     var len = selectedPokers.length;
-    if (len == 5) {
+    if (len == 5 && z == 0) {
       var cardsValues = [];
       var s = '';
       for (var i = 0; i < len; i++) {
@@ -266,6 +268,7 @@
       info.innerHTML += '<tr><td class="cards">' + s + '</td><td class="center">' + type + '</td><td class="center">' + value + '</td></tr>';
       sortCards();
       $("#myTable").trigger("update");
+      z = 1;
     }
   }
 
