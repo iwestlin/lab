@@ -29,11 +29,24 @@
     margin-top: 10px;
   }
   
+  .link a {
+    text-decoration: none;
+    font-size: 1.5em;
+    border-bottom: 1px dashed blue;
+  }
+  .link {
+    margin: 10px;
+    text-align: center;
+  }
   .quote {
     border-left: 7px solid #b4d7e4;
     padding-left: 10px;
   }
   
+  .imp {
+    border-color: #a00;
+  }
+
   .container {
     position: relative;
   }
@@ -144,6 +157,10 @@
   <div class="quote">
     德克萨斯扑克全称Texas Hold'em poker，中文简称德州扑克。它是一种玩家对玩家的公共牌类游戏。德州扑克一共有52张牌，没有王牌。每个玩家分两张牌作为“底牌”，五张由荷官陆续朝上发出的公共牌。开始的时候，每个玩家会有两张面朝下的底牌。经过所有押注圈后，若仍不能分出胜负，游戏会进入“摊牌”阶段，也就是让所剩的玩家亮出各自的底牌以较高下，持大牌者获胜。
   </div>
+  <br>
+  <div class="quote imp">
+    第一次请选择两张底牌，第二次再选两张底牌，第三次选择的是0～4张公共牌。选完后点击计算按钮计算胜率。由于性能问题不能穷举，电脑会随机选出10000种情况，然后根据结果算出胜率，计算结果与真实胜率存在大概1%以内的误差。点击计算后大概几秒钟后会算出结果，请耐心等候。
+  </div>
   <hr>
   <div class="container">
     <div id="黑桃_A" class="spade poker">A</div>
@@ -216,6 +233,11 @@
     <tbody id="info">
     </tbody>
   </table>
+  <hr>
+  <div class="link">
+    <a href="http://iwestlin.github.io/lab/should-i-play-cards-today/" target="_blank">Should I Play Cards Today?</a>
+  </div>
+
   <script type="text/javascript">
   var pokers = document.querySelectorAll('.container .poker');
   var selected = arrFullOfZero(52);
@@ -232,7 +254,7 @@
       var selectedPokers = document.querySelectorAll('.container .selected');
       var len = selectedPokers.length;
       if ((player < (playersNum-1)) && len != cardsNum) {
-        alert('请每次选择2张底牌，选完牌后点击计算求出各方胜率');
+        alert('请仔细阅读说明');
         return;
       }
       if (player >= playersNum) {
@@ -257,7 +279,7 @@
         player++;
         chosen.innerHTML += s;
         for (var i = 0; i < pokers.length; i++) {
-          pokers[i].className = pokers[i].className.replace('selected','');
+          pokers[i].className = pokers[i].className.replace(/selected/g,'');
         }
       }
     }
@@ -330,7 +352,7 @@
         pokers[i].className += ' selected';
         selected[i] = 1;
       } else {
-        pokers[i].className = pokers[i].className.slice(0, -8);
+        pokers[i].className = pokers[i].className.replace(/selected/g,'');
         selected[i] = 0;
       }
     }

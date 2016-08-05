@@ -33,7 +33,15 @@
   hr {
     margin-top: 10px;
   }
-  
+  .link {
+    text-align: center;
+    margin: 10px;
+    font-size: 1.5em;
+  }
+  .link a {
+    text-decoration: none;
+    border-bottom: 1px dashed blue;
+  }
   .container {
     position: relative;
   }
@@ -229,6 +237,11 @@
     <tbody id="info">
     </tbody>
   </table>
+  <hr>
+  <div class="link">
+    <a href="http://iwestlin.github.io/lab/Texas%20Holdem/calc.htm" target="_blank">胜率计算器</a>
+  </div>
+
   <script type="text/javascript">
   var pokers = document.querySelectorAll('.pokers .poker');
   var reset = document.getElementById('reset');
