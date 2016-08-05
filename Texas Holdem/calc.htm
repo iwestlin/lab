@@ -126,6 +126,7 @@
     position: relative;
     top: 30px;
     left: 20px;
+    height: 100px;
   }
   
   #info {
@@ -133,8 +134,9 @@
     font-family: sans-serif;
   }
   </style>
-  <script type="text/javascript" src="jquery-latest.js"></script>
-  <script type="text/javascript" src="jquery.tablesorter.js"></script>
+  <script src="jquery-latest.js"></script>
+  <script src="jquery.tablesorter.js"></script>
+  <script src="underscore-min.js"></script>
   <link rel="stylesheet" href="themes/blue/style.css">
 </head>
 
@@ -207,8 +209,8 @@
     <thead>
       <tr>
         <th>玩家</th>
-        <th>牌型</th>
-        <th>大小</th>
+        <!-- <th>牌型</th> -->
+        <th>胜率</th>
       </tr>
     </thead>
     <tbody id="info">
@@ -216,46 +218,99 @@
   </table>
   <script type="text/javascript">
   var pokers = document.querySelectorAll('.container .poker');
-  var selected = myArray(52);
+  var selected = arrFullOfZero(52);
   var player = 0;
   var selectButton = document.getElementById('select');
   var calcButton = document.getElementById('calc');
   var chosen = document.getElementById('chosen');
   var info = document.getElementById('info');
-  selectButton.onclick = function() {
-    var selectedPokers = document.querySelectorAll('.container .selected');
-    if (selectedPokers.length != 5) {
-      alert('请选择5张牌');
-      return;
-    }
-    var s = ''
-    s += '<div class="cards">';
-    for (var i = 0; i < selectedPokers.length; i++) {
-      s += selectedPokers[i].outerHTML;
-    }
-    player++;
-    s += '<span>是 Player ' + player + ' 所选中的牌</span><hr /></div>';
-    chosen.innerHTML += s;
-  }
-  calcButton.onclick = function() {
-    var cards = document.querySelectorAll('#chosen .cards');
-    var cardsValues = [];
-    for (var i = 0; i < cards.length; i++) {
-      var cardsValue = [];
-      var mycards = cards[i].getElementsByClassName('poker');
-      for (var j = 0; j < mycards.length; j++) {
-        cardsValue.push(mycards[j].id.split('_'));
+
+  selectButton.onclick = selectCards(2, 3);
+
+  function selectCards(cardsNum, playersNum) {
+    return function() {
+      var selectedPokers = document.querySelectorAll('.container .selected');
+      var len = selectedPokers.length;
+      if ((player < (playersNum-1)) && len != cardsNum) {
+        alert('请每次选择2张底牌，选完牌后点击计算求出各方胜率');
+        return;
       }
-      cardsValues.push(cardsValue);
+      if (player >= playersNum) {
+        alert('玩家数不能大于'+(playersNum-1));
+        return;
+      } else {
+        var s = ''
+        s += '<div class="cards">';
+        for (var i = 0; i < len; i++) {
+          s += selectedPokers[i].outerHTML;
+        }
+        if (player < (playersNum-1)) {
+          s += '<span> Player ' + (player+1) + ' 的底牌</span><hr /></div>';
+        } else {
+          if (len < 5 && len >= 0) {
+            s += '<span> 公共牌</span><hr /></div>';
+          } else {
+            alert('请选择5张以下的公共牌！');
+            return;
+          }
+        }
+        player++;
+        chosen.innerHTML += s;
+      }
     }
-    // console.log(cardsValues);
+  }
+//需要求出 pubCards player1 player2，然后调用calcSoManyTimes(1000)
+  calcButton.onclick = function () {
+    winRecords = [0,0,0]; //p1赢，平局，p1赢
+    function calcSoManyTimes(N) {
+      var allSelectedCards = player1.concat(player2).concat(pubCards);
+      var leftCards = _.without(arrContact(allCards), ...arrContact(allSelectedCards));
+
+      for (var ii = 0; ii < N; ii++) {
+        var randomPickedCards = [];
+        var pubCardsCopy = pubCards.slice(0);
+        // console.log(pubCards);
+        var randomPickedNums = randomPick(leftCards.length, 5-pubCards.length);
+        // console.log(randomPickedNums);
+        for (var i = 0; i < randomPickedNums.length; i++) {
+          randomPickedCards.push(leftCards[randomPickedNums[i]]);
+        }
+        for (var i = 0; i < randomPickedCards.length; i++) {
+          pubCardsCopy.push(randomPickedCards[i].split('_'));
+        }
+        // console.log(pubCardsCopy, player1, player2);
+        whoWin(pubCardsCopy, player1, player2);
+      }
+      // console.log(winRecords);
+    }
+
+    var pubCards = [],
+        player1 = [],
+        player2 = [];
+    var cards = document.querySelectorAll('#chosen .cards');
+    var player1Cards = cards[0].getElementsByClassName('poker');
+    var player2Cards = cards[1].getElementsByClassName('poker');
+    if (cards[2]) {
+      var pub = cards[2].getElementsByClassName('poker');
+    } else {
+      var pub = [];
+    }
+    for (var i = 0; i < player1Cards.length; i++) {
+      player1.push(player1Cards[i].id.split('_'));
+    }
+    for (var i = 0; i < player2Cards.length; i++) {
+      player2.push(player2Cards[i].id.split('_'));
+    }
+    if (pub.length > 0) {
+      for (var i = 0; i < pub.length; i++) {
+        pubCards.push(pub[i].id.split('_'));
+      }
+    }
+    calcSoManyTimes(10000);
+
     var s = '';
-    for (var i = 0; i < cardsValues.length; i++) {
-      var result = detect(arraylize(cardsValues[i]));
-      var value = result[1];
-      var type = levels[result[0]];
-      s += '<tr><td>' + (i + 1) + '</td><td>' + type + '</td><td>' + value + '</td></tr>';
-    }
+    s += '<tr><td>1</td><td>' + winRecords[0]/10000 + '</td></tr>';
+    s += '<tr><td>2</td><td>' + winRecords[2]/10000 + '</td></tr>';
     info.innerHTML = '';
     info.innerHTML = s;
     $("#myTable").trigger("update");
@@ -278,27 +333,106 @@
     }
   }
 
-
+  var winRecords = [0,0,0];
   var levels = ['高牌', '对子', '两对', '三条', '顺子', '同花', '葫芦', '四条', '同花顺'];
   var suits = ['黑桃', '红桃', '梅花', '方块'];
-  var sizes = ["A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2"];
+  var values = ["A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2"];
+  var allCards = arrPlus(suits, values);
 
-  // var arr1 = [
-  //   ['红桃', '6'],
-  //   ['红桃', 'Q'],
-  //   ['红桃', '3'],
-  //   ['红桃', '4'],
-  //   ['黑桃', '3']
-  // ];
-  // var arr2 = [
-  //   ['方块', 'A'],
-  //   ['梅花', 'A'],
-  //   ['红桃', 'A'],
-  //   ['黑桃', 'A'],
-  //   ['梅花', '10']
-  // ];
+  function arrPlus(a1, a2) {
+    var result = [];
+    for (var i = 0; i < a1.length; i++) {
+      for (var j = 0; j < a2.length; j++) {
+        result.push([a1[i], a2[j]]);
+      }
+    }
+    return result;
+  }
 
-  function myArray(num) {
+  var player1 = [
+    ['红桃', '10'],
+    ['黑桃', '10']
+  ];
+  var player2 = [
+    ['梅花', '4'],
+    ['红桃', '4']
+  ];
+//   var pubCardsCopy = [
+//     ['方块', '8'],
+//     ['方块', '5'],
+//     ['黑桃', '4']
+//   ];
+// whoWin(pubCardsCopy, player1, player2);
+
+  function whoWin(pubCardsCopy, player1, player2) {
+    var combs = combination([0,1,2,3,4,5,6], 5);
+    var p1max = 0;
+    var p2max = 0;
+    var p1SevenCards = player1.concat(pubCardsCopy);
+    var p2SevenCards = player2.concat(pubCardsCopy);
+
+    for (var i = 0; i < combs.length; i++) {
+      var p1FiveCards = [];
+      var p2FiveCards = [];
+      for (var j = 0; j < 5; j++) {
+        p1FiveCards.push(p1SevenCards[combs[i][j]]);
+        p2FiveCards.push(p2SevenCards[combs[i][j]]);
+      }
+      // console.log(p2FiveCards);
+      var p1value = getCardsValue(p1FiveCards);
+      var p2value = getCardsValue(p2FiveCards);
+      // console.log(p2value);
+      if (p1max < p1value) {
+        p1max = p1value;
+      }
+      if (p2max < p2value) {
+        p2max = p2value;
+      }
+    }
+
+    if(p1max > p2max) {
+      winRecords[0] += 1;
+    }
+    if(p1max === p2max) {
+      winRecords[1] += 1;
+    } 
+    if(p1max < p2max) {
+      winRecords[2] += 1;
+    }
+    // console.log(p1max ,p2max);
+  }
+
+// 函数combination产生从arr中取num个元素的所有可能
+  function combination(arr, num) {
+    var r = [];
+    (function f(t, a, n) {
+      if (n == 0) {
+        return r.push(t);
+      }
+      for (var i = 0, l = a.length; i <= l - n; i++) {
+        f(t.concat(a[i]), a.slice(i + 1), n - 1);
+      }
+    })([], arr, num);
+    return r;
+  }
+
+  function arrContact(arr) {
+    var result = [];
+    for (var i = 0; i < arr.length; i++) {
+      result.push(arr[i].join('_'));
+    }
+    return result;
+  }
+
+  // function arrContactBack (arr) {
+  //   var result = [];
+  //   for (var i = 0; i < arr.length; i++) {
+  //     result.push(arr[i].split('_'));
+  //   }
+  //   return result;
+  // }
+
+  function arrFullOfZero(num) {
     var a = [];
     for (var i = 0; i < num; i++) {
       a[i] = 0;
@@ -307,18 +441,19 @@
   }
 
   function arraylize(arr) {
-    var mysuits = myArray(4);
-    var mysizes = myArray(13);
+    var mysuits = arrFullOfZero(4);
+    var myvalues = arrFullOfZero(13);
     for (var i = 0; i < arr.length; i++) {
+      // console.log(arr[i]);
       if (suits.indexOf(arr[i][0]) > -1) {
         mysuits[suits.indexOf(arr[i][0])] += 1;
       }
-      if (sizes.indexOf(arr[i][1]) > -1) {
-        mysizes[sizes.indexOf(arr[i][1])] += 1;
+      if (values.indexOf(arr[i][1]) > -1) {
+        myvalues[values.indexOf(arr[i][1])] += 1;
       }
     }
-    // console.log('mysuits:' + mysuits + '  mysizes:' + mysizes);
-    return [mysuits, mysizes];
+    // console.log('mysuits:' + mysuits + '  myvalues:' + myvalues);
+    return [mysuits, myvalues];
   }
 
   function detectTonghua(mysuits) {
@@ -329,11 +464,11 @@
     }
   }
 
-  function detectShunzi(mysizes) {
+  function detectShunzi(myvalues) {
     var continueNum = 0;
-    for (var i = 0; i < mysizes.length; i++) {
-      if (mysizes[i] == 1) {
-        if (mysizes[i + 1] == 1) {
+    for (var i = 0; i < myvalues.length; i++) {
+      if (myvalues[i] == 1) {
+        if (myvalues[i + 1] == 1) {
           continueNum++;
         }
       }
@@ -341,52 +476,52 @@
     return (continueNum == 4);
   }
 
-  function detectSitiao(mysizes) {
-    var maxNum = Math.max(...mysizes);
+  function detectSitiao(myvalues) {
+    var maxNum = Math.max(...myvalues);
     if (maxNum == 4) {
       return true;
     }
   }
 
-  function detectHulu(mysizes) {
-    var maxNum = Math.max(...mysizes);
-    var mysizesCopy = mysizes.slice(0);
+  function detectHulu(myvalues) {
+    var maxNum = Math.max(...myvalues);
+    var myvaluesCopy = myvalues.slice(0);
     if (maxNum == 3) {
-      mysizesCopy[mysizesCopy.indexOf(maxNum)] = 0;
-      if (Math.max(...mysizesCopy) == 2) {
+      myvaluesCopy[myvaluesCopy.indexOf(maxNum)] = 0;
+      if (Math.max(...myvaluesCopy) == 2) {
         return true;
       }
     }
   }
 
-  function detectSantiao(mysizes) {
-    var maxNum = Math.max(...mysizes);
-    var mysizesCopy = mysizes.slice(0);
+  function detectSantiao(myvalues) {
+    var maxNum = Math.max(...myvalues);
+    var myvaluesCopy = myvalues.slice(0);
     if (maxNum == 3) {
-      mysizesCopy[mysizesCopy.indexOf(maxNum)] = 0;
-      if (Math.max(...mysizesCopy) < 2) {
+      myvaluesCopy[myvaluesCopy.indexOf(maxNum)] = 0;
+      if (Math.max(...myvaluesCopy) < 2) {
         return true;
       }
     }
   }
 
-  function detectLiangdui(mysizes) {
-    var maxNum = Math.max(...mysizes);
-    var mysizesCopy = mysizes.slice(0);
+  function detectLiangdui(myvalues) {
+    var maxNum = Math.max(...myvalues);
+    var myvaluesCopy = myvalues.slice(0);
     if (maxNum == 2) {
-      mysizesCopy[mysizesCopy.indexOf(maxNum)] = 0;
-      if (Math.max(...mysizesCopy) == 2) {
+      myvaluesCopy[myvaluesCopy.indexOf(maxNum)] = 0;
+      if (Math.max(...myvaluesCopy) == 2) {
         return true;
       }
     }
   }
 
-  function detectDuizi(mysizes) {
-    var maxNum = Math.max(...mysizes);
-    var mysizesCopy = mysizes.slice(0);
+  function detectDuizi(myvalues) {
+    var maxNum = Math.max(...myvalues);
+    var myvaluesCopy = myvalues.slice(0);
     if (maxNum == 2) {
-      mysizesCopy[mysizesCopy.indexOf(maxNum)] = 0;
-      if (Math.max(...mysizesCopy) < 2) {
+      myvaluesCopy[myvaluesCopy.indexOf(maxNum)] = 0;
+      if (Math.max(...myvaluesCopy) < 2) {
         return true;
       }
     }
@@ -394,7 +529,7 @@
 
 
   function detect(arr) { //判断牌型为levels[i]
-    var i = 0; //初始值为高牌
+    var high = 0; //初始值为高牌
     var arrValue = arr[1].join('');
     var myArrValue = parseInt(arrValue);
 
@@ -402,45 +537,66 @@
       return 12 - parseInt(arr[1].indexOf(i));
     }
     if (detectTonghua(arr[0])) { //同花,同类可直接比大小
-      i = 5;
-      myArrValue = i * 1e13 + parseInt(arrValue);
+      high = 5;
+      myArrValue = high * 1e13 + parseInt(arrValue);
     }
     if (detectShunzi(arr[1])) { //顺子，可比
-      i = 4;
-      myArrValue = i * 1e13 + parseInt(arrValue);
+      high = 4;
+      myArrValue = high * 1e13 + parseInt(arrValue);
     }
     if (detectTonghua(arr[0]) && detectShunzi(arr[1])) { //同花顺，可比
-      i = 8;
-      myArrValue = i * 1e13 + parseInt(arrValue);
+      high = 8;
+      myArrValue = high * 1e13 + parseInt(arrValue);
     }
     if (detectSitiao(arr[1])) { //四条，不可比
-      i = 7;
-      myArrValue = i * 1e13 + toNum(4) * 100 + toNum(1);
+      high = 7;
+      myArrValue = high * 1e13 + toNum(4) * 100 + toNum(1);
     }
     if (detectHulu(arr[1])) { //葫芦，不可比
-      i = 6;
-      myArrValue = i * 1e13 + toNum(3) * 100 + toNum(2);
+      high = 6;
+      myArrValue = high * 1e13 + toNum(3) * 100 + toNum(2);
     }
     if (detectSantiao(arr[1])) { //三条，不可比
-      i = 3;
-      myArrValue = i * 1e13 + toNum(3) * 1e11 + parseInt(arrValue) / 100;
+      high = 3;
+      myArrValue = high * 1e13 + toNum(3) * 1e11 + parseInt(arrValue) / 100;
     }
     if (detectLiangdui(arr[1])) { //两对，不可比
-      i = 2;
+      high = 2;
       var arrCopy = arr[1].slice(0);
       arrCopy[arrCopy.indexOf(1)] = 0;
-      myArrValue = i * 1e13 + parseInt(arrCopy) + toNum(1) / 100;
+      myArrValue = high * 1e13 + parseInt(arrCopy.join('')) + (toNum(1)/100);
     }
     if (detectDuizi(arr[1])) { //对子，不可比
-      i = 1;
-      myArrValue = i * 1e13 + toNum(2) * 1e11 + parseInt(arrValue) / 100;
+      high = 1;
+      myArrValue = high * 1e13 + toNum(2) * 1e11 + parseInt(arrValue) / 100;
     }
-    // console.log('i:' + i + '  arrValue:' + arrValue);
-    return [i, myArrValue];
+    // console.log('i:' + high + '  arrValue:' + arrValue);
+    return [high, myArrValue];
+  }
+
+  function getCardsValue(arr) {
+    return detect(arraylize(arr))[1];
   }
 
   // detect(arraylize(arr1));
   // detect(arraylize(arr2));
+
+  function randomPick(n, m) {
+    if (Math.abs(parseInt(n)) != n || Math.abs(parseInt(m)) != m || n < m || n == 0 || m == 0) {
+      console.log('randomPick的参数为两个正整数，且前者不能小于后者！');
+      return;
+    }
+    var result = [];
+    while (true) {
+      var r = Math.floor(Math.random() * n);
+      if (result.indexOf(r) == -1) {
+        result.push(r);
+      }
+      if (result.length == m) {
+        return result;
+      }
+    }
+  }
 
   $(document).ready(function() {
     $("#myTable").tablesorter();
