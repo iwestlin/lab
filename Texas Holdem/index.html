@@ -504,7 +504,7 @@
       i = 2;
       var arrCopy = arr[1].slice(0);
       arrCopy[arrCopy.indexOf(1)] = 0;
-      myArrValue = i * 1e13 + parseInt(arrCopy) + toNum(1) / 100;
+      myArrValue = i * 1e13 + parseInt(arrCopy.join('')) + toNum(1) / 100;
     }
     if (detectDuizi(arr[1])) { //对子，不可比
       i = 1;

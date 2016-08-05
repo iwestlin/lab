@@ -256,6 +256,9 @@
         }
         player++;
         chosen.innerHTML += s;
+        for (var i = 0; i < pokers.length; i++) {
+          pokers[i].className = pokers[i].className.replace('selected','');
+        }
       }
     }
   }
