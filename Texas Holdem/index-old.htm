@@ -393,6 +393,10 @@
   }
 
 
+  function detectAShunzi(mysizes) {
+    return (mysizes.join('') == '1000000001111');
+  }
+
   function detect(arr) { //判断牌型为levels[i]
     var i = 0; //初始值为高牌
     var arrValue = arr[1].join('');
@@ -409,9 +413,17 @@
       i = 4;
       myArrValue = i * 1e13 + parseInt(arrValue);
     }
+    if (detectAShunzi(arr[1])) { //A,2,3,4,5
+      i = 4;
+      myArrValue = i * 1e13;
+    }
     if (detectTonghua(arr[0]) && detectShunzi(arr[1])) { //同花顺，可比
       i = 8;
       myArrValue = i * 1e13 + parseInt(arrValue);
+    }
+    if (detectTonghua(arr[0]) && detectAShunzi(arr[1])) { //A,2,3,4,5
+      i = 8;
+      myArrValue = i * 1e13;
     }
     if (detectSitiao(arr[1])) { //四条，不可比
       i = 7;

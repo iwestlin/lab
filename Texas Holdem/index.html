@@ -467,9 +467,12 @@
     }
   }
 
+  function detectAShunzi(mysizes) {
+    return (mysizes.join('') == '1000000001111');
+  }
 
   function detect(arr) { //判断牌型为levels[i]
-    var i = 0; //初始值为高牌
+    var high = 0; //初始值为高牌
     var arrValue = arr[1].join('');
     var myArrValue = parseInt(arrValue);
 
@@ -477,42 +480,51 @@
       return 12 - parseInt(arr[1].indexOf(i));
     }
     if (detectTonghua(arr[0])) { //同花,同类可直接比大小
-      i = 5;
-      myArrValue = i * 1e13 + parseInt(arrValue);
+      high = 5;
+      myArrValue = high * 1e13 + parseInt(arrValue);
     }
     if (detectShunzi(arr[1])) { //顺子，可比
-      i = 4;
-      myArrValue = i * 1e13 + parseInt(arrValue);
+      high = 4;
+      myArrValue = high * 1e13 + parseInt(arrValue);
+    }
+    if (detectAShunzi(arr[1])) { //A,2,3,4,5
+      high = 4;
+      myArrValue = high * 1e13;
     }
     if (detectTonghua(arr[0]) && detectShunzi(arr[1])) { //同花顺，可比
-      i = 8;
-      myArrValue = i * 1e13 + parseInt(arrValue);
+      high = 8;
+      myArrValue = high * 1e13 + parseInt(arrValue);
+    }
+    if (detectTonghua(arr[0]) && detectAShunzi(arr[1])) { //A,2,3,4,5
+      high = 8;
+      myArrValue = high * 1e13;
     }
     if (detectSitiao(arr[1])) { //四条，不可比
-      i = 7;
-      myArrValue = i * 1e13 + toNum(4) * 100 + toNum(1);
+      high = 7;
+      myArrValue = high * 1e13 + toNum(4) * 100 + toNum(1);
     }
     if (detectHulu(arr[1])) { //葫芦，不可比
-      i = 6;
-      myArrValue = i * 1e13 + toNum(3) * 100 + toNum(2);
+      high = 6;
+      myArrValue = high * 1e13 + toNum(3) * 100 + toNum(2);
     }
     if (detectSantiao(arr[1])) { //三条，不可比
-      i = 3;
-      myArrValue = i * 1e13 + toNum(3) * 1e11 + parseInt(arrValue) / 100;
+      high = 3;
+      myArrValue = high * 1e13 + toNum(3) * 1e11 + parseInt(arrValue) / 100;
     }
     if (detectLiangdui(arr[1])) { //两对，不可比
-      i = 2;
+      high = 2;
       var arrCopy = arr[1].slice(0);
       arrCopy[arrCopy.indexOf(1)] = 0;
-      myArrValue = i * 1e13 + parseInt(arrCopy.join('')) + toNum(1) / 100;
+      myArrValue = high * 1e13 + parseInt(arrCopy.join('')) + (toNum(1)/100);
     }
     if (detectDuizi(arr[1])) { //对子，不可比
-      i = 1;
-      myArrValue = i * 1e13 + toNum(2) * 1e11 + parseInt(arrValue) / 100;
+      high = 1;
+      myArrValue = high * 1e13 + toNum(2) * 1e11 + parseInt(arrValue) / 100;
     }
-    // console.log('i:' + i + '  arrValue:' + arrValue);
-    return [i, myArrValue];
+    // console.log('i:' + high + '  arrValue:' + arrValue);
+    return [high, myArrValue];
   }
+
 
   // detect(arraylize(arr1));
   // detect(arraylize(arr2)); 

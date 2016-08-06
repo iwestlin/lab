@@ -405,9 +405,12 @@
     }
   }
 
+  function detectAShunzi(mysizes) {
+    return (mysizes.join('') == '1000000001111');
+  }
 
   function detect(arr) {
-    var i = 0;
+    var high = 0;
     var arrValue = arr[1].join('');
     var myArrValue = parseInt(arrValue);
 
@@ -415,41 +418,51 @@
       return 12 - parseInt(arr[1].indexOf(i));
     }
     if (detectTonghua(arr[0])) {
-      i = 5;
-      myArrValue = i * 1e13 + parseInt(arrValue);
+      high = 5;
+      myArrValue = high * 1e13 + parseInt(arrValue);
     }
     if (detectShunzi(arr[1])) {
-      i = 4;
-      myArrValue = i * 1e13 + parseInt(arrValue);
+      high = 4;
+      myArrValue = high * 1e13 + parseInt(arrValue);
+    }
+    if (detectAShunzi(arr[1])) {
+      high = 4;
+      myArrValue = high * 1e13;
     }
     if (detectTonghua(arr[0]) && detectShunzi(arr[1])) {
-      i = 8;
-      myArrValue = i * 1e13 + parseInt(arrValue);
+      high = 8;
+      myArrValue = high * 1e13 + parseInt(arrValue);
+    }
+    if (detectTonghua(arr[0]) && detectAShunzi(arr[1])) {
+      high = 8;
+      myArrValue = high * 1e13;
     }
     if (detectSitiao(arr[1])) {
-      i = 7;
-      myArrValue = i * 1e13 + toNum(4) * 100 + toNum(1);
+      high = 7;
+      myArrValue = high * 1e13 + toNum(4) * 100 + toNum(1);
     }
     if (detectHulu(arr[1])) {
-      i = 6;
-      myArrValue = i * 1e13 + toNum(3) * 100 + toNum(2);
+      high = 6;
+      myArrValue = high * 1e13 + toNum(3) * 100 + toNum(2);
     }
     if (detectSantiao(arr[1])) {
-      i = 3;
-      myArrValue = i * 1e13 + toNum(3) * 1e11 + parseInt(arrValue) / 100;
+      high = 3;
+      myArrValue = high * 1e13 + toNum(3) * 1e11 + parseInt(arrValue) / 100;
     }
     if (detectLiangdui(arr[1])) {
-      i = 2;
+      high = 2;
       var arrCopy = arr[1].slice(0);
       arrCopy[arrCopy.indexOf(1)] = 0;
-      myArrValue = i * 1e13 + parseInt(arrCopy) + toNum(1) / 100;
+      myArrValue = high * 1e13 + parseInt(arrCopy.join('')) + (toNum(1)/100);
     }
     if (detectDuizi(arr[1])) {
-      i = 1;
-      myArrValue = i * 1e13 + toNum(2) * 1e11 + parseInt(arrValue) / 100;
+      high = 1;
+      myArrValue = high * 1e13 + toNum(2) * 1e11 + parseInt(arrValue) / 100;
     }
-    return [i, myArrValue];
+   
+    return [high, myArrValue];
   }
+
 
   function natureArr(num) {
     var a = [];

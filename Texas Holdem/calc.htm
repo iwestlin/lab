@@ -159,7 +159,7 @@
   </div>
   <br>
   <div class="quote imp">
-    第一次请选择两张底牌，第二次再选两张底牌，第三次选择的是0～4张公共牌。选完后点击计算按钮计算胜率。由于性能问题不能穷举，电脑会随机选出10000种情况，然后根据结果算出胜率，计算结果与真实胜率存在大概1%以内的误差。点击计算后大概几秒钟后会算出结果，请耐心等候。
+    第一次请选择两张底牌，第二次再选两张底牌，第三次选择的是0～4张公共牌。选完后点击计算按钮计算胜率。由于性能问题不能穷举，电脑会随机选出10000种情况，然后根据结果算出胜率，计算结果与真实胜率存在约1%以内的误差。点击计算后大概几秒钟后会算出结果，请耐心等候。
   </div>
   <hr>
   <div class="container">
@@ -552,6 +552,9 @@
     }
   }
 
+  function detectAShunzi(mysizes) {
+    return (mysizes.join('') == '1000000001111');
+  }
 
   function detect(arr) { //判断牌型为levels[i]
     var high = 0; //初始值为高牌
@@ -569,9 +572,17 @@
       high = 4;
       myArrValue = high * 1e13 + parseInt(arrValue);
     }
+    if (detectAShunzi(arr[1])) { //A,2,3,4,5
+      high = 4;
+      myArrValue = high * 1e13;
+    }
     if (detectTonghua(arr[0]) && detectShunzi(arr[1])) { //同花顺，可比
       high = 8;
       myArrValue = high * 1e13 + parseInt(arrValue);
+    }
+    if (detectTonghua(arr[0]) && detectAShunzi(arr[1])) { //A,2,3,4,5
+      high = 8;
+      myArrValue = high * 1e13;
     }
     if (detectSitiao(arr[1])) { //四条，不可比
       high = 7;
