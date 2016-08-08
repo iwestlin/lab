@@ -29,6 +29,10 @@
     margin-top: 10px;
   }
   
+  button[disabled] {
+    cursor: not-allowed;
+  }
+
   .link a {
     text-decoration: none;
     font-size: 1.5em;
@@ -284,8 +288,21 @@
       }
     }
   }
+  function disableButtonAndCalc(boo, foo) {
+    if (boo) {
+      calcButton.disabled = 'true';
+      setTimeout(doCalc, 100);
+    } else {
+      calcButton.disabled = '';
+    }
+  }
 //需要求出 pubCards player1 player2，然后调用calcSoManyTimes(1000)
   calcButton.onclick = function () {
+    disableButtonAndCalc(true, doCalc);
+    // doCalc();
+  }
+  function doCalc() {
+    // this.disabled = 'true';
     winRecords = [0,0,0]; //p1赢，平局，p1赢
     function calcSoManyTimes(N) {
       var allSelectedCards = player1.concat(player2).concat(pubCards);
@@ -339,6 +356,8 @@
     info.innerHTML = '';
     info.innerHTML = s;
     $("#myTable").trigger("update");
+    // this.disabled = '';
+    disableButtonAndCalc(false);
   }
 
 
