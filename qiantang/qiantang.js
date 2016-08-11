@@ -11,18 +11,18 @@ function Node(name, img, x, y, w, h) {
 // 所有方块
 var nodes = new Array();
 //浅塘375关
-nodes[0] = new Node("red", new Image(), 0, 2, 2, 1)
-nodes[1] = new Node("1x2", new Image(), 3, 0, 1, 2)
-nodes[2] = new Node("2x1", new Image(), 4, 0, 2, 1)
-nodes[3] = new Node("1x2", new Image(), 2, 2, 1, 2)
-nodes[4] = new Node("1x2", new Image(), 3, 2, 1, 2)
-nodes[5] = new Node("1x3", new Image(), 4, 2, 1, 3)
-nodes[6] = new Node("1x2", new Image(), 5, 2, 1, 2)
-nodes[7] = new Node("1x2", new Image(), 0, 4, 1, 2)
-nodes[8] = new Node("3x1", new Image(), 1, 4, 3, 1)
-nodes[9] = new Node("2x1", new Image(), 1, 5, 2, 1)
-nodes[10] = new Node("2x1", new Image(), 3, 5, 2, 1)
-nodes[11] = new Node("1x2", new Image(), 5, 4, 1, 2)
+nodes[0] = new Node("red", new Image(), 0, 2, 2, 1);
+nodes[1] = new Node("1x2", new Image(), 3, 0, 1, 2);
+nodes[2] = new Node("2x1", new Image(), 4, 0, 2, 1);
+nodes[3] = new Node("1x2", new Image(), 2, 2, 1, 2);
+nodes[4] = new Node("1x2", new Image(), 3, 2, 1, 2);
+nodes[5] = new Node("1x3", new Image(), 4, 2, 1, 3);
+nodes[6] = new Node("1x2", new Image(), 5, 2, 1, 2);
+nodes[7] = new Node("1x2", new Image(), 0, 4, 1, 2);
+nodes[8] = new Node("3x1", new Image(), 1, 4, 3, 1);
+nodes[9] = new Node("2x1", new Image(), 1, 5, 2, 1);
+nodes[10] = new Node("2x1", new Image(), 3, 5, 2, 1);
+nodes[11] = new Node("1x2", new Image(), 5, 4, 1, 2);
 
 
 var index12 = new Array(); //存储1x2的格子编号
@@ -51,17 +51,45 @@ function NodePos(x, y) {
 }
 
 // 所有空点位置
-var emptyNodes = new Array();
-emptyNodes[0] = new NodePos(0, 0);
-emptyNodes[1] = new NodePos(1, 0);
-emptyNodes[2] = new NodePos(2, 0);
-emptyNodes[3] = new NodePos(0, 1);
-emptyNodes[4] = new NodePos(1, 1);
-emptyNodes[5] = new NodePos(2, 1);
-emptyNodes[6] = new NodePos(4, 1);
-emptyNodes[7] = new NodePos(5, 1);
-emptyNodes[8] = new NodePos(0, 3);
-emptyNodes[9] = new NodePos(1, 3);
+var emptyNodes = [];
+var myEmptyNodes = [];
+var notEmptyNodes = [];
+var allNodes = [];
+for (var i = 0; i < 6; i++) {
+  for (var j = 0; j <6; j++) {
+    allNodes.push(i.toString()+j.toString());
+  }
+}
+for (var i = 0; i < nodes.length; i++) {
+  var x = nodes[i].x;
+  var y = nodes[i].y;
+  notEmptyNodes.push(x.toString()+y.toString());
+  if (nodes[i].w == 2) {
+    notEmptyNodes.push((x + 1).toString()+y.toString());
+  }
+  if (nodes[i].w == 3) {
+    notEmptyNodes.push((x + 1).toString()+y.toString());
+    notEmptyNodes.push((x + 2).toString()+y.toString());
+  }
+  if (nodes[i].h == 2) {
+    notEmptyNodes.push((x).toString()+(y + 1).toString());
+  }
+  if (nodes[i].h == 3) {
+    notEmptyNodes.push((x).toString()+(y + 1).toString());
+    notEmptyNodes.push((x).toString()+(y + 2).toString());
+  }
+}
+allNodes.map(function(elem) {
+  if (notEmptyNodes.indexOf(elem) < 0) {
+    myEmptyNodes.push(elem);
+  }
+})
+myEmptyNodes = myEmptyNodes.map(function(elem) {
+  return elem.split('');
+})
+for (var i = 0; i < myEmptyNodes.length; i++) {
+  emptyNodes.push(new NodePos(myEmptyNodes[i][0], myEmptyNodes[i][1]));
+}
 
 // 游戏相关变量
 var clickIndex = -1;
