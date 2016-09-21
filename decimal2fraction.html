@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>任意小数化为最简分数</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+  body {
+    width: 920px;
+    margin: 0 auto;
+    margin-top: 20px;
+    text-align: center;
+  }
+  input {
+    width: 200px;
+  }
+  .quote {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 10px;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="quote">
+    示例：7/15的小数表示为0.466666666...其整数部分为0，不循环小数部分为4，循环小数部分为6。
+  </div>
+  <input type="text" placeholder="整数部分（不填默认为0）" id="inter">
+  <span>.</span>
+  <input type="text" placeholder="不循环小数部分（可不填）" id="nocir">
+  <input type="text" placeholder="循环小数部分（可不填）" id="cir">
+  <br>
+  <br>
+  <button onclick="calc()">化成最简分数为：</button>
+  <br>
+  <br>
+  <div id="result"></div>
+  <script type="text/javascript">
+  var id = document.getElementById.bind(document);
+  var inter = id('inter');
+  var nocir = id('nocir');
+  var cir = id('cir');
+  var result = id('result');
+
+  function gcd(num1, num2) {
+    return num2 != 0 ? gcd(num2, num1 % num2) : num1;
+  }
+
+
+  function calc() {
+    var i = inter.value ? parseInt(inter.value) : 0;
+    var a = nocir.value ? parseInt(nocir.value) : 0;
+    var b = cir.value ? parseInt(cir.value) : 0;
+    var n = nocir.value.length || 0;
+    var m = cir.value.length || 0;
+    if (m == 0) {
+      var up = i * Math.pow(10,n) + a;
+      var down = Math.pow(10,n);
+      var yueshu = gcd(up, down);
+      var shang = up / yueshu;
+      var xia = down / yueshu;
+      result.innerText = shang + '/' + xia;
+    } else {
+      var up = a * (Math.pow(10,m) - 1) + b;
+      var down = Math.pow(10,n) * (Math.pow(10,m) - 1);
+      var yueshu = gcd(up, down);
+      var xia = down / yueshu;
+      var shang = up / yueshu + i * xia;
+      result.innerText = shang + '/' + xia;
+    }
+  }
+  </script>
+</body>
+
+</html>
