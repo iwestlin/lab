@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>字母套个圈</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+  body {
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  </style>
+</head>
+
+<body>
+  <h1>仅对26个英文字母和数字0-9有效</h1>
+  <textarea name="" id="inp" cols="70" rows="10"></textarea>
+  <textarea name="" id="res" cols="70" rows="10"></textarea>
+  <script type="text/javascript">
+  var s1 = '0123456789abcdefghijklmnopqrstuvwxyz \n';
+  var s2 = '⓪①②③④⑤⑥⑦⑧⑨ⓐⓑⓒⓓⓔⓕⓖⓗⓘⓙⓚⓛⓜⓝⓞⓟⓠⓡⓢⓣⓤⓥⓦⓧⓨⓩ \n';
+  var len = s1.length;
+  var o = {};
+  for (var i = 0; i < len; i++) {
+    o[s1[i]] = s2[i];
+  }
+
+  var inp = document.getElementById('inp');
+  var res = document.getElementById('res');
+  inp.onkeyup = trans;
+
+  function trans() {
+    var str = inp.value;
+    var result = '';
+    for (s of str) {
+      if (o[s]) {
+        result += o[s];
+      }
+    }
+    res.value = result;
+  }
+  </script>
+</body>
+
+</html>
