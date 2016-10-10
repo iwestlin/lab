@@ -18,8 +18,8 @@
   <textarea name="" id="inp" cols="70" rows="10"></textarea>
   <textarea name="" id="res" cols="70" rows="10"></textarea>
   <script type="text/javascript">
-  var s1 = '0123456789abcdefghijklmnopqrstuvwxyz \n';
-  var s2 = '⓪①②③④⑤⑥⑦⑧⑨ⓐⓑⓒⓓⓔⓕⓖⓗⓘⓙⓚⓛⓜⓝⓞⓟⓠⓡⓢⓣⓤⓥⓦⓧⓨⓩ \n';
+  var s1 = '0123456789abcdefghijklmnopqrstuvwxyz';
+  var s2 = '⓪①②③④⑤⑥⑦⑧⑨ⓐⓑⓒⓓⓔⓕⓖⓗⓘⓙⓚⓛⓜⓝⓞⓟⓠⓡⓢⓣⓤⓥⓦⓧⓨⓩ';
   var len = s1.length;
   var o = {};
   for (var i = 0; i < len; i++) {
@@ -36,6 +36,8 @@
     for (s of str) {
       if (o[s]) {
         result += o[s];
+      } else {
+        result += s;
       }
     }
     res.value = result;
