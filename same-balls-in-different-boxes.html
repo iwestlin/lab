@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>n个相同的球放入m个不同的盒子中</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+  body {
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  #result {
+    width: 300px;
+    height: 700px;
+  }
+  </style>
+</head>
+
+<body>
+  <input type="text" id="balls">
+  <span>个相同的球放进</span>
+  <input type="text" id="boxes">
+  <span>个不同的盒子里有以下方案：</span>
+  <button id="calc">计算</button>
+  <br>
+  <textarea id="result"></textarea>
+  <script type="text/javascript">
+  var ball = document.getElementById('balls');
+  var box = document.getElementById('boxes');
+  var result = document.getElementById('result');
+  var calc = document.getElementById('calc');
+  calc.onclick = function() {
+    var n = parseInt(ball.value);
+    var m = parseInt(box.value);
+    if (n < 0 || m <= 0) {
+      alert('请输入两个正整数');
+      return;
+    }
+    var s = '';
+    var res = nm(n, m, [], []);
+    result.innerText = res;
+
+    function nm(n, m, a, b) {
+      if (m == 1) {
+        for (let j = 0; j < a.length; j++) {
+          s += (a[j] + ', ');
+        }
+        s += (n + '\n');
+      } else {
+        for (let i = 0; i <= n; i++) {
+          b = a.slice();
+          a.push(i);
+          nm(n - i, m - 1, a, b);
+          a = b;
+        }
+      }
+      return s;
+    }
+  }
+  </script>
+</body>
+
+</html>
