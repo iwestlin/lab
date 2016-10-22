@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>阿拉伯数字转中文</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+  input {
+    width: 500px;
+  }
+  </style>
+</head>
+
+<body>
+  <p>
+    108000里 一般读成十万八千里，以下采用这种读法。
+    如 100001000 读成一亿一千。
+  </p>
+  阿拉伯数字：
+  <input type="text" id="arab" placeholder="请输入一个任意大的自然数">
+  中文：
+  <input type="text" id="chin">
+  <br><hr>
+  中文：
+  <input type="text" id="chin2">
+  <button onclick="back()">转换回数字：</button>
+  <input type="text" id="arab2">
+
+  <script type="text/javascript">
+  var arab = document.getElementById('arab');
+  var chin = document.getElementById('chin');
+  var chin2 = document.getElementById('chin2');
+  var arab2 = document.getElementById('arab2');
+  arab.onkeyup = function() {
+    chin.value = haha(arab.value);
+  }
+
+  function back() {
+    arab2.value = heihei(chin2.value);
+  }
+
+  var shuzi = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
+  var weishu = ["十", "百", "千", "万", "十", "百", "千", "亿"];
+
+  function haha(numstr) {
+    var r0 = /^0+$/;
+    if (r0.test(numstr)) {
+      return '零';
+    }
+    var r = /^\d+$/;
+    if (!r.test(numstr)) {
+      alert('请输入一个阿拉伯数字');
+      return;
+    }
+    var n = numstr.replace(/^0+/, '');
+    var a = n.split('');
+    var len = a.length;
+    var result = '';
+    for (var i = 0; i < len; i++) {
+      var temp = len - i - 1;
+      if (temp > 0 && temp % 4 == 0 && temp % 8 != 0) {
+        result += (shuzi[parseInt(a[i])] + '万');
+      } else if (temp > 0 && temp % 8 == 0) {
+        result += (shuzi[parseInt(a[i])] + '亿');
+      } else {
+        result += shuzi[parseInt(a[i])];
+        if (parseInt(a[i]) !== 0) {
+          result += weishu[(len - i - 2) % 8] || '';
+        }
+      }
+    }
+    return result.replace(/零+/g, '零').replace(/零万/g, '万').replace(/零亿/g, '亿').replace(/亿万/g, '亿').replace(/零$/, '').replace(/^一十/, '十');
+  }
+
+  function heihei(arabstr) {
+    if (/^十/.test(arabstr)) {
+      arabstr = '一' + arabstr;
+    }
+    var arr = arabstr.split('亿');
+    for (var i = 0; i < arr.length; i++) {
+      //不含首位且不含'万' 或者 为空字符串
+      if ((i>0 && !/万/.test(arr[i])) || arr[i] === '') {
+        var temp = [];
+        temp.push(['零']);
+        temp.push(arr[i]);
+        arr[i] = temp;
+      } else {
+        arr[i] = arr[i].split('万');
+      }
+    }
+    arr = arr.join(',').split(',');
+    // console.log(arr);
+    var result = '';
+    for (var i = 0; i < arr.length; i++) {
+      result += trans(arr[i]);
+    }
+    return result.replace(/^0+/g, '');
+  }
+
+  var arabshuzi = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  function trans(str) {
+    var arr = str.split('');
+    // console.log(arr);
+    var result = '';
+    var qian = arr.indexOf('千');
+    var bai = arr.indexOf('百');
+    var shi = arr.indexOf('十');
+    if (qian > -1) {
+      result += arabshuzi[shuzi.indexOf(arr[qian-1])];
+    } else {
+      result += '0';
+    }
+    if (bai > -1) {
+      result += arabshuzi[shuzi.indexOf(arr[bai-1])];
+    } else {
+      result += '0';
+    }
+    if (shi > -1) {
+      result += arabshuzi[shuzi.indexOf(arr[shi-1])];
+    } else {
+      result += '0';
+    }
+    if (shuzi.indexOf(arr[arr.length-1]) > -1) {
+      result += arabshuzi[shuzi.indexOf(arr[arr.length-1])];
+    } else {
+      result += '0';
+    }
+    return result;
+  }
+  </script>
+</body>
+
+</html>
