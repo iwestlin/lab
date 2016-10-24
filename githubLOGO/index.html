@@ -55,7 +55,9 @@
       var yu = i % halfwidth;
       var shang2 = shang *2;
       var yu2 = yu*2;
-      s += '<div style="background:rgb('+red[shang2][yu2]+','+green[shang2][yu2]+','+blue[shang2][yu2]+');' + 'top:' + shang*10+'px;'+'left:'+yu*10+'px;"></div>';
+      if (red[shang2][yu2] !== undefined) {
+        s += '<div style="background:rgb('+red[shang2][yu2]+','+green[shang2][yu2]+','+blue[shang2][yu2]+');' + 'top:' + shang*10+'px;'+'left:'+yu*10+'px;"></div>';
+      }
     }
     hh.innerHTML = s;
   };
