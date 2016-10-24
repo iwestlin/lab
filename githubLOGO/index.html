@@ -2,17 +2,18 @@
 <html>
 
 <head>
-  <title>Github LOGO</title>
+  <title>saber</title>
   <meta charset="utf-8">
   <style type="text/css">
   #haha {
+    /*width: 640px;*/
     position: relative;
   }
   #haha div{
     position: absolute;
-    width: 10px;
-    height: 10px;
-    border-radius: 10px;
+    width: 5px;
+    height: 5px;
+    border-radius: 640px;
   }
   </style>
 </head>
@@ -27,42 +28,34 @@
 
   var imageObj = new Image();
   imageObj.onload = function() {
-    var width = this.width;
-    var height = this.height;
     context.drawImage(this, 0, 0);
-    var data = context.getImageData(0, 0, width, height);
+    var w = this.width;
+    var h = this.height;
+    var data = context.getImageData(0, 0, w, h);
     var d = data.data;
+    // data有3个属性，width，height和data，data（数组）共有witdh*height*4个元素，依次记录了从左到右从上到下每个像素的red／green／blue／alpha值。
     var red = [],
         green = [],
         blue = [],
-        w4 = width * 4;
         len = d.length;
-    for (let i = 0; i < width; i++) {
-      red.push([]);
-      green.push([]);
-      blue.push([]);
-    }
     for (let i = 0; i < len; i += 4) {
-      red[Math.floor(i/w4)].push(d[i]);
-      green[Math.floor(i/w4)].push(d[i+1]);
-      blue[Math.floor(i/w4)].push(d[i+2]);
+      if (d[i] !== undefined) {
+        red.push(d[i]);
+        green.push(d[i+1]);
+        blue.push(d[i+2]);
+      }
     }
     var s = '';
-    var halfwidth = width/2;
-    var h2 = halfwidth * halfwidth;
-    for (let i = 0; i < h2; i++) {
-      var shang = Math.floor(i / halfwidth);
-      var yu = i % halfwidth;
-      var shang2 = shang *2;
-      var yu2 = yu*2;
-      if (red[shang2][yu2] !== undefined) {
-        s += '<div style="background:rgb('+red[shang2][yu2]+','+green[shang2][yu2]+','+blue[shang2][yu2]+');' + 'top:' + shang*10+'px;'+'left:'+yu*10+'px;"></div>';
+    for (let i = 0; i < len; i++) {
+      if (red[i] !== undefined) {
+        s += '<div style="background:rgb('+red[i]+','+green[i]+','+blue[i]+');' + 'top:' + Math.floor(i/w)*5+'px;'+'left:'+(i%w)*5+'px;"></div>';
       }
     }
     hh.innerHTML = s;
   };
   imageObj.crossOrigin = '*';
   imageObj.src = "./github.png";
+  // imageObj.src = "./y.jpg";
 
   </script>
 </body>

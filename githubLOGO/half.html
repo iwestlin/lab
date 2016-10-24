@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Github LOGO</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+  #haha {
+    position: relative;
+  }
+  #haha div{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+  }
+  </style>
+</head>
+
+<body>
+  <div id="haha">
+  </div>
+  <script>
+  var hh = document.getElementById('haha');
+  var canvas = document.createElement("canvas");
+  var context = canvas.getContext('2d');
+
+  var imageObj = new Image();
+  imageObj.onload = function() {
+    var width = this.width;
+    var height = this.height;
+    context.drawImage(this, 0, 0);
+    var data = context.getImageData(0, 0, width, height);
+    var d = data.data;
+    var red = [],
+        green = [],
+        blue = [],
+        w4 = width * 4;
+        len = d.length;
+    for (let i = 0; i < Math.max(width, height); i++) {
+      red.push([]);
+      green.push([]);
+      blue.push([]);
+    }
+    for (let i = 0; i < len; i += 4) {
+      red[Math.floor(i/w4)].push(d[i]);
+      green[Math.floor(i/w4)].push(d[i+1]);
+      blue[Math.floor(i/w4)].push(d[i+2]);
+    }
+    var s = '';
+    var halfwidth = Math.floor(width/2);
+    var halfheight = Math.floor(height/2);
+    var wh = halfwidth * halfheight;
+    for (let i = 0; i < wh; i++) {
+      var shang = Math.floor(i / halfwidth);
+      var yu = i % halfwidth;
+      var shang2 = shang * 2;
+      var yu2 = yu * 2;
+      if (red[shang2]!== undefined && red[shang2][yu2] !== undefined) {
+        s += '<div style="background:rgb('+red[shang2][yu2]+','+green[shang2][yu2]+','+blue[shang2][yu2]+');' + 'top:' + shang*10+'px;'+'left:'+yu*10+'px;"></div>';
+      }
+
+    }
+    hh.innerHTML = s;
+  };
+  imageObj.crossOrigin = '*';
+  imageObj.src = "./github.png";
+
+  </script>
+</body>
+
+</html>
