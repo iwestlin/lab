@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>How long did you live, what have you done?</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+  body {
+    font-family: Helvetica, Arial, Vernada, Tahoma, STXihei, "Microsoft YaHei", "Songti SC", SimSun, Heiti, sans-serif;
+    text-align: center;
+  }
+  #info {
+    background-color: #333;
+    color: #ddd;
+    padding: 70px;
+    padding-bottom: 7em;
+    margin-top: 20px;
+  }
+  #haha {
+    display: inline-block;
+    font-size: 12em;
+    font-family: monospace;
+    margin: 30px;
+  }
+  </style>
+</head>
+
+<body>
+  <span>我的生日是:</span>
+  <input type="text" id="year">
+  <span>年</span>
+  <input type="text" id="month">
+  <span>月</span>
+  <input type="text" id="day">
+  <span>日</span>
+  <button onclick="calc()">看我活了多少天</button>
+  <div id="info" style="display: none;">
+    <p>YOU HAVE LIVED<span id="haha">1,024</span>
+DAYS. WHAT HAVE YOU DONE?</p>
+    <p id="birth"></p>
+  </div>
+
+  <script src="./countUp.min.js"></script>
+  <script type="text/javascript">
+  var options = {  
+    useEasing: true,
+    useGrouping: false,
+    separator: ',',
+    decimal: '.',
+    prefix: '',
+    suffix: ''
+  };
+  var info = document.getElementById('info');
+  var birth = document.getElementById('birth');
+  function calc() {
+    var year = document.getElementById('year');
+    var month = document.getElementById('month');
+    var day = document.getElementById('day');
+    var y = parseInt(year.value) || 0;
+    var m = parseInt(month.value) || 0;
+    var d = parseInt(day.value) || 0;
+    if (y<0 || m<0 || d<0 || m >12 || d>31) {
+      alert('请输入一个有效的日期！');
+      return;
+    }
+    var birthday = new Date(y, m - 1, d); //month中1月计为0，最早1901年1月1日
+    if (birthday === undefined) {
+      alert('请输入一个有效的日期！');
+      return;
+    }
+    var now = Date.now();
+    var today = new Date();
+    var ms = now - birthday.getTime();
+    var days = Math.floor(ms / 1000 / 3600 / 24);
+    var demo = new CountUp("haha", 0, days, 0, 3, options);
+    info.style.display = '';
+    birth.innerText = 'Today is ' + today.toDateString() + ', your birthday is ' + birthday.toDateString();
+    demo.start();
+  }
+  </script>
+</body>
+
+</html>
