@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>文字选中和复制</title>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <p id="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt totam, animi vel maxime tenetur minima doloribus recusandae, provident alias. Veritatis sint porro?</p>
+  <button onclick="xuan()">select</button>
+  <button onclick="haha()">copy</button>
+  <button onclick="xuan2()">部分选中</button>
+  <br>
+  <textarea name="" id="" cols="70" rows="20">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut atque quo iusto quas eos, repudiandae voluptas tempora? Modi, error iusto.
+  </textarea>
+
+  <script type="text/javascript">
+  var text = document.getElementById('text');
+  var textdom = document.getElementsByTagName('textarea')[0];
+  function haha() {
+    document.execCommand('copy');
+  }
+  function xuan() {
+    var range = document.createRange();
+    range.selectNode(text);
+    var s = window.getSelection();
+    if(s.rangeCount > 0) {
+      s.removeAllRanges();
+    }
+    s.addRange(range);
+  }
+  function xuan2() {
+    textdom.setSelectionRange(0, 20);
+  }
+  </script>
+</body>
+
+</html>

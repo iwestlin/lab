@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>document</title>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <h2>just type</h2>
+  <div id="type"></div>
+  <script type="text/javascript">
+  var type = document.getElementById('type');
+  var s = '';
+  document.onkeyup = function(event) {
+    var e = event || window.event;
+    var keyCode = e.keyCode || e.which;
+    var keyString = String.fromCharCode(keyCode);
+    s += keyString;
+    type.innerText = s;
+  }
+  </script>
+</body>
+
+</html>

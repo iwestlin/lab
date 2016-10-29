@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>禁止选中文字和右键菜单</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+  #test {
+    user-select: none; /*禁止选中文字*/
+    border: 1px solid;
+  }
+  </style>
+</head>
+<body>
+<code id="test">
+  this is a test.
+</code>
+
+<script type="text/javascript">
+  var test = document.getElementById('test');
+  test.oncontextmenu = function() { //禁止右键菜单
+    return false;
+  }
+</script>
+</body>
+</html>
