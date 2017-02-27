@@ -3,7 +3,7 @@ mapkey('<Ctrl-y>', 'Show me the money', function() {
     Front.showPopup('a well-known phrase uttered by characters in the 1996 film Jerry Maguire (Escape to close).');
 });
 
-mapkey('zz', 'show jpeg on oiegg', function() {
+mapkey('za', 'show jpeg on oiegg', function() {
     var a = document.querySelectorAll('a[href^="attachment.php"]');
     for (var j = 0; j < a.length; j++) {
       try {
@@ -18,11 +18,7 @@ mapkey('zz', 'show jpeg on oiegg', function() {
     }
 }, {domain: /oiegg\.com/i});
 
-mapkey('za', 'open hongbao page', function() {
-    window.open('http://www.oiegg.com/plugin.php?identifier=get_money&module=money&action=money_get&hid=59');
-}, {domain: /oiegg\.com/i});
-
-mapkey('zz', 'download origin pictures', function() {
+mapkey('za', 'download origin pictures', function() {
       var imgs = document.getElementsByClassName('a-show');
       for (var i = 0, len = imgs.length; i < len; i++) {
           var a = document.createElement('a');
