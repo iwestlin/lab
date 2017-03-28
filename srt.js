@@ -1,7 +1,7 @@
-// must execuate on https://www.shanbay.com
+// must run on shanbay.com
 /*
 var script = document.createElement('script');
-script.src = 'https://paster.coding.me/srt.js';
+script.src = '//js007-1253509220.costj.myqcloud.com/srt.js';
 document.body.appendChild(script);
  */
 
@@ -43,8 +43,8 @@ function start () {
   myResult = ''
   index = 0
   notfound = []
-  var srt = str2arr('subtitle')
-  var dict = str2arr('dictionary')
+  var srt = str2arr(sub.value)
+  var dict = str2arr(dic.value)
   unknownWords = srt.filter(function (value) {
     return dict.indexOf(value) < 0
   })
@@ -53,6 +53,7 @@ function start () {
   }, 500)
 }
 
+// http://stackoverflow.com/a/18197511/3469145
 function download (filename, text) {
   var pom = document.createElement('a')
   pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text))
@@ -72,23 +73,14 @@ function arrUnique (arr) {
   return Array.from(myset)
 }
 
-function str2arr (id) {
-  var words
-  var reg1 = /\n\d+\n/g
-  var reg2 = /\n.+-->.+\n?/g
-  var reg3 = /[^a-zA-Z ']/g
-  var reg4 = /[a-zA-Z]+'[a-zA-Z]+/g
-  var str = document.getElementById(id).value
-  if (id === 'subtitle') {
-    str = str.replace(reg1, '').replace(reg2, ' ').replace(/\n/g, ' ').replace(reg3, '').replace(reg4, '').trim()
-    words = str.split(' ')
-  } else if (id === 'dictionary') {
-    str = str.replace(/[，\n+]/g, ',')
-    words = str.split(',')
+function str2arr (str) {
+  var words = []
+  // var reg = /\b[a-z'-]+\b/ig
+  var reg = /[a-z'-]+/ig
+  var match
+  while ((match = reg.exec(str)) !== null) {
+    words.push(match[0])
   }
-  words = words.map(function (v) {
-    return v.trim().toLowerCase()
-  })
   return arrUnique(words)
 }
 
