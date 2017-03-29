@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Texas Holdem - 德州扑克</title>
+  <title>德州扑克胜率计算</title>
   <meta charset="utf-8">
   <style type="text/css">
   * {
@@ -120,21 +120,21 @@
     background-color: rgba(0, 0, 0, .3);
   }
   
-  .mybutton {
+  #mybutton {
     position: absolute;
     bottom: 0px;
     right: 0px;
   }
   
-  .mybutton button {
-    width: 307px;
-    text-align: center;
-    line-height: 100px;
-    font-size: 2em;
-    border: 1px solid #666;
-    border-radius: .1em;
-    box-shadow: .2em .2em .5em #333;
-    background-color: white;
+  #mybutton button {
+    width: 100px;
+    height: 100px;
+    background: #333;
+    color: #eee;
+    box-shadow: inset 0 0 1px 1px rgba(0, 0, 0, 0.1), 0 0 5px 1px rgba(90, 90, 90, 0.1), inset 0 35px 1px rgba(255, 255, 255, 0.1);
+    border: 10px dotted #ccc;
+    border-radius: 100px;
+    font-size: 1.5em;
   }
   
   .cards span {
@@ -159,11 +159,11 @@
 
 <body>
   <div class="quote">
-    德克萨斯扑克全称Texas Hold'em poker，中文简称德州扑克。它是一种玩家对玩家的公共牌类游戏。德州扑克一共有52张牌，没有王牌。每个玩家分两张牌作为“底牌”，五张由荷官陆续朝上发出的公共牌。开始的时候，每个玩家会有两张面朝下的底牌。经过所有押注圈后，若仍不能分出胜负，游戏会进入“摊牌”阶段，也就是让所剩的玩家亮出各自的底牌以较高下，持大牌者获胜。
+    德克萨斯扑克全称 Texas Hold'em poker，中文简称德州扑克。它是一种玩家对玩家的公共牌类游戏。德州扑克一共有52张牌，没有王牌。每个玩家分两张牌作为“底牌”，五张由荷官陆续朝上发出的公共牌。开始的时候，每个玩家会有两张面朝下的底牌。经过所有押注圈后，若仍不能分出胜负，游戏会进入“摊牌”阶段，也就是让所剩的玩家亮出各自的底牌以较高下，持大牌者获胜。
   </div>
   <br>
   <div class="quote imp">
-    第一次请选择两张底牌，第二次再选两张底牌，第三次选择的是0～4张公共牌。选完后点击计算按钮计算胜率。由于性能问题不能穷举，电脑会随机选出10000种情况，然后根据结果算出胜率，计算结果与真实胜率存在约1%以内的误差。点击计算后大概几秒钟后会算出结果，请耐心等候。
+    第一次请选择两张底牌，第二次再选两张底牌，第三次选择0～4张公共牌。选完后点击计算按钮计算胜率。由于性能问题不能穷举，电脑会随机选出10000种情况，然后根据结果算出胜率，计算结果与真实胜率存在约1%以内的误差。点击计算后大概几秒钟后会算出结果，请耐心等候。
   </div>
   <hr>
   <div class="container">
@@ -219,7 +219,7 @@
     <div id="红桃_2" class="heart poker">2</div>
     <div id="梅花_2" class="club poker">2</div>
     <div id="方块_2" class="diamond poker">2</div>
-    <div id="方块_2" class="mybutton">
+    <div id="mybutton">
       <button id="select">选定</button>
       <button id="calc">计算</button>
     </div>
