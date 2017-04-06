@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Polygon</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+  .container {
+    width: 410px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .out {
+    width: 400px;
+    height: 400px;
+    border-radius: 400px;
+    border: 1px solid #666;
+  }
+  .triangle {
+    display: block;
+    height: 400px;
+    background-color: #3385FF;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+  }
+  .range {
+    display: block;
+    width: 400px;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="out">
+      <i class="triangle"></i>
+    </div>
+    <input type="range" class="range">
+    <p><span id="bian">7</span> 边形</p>
+  </div>
+
+  <script type="text/javascript">
+  var bian = document.getElementById('bian')
+  var range = document.querySelector('.range')
+  var tri = document.getElementsByClassName('triangle')[0]
+  range.min = 3
+  range.max = 36
+  range.value = 10
+  range.onchange = function() {
+    clearInterval(loop)
+    bian.innerText = this.value
+    var value = Number(this.value)
+    change(value)
+    loop = setInterval(function() {
+      change(value)
+    }, 1000)
+  }
+
+  change(7)
+  var loop = setInterval(function() {
+    change(7)
+  }, 1000)
+  
+  function change(n) {
+    tri.style.clipPath = 'polygon(' + generatePoints(n) + ')'
+  }
+  function generatePoints(n) {
+    var x0 = y0 = r0 = 200
+    var a = Array(n)
+    var jiao = 0
+    var step = Math.PI * 2 / n
+    for (let i = 0; i < a.length; i++) {
+      var r = Math.floor(myRandom(100, 200))
+      var x = x0 + Math.floor(r * Math.cos(jiao))
+      var y = y0 + Math.floor(r * Math.sin(jiao))
+      jiao += step
+      a[i] = x + 'px ' + y + 'px'
+    }
+    return a.join(', ')
+  }
+  function myRandom (start, end) {
+    var cha = end - start
+    return start + Math.random() * cha
+  }
+  </script>
+</body>
+
+</html>
