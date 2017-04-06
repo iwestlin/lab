@@ -32,6 +32,7 @@
 
 <body>
   <div class="container">
+    <p>请使用电脑和现代浏览器（如 Chrome／Firefox 等）浏览</p>
     <div class="out">
       <i class="triangle"></i>
     </div>
@@ -45,7 +46,7 @@
   var tri = document.getElementsByClassName('triangle')[0]
   range.min = 3
   range.max = 36
-  range.value = 10
+  range.value = 7
   range.onchange = function() {
     clearInterval(loop)
     bian.innerText = this.value
