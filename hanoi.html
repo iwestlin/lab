@@ -115,6 +115,9 @@
     i = 0;
     var number = parseInt(trayNumber.value);
     var delays = parseInt(delay.value);
+    a.innerText = onetwothree(number);
+    b.innerText = '';
+    c.innerText = '';
     disable(true)
     myhanoi(number, 'a', 'b', 'c', delays);
     setTimeout(function() {
