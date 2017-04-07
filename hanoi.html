@@ -115,7 +115,11 @@
     i = 0;
     var number = parseInt(trayNumber.value);
     var delays = parseInt(delay.value);
+    disable(true)
     myhanoi(number, 'a', 'b', 'c', delays);
+    setTimeout(function() {
+      disable(false)
+    }, delays*i)
   }
 
   trayNumber.onchange = function() {
@@ -140,6 +144,12 @@
       s = s.concat(i++)
     }
     return s;
+  }
+
+  function disable (bool) {
+    go.disabled = bool
+    trayNumber.disabled = bool
+    delay.disabled = bool
   }
 
   function myhanoi(num, src, mid, tar, del) {
