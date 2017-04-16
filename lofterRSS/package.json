@@ -1,0 +1,21 @@
+{
+  "name": "lofter-feed",
+  "description": "抓取lofter喜欢的图片生成rss",
+  "version": "0.0.1",
+  "main": "index.js",
+  "private": true,
+  "author": {
+    "name": "何从",
+    "email": "westlin@foxmail.com"
+  },
+  "dependencies": {
+    "request": "~2.11.4",
+    "rss": "~0.0.4"
+  },
+  "engines": {
+    "node": "0.10.36"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
