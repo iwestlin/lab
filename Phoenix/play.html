@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Flappy Bird - Never Die</title>
+	<link href='style.css' rel='stylesheet' type='text/css'>
+	<meta name="viewport" content="width=500,width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<style type="text/css">
+	body {
+		/*width: 500px;*/
+		margin: 0 auto;
+		text-align: center;
+	}
+	a {
+		text-decoration: none;
+	}
+	</style>
+</head>
+<body>
+	<canvas id="flappy" width="500" height="512"></canvas>
+	<br/>
+	<p>鼠标点击或按任意按键进行跳跃</p>
+	<a href="index.html">不死鸟</a>
+	<script src = "game.js"></script>
+	<script type="text/javascript">
+		document.body.addEventListener('click', function() {
+			b.flap()
+		})
+		document.body.addEventListener('touchstart', function() {
+			b.flap()
+		})
+		document.onkeydown = function(e) {
+			b.flap()
+		}
+		window.shouldFlap = function() {
+			return false
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>找不同</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		body {
+			width: 1120px;
+			margin: 0 auto;
+		}
+		
+		div.normal {
+			display: inline-block;
+		}
+		
+		div.mix {
+			min-width: 350px;
+			min-height: 386px;
+			position: relative;
+			display: inline-block;
+		}
+		
+		.normal img {
+			padding-right: 10px;
+		}
+		
+		.mix img {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		
+		.mix .two {
+			mix-blend-mode: difference;
+			/*-webkit-filter: invert(100%) opacity(50%);*/
+		}
+		
+		form {
+			text-align: center;
+			line-height: 77px;
+		}
+		
+		div.credits {
+			text-align: center;
+		}
+		
+		.credits a {
+			text-decoration: none;
+		}
+		
+		div.usage {
+			border-left: 7px solid #a00;
+			padding: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="usage">
+		<p>
+			选择两张长宽尺寸都相等的图片，分别上传到图一和图二，图三会显示出图片的不同之处。
+		</p>
+	</div>
+	<form action="">
+		<input type="file" onchange="loadImg(this,'one');" />
+		<input type="file" onchange="loadImg(this,'two');" />
+	</form>
+
+	<div class="normal">
+		<img src="1.png" alt="" class="one">
+		<img src="2.png" alt="" class="two">
+	</div>
+	<div class="mix">
+		<img src="1.png" alt="" class="one">
+		<img src="2.png" alt="" class="two">
+	</div>
+	<div class="credits">
+		<p>
+			All credits to <a href="http://franklinta.com/2014/11/30/image-diffing-using-css/">http://franklinta.com/2014/11/30/image-diffing-using-css/</a>
+		</p>
+	</div>
+
+	<script type="text/javascript">
+		function loadImg(source, target) {
+			if (typeof FileReader === 'undefined') {
+				alert('您使用的浏览器不支持部分功能，请使用最新版的chrome或Firefox等现代浏览器。');
+				return;
+			}
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				var imgs = document.getElementsByClassName(target);
+				imgs[0].src = this.result;
+				imgs[1].src = this.result;
+			}
+			reader.readAsDataURL(source.files[0]);
+		}
+	</script>
+</body>
+
+</html>

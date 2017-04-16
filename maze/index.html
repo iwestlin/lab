@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>迷宫</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+  #maze {
+    line-height: 18px;
+    font-size: 18px;
+    font-family: monospace;
+  }
+  </style>
+</head>
+
+<body>
+  <div id="maze"></div>
+  <script>
+  var s = ''
+  var w = Math.floor(document.body.scrollWidth / 18)
+  var h = Math.floor(document.body.scrollHeight / 18)
+  for (var i = 0; i < h; i++) {
+    for (var j = 0; j < w; j++) {
+      s += (Math.floor(Math.random() * 2)) ? "╱" : "╲";
+    }
+    s += '\n'
+  }
+  document.getElementById('maze').innerText = s
+  </script>
+</body>
+
+</html>

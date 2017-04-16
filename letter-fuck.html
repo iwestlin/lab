@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>fuck</title>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <style type="text/css">
+  .container {
+    width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .triangle {
+    transform: rotateX(180deg);
+    display: block;
+    height: 700px;
+    background-color: #3385FF;
+    -webkit-transition: all 2s;
+    transition: all 2s;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="out">
+      <i class="triangle"></i>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+  var tri = document.getElementsByClassName('triangle')[0]
+  var o = {}
+  o.a = '460px 220px, 180px 220px, 98px 0px, 21px 0px, 285px 689px, 356px 689px, 621px 0px, 542px 0px, 460px 220px, 437px 280px, 320px 594px, 202px 280px, 437px 280px'
+  o.c = '49px 167px, 480px 167px, 480px 285px, 411px 285px, 411px 236px, 118px 236px, 118px 615px, 411px 615px, 411px 566px, 480px 566px, 480px 687px, 49px 687px, 49px 687px'
+  o.e = '525px 60px, 525px 0px, 115px 0px, 115px 680px, 505px 680px, 505px 620px, 193px 620px, 193px 390px, 465px 390px, 465px 330px, 193px 330px, 193px 60px, 525px 60px'
+  o.f = '193px 620px, 193px 375px, 465px 375px, 465px 314px, 193px 314px, 193px 0px, 115px 0px, 115px 680px, 505px 680px, 505px 620px, 193px 620px, 193px 620px, 193px 620px'
+  o.h = '652px 680px, 652px 0px, 574px 0px, 574px 330px, 193px 330px, 193px 0px, 115px 0px, 115px 680px, 193px 680px, 193px 390px, 574px 390px, 574px 680px, 652px 680px'
+  o.i = '115px 680px, 193px 680px, 193px 0px, 115px 0px, 115px 680px, 115px 680px, 115px 680px, 115px 680px, 115px 680px, 115px 680px, 115px 680px, 115px 680px, 115px 680px'
+  o.k = '115px 680px, 193px 680px, 193px 0px, 115px 0px, 115px 680px, 645px 0px, 550px 0px, 213px 355px, 213px 375px, 510px 680px, 602px 680px, 293px 368px, 645px 0px'
+  o.l = '525px 60px, 525px 0px, 115px 0px, 115px 680px, 193px 680px, 193px 60px, 525px 60px, 525px 60px, 525px 60px, 525px 60px, 525px 60px, 525px 60px, 525px 60px'
+  o.u = '632px 680px, 632px -8px, 31px -8px, 31px 680px, 110px 680px, 110px 86px, 555px 86px, 555px 680px, 782px 680px, 652px 680px, 632px 680px, 632px 680px, 632px 680px'
+  o.v = '632px 680px, 368px -8px, 296px -8px, 31px 680px, 110px 680px, 333px 86px, 555px 680px, 632px 680px, 632px 680px, 632px 680px, 632px 680px, 632px 680px, 632px 680px'
+  function change (s) {
+    tri.style.clipPath = 'polygon(' + s + ')'
+  }
+  change(o.f)
+  function fuck () {
+    setTimeout(function() {
+      change(o.f)
+    }, 0)
+    setTimeout(function() {
+      change(o.u)
+    }, 2000)
+    setTimeout(function() {
+      change(o.c)
+    }, 4000)
+    setTimeout(function() {
+      change(o.k)
+    }, 6000)
+  }
+  fuck()
+  setInterval(function() {
+    fuck()
+  }, 8000)
+
+  </script>
+</body>
+
+</html>

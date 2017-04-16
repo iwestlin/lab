@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>svg maze generator</title>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <svg></svg>
+  <script type="text/javascript">
+  window.onload = function() {
+      var w = document.body.scrollWidth
+      var h = document.body.scrollHeight
+      var svg = document.createElement('svg')
+      var vb = '0 0 ' + w + ' ' + h
+      svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+      svg.setAttribute('viewBox', vb)
+      svg.setAttribute('version', '1.1')
+      var px = 20
+      for (let y = 0; y < h; y += px) {
+        for (let x = 0; x < w; x += px) {
+          var zo = zeroOrOne()
+          var oz = zo ? -1 : 1
+          var x1 = x
+          var y1 = y + zo * px
+          var x2 = x + px
+          var y2 = y1 + oz * px
+          svg.appendChild(createSvgLine(x1, y1, x2, y2))
+        }
+      }
+      download('maze.svg', svg.outerHTML)
+    }
+  function zeroOrOne() {
+    return Math.floor(Math.random() * 2)
+  }
+
+  function createSvgLine(x1, y1, x2, y2) {
+    var line = document.createElement('polyline')
+    var points = '' + x1 + ',' + y1 + ' ' + x2 + ',' + y2
+    line.setAttribute('points', points)
+    line.setAttribute('fill', 'none')
+    line.setAttribute('stroke', 'black')
+    return line
+  }
+  function download (filename, text) {
+    var pom = document.createElement('a')
+    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text))
+    pom.setAttribute('download', filename)
+
+    if (document.createEvent) {
+      var event = document.createEvent('MouseEvents')
+      event.initEvent('click', true, true)
+      pom.dispatchEvent(event)
+    } else {
+      pom.click()
+    }
+  }
+  </script>
+</body>
+
+</html>

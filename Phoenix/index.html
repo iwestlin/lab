@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Flappy Bird - Never Die</title>
+	<link href='style.css' rel='stylesheet' type='text/css'>
+	<meta name="viewport" content="width=500,width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<style type="text/css">
+	body {
+		/*width: 500px;*/
+		margin: 0 auto;
+		text-align: center;
+	}
+	a {
+		text-decoration: none;
+	}
+	</style>
+</head>
+<body>
+	<canvas id="flappy" width="500" height="512"></canvas> <br/>
+	<button onclick="speed(60)">x1</button> 
+	<button onclick="speed(120)">x2</button> 
+	<button onclick="speed(180)">x3</button> 
+	<button onclick="speed(300)">x5</button> 
+	<button onclick="speed(0)">MAX</button> 
+	<br/>
+	<hr>
+	<a href="play.html">自己玩</a>
+	<span> | </span>
+	<a href="https://github.com/xviniette/FlappyLearning">source</a>
+	<script src = "game.js"></script>
+</body>
+</html>
