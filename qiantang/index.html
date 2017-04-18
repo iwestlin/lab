@@ -18,12 +18,20 @@ table {
 
 <body>
   <div class="container">
-    <h1>浅塘375关</h1>
+    <h1>浅塘 375 关</h1>
+    <p>
+      <a href="http://app.mi.com/details?id=com.ttzgame.pond">浅塘</a>
+      是一款解谜类 APP，一个个不同颜色的色块代表了拥挤在一个池塘里的一条条小鱼，小鱼只能前后移动，不能横向移动，将红色小鱼从最左边移到最右边则获得胜利。
+      可以用鼠标拖动色块进行移动。
+    </p>
+    <p>
+      点击「电脑计算」按钮求出每一步解法。
+    </p>
     <canvas id="myCanvas" width="300" height="300" onmousedown="mouseDown(event)" onmouseup="mouseUp(event)" style="border:5px solid #8C5125;">
       您的浏览器不支持canvas标签，请使用chrome/firefox/safari等现代浏览器
     </canvas>
     <br>
-    <button type="button" onclick="FindPath()">AI计算</button>
+    <button type="button" onclick="FindPath()">电脑计算</button>
     <div id="info1"></div>
     <div id="info2"></div>
   </div>
