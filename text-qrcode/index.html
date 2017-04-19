@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Unicode QRcode</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+  body {
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  input {
+    width: 100%;
+  }
+  
+  pre {
+    font-family: 'Courier New';
+    font-size: 1.5em;
+  }
+  </style>
+</head>
+
+<body>
+  <input type="text" onkeyup="gen(this.value)">
+  <pre></pre>
+  <script src='qrcode.min.js'></script>
+  <script>
+  var pre = document.getElementsByTagName('pre')[0]
+
+  function gen(str) {
+    var q = qrcodelib.create(str)
+    var s = q.modules.data.toString()
+    s = s.split(',')
+    var width = 21
+    var matrix = []
+    for (let i = 0; i < width; i++) {
+      matrix[i] = []
+    }
+    for (let i = 0, index = 0; i < matrix.length; i++) {
+      for (let j = 0; j < width; j++) {
+        matrix[i][j] = parseInt(s[index])
+        index++
+      }
+    }
+    var r = '\n'
+    for (let i = 0; i < matrix.length; i += 2) {
+      for (let j = 0; j < matrix[i].length; j++) {
+        if (matrix[i + 1]) {
+          if (matrix[i][j]) {
+            if (matrix[i + 1][j]) {
+              r += '█'
+            } else {
+              r += '▀'
+            }
+          } else {
+            if (matrix[i + 1][j]) {
+              r += '▄'
+            } else {
+              r += ' '
+            }
+          }
+        } else {
+          if (matrix[i][j]) {
+            r += '▀'
+          } else {
+            r += ' '
+          }
+        }
+      }
+      r += '\n'
+    }
+    pre.innerText = r
+  }
+  </script>
+</body>
+
+</html>
