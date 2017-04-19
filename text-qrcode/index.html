@@ -34,7 +34,7 @@
     var q = qrcodelib.create(str)
     var s = q.modules.data.toString()
     s = s.split(',')
-    var width = 21
+    var width = Math.round(Math.sqrt(s.length))
     var matrix = []
     for (let i = 0; i < width; i++) {
       matrix[i] = []
