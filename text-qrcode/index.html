@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <style type="text/css">
   body {
-    width: 300px;
+    width: 400px;
     margin: 0 auto;
     text-align: center;
     margin-top: 30px;
@@ -24,11 +24,12 @@
 </head>
 
 <body>
-  <input type="text" onkeyup="gen(this.value)">
+  <input type="text" onkeyup="gen(this.value)" placeholder="输入任意内容自动生成二维码">
   <pre></pre>
   <script src='qrcode.min.js'></script>
   <script>
   var pre = document.getElementsByTagName('pre')[0]
+  gen('Hello World!')
 
   function gen(str) {
     var q = qrcodelib.create(str)
