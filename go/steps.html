@@ -26,7 +26,7 @@
 </head>
 <body>
   <p>
-    分步落子<a href="steps.html">点此</a>
+    自动落子<a href="index.html">点此</a>
     查看源码有惊喜……
   </p>
   <span>上传棋谱 sgf 文件：</span>
@@ -47,6 +47,7 @@
   </pre>
   <button onclick='alphago()'>load Google Deepmind Challenge Match #5</button>
   <hr>
+  <div id="butts"></div>
   <!-- <button onclick='step()'>step</button> -->
   <script type="text/javascript">
     var boardArr, game, timeouts
@@ -55,11 +56,35 @@
       B: '●'
     }
     // var index = 0
+    var steps = []
     var width = 19
     var reg = /[BW]\[([a-s]{2})\]/gi
+    var butts = document.getElementById('butts')
     var board = document.getElementById('board')
     window.onload = clear
 
+  function createSteps(s) { // s 是棋谱文件字符串
+    butts.innerHTML = ''
+    var game = read(s) // 包含了每一步落子的位置和颜色
+    for (let i = 0; i < game.length; i++) {
+      boardArr[game[i][1]][game[i][0]] = game[i][2]
+      if (game[i][2] === colors['B']) {
+        removeDead(colors['W'])
+      } else {
+        removeDead(colors['B'])
+      }
+      steps.push(flatten(boardArr).join(''))
+      var butt = document.createElement('button')
+      butt.innerText = i + 1
+      butt.onclick = function () {
+        getStep(i)
+      }
+      butts.appendChild(butt)
+    }
+    function getStep (n) {
+      board.innerText = steps[n]
+    }
+  }
   function clear () {
       if (timeouts) {
         for (let i = 0; i < timeouts.length; i++) {
@@ -135,14 +160,15 @@
       return game
     }
     function start (s) {
-      timeouts = []
-      var delay = 500
-      for (let i = 0; i < game.length; i++) {
-        var t = setTimeout(function () {
-          draw(game[i])
-        }, i * delay)
-        timeouts.push(t)
-      }
+      createSteps(s)
+      // timeouts = []
+      // var delay = 500
+      // for (let i = 0; i < game.length; i++) {
+      //   var t = setTimeout(function () {
+      //     draw(game[i])
+      //   }, i * delay)
+      //   timeouts.push(t)
+      // }
     }
     function readText (files) {
       clear()
