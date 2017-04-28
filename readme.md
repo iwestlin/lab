@@ -1,3 +1,3 @@
 Lab for Web
 ---
-http://iwestlin.github.io/lab/
+https://iwestlin.github.io/lab/

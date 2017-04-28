@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+  body {
+    text-align: center;
+    white-space: nowrap;
+    background-color: #ffd;
+  }
+  
+  #grid {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  
+  #translationText {
+    line-height: 130px;
+    font-size: 2em;
+    width: 290px;
+    height: 130px;
+    position: absolute;
+    top: 10px;
+    right: 0;
+  }
+  #result {
+    font-size: 2em;
+    border: 1px dashed;
+    width: 390px;
+    padding: 15px 5px;
+    margin: 0 auto;
+  }
+  button {
+    margin: 10px;
+    font-size: 1.5em;
+  }
+  .container {
+    position: relative;
+    width: 400px;
+    height: 150px;
+    margin: 0 auto;
+    border: 1px dashed;
+  }
+  </style>
+</head>
+
+<body>
+  <h1>Braille Translator</h1>
+  <div class="container">
+    <div id="grid">
+      <div id="row1">
+        <img src="dot.png" alt="dot1" id="dot1" style="width:10px;height:10px;opacity: .2;">
+        <img src="dot.png" alt="dot2" id="dot2" style="width:10px;height:10px;opacity: .2;">
+      </div>
+      <div id="row2">
+        <img src="dot.png" alt="dot3" id="dot3" style="width:10px;height:10px;opacity: .2;">
+        <img src="dot.png" alt="dot4" id="dot4" style="width:10px;height:10px;opacity: .2;">
+      </div>
+      <div id="row3">
+        <img src="dot.png" alt="dot5" id="dot5" style="width:10px;height:10px;opacity: .2;">
+        <img src="dot.png" alt="dot6" id="dot6" style="width:10px;height:10px;opacity: .2;">
+      </div>
+    </div>
+    <div id="translationText">Click the Dots</div>
+  </div>
+  <button id="sel">select</button>
+  <button id="cle">clear</button>
+  <div id="result"></div>
+  <div id="info">
+    <p>
+      Forked from <a href="https://github.com/RaubCamaioni/BrailleTranslator">BrailleTranslator</a>
+    </p>
+  </div>
+  <script>
+  var tt = document.getElementById('translationText')
+  var sel = document.getElementById('sel')
+  var cle = document.getElementById('cle')
+  var result = document.getElementById('result')
+  sel.onclick = function () {
+    result.innerText += ' ' + tt.innerText
+  }
+  cle.onclick = function () {
+    result.innerText = ''
+  }
+  var DOTWIDTH = '50px'
+  var DOTHEIGHT = '50px'
+  var dots = [] // Populated in for loop, dots objects (images)
+  /*
+   *  Dots layout
+   *  The weights of the dots are binary, 2^(# of dot).
+   *  This is used to index array.
+   *  (5) (4)
+   *  (3) (2)
+   *  (1) (0)
+   */
+  var brailleToAlph = [
+    '(space)', // 00
+    '(uppercase prefix)', // 01
+    "'", // 02
+    '-', // 03
+
+    '(contraction)', // 04
+    '(letter prefix)', // 05
+    'in', // 06
+    '"', // 07
+
+    ',', // 08
+    'en', // 09
+    ';', // 0A
+    '" or ?', // 0B
+
+    ':', // 0C
+    '.', // 0D
+    '!', // 0E
+    '(or)', // 0F
+
+    '(accent prefix)', // 10
+    '(italic prefix)', // 11
+    'st', // 12
+    'ing', // 13
+
+    '(currency prefix)', // 14
+    '(contraction)', // 15
+    'ar', // 16
+    '(number prefix)', // 17
+
+    'i', // 18
+    'ow', // 19
+    's', // 1A
+    'the', // 1B
+
+    'j', // 1C
+    'w', // 1D
+    't', // 1E
+    'with', // 1F
+
+    'a', // 20
+    'ch', // 21
+    'k', // 22
+    'u', // 23
+
+    'e', // 24
+    'wh', // 25
+    'o', // 26
+    'z', // 27
+
+    'b', // 28
+    'gh', // 29
+    'l', // 2A
+    'v', // 2B
+
+    'h', // 2C
+    'ou', // 2D
+    'r', // 2E
+    'of', // 2F
+
+    'c', // 30
+    'sh', // 31
+    'm', // 32
+    'x', // 33
+
+    'd', // 34
+    'th', // 35
+    'n', // 36
+    'y', // 37
+
+    'f', // 38
+    'ed', // 39
+    'p', // 3A
+    'and', // 3B
+
+    'g', // 3C
+    'er', // 3D
+    'q', // 3E
+    'for', // 3F
+
+    '?', // 40
+    '?', // 41
+    '?', // 42
+    '?', // 43
+
+    '?', // 44
+    '?', // 45
+    '?', // 46
+    '?', // 47
+
+    '?', // 48
+    '?', // 49
+    '?', // 4A
+    '?', // 4B
+
+    '?', // 4C
+    '?', // 4D
+    '?', // 4E
+    '?', // 4F
+
+    '?', // 50
+    '?', // 51
+    '?', // 52
+    '?', // 53
+
+    '?', // 54
+    '?', // 55
+    '?', // 56
+    '?', // 57
+
+    '?', // 58
+    '?', // 59
+    '?', // 5A
+    '?', // 5B
+
+    '?', // 5C
+    '?', // 5D
+    '?', // 5E
+    '?' // 5F
+  ]
+
+  function imgClick () {
+    if (this.style.opacity === '1') {
+      this.style.opacity = '0.2'
+    } else {
+      this.style.opacity = '1'
+    }
+    tt.innerHTML = brailleToAlph[brailleIndex()].toUpperCase()
+  }
+
+  function brailleIndex () {
+    var index = 0
+    for (let i = 0; i < dots.length; i++) {
+      if (dots[i].style.opacity === '1') {
+        index += Math.pow(2, dots.length - 1 - i)
+      }
+    }
+    return index
+  }
+
+  function constructor () {
+    for (let i = 1; i < 7; i++) {
+      var dotIndex = 'dot' + i
+      var dotObject = document.getElementById(dotIndex) // adds each dot to the dots[] array
+      dots[dots.length] = dotObject
+      dotObject.onclick = imgClick // adds the onclick function to each dot
+      if (dotObject && dotObject.style) { // change the dots width, the check is not really needed.
+        dotObject.style.width = DOTHEIGHT
+        dotObject.style.height = DOTWIDTH
+      }
+    }
+
+    document.getElementById('row1').style.height = DOTHEIGHT
+    document.getElementById('row2').style.height = DOTHEIGHT
+    document.getElementById('row3').style.height = DOTHEIGHT
+  }
+  constructor()
+  </script>
+</body>
+
+</html>

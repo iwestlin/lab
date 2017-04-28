@@ -1,0 +1,62 @@
+<!-- code from https://yijuanzhaopian.com/arhb/ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>支付宝AR红包在线去黑线</title>
+  <style type="text/css">
+  html,
+  body {
+    width: 60%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  </style>
+</head>
+
+<body>
+  <div style="position: absolute;z-index: 10px;">
+    <input type="file" id="getfileinput">
+    <div>用↑↓调整图片。</div>
+  </div>
+  <div id="checkimg" style="position: relative;top:50px;height: 900px;width:450px;overflow: hidden;background-size: contain;background-repeat:no-repeat;">
+    <img style="position: absolute;left:0;top:-200px;mix-blend-mode: screen;" src="" width="450">
+  </div>
+  <script type="text/javascript">
+  var obj = document.querySelector('#checkimg'),
+    oimg = obj.querySelector('img'),
+    bgposy = 0;
+  // 加载图片
+  document.querySelector('#getfileinput').addEventListener('change', function() {
+    // console.log('change');
+    var that = this,
+      filereader;
+    if (that.files.length > 0) {
+      filereader = new FileReader();
+      filereader.onload = function(e) {
+        oimg.src = this.result;
+        obj.style.backgroundImage = 'url(' + this.result + ')';
+        oimg.style.top = (bgposy + 3) + "px";
+      };
+      filereader.readAsDataURL(that.files[0]);
+
+    }
+  }, false);
+
+  // 调整
+  document.addEventListener('keydown', function(e) {
+    e.stopPropagation();
+    switch (e.keyCode) {
+      case 38: //上
+        ++bgposy;
+        break;
+      case 40: //下
+        bgposy = bgposy = 0 ? 0 : --bgposy;
+        break;
+    }
+    // console.log(bgposy);
+    oimg.style.top = bgposy + "px";
+  }, false);
+  </script>

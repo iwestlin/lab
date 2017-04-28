@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>将 JavaScript 代码转化为浏览器书签</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    #js {
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+<div>注意，目前不能转化省略了分号的 JavaScript 代码</div>
+<button onclick="trans()">转化</button>
+<span>输入需要执行的代码，点击转化按钮后，将此链接拖入浏览器书签：</span>
+<a href="" id="result">run js</a>
+<br>
+<textarea name="" id="js" cols="70" rows="30"></textarea>
+<script src='jsmin.js'></script>
+<script type="text/javascript">
+  var js = document.getElementById('js')
+  var result = document.getElementById('result')
+  function trans () {
+    var input = jsmin('', js.value, 3).slice(1)
+    result.href = 'javascript:(function()%7B' + encodeURIComponent(input) + '%7D)()'
+  }
+</script>
+</body>
+</html>

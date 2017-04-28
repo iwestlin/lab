@@ -113,11 +113,12 @@
     function draw (position) { // [16, 3, '●']
       boardArr[position[1]][position[0]] = position[2]
       // boardArr[position[1]][position[0]] = '<span>' + position[2] + '</span>'
-      // 隐含 bug: 如果自填活眼，不会处理
       if (position[2] === colors['B']) {
         removeDead(colors['W'])
+        removeDead(colors['B'])
       } else {
         removeDead(colors['B'])
+        removeDead(colors['W'])
       }
       board.innerText = flatten(boardArr).join('')
       // board.innerHTML = flatten(boardArr).join('')
