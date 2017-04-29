@@ -5,6 +5,11 @@
   <title>Unicode QRcode</title>
   <meta charset="utf-8">
   <style type="text/css">
+  @font-face {
+    font-family: "qrcode";
+    src: url("a.woff") format("woff"), /* chrome, firefox */
+    url("a.ttf") format("truetype"); /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  }
   body {
     width: 400px;
     margin: 0 auto;
@@ -17,7 +22,7 @@
   }
   
   pre {
-    font-family: 'Courier New';
+    font-family: 'qrcode';
     font-size: 1.5em;
   }
   </style>
