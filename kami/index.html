@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kami - 神之折纸</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    width: 621px;
+    position: relative;
+    margin: auto;
+    text-align: center;
+  }
+  hr {
+    margin: 10px 0px;
+  }
+  #board {
+    width: 521px;
+    line-height: 0em;
+  }
+  #selects {
+    position: absolute;
+    right: 0;
+  }
+  #selects div {
+    width: 100px;
+    min-height: 150px;
+    position: relative;
+  }
+  #selects .selected:after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border-top: 15px solid white;
+    border-right: 15px solid white;
+    border-bottom: 15px solid #F9CC9D;
+    border-left: 15px solid #F9CC9D;
+    /*box-sizing: border-box;*/
+  }
+  .tile {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 1px dashed #ddd;
+    transition: 0.5s;
+  }
+  #chooseLevel button {
+    margin: 4px;
+    width: 50px;
+    height: 30px;
+  }
+  .tile:hover, button:hover, #selects div:hover {
+    cursor: pointer;
+  }
+  </style>
+</head>
+<body>
+<h1>Kami - Game <span id="levels"></span></h1>
+<p>
+  完美步数：<span id="ps"></span>
+  <span>&nbsp;&nbsp;|&nbsp;&nbsp; </span>
+  已用步数：<span id="us">0</span>
+</p>
+<div id="selects"></div>
+<div id="board"></div>
+<hr>
+<div id="chooseLevel">
+  <span>选关：</span>
+  <button>1</button>
+  <button>2</button>
+  <button>3</button>
+  <button>4</button>
+  <button>5</button>
+  <button>6</button>
+  <button>7</button>
+  <button>8</button>
+  <button>9</button>
+</div>
+
+<script type="text/javascript">
+  var gameArr
+  var selectedColor = ''
+  var usedSteps = 0
+  var width = 10
+  var height = 16
+  var colors = [
+    '#6AC6AF', // blue
+    '#D74A41', // red
+    '#332814', // brown
+    '#E66939', // orange
+    '#8D9A80'  // gray
+  ]
+
+  level = 5
+  prefectSteps = 5
+  gameStr = '0001101100001100011001100200111100222001100220220010220102201002202200110022200101100200110011000110000110110020001110002200010002022000002200220002200002202200'
+
+  var board = document.getElementById('board')
+  var us = document.getElementById('us')
+  var ps = document.getElementById('ps')
+  var levels = document.getElementById('levels')
+  var selects = document.getElementById('selects')
+
+  window.onload = function () {
+    var butts = document.querySelectorAll('#chooseLevel button')
+    for (let i = 0; i < butts.length; i++) {
+      butts[i].onclick = function () {
+        load(butts[i].innerText)
+        // console.log(this.innerText)
+      }
+    }
+    init()
+  }
+
+  function init () {
+    selectedColor = ''
+    levels.innerText = level
+    ps.innerText = prefectSteps
+    usedSteps = 0
+    us.innerText = usedSteps
+    gameArr = createBoardArray(gameStr)
+    createBoard(gameArr)
+    createSelects(gameStr)
+  }
+
+  function load (n) {
+    if (arguments.length) {
+      var src = 'levels/' + n + '.js'
+      var script = document.createElement('script')
+      script.src = src
+      script.onload = function () {
+        // console.log('loaded!')
+        init()
+      }
+      document.body.appendChild(script)
+    }
+  }
+
+  function createSelects (s) {
+    selects.innerHTML = ''
+    s = new Set(s)
+    s = Array.from(s)
+    var h = parseInt(getComputedStyle(board).height) / s.length + 'px'
+    for (let i = 0; i < s.length; i++) {
+      var elem = document.createElement('div')
+      elem.setAttribute('data-color', s[i])
+      elem.style.backgroundColor = colors[parseInt(s[i])]
+      elem.style.height = h
+      elem.onclick = function () {
+        selectedColor = parseInt(this.dataset.color)
+        var ss = document.getElementsByClassName('selected')
+        for (let i = 0; i < ss.length; i++) {
+          ss[i].className = ''
+        }
+        this.className = 'selected'
+      }
+      selects.appendChild(elem)
+    }
+  }
+
+  function createBoardArray (game) {
+    var r = []
+    for (let i = 0; i < height; i++) {
+      var temp = []
+      for (let j = 0; j < width; j++) {
+        temp.push(parseInt(game[i * width + j]))
+      }
+      r.push(temp)
+    }
+    return r
+  }
+
+  function createBoard (arr) {
+    board.innerHTML = ''
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = 0; j < arr[i].length; j++) {
+        var elem = document.createElement('div')
+        elem.setAttribute('class', 'tile')
+        elem.setAttribute('id', i + '-' + j)
+        elem.style.backgroundColor = colors[arr[i][j]]
+        elem.onclick = function () {
+          if (selectedColor === '') { return }
+          changeColor(i, j, colors[selectedColor])
+          usedSteps++
+          us.innerText = usedSteps
+          if (isDone(gameArr)) {
+            setTimeout(function () {
+              // console.log('Done')
+              if (usedSteps <= prefectSteps) {
+                alert('Prefect!')
+              } else if (usedSteps - prefectSteps < 3) {
+                alert('OK')
+              } else {
+                alert('Just so so')
+              }
+            }, 2000)
+          }
+        }
+        board.appendChild(elem)
+      }
+    }
+  }
+
+  function getGroup(arr, x, y, color) {
+    var result = []
+    var checked = []
+    var type = arr[x][y]
+    connect(x, y)
+    // var index = 0
+    var delay = 100
+    var changed = [x + '-' + y]
+    change(x, y)
+    return result
+
+    function connect (x, y) {
+      var str = x + '-' + y
+      if (checked.indexOf(str) < 0) {
+        checked.push(str)
+        result.push([x, y])
+        if (arr[x - 1] && arr[x - 1][y] === type) {
+          connect(x - 1, y)
+        }
+        if (arr[x + 1] && arr[x + 1][y] === type) {
+          connect(x + 1, y)
+        }
+        if (arr[x][y - 1] === type) {
+          connect(x, y - 1)
+        }
+        if (arr[x][y + 1] === type) {
+          connect(x, y + 1)
+        }
+      }
+    }
+    function change (x, y) {
+      var id = x + '-' + y
+      // changed.push(id)
+      document.getElementById(id).style.backgroundColor = color
+      var shang = (x - 1) + '-' + y
+      if (checked.indexOf(shang) >= 0 && changed.indexOf(shang) < 0) {
+        changed.push(shang)
+        setTimeout(function () {
+          change(x - 1, y)
+        }, delay)
+      }
+      var xia = (x + 1) + '-' + y
+      if (checked.indexOf(xia) >= 0 && changed.indexOf(xia) < 0) {
+        changed.push(xia)
+        setTimeout(function () {
+          change(x + 1, y)
+        }, delay)
+      }
+      var zuo = x + '-' + (y - 1)
+      if (checked.indexOf(zuo) >= 0 && changed.indexOf(zuo) < 0) {
+        changed.push(zuo)
+        setTimeout(function () {
+          change(x, y - 1)
+        }, delay)
+      }
+      var you = x + '-' + (y + 1)
+      if (checked.indexOf(you) >= 0 && changed.indexOf(you) < 0) {
+        changed.push(you)
+        setTimeout(function () {
+          change(x, y + 1)
+        }, delay)
+      }
+    }
+  }
+
+  function changeColor (x, y, color) {
+    var c = color
+    var groups = getGroup(gameArr, x, y, color)
+    for (let i = 0; i < groups.length; i++) {
+      gameArr[groups[i][0]][groups[i][1]] = colors.indexOf(c)
+      // var id = groups[i][0] + '-' + groups[i][1]
+      // document.getElementById(id).style.backgroundColor = color
+    }
+  }
+
+  function isDone (arr) {
+    arr = Array.prototype.concat.apply([], arr)
+    for (let i = 0; i < arr.length - 1; i++) {
+      if (arr[i] !== arr[i + 1]) {
+        return false
+      }
+    }
+    return true
+  }
+</script>
+</body>
+</html>

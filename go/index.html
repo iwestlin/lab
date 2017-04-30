@@ -195,25 +195,25 @@
             if (boardArr[x - 1] && boardArr[x - 1][y] === type) {
               connect(x - 1, y)
             }
-             if (boardArr[x + 1] && boardArr[x + 1][y] === type) {
+            if (boardArr[x + 1] && boardArr[x + 1][y] === type) {
               connect(x + 1, y)
             }
-             if (boardArr[x][y - 1] === type) {
+            if (boardArr[x][y - 1] === type) {
               connect(x, y - 1)
             }
-             if (boardArr[x][y + 1] === type) {
+            if (boardArr[x][y + 1] === type) {
               connect(x, y + 1)
             }
           }
         }
         connect(x, y)
         result.push(temp)
-        // checked.push(x + '-' + y)
       }
       for (let i = 0; i < boardArr.length; i++) {
         for (let j = 0; j < boardArr[i].length; j++) {
           if (checked.indexOf(i + '-' + j) < 0 && boardArr[i][j] === type) {
-            getGroup(i, j) // 把与 (i, j) 相连接的棋子放入同一个数组中，将此数组 push 进 result，将这些棋子标记为 chekced
+            getGroup(i, j)
+            // 把与 (i, j) 相连接的棋子放入同一个数组中，将此数组 push 进 result，将这些棋子标记为 chekced
           }
         }
       }
