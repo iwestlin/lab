@@ -9,7 +9,7 @@
     padding: 0;
   }
   body {
-    width: 621px;
+    width: 600px;
     position: relative;
     margin: auto;
     text-align: center;
@@ -18,7 +18,7 @@
     margin: 10px 0px;
   }
   #board {
-    width: 521px;
+    width: 500px;
     line-height: 0em;
   }
   #selects {
@@ -39,7 +39,6 @@
     border-right: 15px solid white;
     border-bottom: 15px solid #F9CC9D;
     border-left: 15px solid #F9CC9D;
-    /*box-sizing: border-box;*/
   }
   .tile {
     display: inline-block;
@@ -47,9 +46,10 @@
     height: 50px;
     border: 1px dashed #ddd;
     transition: 0.5s;
+    box-sizing: border-box;
   }
   #chooseLevel button {
-    margin: 4px;
+    margin: 3px;
     width: 50px;
     height: 30px;
   }
@@ -70,19 +70,10 @@
 <hr>
 <div id="chooseLevel">
   <span>选关：</span>
-  <button>1</button>
-  <button>2</button>
-  <button>3</button>
-  <button>4</button>
-  <button>5</button>
-  <button>6</button>
-  <button>7</button>
-  <button>8</button>
-  <button>9</button>
 </div>
 
 <script type="text/javascript">
-  var gameArr
+  var gameArr, level, prefectSteps, gameStr
   var selectedColor = ''
   var usedSteps = 0
   var width = 10
@@ -94,50 +85,37 @@
     '#E66939', // orange
     '#8D9A80'  // gray
   ]
-
-  level = 5
-  prefectSteps = 5
-  gameStr = '0001101100001100011001100200111100222001100220220010220102201002202200110022200101100200110011000110000110110020001110002200010002022000002200220002200002202200'
-
   var board = document.getElementById('board')
   var us = document.getElementById('us')
   var ps = document.getElementById('ps')
   var levels = document.getElementById('levels')
   var selects = document.getElementById('selects')
+  var choose = document.getElementById('chooseLevel')
 
   window.onload = function () {
-    var butts = document.querySelectorAll('#chooseLevel button')
-    for (let i = 0; i < butts.length; i++) {
-      butts[i].onclick = function () {
-        load(butts[i].innerText)
-        // console.log(this.innerText)
+    for (let i = 0; i < levelsData.length; i++) {
+      var butt = document.createElement('button')
+      butt.innerText = i + 1
+      butt.onclick = function () {
+        init(i)
       }
+      choose.appendChild(butt)
     }
-    init()
+    init(4)
   }
 
-  function init () {
+  function init (n) {
     selectedColor = ''
+    usedSteps = 0
+    level = levelsData[n].level
+    prefectSteps = levelsData[n].prefectSteps
+    gameStr = levelsData[n].gameStr
     levels.innerText = level
     ps.innerText = prefectSteps
-    usedSteps = 0
     us.innerText = usedSteps
     gameArr = createBoardArray(gameStr)
     createBoard(gameArr)
     createSelects(gameStr)
-  }
-
-  function load (n) {
-    if (arguments.length) {
-      var src = 'levels/' + n + '.js'
-      var script = document.createElement('script')
-      script.src = src
-      script.onload = function () {
-        // console.log('loaded!')
-        init()
-      }
-      document.body.appendChild(script)
-    }
   }
 
   function createSelects (s) {
@@ -189,7 +167,6 @@
           us.innerText = usedSteps
           if (isDone(gameArr)) {
             setTimeout(function () {
-              // console.log('Done')
               if (usedSteps <= prefectSteps) {
                 alert('Prefect!')
               } else if (usedSteps - prefectSteps < 3) {
@@ -205,12 +182,11 @@
     }
   }
 
-  function getGroup(arr, x, y, color) {
+  function getGroup (arr, x, y, color) {
     var result = []
     var checked = []
     var type = arr[x][y]
     connect(x, y)
-    // var index = 0
     var delay = 100
     var changed = [x + '-' + y]
     change(x, y)
@@ -237,7 +213,6 @@
     }
     function change (x, y) {
       var id = x + '-' + y
-      // changed.push(id)
       document.getElementById(id).style.backgroundColor = color
       var shang = (x - 1) + '-' + y
       if (checked.indexOf(shang) >= 0 && changed.indexOf(shang) < 0) {
@@ -275,8 +250,6 @@
     var groups = getGroup(gameArr, x, y, color)
     for (let i = 0; i < groups.length; i++) {
       gameArr[groups[i][0]][groups[i][1]] = colors.indexOf(c)
-      // var id = groups[i][0] + '-' + groups[i][1]
-      // document.getElementById(id).style.backgroundColor = color
     }
   }
 
@@ -289,6 +262,53 @@
     }
     return true
   }
+  var levelsData = [
+    {
+      level: 1,
+      prefectSteps: 1,
+      gameStr: '1111111111111111111111111111111111111111111111111111111111111111111111111111111122222222222222222222222222222222222222222222222222222222222222222222222222222222'
+    },
+    {
+      level: 2,
+      prefectSteps: 1,
+      gameStr: '0000000000000000000000000000000011111100001111110000111111000011111100001111110000111111000011111100001111110000111111000011111100000000000000000000000000000000'
+    },
+    {
+      level: 3,
+      prefectSteps: 2,
+      gameStr: '0000000000000000000000000000000011111100001111110000111111000022222200002222220000222222000022222200001111110000111111000011111100000000000000000000000000000000'
+    },
+    {
+      level: 4,
+      prefectSteps: 3,
+      gameStr: '0000000000000000000022222222222000000002201111110220122221022012112102201211210220121121022012112102201222210220111111022000000002222222222200000000000000000000'
+    },
+    {
+      level: 5,
+      prefectSteps: 5,
+      gameStr: '0001101100001100011001100200111100222001100220220010220102201002202200110022200101100200110011000110000110110020001110002200010002022000002200220002200002202200'
+    },
+    {
+      level: 6,
+      prefectSteps: 3,
+      gameStr: '1100022200110002220011000222001100022222100002112212211211221221121122122112222210011222222201121100220112110022011211002110020011211002001121100200112222220011'
+    },
+    {
+      level: 7,
+      prefectSteps: 4,
+      gameStr: '0000000000000000000000000000000001111111000111111100011222220001122222000112200000011220000001122000000112200022022110112202211011222000011122222111112222211111'
+    },
+    {
+      level: 8,
+      prefectSteps: 4,
+      gameStr: '0000000000222222222211111111111111111111222222222200000000000110110110011011011000000000002222222222222222222200000000000000000000000000000011111111111111111111'
+    },
+    {
+      level: 9,
+      prefectSteps: 4,
+      gameStr: '2222222222200200000220020222022222021202222202220222220000022222222222222222222221111111122122222212212111121221210012122121111212212222221221111111122222222222'
+    }
+  ]
 </script>
 </body>
 </html>
