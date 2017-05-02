@@ -3,12 +3,15 @@
 <head>
   <title>音乐可视化</title>
   <style type="text/css">
+  * {
+    margin: 0;
+  }
   body {
     text-align: center;
   }
   
   canvas {
-    margin: 10px;
+    /*margin: 10px;*/
   }
   </style>
 </head>
@@ -102,8 +105,12 @@
     var fragCanvas = document.createElement('canvas')
     document.body.appendChild(fragCanvas)
       // fragCanvas.width = fragCanvas.parentNode.offsetWidth
-    fragCanvas.width = 450
-    fragCanvas.height = fragCanvas.width * 0.75
+    fragCanvas.width = document.body.clientWidth
+    // fragCanvas.width = window.screen.width
+    // fragCanvas.width = 450
+    fragCanvas.height = document.body.clientHeight
+    // fragCanvas.height = window.screen.height
+    // fragCanvas.height = fragCanvas.width * 0.75
     const gl = fragCanvas.getContext('webgl') || fragCanvas.getContext('experimental-webgl')
       // const vertexShaderSrc = document.getElementById('vertex-shader').textContent
     const vertexShaderSrc = 'attribute vec2 position; void main(void) {gl_Position = vec4(position, 0, 1);}'
