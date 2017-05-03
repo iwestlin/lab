@@ -9,11 +9,6 @@
   body {
     text-align: center;
   }
-  
-  canvas {
-    /*margin: 10px;*/
-    border-bottom: 1px solid white;
-  }
   </style>
 </head>
 
@@ -105,7 +100,7 @@
       // const fragCanvas = document.getElementById('fragment')
     var fragCanvas = document.createElement('canvas')
     document.body.appendChild(fragCanvas)
-      // fragCanvas.width = fragCanvas.parentNode.offsetWidth
+    // fragCanvas.width = fragCanvas.parentNode.offsetWidth
     fragCanvas.width = document.body.clientWidth
     // fragCanvas.width = window.screen.width
     // fragCanvas.width = 450
@@ -140,8 +135,7 @@
     const fragSpectrum = createTexture(gl)
     initQuad(gl)
 
-    ;
-    (function renderFragment () {
+    ;(function renderFragment () {
       requestAnimationFrame(renderFragment)
       gl.uniform1f(fragTime, audioContext.currentTime)
       copyAudioDataToTexture(gl, spectrum, fragSpectrumArray)
@@ -158,6 +152,8 @@
       }
       songPlaying = !songPlaying
     }
+
+    document.body.scrollTop = document.documentElement.offsetHeight
   }
   </script>
 </body>
