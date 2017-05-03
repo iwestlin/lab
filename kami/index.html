@@ -74,7 +74,7 @@
 </div>
 
 <script type="text/javascript">
-  var gameArr, level, prefectSteps, gameStr
+  var gameArr, level, prefectSteps, gameStr, tiles
   var selectedColor = ''
   var usedSteps = 0
   var width = 10
@@ -117,6 +117,13 @@
     gameArr = createBoardArray(gameStr)
     createBoard(gameArr)
     createSelects(gameStr)
+    tiles = []
+    for (let i = 0; i < height; i++) {
+      for (let j = 0; j < width; j++) {
+        let id = i + '-' + j
+        tiles[id] = document.getElementById(id)
+      }
+    }
   }
 
   function createSelects (s) {
@@ -214,7 +221,8 @@
     }
     function change (x, y) {
       var id = x + '-' + y
-      document.getElementById(id).style.backgroundColor = color
+      // document.getElementById(id).style.backgroundColor = color
+      tiles[id].style.backgroundColor = color
       var shang = (x - 1) + '-' + y
       if (checked.indexOf(shang) >= 0 && changed.indexOf(shang) < 0) {
         changed.push(shang)
