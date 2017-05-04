@@ -174,6 +174,7 @@
           usedSteps++
           us.innerText = usedSteps
           if (isDone(gameArr)) {
+            doneWithClick()
             setTimeout(function () {
               if (usedSteps <= prefectSteps) {
                 alert('Prefect!')
@@ -271,6 +272,15 @@
     }
     return true
   }
+
+  function doneWithClick () {
+    for (let i = 0; i < height; i++) {
+      for (let j = 0; j < width; j++) {
+        tiles[i + '-' + j].onclick = ''
+      }
+    }
+  }
+
   var levelsData = [
     {
       level: 1,
