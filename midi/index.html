@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style type="text/css">
+  body {
+    text-align: center;
+  }
+  button {
+    width: 140px;
+    height: 70px;
+    border-radius: 10px;
+    margin: 10px;
+    font-size: 2em;
+    background-color: #ccc;
+  }
+  button:hover {
+    cursor: pointer;
+  }
+  </style>
+  <!-- polyfill -->
+  <script src="./inc/shim/Base64.js"></script>
+  <script src="./inc/shim/Base64binary.js"></script>
+  <script src="./inc/shim/WebAudioAPI.js"></script>
+  <script src="./inc/shim/WebMIDIAPI.js"></script>
+  <!-- jasmid package -->
+  <script src="./inc/jasmid/stream.js"></script>
+  <script src="./inc/jasmid/midifile.js"></script>
+  <script src="./inc/jasmid/replayer.js"></script>
+  <!-- midi.js package -->
+  <script src="./js/midi/audioDetect.js"></script>
+  <script src="./js/midi/gm.js"></script>
+  <script src="./js/midi/loader.js"></script>
+  <script src="./js/midi/plugin.audiotag.js"></script>
+  <script src="./js/midi/plugin.webaudio.js"></script>
+  <script src="./js/midi/plugin.webmidi.js"></script>
+  <script src="./js/midi/player.js"></script>
+  <script src="./js/midi/synesthesia.js"></script>
+  <!-- utils -->
+  <script src="./js/util/dom_request_xhr.js"></script>
+  <script src="./js/util/dom_request_script.js"></script>
+</head>
+
+<body>
+  <p>code from <a href="https://github.com/mudcube/MIDI.js">here</a></p>
+	<span>下载测试 MIDI 文件：</span>	
+	<a href="test.mid">test.mid</a>
+	<hr>
+	<span>上传 .mid 文件在线播放： </span>
+  <input type="file" id="music" onchange="play(this)">
+  <script type="text/javascript">
+  function play (env) {
+    var file = env.files[0]
+    var url = URL.createObjectURL(file)
+    playFromUrl(url)
+    var pause = document.createElement('button')
+    pause.innerText = 'pause'
+
+    pause.onclick = function () {
+      if (MIDI.Player.playing) {
+        MIDI.Player.pause()
+        pause.innerText = 'Play'
+      } else {
+        MIDI.Player.resume()
+        pause.innerText = 'Pause'
+      }
+    }
+    document.body.appendChild(pause)
+  }
+
+  function playFromUrl (url) {
+    MIDI.loadPlugin({
+      soundfontUrl: "./soundfont/",
+      onsuccess: function () {
+        MIDI.Player.loadFile(url, function() {
+          MIDI.Player.start()
+        })
+      }
+    })
+  }
+  </script>
+</body>
+
+</html>
