@@ -48,7 +48,7 @@
 	<span>下载测试 MIDI 文件：</span>	
 	<a href="test.mid">test.mid</a>
 	<hr>
-	<span>上传 .mid 文件在线播放： </span>
+	<span>上传 .mid 文件在线播放(钢琴音)：</span>
   <input type="file" id="music" onchange="play(this)">
   <script type="text/javascript">
   function play (env) {
@@ -72,7 +72,8 @@
 
   function playFromUrl (url) {
     MIDI.loadPlugin({
-      soundfontUrl: "./soundfont/",
+      // soundfontUrl: './soundfont/',
+      soundfontUrl: 'http://js007-1253509220.costj.myqcloud.com/soundfont/',
       onsuccess: function () {
         MIDI.Player.loadFile(url, function() {
           MIDI.Player.start()
@@ -81,6 +82,7 @@
     })
   }
   </script>
+  <script src="http://js007-1253509220.costj.myqcloud.com/soundfont/acoustic_grand_piano-ogg.js"></script>
 </body>
 
 </html>
