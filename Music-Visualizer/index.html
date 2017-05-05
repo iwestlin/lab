@@ -19,9 +19,9 @@
   <button onclick="playFromSrc()">Play BeautifulSoup.mp3</button>
   <input type="file" id="file" onchange="playme()">
   <hr>
-  <audio id="audio">
-    <source src="BeautifulSoup.mp3" type="audio/mpeg">
-    <!-- <source src="//js007-1253509220.costj.myqcloud.com/BeautifulSoup.mp3" type="audio/mpeg" crossOrigin="anonymous"> --><!-- not work because of cors  -->
+  <audio id="audio" src="//js007-1253509220.costj.myqcloud.com/BeautifulSoup.mp3" crossOrigin="anonymous">
+    <!-- <source src="BeautifulSoup.mp3" type="audio/mpeg"> -->
+    <!-- <source src="//js007-1253509220.costj.myqcloud.com/BeautifulSoup.mp3" type="audio/mpeg" crossOrigin="anonymous"> -->
   </audio>
   <script>
   function playme () {
@@ -95,7 +95,7 @@
     } else {
       song = document.getElementById('audio')
     }
-    song.crossOrigin = 'anonymous'
+    // song.crossOrigin = 'anonymous'
     const songSource = audioContext.createMediaElementSource(song)
     songSource.connect(masterGain)
       // const fragCanvas = document.getElementById('fragment')
