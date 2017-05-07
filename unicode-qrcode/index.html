@@ -7,8 +7,8 @@
   <style type="text/css">
   @font-face {
     font-family: "qrcode";
-    src: url("a.woff") format("woff"), /* chrome, firefox */
-    url("a.ttf") format("truetype"); /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+    src: url("a.woff") format("woff"),
+    url("a.ttf") format("truetype");
   }
   body {
     width: 400px;
@@ -23,7 +23,7 @@
   
   pre {
     font-family: 'qrcode', monospace;
-    font-size: 1.5em;
+    font-size: 1.4em;
     line-height: 1.2em;
   }
   </style>
@@ -35,18 +35,15 @@
   <script src='qrcode.min.js'></script>
   <script>
   var pre = document.getElementsByTagName('pre')[0]
-  gen('Hello World!')
+  gen('https://code.viegg.com/unicode-qrcode/')
 
-  function gen(str) {
-    var q = qrcodelib.create(str)
-    var s = q.modules.data.toString()
-    s = s.split(',')
+  function gen (str) {
+    var s = qrcodelib.create(str)
+    s = s.modules.data.join('')
     var width = Math.round(Math.sqrt(s.length))
     var matrix = []
-    for (let i = 0; i < width; i++) {
+    for (let i = 0, index = 0; i < width; i++) {
       matrix[i] = []
-    }
-    for (let i = 0, index = 0; i < matrix.length; i++) {
       for (let j = 0; j < width; j++) {
         matrix[i][j] = parseInt(s[index])
         index++
