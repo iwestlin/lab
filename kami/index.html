@@ -77,8 +77,8 @@
   var gameArr, level, prefectSteps, gameStr, tiles
   var selectedColor = ''
   var usedSteps = 0
-  var width = 10
-  var height = 16
+  var WIDTH = 10
+  var HEIGHT = 16
   var colors = [
     '#6AC6AF', // blue
     '#D74A41', // red
@@ -118,8 +118,8 @@
     createBoard(gameArr)
     createSelects(gameStr)
     tiles = []
-    for (let i = 0; i < height; i++) {
-      for (let j = 0; j < width; j++) {
+    for (let i = 0; i < HEIGHT; i++) {
+      for (let j = 0; j < WIDTH; j++) {
         let id = i + '-' + j
         tiles[id] = document.getElementById(id)
       }
@@ -150,10 +150,10 @@
 
   function createBoardArray (game) {
     var r = []
-    for (let i = 0; i < height; i++) {
+    for (let i = 0; i < HEIGHT; i++) {
       var temp = []
-      for (let j = 0; j < width; j++) {
-        temp.push(parseInt(game[i * width + j]))
+      for (let j = 0; j < WIDTH; j++) {
+        temp.push(parseInt(game[i * WIDTH + j]))
       }
       r.push(temp)
     }
@@ -274,8 +274,8 @@
   }
 
   function doneWithClick () {
-    for (let i = 0; i < height; i++) {
-      for (let j = 0; j < width; j++) {
+    for (let i = 0; i < HEIGHT; i++) {
+      for (let j = 0; j < WIDTH; j++) {
         tiles[i + '-' + j].onclick = ''
       }
     }

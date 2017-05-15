@@ -1,4 +1,5 @@
 Lab for Web
 ---
-https://code.viegg.com/  
+https://paster.coding.me
+http://code.viegg.com/lab/  
 https://iwestlin.github.io/lab/
