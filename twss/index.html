@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Is that what she said?</title>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <input id="text" type="text" onchange="calc()" placeholder="type here, press enter to calculate" style="width: 100%;">
+  <div id="answer"></div>
+  <script src="bundle.js"></script>
+  <script type="text/javascript">
+  var t = document.getElementById('text')
+  var a = document.getElementById('answer')
+  function calc () {
+    var n = twss.prob(t.value)
+    var s = ''
+    if (n > 0.8) {
+      s = 'That\'s exactly what she said!'
+    } else if (n > 0.6) {
+      s = 'That\'s what she said!'
+    } else if (n > 0.4) {
+      s = 'That seems to be what she said...'
+    } else if (n > 0.2) {
+      s = 'That\'s not what she said...'
+    } else {
+      s = 'She will never gonna say that to me.'
+    }
+    a.innerText = s
+  }
+  </script>
+</body>
+
+</html>
