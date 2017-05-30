@@ -18,7 +18,7 @@
 		}
 	}
 
-	function shouldFlap (inputs) {
+	function shouldFlap (inputs) { // [鸟高, 下个天花板高]
 		// if (inputs[0] > inputs[1] + 63) {
 		if (inputs[0] + b.gravity + b.velocity + b.height > inputs[1] + pipeHoll) {
 			return true

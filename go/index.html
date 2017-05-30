@@ -17,7 +17,7 @@
     color: red;
   }*/
   #board {
-    transform: rotate(180deg);
+    /*transform: rotate(180deg);*/
     line-height: 1em;
     font-size: 2em;
     font-family: 'go';
@@ -45,7 +45,7 @@
     ├┼┼┼┼○┼┼┼○○○●●●┤
     └┴┴┴┴┴┴┴┴┴┴┴┴┴┴┘
   </pre>
-  <button onclick='alphago()'>load Google Deepmind Challenge Match #5</button>
+  <button onclick='alphago()'>Load AlphaGo Self Play #2</button>
   <hr>
   <!-- <button onclick='step()'>step</button> -->
   <script type="text/javascript">
@@ -158,7 +158,7 @@
     }
     function alphago () {
       clear()
-      var s = ';B[qd];W[dd];B[pq];W[dp];B[oc];W[po];B[qo];W[qn];B[qp];W[pm];B[nq];W[qe];B[pe];W[qf];B[rd];W[pf];B[ql];W[oe];B[pl];W[ol];B[om];W[ok];B[nm];W[qj];B[rn];W[gq];B[cf];W[fc];B[bd];W[ch];B[dh];W[di];B[dg];W[cc];B[ci];W[cj];B[bi];W[dj];B[bh];W[ml];B[mm];W[lm];B[nl];W[nk];B[ln];W[ll];B[kn];W[mn];B[mo];W[rm];B[rl];W[ro];B[sn];W[pn];B[oo];W[op];B[no];W[sm];B[pp];W[nc];B[nb];W[ob];B[pb];W[od];B[pc];W[mb];B[oa];W[mc];B[gd];W[gf];B[gc];W[fd];B[ge];W[ff];B[hf];W[hg];B[if];W[ig];B[id];W[jf];B[jb];W[jd];B[jc];W[je];B[gh];W[fb];B[gg];W[fe];B[hc];W[hi];B[jl];W[hb];B[gb];W[ga];B[ib];W[ha];B[ia];W[fa];B[ka];W[iq];B[ii];W[hh];B[hj];W[gi];B[gj];W[cn];B[dq];W[cq];B[fq];W[eq];B[fp];W[gp];B[do];W[co];B[ep];W[dr];B[er];W[dq];B[gr];W[fo];B[eo];W[fn];B[hr];W[in];B[ir];W[jq];B[kr];W[jr];B[js];W[kq];B[lr];W[lq];B[mq];W[mr];B[nr];W[ik];B[fi];W[fh];B[jk];W[ij];B[jj];W[il];B[jm];W[im];B[eh];W[fg];B[mj];W[lj];B[li];W[mi];B[lk];W[nj];B[kj];W[ei];B[bk];W[bj];B[aj];W[is];B[hs];W[so];B[rn];W[rk];B[sl];W[ai];B[ah];W[cl];B[bl];W[bm];B[dm];W[dn];B[cm];W[dl];B[em];W[en];B[fl];W[fj];B[bn];W[ak];B[al];W[fr];B[mh];W[ni];B[lg];W[ks];B[ls];W[bc];B[bo];W[bp];B[og];W[mf];B[nh];W[ph];B[ce];W[mk];B[sg];W[rg];B[gl];W[re];B[se];W[sf];B[rf];W[sh];B[ld];W[me];B[ac];W[ab];B[ad];W[cd];B[bf];W[kc];B[kb];W[oh];B[nf];W[lc];B[bb];W[cb];B[aa];W[gk];B[hl];W[hk];B[jh];W[kg];B[lf];W[kh];B[lh];W[le];B[kf];W[jg];B[ao];W[lj];B[ki];W[jn];B[km];W[sn];B[on];W[rp];B[rq];W[pk];B[qm];W[sf];B[sd];W[ma];B[na];W[ie];B[he];W[hq];B[ms];W[ko];B[lp];W[kp];B[lo];W[fs];B[ks];W[el];B[fm];W[hm];B[am];W[kk];B[ne];W[of];B[de];W[ap];B[ee];W[ed];B[ke];W[kd];B[pd];W[pg];B[ng];W[sk];B[rn];W[fk];B[kl];W[gm];B[bm];W[lk];B[ck];W[dk];B[qk];W[rj])'
+      var s = ';B[pd];W[dd];B[pp];W[dp];B[pj];W[nc];B[pf];W[nq];B[pn];W[oo];B[po];W[pr];B[fc];W[cf];B[oc];W[qc];B[nb];W[rf];B[rg];W[qg];B[re];W[rh];B[rj];W[fq];B[fe];W[mb];B[mc];W[nd];B[lb];W[ec];B[fb];W[og];B[ma];W[oi];B[oj];W[dk];B[dg];W[cg];B[dh];W[ch];B[di];W[bj];B[lg];W[mi];B[ek];W[el];B[fl];W[em];B[nh];W[ni];B[ph];W[pg];B[oh];W[of];B[qf];W[pi];B[qi];W[qh];B[mh];W[sg];B[qd];W[li];B[se];W[le];B[md];W[si];B[ri];W[jh];B[kf];W[if];B[ke];W[gg];B[fk];W[dj];B[il];W[ef];B[fm];W[id];B[hi];W[kd];B[me];W[ll];B[gp];W[en];B[fn];W[hc];B[ig];W[ih];B[hf];W[hg];B[ie];W[he];B[jf];W[gf];B[ol];W[qq];B[cc];W[eb];B[cd];W[de];B[db];W[ea];B[be];W[iq];B[km];W[lm];B[jo];W[gq];B[cq];W[rk];B[ro];W[hp];B[ho];W[go];B[oq];W[or];B[np];W[hn];B[hm];W[dq];B[eo];W[do];B[mq];W[nr];B[io];W[fi];B[dr];W[er];B[ej];W[gn];B[in];W[fo];B[mo];W[lp];B[mp];W[gi];B[hj];W[lo];B[hh];W[if];B[gh];W[fh];B[hf];W[nl];B[nk];W[if];B[fg];W[om];B[pl];W[eg];B[hf];W[pe];B[qe];W[if];B[gm];W[fp];B[hf];W[pm];B[qm];W[nm];B[ql];W[kn];B[kl];W[kk];B[jk];W[jm];B[jl];W[jn];B[ff];W[ge];B[mr];W[im];B[gd];W[hd];B[eh];W[fd];B[ed];W[ee];B[fd];W[fa];B[kq];W[kp];B[dl];W[cl];B[rr];W[gb];B[kj];W[lj];B[ki];W[lh];B[mf];W[kh];B[hk];W[rq];B[sp];W[sq];B[ns];W[rs];B[qs];W[sr];B[ss];W[bb];B[cb];W[rs];B[bp];W[br];B[ss];W[qo];B[rs];W[op];B[on];W[sj];B[qj];W[rn];B[qn];W[rp];B[qp];W[so];B[jq];W[jp];B[qo];W[sl];B[rm];W[sm];B[sn];W[pq];B[no];W[rn];B[sf];W[nj];B[sn];W[da];B[ca];W[rn];B[mk];W[lk];B[sn];W[bc];B[ab];W[rn];B[lq];W[sn];B[ir];W[hr];B[is];W[ms];B[ls];W[kr];B[jr];W[ks];B[os];W[ps];B[ms];W[nn];B[oq];W[op];B[nf];W[sp];B[mn];W[ln];B[rl];W[sk];B[oe];W[sh];B[oo];W[ml];B[ng];W[mj];B[qk];W[ok];B[nk];W[mk];B[oq];W[mm];B[rg];W[op];B[rf];W[nk];B[oq];W[ba];B[bd];W[op];B[ip];W[hq];B[oq];W[bf];B[qr];W[ae];B[cr];W[bo];B[ei];W[ii];B[ij];W[ci];B[jd];W[jc];B[aa];W[ac];B[jb];W[je];B[co];W[bn];B[jd];W[if];B[fj];W[gc];B[cm];W[cn];B[hf];W[kc];B[ib];W[ic]'
       game = read(s)
       start(s)
     }
