@@ -2,15 +2,15 @@
 function Node(name, img, x, y, w, h) {
   this.name = name;
   this.image = img;
-  this.x = x; //x坐标，从左至右依次为012345
-  this.y = y; //y坐标，从上至下依次为012345
-  this.w = w; //width,格子宽度
-  this.h = h; //height,格子高度
+  this.x = x; // x坐标，从左至右依次为012345
+  this.y = y; // y坐标，从上至下依次为012345
+  this.w = w; // width,格子宽度
+  this.h = h; // height,格子高度
 }
 
 // 所有方块
-var nodes = new Array();
-//浅塘375关
+var nodes = [];
+// 浅塘 375 关, 12只鱼
 nodes[0] = new Node("red", new Image(), 0, 2, 2, 1);
 nodes[1] = new Node("1x2", new Image(), 3, 0, 1, 2);
 nodes[2] = new Node("2x1", new Image(), 4, 0, 2, 1);
@@ -25,10 +25,10 @@ nodes[10] = new Node("2x1", new Image(), 3, 5, 2, 1);
 nodes[11] = new Node("1x2", new Image(), 5, 4, 1, 2);
 
 
-var index12 = new Array(); //存储1x2的格子编号
-var index21 = new Array(); //存储2x1的格子编号
-var index13 = new Array(); //存储1x3的格子编号
-var index31 = new Array(); //存储3x1的格子编号
+var index12 = []; // 存储 宽1长2 的格子编号
+var index21 = []; // 2x1
+var index13 = []; // 1x3
+var index31 = []; // 3x1
 
 for (var i = 0; i < nodes.length; i++) {
   if (nodes[i].w == 1 && nodes[i].h == 3)
@@ -41,7 +41,7 @@ for (var i = 0; i < nodes.length; i++) {
     index31[index31.length] = i;
 }
 
-// 角色位置
+// 鱼的位置
 function NodePos(x, y) {
   this.x = x;
   this.y = y;
@@ -273,7 +273,7 @@ function DisplayGame() {
   }
 }
 
-function SortNum(a) { //将传入的数组a中的元素按从小到大排列
+function SortNum(a) { // 将传入的数组a中的元素按从小到大排列
   for (var i = 0; i < a.length - 1; i++) {
     for (var j = i + 1; j < a.length; j++) {
       if (a[i] > a[j]) {
@@ -286,7 +286,7 @@ function SortNum(a) { //将传入的数组a中的元素按从小到大排列
 }
 
 function GraphNode(nodesPos, edges, checked, p) {
-  this.p = p; //变化成此盘面的前一个盘面
+  this.p = p; // 变化成此盘面的前一个盘面
   this.nodesPos = nodesPos;
   this.edges = edges;
   this.checked = checked;
@@ -300,12 +300,12 @@ function GraphNode(nodesPos, edges, checked, p) {
     }
     return true;
   }
-  this.m1 = 0; //特征值，用于判断两种盘面是否等同
-  this.m2 = 0; //特征值，同上
+  this.m1 = 0; // 特征值，用于判断两种盘面是否等同
+  this.m2 = 0; // 特征值，同上
   var mult = 1;
   var index = 0;
 
-  var pos12 = new Array(); //1x2方块的位置
+  var pos12 = []; // 1x2方块的位置
   for (var i = 0; i < index12.length; i++) {
     pos12[pos12.length] = nodesPos[index12[i]].index();
   }
@@ -321,7 +321,7 @@ function GraphNode(nodesPos, edges, checked, p) {
       mult = 1;
   }
 
-  var pos21 = new Array(); //2x1的位置
+  var pos21 = []; // 2x1的位置
   for (var i = 0; i < index21.length; i++) {
     pos21[pos21.length] = nodesPos[index21[i]].index();
   }
@@ -337,7 +337,7 @@ function GraphNode(nodesPos, edges, checked, p) {
       mult = 1;
   }
 
-  var pos13 = new Array(); //1x3的位置
+  var pos13 = []; // 1x3的位置
   for (var i = 0; i < index13.length; i++) {
     pos13[pos13.length] = nodesPos[index13[i]].index();
   }
@@ -353,7 +353,7 @@ function GraphNode(nodesPos, edges, checked, p) {
       mult = 1;
   }
 
-  var pos31 = new Array(); //3x1的位置
+  var pos31 = []; // 3x1的位置
   for (var i = 0; i < index31.length; i++) {
     pos31[pos31.length] = nodesPos[index31[i]].index();
   }
@@ -370,7 +370,7 @@ function GraphNode(nodesPos, edges, checked, p) {
   }
 }
 
-var graphNodes = new Array();
+var graphNodes = [];
 
 var buildGraphFinish = false;
 var isWin = false
@@ -389,19 +389,18 @@ function AddOneGraphNode(nodesPos, p) {
   var i;
   for (i = 0; i < graphNodes.length; i++) {
     if (newNode.m1 == graphNodes[i].m1 && newNode.m2 == graphNodes[i].m2)
-      return i; //若graphNodes已经存储了此种盘面，则直接返回
+      return i; // 若graphNodes已经存储了此种盘面，则直接返回
   }
   if (i == graphNodes.length) {
-    graphNodes[graphNodes.length] = newNode; //将新盘面数据存入graphNodes中
-    if (nodesPos[0].x == 4 && nodesPos[0].y == 2) //红鱼到达目的地
+    graphNodes[graphNodes.length] = newNode; // 将新盘面数据存入graphNodes中
+    if (nodesPos[0].x == 4 && nodesPos[0].y == 2) // 红鱼到达目的地
       isWin = true;
     return graphNodes.length;
   }
 }
 
-function SearchOne(index) {
-//对盘面的所有格子尝试上下左右移动，并将移动结果与存储的所有盘面进行对比；
-//若无此盘面，则将新盘面存入grapgNodes中，若将曹操移动到指定位置，则跳出循环
+function SearchOne(index) { // 对盘面的所有格子尝试上下左右移动，并将移动结果与存储的所有盘面进行对比；
+// 若无此盘面，则将新盘面存入grapgNodes中，若将曹操移动到指定位置，则跳出循环
   var n = graphNodes[index]
   n.checked = true;
   for (var i = 0; i < nodes.length; i++) {
@@ -457,12 +456,12 @@ function SearchOne(index) {
 
 // 搜索解
 function FindPath() {
-  var nodesPos = new Array();
+  var nodesPos = [];
   for (var i = 0; i < nodes.length; i++) {
     nodesPos[i] = new NodePos(nodes[i].x, nodes[i].y);
   }
 
-  graphNodes[0] = new GraphNode(nodesPos, new Array(), false);
+  graphNodes[0] = new GraphNode(nodesPos, [], false);
   var counter = 0;
 
   var d1 = new Date();
@@ -476,10 +475,10 @@ function FindPath() {
         break;
       }
     }
-    if (isWin) { //红鱼到达目的地，跳出循环
+    if (isWin) { // 红鱼到达目的地，跳出循环
       break;
     }
-    if (i == graphNodes.length) { //穷尽所有可能盘面，红鱼也无法逃脱
+    if (i == graphNodes.length) { // 穷尽所有可能盘面，红鱼也无法逃脱
       showstr1("红鱼插翅难飞！");
       break;
     }
@@ -490,7 +489,7 @@ function FindPath() {
 }
 
 function DisplaySolution() {
-  var solutionNodes = new Array();
+  var solutionNodes = [];
   var n = graphNodes[graphNodes.length - 1];
   solutionNodes[0] = n;
   while (n != graphNodes[0]) {

@@ -4,9 +4,9 @@
 <style>
 body {
   font-family: PingFang SC, Verdana, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+  text-align: center;
 }
 .container {
-  text-align: center;
   width: 310px;
   margin: 0 auto;
 }
@@ -25,17 +25,21 @@ table {
       可以用鼠标拖动色块进行移动。
     </p>
     <p>
-      点击「电脑计算」按钮求出每一步解法。
+      点击「自动求解」按钮求出每一步解法。
     </p>
     <canvas id="myCanvas" width="300" height="300" onmousedown="mouseDown(event)" onmouseup="mouseUp(event)" style="border:5px solid #8C5125;">
       您的浏览器不支持canvas标签，请使用chrome/firefox/safari等现代浏览器
     </canvas>
     <br>
-    <button type="button" onclick="FindPath()">电脑计算</button>
+    <button type="button" onclick="FindPath()">自动求解</button>
     <div id="info1"></div>
     <div id="info2"></div>
   </div>
   <table id="deallist" border="0"></table>
+  <hr>
+  <p>
+    代码修改自 <a href="https://github.com/buck84/huarongdao/tree/master/huarongdaohtml5">huarongdaohtml5</a>
+  </p>
   <script src="qiantang.js"></script>
   <script type="text/javascript">
     document.body.onload = DisplayGame;
