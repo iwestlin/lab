@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Minesweeper - Vue.js</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="minesweep.css">
+    <script src="https://unpkg.com/vue@2.3.4/dist/vue.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div id="minesweep">
+        <div class="controls">
+          宽度：<input type="text" v-model.number="columns">
+          高度: <input type="text" v-model.number="rows">
+          雷数：<input type="text" v-model.number="mines">
+          <button @click="newGame()">开始</button>
+        </div>
+        <table class="minesweeper">
+          <tr v-for="(row,r) in tiles">
+            <td v-for="(tile,c) in row"
+                @click="openTile(r, c)"
+                @contextmenu.prevent="flagTile(r, c)"
+                :class="tile.classes">
+            </td>
+          </tr>
+        </table>
+        <div id="info">{{result}}</div>
+      </div>
+    </div>
+    </script>
+    <script type="text/javascript" src="minesweep.js"></script>
+  </body>
+</html>
