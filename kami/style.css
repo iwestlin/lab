@@ -1,0 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  width: 600px;
+  position: relative;
+  margin: auto;
+  text-align: center;
+  background-color: white;
+}
+hr {
+  margin: 10px 0px;
+}
+#board {
+  width: 500px;
+  line-height: 0em;
+}
+#selects {
+  position: absolute;
+  right: 0;
+}
+#selects div {
+  width: 100px;
+  min-height: 150px;
+  position: relative;
+}
+#selects .selected:after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border-top: 15px solid white;
+  border-right: 15px solid white;
+  border-bottom: 15px solid #F9CC9D;
+  border-left: 15px solid #F9CC9D;
+}
+.tile {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 1px dashed #ddd;
+  transition: 0.5s;
+  box-sizing: border-box;
+}
+#chooseLevel button {
+  margin: 3px;
+  width: 60px;
+  height: 30px;
+}
+.tile:hover, button:hover, #selects div:hover {
+  cursor: pointer;
+}
+p span {
+  margin-right: 50px;
+}
+#win {
+  color: red;
+  font-size: 1.2em;
+}
