@@ -1,1 +1,0 @@
-Powered by [dengo](http://dengo.org/archives/876)
