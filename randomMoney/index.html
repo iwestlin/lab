@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>今天哪个字母运气最好</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    body {
+      text-align: center;
+    }
+    #main {
+      margin: 0 auto;
+    }
+  </style>
+  <script src="//cdn.bootcss.com/echarts/3.6.2/echarts.common.js"></script>
+</head>
+
+<body>
+  <input type="text" placeholder="输入随机的次数" id="i">
+  <button onclick="changeButton()">change</button>
+  <div id="main" style="width: 1200px;height:700px;"></div>
+
+  <script src="randomMoney.js"></script>
+  <script type="text/javascript">
+  function changeButton () {
+    change(Number(i.value))
+  }
+
+  var i = document.getElementById('i')
+  var myChart = echarts.init(document.getElementById('main'));
+
+  var option = {
+    // title: {
+    //   text: '很公平的不公平'
+    // },
+    // legend: {
+    //   data: ['财富值']
+    // },
+    color: ['#3398DB'],
+    tooltip: {},
+    xAxis: {
+      data: 'abcdefghijklmnopqrstuvwxyz'.toUpperCase()
+    },
+    yAxis: {},
+    series: [{
+      name: '财富值',
+      type: 'bar',
+      data: a
+    }]
+  };
+  myChart.setOption(option)
+
+  setInterval(function () {
+    change(1)
+    myChart.setOption({
+      series: [{
+        name: '财富值',
+        type: 'bar',
+        data: a
+      }]
+    })
+  }, 333)
+
+  </script>
+</body>
+
+</html>

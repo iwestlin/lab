@@ -393,67 +393,73 @@
     }
   }
 
+  function detectGaopai (mysuits, myvalues) {
+    if (!detectTonghua(mysuits) && !detectShunzi(myvalues) && !detectAShunzi(myvalues)) {
+      for (var i = 0; i < myvalues.length; i++) {
+        if (myvalues[i] > 1) {
+          return false
+        }
+      }
+      return true
+    }
+    return false
+  }
 
   function detectAShunzi(mysizes) {
     return (mysizes.join('') == '1000000001111');
   }
 
-  function detect(arr) { //判断牌型为levels[i]
-    var i = 0; //初始值为高牌
-    var arrValue = arr[1].join('');
-    var myArrValue = parseInt(arrValue);
 
-    function toNum(i) {
-      return 12 - parseInt(arr[1].indexOf(i));
+  function detect (arr) { // 判断牌型为levels[i]
+    var high = 0 // 初始值为高牌
+    var arrValue = arr[1].join('')
+    var myArrValue = parseInt(arrValue) // 默认为高牌
+
+    function toNum (i) {
+      return 12 - parseInt(arr[1].indexOf(i))
     }
-    if (detectTonghua(arr[0])) { //同花,同类可直接比大小
-      i = 5;
-      myArrValue = i * 1e13 + parseInt(arrValue);
+
+    if (detectGaopai(arr[0], arr[1])) { // 高牌，可比
+      return [high, myArrValue]
+    } else if (detectDuizi(arr[1])) { // 对子，不可比
+      high = 1
+      myArrValue = high * 1e13 + toNum(2) * 1e11 + parseInt(arrValue) / 100
+    } else if (detectLiangdui(arr[1])) { // 两对，不可比
+      high = 2
+      var arrCopy = arr[1].slice(0)
+      arrCopy[arrCopy.indexOf(1)] = 0
+      myArrValue = high * 1e13 + parseInt(arrCopy.join('')) + (toNum(1) / 100)
+    } else if (detectSantiao(arr[1])) { // 三条，不可比
+      high = 3
+      myArrValue = high * 1e13 + toNum(3) * 1e11 + parseInt(arrValue) / 100
+    } else if (detectTonghua(arr[0])) { // 同花, 同类可直接比大小
+      if (detectShunzi(arr[1])) {
+        high = 8
+        myArrValue = high * 1e13 + parseInt(arrValue)
+      } else if (detectAShunzi(arr[1])) {
+        high = 8
+        myArrValue = high * 1e13
+      } else {
+        high = 5
+        myArrValue = high * 1e13 + parseInt(arrValue)
+      }
+    } else if (detectShunzi(arr[1])) { // 顺子，可比
+      high = 4
+      myArrValue = high * 1e13 + parseInt(arrValue)
+    } else if (detectAShunzi(arr[1])) { // A,2,3,4,5
+      high = 4
+      myArrValue = high * 1e13
+    } else if (detectHulu(arr[1])) { // 葫芦，不可比
+      high = 6
+      myArrValue = high * 1e13 + toNum(3) * 100 + toNum(2)
+    } else if (detectSitiao(arr[1])) { // 四条，不可比
+      high = 7
+      myArrValue = high * 1e13 + toNum(4) * 100 + toNum(1)
     }
-    if (detectShunzi(arr[1])) { //顺子，可比
-      i = 4;
-      myArrValue = i * 1e13 + parseInt(arrValue);
-    }
-    if (detectAShunzi(arr[1])) { //A,2,3,4,5
-      i = 4;
-      myArrValue = i * 1e13;
-    }
-    if (detectTonghua(arr[0]) && detectShunzi(arr[1])) { //同花顺，可比
-      i = 8;
-      myArrValue = i * 1e13 + parseInt(arrValue);
-    }
-    if (detectTonghua(arr[0]) && detectAShunzi(arr[1])) { //A,2,3,4,5
-      i = 8;
-      myArrValue = i * 1e13;
-    }
-    if (detectSitiao(arr[1])) { //四条，不可比
-      i = 7;
-      myArrValue = i * 1e13 + toNum(4) * 100 + toNum(1);
-    }
-    if (detectHulu(arr[1])) { //葫芦，不可比
-      i = 6;
-      myArrValue = i * 1e13 + toNum(3) * 100 + toNum(2);
-    }
-    if (detectSantiao(arr[1])) { //三条，不可比
-      i = 3;
-      myArrValue = i * 1e13 + toNum(3) * 1e11 + parseInt(arrValue) / 100;
-    }
-    if (detectLiangdui(arr[1])) { //两对，不可比
-      i = 2;
-      var arrCopy = arr[1].slice(0);
-      arrCopy[arrCopy.indexOf(1)] = 0;
-      myArrValue = i * 1e13 + parseInt(arrCopy.join('')) + toNum(1) / 100;
-    }
-    if (detectDuizi(arr[1])) { //对子，不可比
-      i = 1;
-      myArrValue = i * 1e13 + toNum(2) * 1e11 + parseInt(arrValue) / 100;
-    }
-    // console.log('i:' + i + '  arrValue:' + arrValue);
-    return [i, myArrValue];
+
+    return [high, myArrValue]
   }
 
-  // detect(arraylize(arr1));
-  // detect(arraylize(arr2));
 
   $(document).ready(function() {
     $("#myTable").tablesorter();
