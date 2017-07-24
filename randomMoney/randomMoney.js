@@ -1,4 +1,4 @@
-var n = 26 // 人数
+var n = 27 // 人数
 var m = 100 // 初始财富值
 var a = Array(n).fill(m) // 存储所有人财富值的数组
 // change(1000)
