@@ -9,15 +9,15 @@ var a = Array(n).fill(m) // 存储所有人财富值的数组
 function change (times) {
   for (var count = 0; count < times; count++) {
     a.forEach((value, index) => giveAway(value, index))
-    // a = a.map(x => x - 1) // 允许财富值为负数
-    // for (var i = 0; i < n; i++) {
-    //   a[randomRange(0, n)]++
-    // }
+  // a = a.map(x => x - 1) // 允许财富值为负数
+  // for (var i = 0; i < n; i++) {
+  //   a[randomRange(0, n)]++
+  // }
   }
 }
 
 function randomRange (min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
+  return Math.floor(Math.random() * (max - min)) + min
 }
 
 function giveAway (value, index) {
