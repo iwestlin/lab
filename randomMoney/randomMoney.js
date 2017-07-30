@@ -1,4 +1,4 @@
-var players = '一个人的命运啊当然要靠自我奋斗但是也要考虑到历史的行程'
+var players = '一个人的命运啊当然要靠自我奋斗但是也要考虑到历史的行程'.split('')
 var n = players.length
 var m = 100 // 初始财富值
 var a = Array(n).fill(m) // 存储所有人财富值的数组
