@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>document</title>
+  <meta charset="utf-8">
+</head>
+<body>
+<input type="text" placeholder="输入番号" id="inp">
+<button onclick="getfh()">获取磁力链接</button>
+<div id="result"></div>
+
+<script type="text/javascript">
+var inp = document.getElementById('inp')
+var result = document.getElementById('result')
+var link = 'https://paster.lib.id/test@dev/xxx/'
+var xhr = new XMLHttpRequest()
+xhr.onreadystatechange = function (evt) {
+  if (xhr.readyState === 4) {
+    if (xhr.status === 200) {
+      var r = xhr.response
+      r = JSON.parse(r)
+      // console.log(r)
+      if (r.found) {
+        result.innerHTML = `<a href="${r.value}">${r.value}</a>`
+      } else {
+        result.innerText = r.value
+      }
+    }
+  }
+}
+
+function getfh () {
+  var fh = inp.value.replace('/-/g', '').toLowerCase()
+  var mylink = link + '?id=' + fh
+  xhr.open('GET', mylink, true)
+  xhr.send()
+}
+</script>
+</body>
+</html>
