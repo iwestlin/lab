@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>复数域的根</title>
+    <style type="text/css">
+    body {
+      width: 1020px;
+      margin: 0 auto;
+    }
+    #c1, #c2 {
+      width: 500px;
+      display: inline-block;
+    }
+    </style>
+    <script src="https://gw.alipayobjects.com/as/g/datavis/g2/2.3.8/index.js"></script>
+    <script src="./complex.js"></script>
+  </head>
+  <body>
+    <div id="c1"></div>
+    <div id="c2"></div>
+    <script>
+    var data = [
+      {
+        "root": "x1",
+        "real": 2,
+        "imaginary": 0
+      },
+      {
+        "root": "x2",
+        "real": 1,
+        "imaginary": 3
+      },
+      {
+        "root": "x3",
+        "real": 3,
+        "imaginary": 0
+      },
+      {
+        "root": "x4",
+        "real": 3,
+        "imaginary": 2
+      },
+      {
+        "root": "x5",
+        "real": 1,
+        "imaginary": 0
+      }
+    ]
+
+    var chart2 = new G2.Chart({
+      id: 'c2',
+      forceFit: true,
+      height: 500
+    })
+    var v1 = f1(x1, x2, x3, x4, x5)
+    var data2 = [
+      {
+        root: 'r1-origin',
+        real: v1[0],
+        imaginary: v1[1]
+      },
+      {
+        "root": 'r1',
+        "real": v1[0],
+        "imaginary": v1[1]
+      }
+    ]
+    chart2.source(data2, {})
+    chart2.tooltip({
+      title: null
+    });
+    chart2.axis('real', {
+      gridAlign: 'start',
+      grid: {
+        line: {
+          stroke: '#d9d9d9',
+          lineWidth: 1,
+          lineDash: [2,2]
+        }
+      }
+    });
+    chart2.col('real', {
+      type: 'linear',
+      min: -80, 
+      max: -20,
+      alias: '实部'
+    });
+    chart2.col('imaginary', {
+      type: 'linear',
+      min: -100, 
+      max: -40,
+      alias: '虚部'
+    });
+    chart2.guide().text([-50,-65], 'r1 = b^2 - 4ac', {
+      fill: '#444',
+      // fontSize: '12',
+      fontWeight: 'bold'
+    })
+    // chart2.guide().line([-50,-50], [-60,-60])
+    chart2.point().position('real*imaginary')
+    // .color('root', ['RGBA(240, 75, 70, 1.0)', 'RGBA(255, 179, 0, 1.00)','RGBA(249, 255, 0, 1.00)', 'RGBA(92, 213, 191, 1.00)', 'RGBA(100, 80, 193, 1.00)'])
+    .shape('root', ['diamond', 'circle'])
+    .size(5)
+    .tooltip('real*imaginary');
+    // chart2.legend(false);
+    chart2.render();
+
+    // var frame = new G2.Frame(data);
+    // var lineCfg = { // 线的配置信息
+    //   stroke: '#94E08A'
+    // };
+    var chart = new G2.Chart({
+      id: 'c1',
+      forceFit: true,
+      height: 500
+    });
+    chart.source(data, {});
+    chart.tooltip({
+      title: null
+    });
+    chart.axis('real', {
+      gridAlign: 'start',
+      grid: {
+        line: {
+          stroke: '#d9d9d9',
+          lineWidth: 1,
+          lineDash: [2,2]
+        }
+      }
+    });
+    chart.col('real', {
+      type: 'linear',
+      min: 0, 
+      max: 4,
+      alias: '实部'
+    });
+    chart.col('imaginary', {
+      type: 'linear',
+      min: -1, 
+      max: 4,
+      alias: '虚部'
+    });
+    chart.point().position('real*imaginary')
+    .color('root', ['RGBA(240, 75, 70, 1.0)', 'RGBA(255, 179, 0, 1.00)','RGBA(249, 255, 0, 1.00)', 'RGBA(92, 213, 191, 1.00)', 'RGBA(100, 80, 193, 1.00)'])
+    .shape('root', Array(5).fill('circle'))
+    .size(4)
+    .tooltip('root*real*imaginary');
+    // chart.legend(false);
+    chart.render();
+
+    // moveAll([2,3,4,5,1]) // 表示x1=>x2,x2=>x3,x3=>x4,x4=>x5,x5=>x1
+    function moveAll (arr) {
+      for (var i = 0; i < arr.length; i++) {
+        move(i + 1, xs[arr[i] - 1], 100)
+      }
+    }
+    // move(1, [1,0]); // 把 x1 移到 (1, 0)
+    function move (pointIndex, dest, steps) {
+      var point = data[pointIndex - 1]
+      var steps = steps || 100
+      var realDiff = (dest[0] - point.real)/steps
+      var imaginaryDiff = (dest[1] - point.imaginary)/steps
+      // var xs = [x1, x2, x3, x4, x5]
+
+      var loop = setInterval(() => {
+        if (steps < 0) {
+          clearInterval(loop)
+          point.real = Math.round(point.real)
+          point.imaginary = Math.round(point.imaginary)
+          data2[1].real = Math.round(data2[1].real)
+          data2[1].imaginary = Math.round(data2[1].imaginary)
+          xs[pointIndex - 1][0] = Math.round(xs[pointIndex - 1][0])
+          xs[pointIndex - 1][1] = Math.round(xs[pointIndex - 1][1])
+          chart.changeData(data)
+          chart2.changeData(data2)
+        } else {
+          chart.changeData(data)
+          point.real += realDiff
+          xs[pointIndex - 1][0] = point.real
+          point.imaginary += imaginaryDiff
+          xs[pointIndex - 1][1] = point.imaginary
+          var v1 = f1(...xs)
+          data2[1].real = v1[0]
+          data2[1].imaginary = v1[1]
+          chart2.changeData(data2)
+          steps--
+        }
+      }, 50)
+    }
+
+    // exchange(1, 5)
+    function exchange (p1, p2) { // [2,0] [1,0]
+      var p1 = data[p1 - 1]
+      var p2 = data[p2 - 1]
+      var realDiff = (p2.real - p1.real)/40
+      var imaginaryDiff = (p2.imaginary - p1.imaginary)/40
+      var count = 40
+      var loop = setInterval(() => {
+        if (count <= 0) {
+          clearInterval(loop)
+          p1.real = Math.round(p1.real)
+          p1.imaginary = Math.round(p1.imaginary)
+          p2.real = Math.round(p2.real)
+          p2.imaginary = Math.round(p2.imaginary)
+          chart.changeData(data)
+        } else {
+          chart.changeData(data)
+          p1.real += realDiff
+          p2.real -= realDiff
+          p1.imaginary += imaginaryDiff
+          p2.imaginary -= imaginaryDiff
+          count--
+        }
+      }, 50)
+    }
+    </script>
+  </body>
+</html>
