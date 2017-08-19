@@ -7,6 +7,7 @@
     body {
       width: 1024px;
       margin: 0 auto;
+      text-align: center;
     }
     #c1, #c2 {
       width: 49%;
@@ -19,7 +20,11 @@
   <body>
     <div id="c1"></div>
     <div id="c2"></div>
+    <input type="text" id="inp">
+    <button onclick="myMove()">move</button>
+
     <script>
+    var inp = document.getElementById('inp')
     var data = [
       {
         "root": "x1",
@@ -149,7 +154,12 @@
     // chart.legend(false)
     chart.render()
 
-    // moveAll([2,3,4,5,1]) // 表示x1=>x2,x2=>x3,x3=>x4,x4=>x5,x5=>x1
+    function myMove () {
+      var arr = inp.value.split(/[\s,，]/g).map(x => parseInt(x))
+      moveAll(arr)
+    }
+
+    // moveAll([2,3,4,5,1]) 表示x1=>x2,x2=>x3,x3=>x4,x4=>x5,x5=>x1
     function moveAll (arr, steps, period) {
       var steps = steps || 100
       var period = period || 40
