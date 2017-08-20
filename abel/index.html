@@ -64,7 +64,7 @@
         })
         data = []
         data2 = []
-        xs.map((v, i) => {
+        xs.forEach((v, i) => {
           data.push({
             root: 'x' + (i + 1),
             real: v[0],
@@ -72,7 +72,7 @@
           })
         })
         var rs = getRoots(f2(...xs), 3)
-        rs.map((v, i) => {
+        rs.forEach((v, i) => {
           data2.push({
             // root: 'old-' + (i + 1),
             root: 'stay',
@@ -163,7 +163,7 @@
       }
 
       function myMove () {
-        var arr = inp.value.split(/[\s,，]+/g).map(x => parseInt(x))
+        var arr = inp.value.split(/[\s,，]+/g).map(parseInt)
         moveAll(arr)
         // var count = 7
         // var loop = setInterval(() => {
@@ -184,7 +184,7 @@
       function moveAll (arr, steps, period) {
         steps = steps || 100
         period = period || 40
-        arr.map((v, i) => {
+        arr.forEach((v, i) => {
           // move(i + 1, xs[v - 1], steps, period)
           move(positions[i], xs[v - 1], steps, period)
         })
@@ -209,7 +209,7 @@
 
       function getPoints () {
         var result = []
-        data.map((v, i) => {
+        data.forEach((v, i) => {
           result.push([v.real, v.imaginary])
         })
         return result
