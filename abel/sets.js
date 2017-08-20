@@ -36,7 +36,7 @@ function commutate (a, b) {
   return compose(compose(compose(a, b), invert(a)), invert(b))
 }
 
-function C (a) {
+function getAllCommutators (a) {
   var result = []
   for (let p1 of a) {
     for (let p2 of a) {
@@ -47,17 +47,12 @@ function C (a) {
   return result.map(v => v.split('-').map(vv => parseInt(vv)))
 }
 
-var s5 = powerset([1, 2, 3, 4, 5])
-// console.table(s5)
-var a5 = C(s5) // commutators of s5
-// console.table(a5)
-var commutators_of_a5 = C(a5)
-// console.table(commutators_of_a5)
-
-// prove a5 equals to commutators_of_a5
-var t = a5.map(v => v.join('')).sort()
-var t2 = commutators_of_a5.map(v => v.join('')).sort()
-console.log(t.join('-') === t2.join('-')) // true
+// var s5 = powerset([1, 2, 3, 4, 5])
+// var a5 = getAllCommutators(s5) // commutators of s5
+// var commutatorsOfA5 = getAllCommutators(a5)
+// var t = a5.map(v => v.join('')).sort()
+// var t2 = commutatorsOfA5.map(v => v.join('')).sort()
+// console.log(t.join('-') === t2.join('-')) // true, which proved a5 equals to commutators_of_a5
 
 // ===== explanation =====
 // s5 中每一个元素都意味着一次根与根之间的移动

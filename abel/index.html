@@ -2,241 +2,237 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>复数域的根</title>
+    <title>一元五次方程没有根式解的直观说明</title>
     <style type="text/css">
-    body {
-      width: 1024px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    #c1, #c2 {
-      width: 49%;
-      display: inline-block;
-    }
+      body {
+        width: 1024px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      #c1, #c2 {
+        width: 49%;
+        display: inline-block;
+      }
     </style>
     <script src="https://gw.alipayobjects.com/as/g/datavis/g2/2.3.8/index.js"></script>
     <script src="./complex.js"></script>
+    <script src="./sets.js"></script>    
   </head>
   <body>
     <div id="c1"></div>
     <div id="c2"></div>
-    <input type="text" id="inp">
-    <button onclick="myMove()">move</button>
+    <!-- <input type="text" id="inp"> -->
+    <!-- <button onclick="myMove()">move</button> -->
+    <!-- <button onclick="start()">start moving!</button> -->
 
     <script>
-    var inp = document.getElementById('inp')
-    var data = [
-      {
-        "root": "x1",
-        "real": 2,
-        "imaginary": 0
-      },
-      {
-        "root": "x2",
-        "real": 1,
-        "imaginary": 3
-      },
-      {
-        "root": "x3",
-        "real": 3,
-        "imaginary": 0
-      },
-      {
-        "root": "x4",
-        "real": 3,
-        "imaginary": 2
-      },
-      {
-        "root": "x5",
-        "real": 1,
-        "imaginary": 0
+      var data, data2, chart, chart2
+      var positions = [1, 2, 3, 4, 5]
+      // 如[2,3,4,5,1]表示处在位置1的点是x2
+      var inp = document.getElementById('inp')
+      var sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+      var start = _ => {
+        sleep(0)
+        .then(_ => moveAll([2, 5, 3, 4, 1]))
+        .then(_ => sleep(5000))
+        .then(_ => moveAll([3, 4, 5, 2, 1]))
+        .then(_ => sleep(5000))
+        .then(_ => moveAll([5, 1, 3, 4, 2]))
+        .then(_ => sleep(5000))
+        .then(_ => moveAll([5, 4, 1, 2, 3]))
       }
-    ]
+      // P1  2 5 3 4 1 不动
+      // P2  3 4 5 2 1 顺时针转1/3圈
+      // -P1 5 1 3 4 2 不动
+      // -P2 5 4 1 2 3 逆时针转1/3圈
+      // result: 2 3 4 5 1 顺时针转1/3圈
 
-    var chart2 = new G2.Chart({
-      id: 'c2',
-      forceFit: true,
-      height: 500
-    })
-    var v1 = f1(x1, x2, x3, x4, x5)
-    var data2 = [
-      {
-        root: 'r0',
-        real: v1[0],
-        imaginary: v1[1]
-      },
-      {
-        "root": 'r1',
-        "real": v1[0],
-        "imaginary": v1[1]
-      }
-    ]
-    chart2.source(data2, {})
-    chart2.tooltip({
-      title: null
-    })
-    chart2.axis('real', {
-      gridAlign: 'start',
-      grid: {
-        line: {
-          stroke: '#d9d9d9',
-          lineWidth: 1,
-          lineDash: [2,2]
-        }
-      }
-    })
-    chart2.col('real', {
-      type: 'linear',
-      min: -70, 
-      max: -30,
-      alias: '实部'
-    })
-    chart2.col('imaginary', {
-      type: 'linear',
-      min: -90, 
-      max: -40,
-      alias: '虚部'
-    })
-    chart2.guide().text([-51,-65], 'r1 = b^2 - 4ac', {
-      fill: '#444',
-      // fontSize: '12',
-      fontWeight: 'bold'
-    })
-    // chart2.guide().line([-50,-50], [-60,-60])
-    chart2.point().position('real*imaginary')
-    // .color('root', ['RGBA(240, 75, 70, 1.0)', 'RGBA(255, 179, 0, 1.00)','RGBA(249, 255, 0, 1.00)', 'RGBA(92, 213, 191, 1.00)', 'RGBA(100, 80, 193, 1.00)'])
-    .shape('root', ['diamond', 'circle'])
-    .size(5)
-    .tooltip('real*imaginary')
-    // chart2.legend(false)
-    chart2.render()
+      init()
+      config()
+      start()
 
-    // var frame = new G2.Frame(data)
-    // var lineCfg = { // 线的配置信息
-    //   stroke: '#94E08A'
-    // }
-    var chart = new G2.Chart({
-      id: 'c1',
-      forceFit: true,
-      height: 500
-    })
-    chart.source(data, {})
-    chart.tooltip({
-      title: null
-    })
-    chart.axis('real', {
-      gridAlign: 'start',
-      grid: {
-        line: {
-          stroke: '#d9d9d9',
-          lineWidth: 1,
-          lineDash: [2,2]
-        }
+      function init () {
+        chart2 = new G2.Chart({
+          id: 'c2',
+          forceFit: true,
+          height: 500
+        })
+        chart = new G2.Chart({
+          id: 'c1',
+          forceFit: true,
+          height: 500
+        })
+        data = []
+        data2 = []
+        xs.map((v, i) => {
+          data.push({
+            root: 'x' + (i + 1),
+            real: v[0],
+            imaginary: v[1]
+          })
+        })
+        var rs = getRoots(f2(...xs), 3)
+        rs.map((v, i) => {
+          data2.push({
+            // root: 'old-' + (i + 1),
+            root: 'stay',
+            real: v[0],
+            imaginary: v[1]
+          }
+          , {
+            // root: 'new-' + (i + 1),
+            root: 'move',
+            real: v[0],
+            imaginary: v[1]
+          })
+        })
+        chart.source(data, {})
+        chart2.source(data2, {})
       }
-    })
-    chart.col('real', {
-      type: 'linear',
-      min: 0, 
-      max: 4,
-      alias: '实部'
-    })
-    chart.col('imaginary', {
-      type: 'linear',
-      min: -1, 
-      max: 4,
-      alias: '虚部'
-    })
-    chart.point().position('real*imaginary')
-    .color('root', ['RGBA(240, 75, 70, 1.0)', 'RGBA(255, 179, 0, 1.00)','RGBA(249, 255, 0, 1.00)', 'RGBA(92, 213, 191, 1.00)', 'RGBA(100, 80, 193, 1.00)'])
-    .shape('root', Array(5).fill('circle'))
-    .size(4)
-    .tooltip('root*real*imaginary')
-    // chart.legend(false)
-    chart.render()
 
-    function myMove () {
-      var arr = inp.value.split(/[\s,，]/g).map(x => parseInt(x))
-      moveAll(arr)
-    }
+      function config () {
+        chart2.tooltip({
+          title: null
+        })
+        chart2.axis('real', {
+          gridAlign: 'start',
+          grid: {
+            line: {
+              stroke: '#d9d9d9',
+              lineWidth: 1,
+              lineDash: [2, 2]
+            }
+          }
+        })
+        chart2.col('real', {
+          type: 'linear',
+          min: -10,
+          max: 10,
+          alias: '实部'
+        })
+        chart2.col('imaginary', {
+          type: 'linear',
+          min: -10,
+          max: 10,
+          alias: '虚部'
+        })
+        // chart2.guide().text([-51, -65], 'r1 = 7f ^ (1/3)', {
+        //   fill: '#444',
+        //   fontWeight: 'bold'
+        // })
+        chart2.point().position('real*imaginary')
+        .color('root', ['red', 'blue', 'red', 'blue', 'red', 'blue'])
+        .shape('root', ['diamond', 'circle', 'diamond', 'circle', 'diamond', 'circle'])
+        .size(4)
+        .tooltip('root*real*imaginary')
+        chart2.legend(false)
+        chart2.render()
 
-    // moveAll([2,3,4,5,1]) 表示x1=>x2,x2=>x3,x3=>x4,x4=>x5,x5=>x1
-    function moveAll (arr, steps, period) {
-      var steps = steps || 100
-      var period = period || 40
-      for (var i = 0; i < arr.length; i++) {
-        move(i + 1, xs[arr[i] - 1], steps, period)
+        chart.tooltip({
+          title: null
+        })
+        chart.axis('real', {
+          gridAlign: 'start',
+          grid: {
+            line: {
+              stroke: '#d9d9d9',
+              lineWidth: 1,
+              lineDash: [2, 2]
+            }
+          }
+        })
+        chart.col('real', {
+          type: 'linear',
+          min: -3,
+          max: 3,
+          alias: '实部'
+        })
+        chart.col('imaginary', {
+          type: 'linear',
+          min: -3,
+          max: 3,
+          alias: '虚部'
+        })
+        chart.point().position('real*imaginary')
+        .color('root', ['RGBA(240, 75, 70, 1.0)', 'RGBA(255, 179, 0, 1.00)', 'RGBA(249, 255, 0, 1.00)', 'RGBA(92, 213, 191, 1.00)', 'RGBA(100, 80, 193, 1.00)'])
+        .shape('root', Array(5).fill('circle'))
+        .size(4)
+        .tooltip('root*real*imaginary')
+        // chart.legend(false)
+        chart.render()
       }
-      var loop = setInterval(() => {
-        if (steps < 0) {
-          clearInterval(loop)
-        }
-        steps--
-        var v1 = f1(...xs)
-        data2[1].real = v1[0]
-        data2[1].imaginary = v1[1]
+
+      function myMove () {
+        var arr = inp.value.split(/[\s,，]+/g).map(x => parseInt(x))
+        moveAll(arr)
+        // var count = 7
+        // var loop = setInterval(() => {
+        //   if (count < 0) {
+        //     clearInterval(loop)
+        //   }
+        //   getAll(xs)
+        //   count--
+        // }, 500)
+      }
+
+      function refresh () {
+        chart.changeData(data)
         chart2.changeData(data2)
-      }, period)
-    }
-    // move(1, [1,0]) // 把 x1 移到 (1, 0)
-    function move (pointIndex, dest, steps, delay) {
-      var point = data[pointIndex - 1]
-      // var steps = steps || 100
-      // var delay = delay || 50
-      var realDiff = (dest[0] - point.real)/steps
-      var imaginaryDiff = (dest[1] - point.imaginary)/steps
-      // var xs = [x1, x2, x3, x4, x5]
+      }
 
-      var loop = setInterval(() => {
-        if (steps < 0) {
-          clearInterval(loop)
-          point.real = Math.round(point.real)
-          point.imaginary = Math.round(point.imaginary)
-          data2[1].real = Math.round(data2[1].real)
-          data2[1].imaginary = Math.round(data2[1].imaginary)
-          xs[pointIndex - 1][0] = Math.round(xs[pointIndex - 1][0])
-          xs[pointIndex - 1][1] = Math.round(xs[pointIndex - 1][1])
-          chart.changeData(data)
-          // chart2.changeData(data2)
-        } else {
-          chart.changeData(data)
-          point.real += realDiff
-          xs[pointIndex - 1][0] = point.real
-          point.imaginary += imaginaryDiff
-          xs[pointIndex - 1][1] = point.imaginary
-          // var v1 = f1(...xs)
-          // data2[1].real = v1[0]
-          // data2[1].imaginary = v1[1]
-          // chart2.changeData(data2)
+      // moveAll([2,3,4,5,1]) 表示把处在位置1的点移到位置2,2=>3,3=>4,4=>5,5=>1以此类推
+      function moveAll (arr, steps, period) {
+        steps = steps || 100
+        period = period || 40
+        arr.map((v, i) => {
+          // move(i + 1, xs[v - 1], steps, period)
+          move(positions[i], xs[v - 1], steps, period)
+        })
+        positions = invert(compose(invert(positions), arr))
+        var loop = setInterval(() => {
+          if (steps < 0) {
+            clearInterval(loop)
+          }
           steps--
-        }
-      }, delay)
-    }
+          // var v2 = f2(...xs)
+          var v2 = f2(...getPoints())
+          var roots = getRoots(v2, 3)
+          data2[1].real = roots[0][0]
+          data2[1].imaginary = roots[0][1]
+          data2[3].real = roots[1][0]
+          data2[3].imaginary = roots[1][1]
+          data2[5].real = roots[2][0]
+          data2[5].imaginary = roots[2][1]
+          refresh()
+        }, period)
+      }
 
-    // exchange(1, 5)
-    // function exchange (p1, p2) { // [2,0] [1,0]
-    //   var p1 = data[p1 - 1]
-    //   var p2 = data[p2 - 1]
-    //   var realDiff = (p2.real - p1.real)/40
-    //   var imaginaryDiff = (p2.imaginary - p1.imaginary)/40
-    //   var count = 40
-    //   var loop = setInterval(() => {
-    //     if (count <= 0) {
-    //       clearInterval(loop)
-    //       p1.real = Math.round(p1.real)
-    //       p1.imaginary = Math.round(p1.imaginary)
-    //       p2.real = Math.round(p2.real)
-    //       p2.imaginary = Math.round(p2.imaginary)
-    //       chart.changeData(data)
-    //     } else {
-    //       chart.changeData(data)
-    //       p1.real += realDiff
-    //       p2.real -= realDiff
-    //       p1.imaginary += imaginaryDiff
-    //       p2.imaginary -= imaginaryDiff
-    //       count--
-    //     }
-    //   }, 50)
-    // }
+      function getPoints () {
+        var result = []
+        data.map((v, i) => {
+          result.push([v.real, v.imaginary])
+        })
+        return result
+      }
+
+      // move(1, [1,0], 100, 50) // 把 x1 移到 (1, 0)，每50毫秒移动一次，共移动100次
+      function move (pointIndex, dest, steps, period) {
+        var point = data[pointIndex - 1]
+        var realDiff = (dest[0] - point.real) / steps
+        var imaginaryDiff = (dest[1] - point.imaginary) / steps
+
+        var loop = setInterval(() => {
+          if (steps < 0) {
+            clearInterval(loop)
+            point.real = Math.round(point.real)
+            point.imaginary = Math.round(point.imaginary)
+          } else {
+            point.real += realDiff
+            point.imaginary += imaginaryDiff
+            steps--
+          }
+        }, period)
+      }
     </script>
   </body>
 </html>
