@@ -21,11 +21,11 @@
   <body>
     <div id="c1"></div>
     <div id="c2"></div>
-    <input type="text" id="inp">
-    <button onclick="myMove()">move</button>
-    <hr>
-    <span>don't click while moving!</span>
-    <button onclick="start()">auto move</button>
+    <!-- <input type="text" id="inp"> -->
+    <!-- <button onclick="myMove()">move</button> -->
+    <!-- <hr> -->
+    <!-- <span>don't click while moving!</span> -->
+    <button onclick="start()">start</button>
     <!-- <button onclick="start()">start moving!</button> -->
 
     <script>
@@ -44,11 +44,6 @@
         .then(_ => sleep(5000))
         .then(_ => moveAll([5, 4, 1, 2, 3]))
       }
-      // P1  2 5 3 4 1 不动
-      // P2  3 4 5 2 1 顺时针转1/5圈
-      // -P1 5 1 3 4 2 不动
-      // -P2 5 4 1 2 3 逆时针转1/5圈
-      // result: 2 3 4 5 1 不动
 
       init()
       config()

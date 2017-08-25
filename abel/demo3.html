@@ -21,12 +21,9 @@
   <body>
     <div id="c1"></div>
     <div id="c2"></div>
-    <input type="text" id="inp">
-    <button onclick="myMove()">move</button>
-    <hr>
-    <span>don't click while moving!</span>
-    <button onclick="start()">auto move</button>
-    <!-- <button onclick="start()">start moving!</button> -->
+    <!-- <input type="text" id="inp"> -->
+    <!-- <button onclick="myMove()">move</button> -->
+    <button onclick="start()">start moving</button>
 
     <script>
       var data, data2, chart, chart2
@@ -44,11 +41,6 @@
         .then(_ => sleep(5000))
         .then(_ => moveAll([5, 4, 1, 2, 3]))
       }
-      // P1  2 5 3 4 1 不动
-      // P2  3 4 5 2 1 顺时针转1/5圈
-      // -P1 5 1 3 4 2 不动
-      // -P2 5 4 1 2 3 逆时针转1/5圈
-      // result: 2 3 4 5 1 不动
 
       init()
       config()
@@ -74,19 +66,17 @@
             imaginary: v[1]
           })
         })
-        var rs = getRoots(f2(...xs), 5)
+        var rs = getRoots(f2(...xs), 3)
         rs.forEach((v, i) => {
           data2.push({
-            root: 'stay-' + (i + 1),
-            // root: 'stay',
+            // root: 'old-' + (i + 1),
+            root: 'stay',
             real: v[0],
             imaginary: v[1]
-          })
-        })
-        rs.forEach((v, i) => {
-          data2.push({
-            root: 'move-' + (i + 1),
-            // root: 'move',
+          }
+          , {
+            // root: 'new-' + (i + 1),
+            root: 'move',
             real: v[0],
             imaginary: v[1]
           })
@@ -111,14 +101,14 @@
         })
         chart2.col('real', {
           type: 'linear',
-          min: -4,
-          max: 3,
+          min: -10,
+          max: 10,
           alias: '实部'
         })
         chart2.col('imaginary', {
           type: 'linear',
-          min: -4,
-          max: 3,
+          min: -10,
+          max: 10,
           alias: '虚部'
         })
         // chart2.guide().text([-51, -65], 'r1 = 7f ^ (1/3)', {
@@ -126,11 +116,11 @@
         //   fontWeight: 'bold'
         // })
         chart2.point().position('real*imaginary')
-        .color('root', Array(5).fill('red').concat(Array(5).fill('blue')))
-        .shape('root', Array(5).fill('diamond').concat(Array(5).fill('circle')))
+        .color('root', ['red', 'blue', 'red', 'blue', 'red', 'blue'])
+        .shape('root', ['diamond', 'circle', 'diamond', 'circle', 'diamond', 'circle'])
         .size(4)
         .tooltip('root*real*imaginary')
-        // chart2.legend(false)
+        chart2.legend(false)
         chart2.render()
 
         chart.tooltip({
@@ -175,7 +165,7 @@
         //   if (count < 0) {
         //     clearInterval(loop)
         //   }
-        //   printInfo(data2)
+        //   getAll(xs)
         //   count--
         // }, 500)
       }
@@ -201,43 +191,15 @@
           steps--
           // var v2 = f2(...xs)
           var v2 = f2(...getPoints())
-          var roots = getRoots(v2, 5)
-          data2.forEach((v, i) => {
-            if (i >= 5) {
-              var theRoot = findNearestRoot(roots, v)
-              v.real = theRoot[0]
-              v.imaginary = theRoot[1]
-            }
-          })
-          // data2[1].real = roots[0][0]
-          // data2[1].imaginary = roots[0][1]
-          // data2[3].real = roots[1][0]
-          // data2[3].imaginary = roots[1][1]
-          // data2[5].real = roots[2][0]
-          // data2[5].imaginary = roots[2][1]
-          // data2[7].real = roots[3][0]
-          // data2[7].imaginary = roots[3][1]
-          // data2[9].real = roots[4][0]
-          // data2[9].imaginary = roots[4][1]
+          var roots = getRoots(v2, 3)
+          data2[1].real = roots[0][0]
+          data2[1].imaginary = roots[0][1]
+          data2[3].real = roots[1][0]
+          data2[3].imaginary = roots[1][1]
+          data2[5].real = roots[2][0]
+          data2[5].imaginary = roots[2][1]
           refresh()
         }, period)
-      }
-
-      function findNearestRoot (roots, data) {
-        var nearest
-        var origin = [data.real, data.imaginary]
-        roots.forEach(v => {
-          if (!nearest) {
-            nearest = v
-          } else {
-            var lastDistance = sumOfSquares([nearest[0] - origin[0], nearest[1] - origin[1]])
-            var distance = sumOfSquares([v[0] - origin[0], v[1] - origin[1]])
-            if (distance < lastDistance) {
-              nearest = v
-            }
-          }
-        })
-        return nearest
       }
 
       function getPoints () {

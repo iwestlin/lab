@@ -1,0 +1,459 @@
+<!doctype html><html><head><meta charset='utf-8'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.2/katex.min.css">
+  <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/mdmath.css">
+  <style>
+    body {
+      width: 1100px;
+      margin: 0 auto;
+    }
+    img {
+      margin: 10px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px #555;
+    }
+  </style>  
+  </head><body class="markdown-body">
+  <h1 data-line="0" class="code-line" id="%E4%B8%80%E8%88%AC%E4%B8%80%E5%85%83%E4%BA%94%E6%AC%A1%EF%BC%88%E5%8F%8A%E4%BB%A5%E4%B8%8A%EF%BC%89%E6%96%B9%E7%A8%8B%E6%97%A0%E6%B1%82%E6%A0%B9%E5%85%AC%E5%BC%8F%E7%9A%84%E7%9B%B4%E8%A7%82%E8%A7%A3%E9%87%8A">一般一元五次（及以上）方程无求根公式的直观解释</h1>
+  <blockquote data-line="2" class="code-line">
+  <p data-line="2" class="code-line">本文假定读者具有中学及以上数学基础</p>
+  </blockquote>
+  <!-- TOC -->
+  <ul>
+  <li data-line="6" class="code-line"><a href="#%E4%B8%80%E8%88%AC%E4%B8%80%E5%85%83%E4%BA%94%E6%AC%A1%E5%8F%8A%E4%BB%A5%E4%B8%8A%E6%96%B9%E7%A8%8B%E6%97%A0%E6%B1%82%E6%A0%B9%E5%85%AC%E5%BC%8F%E7%9A%84%E7%9B%B4%E8%A7%82%E8%A7%A3%E9%87%8A">一般一元五次（及以上）方程无求根公式的直观解释</a>
+  <ul>
+  <li data-line="7" class="code-line"><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+  <li data-line="8" class="code-line"><a href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8">复数的本质</a></li>
+  <li data-line="9" class="code-line"><a href="#%E6%A0%B9%E5%8F%B7%E5%AF%B9%E5%A4%8D%E6%95%B0%E7%9A%84%E4%BD%9C%E7%94%A8">根号对复数的作用</a></li>
+  <li data-line="10" class="code-line"><a href="#%E6%A0%B9%E7%9A%84%E7%BD%AE%E6%8D%A2">根的置换</a></li>
+  <li data-line="11" class="code-line"><a href="#%E6%A0%B9%E5%8F%B7%E7%9A%84%E9%AD%94%E6%B3%95">根号的魔法</a></li>
+  <li data-line="12" class="code-line"><a href="#%E6%A0%B9%E5%8F%B7%E7%9A%84%E5%B1%80%E9%99%90">根号的局限</a></li>
+  <li data-line="13" class="code-line"><a href="#%E7%A8%8B%E5%BA%8F%E8%AF%81%E6%98%8E">程序证明</a></li>
+  <li data-line="14" class="code-line"><a href="#%E6%8E%A8%E5%B9%BF%E5%88%B0%E5%85%B6%E4%BB%96%E6%AC%A1%E6%96%B9%E7%A8%8B">推广到其他次方程</a></li>
+  </ul>
+  </li>
+  </ul>
+  <!-- /TOC -->
+  <h2 data-line="18" class="code-line" id="%E5%89%8D%E8%A8%80">前言</h2>
+  <p data-line="20" class="code-line">记得中学学方程的时候老师提到过高次方程的可解性问题，那时候我满脑子想的是上课怎么睡觉不会让老师发现和下课怎么和隔壁班的美女偶遇，对这种事情自然不会放在心上。然而命运和人性就是这么捉摸不定，在远离了课堂和考试之后，我发现自己对这种问题越来越感兴趣了……</p>
+  <p data-line="22" class="code-line">知乎上 <a href="https://www.zhihu.com/question/29316970">这个问题</a> 出现在我时间线后，我看完了下面的每一个答案，用心的超长答案不少，给的一些链接也是干货满满。其中我觉得最认真的回答是匡世珉的<a href="https://www.zhihu.com/question/29316970/answer/151839928">这个回答</a>，（我能看懂的）最严肃的回答是韩京俊写的<a href="https://www.zhihu.com/question/29316970/answer/80816396">一篇论文</a>，最直观易懂的是姜子麟的<a href="https://www.zhihu.com/question/29316970/answer/151649630">这个回答</a>，最生动的是一个 YouTube 上的<a href="https://www.youtube.com/watch?v=RhpVSV6iCko">视频</a>，最全面的回答是一个三百多页的<a href="http://www.maths.ed.ac.uk/~aar/papers/abel.pdf">英文 pdf</a>，来自 V.I. Arnold 的课程讲义（我只看了看目录。。）<br>
+  其中韩京俊、姜子麟和 YouTube 上的视频用的都是同样的方法，本文也将使用这种方法来解释。</p>
+  <blockquote data-line="25" class="code-line">
+  <p data-line="25" class="code-line">说到 V.I. Arnold，这位可是个传说级的大牛，「数学直觉主义」代表人物，对形式化的公理证明不屑一顾（@罗素 和他的数学原理。。），认为数学是物理的一部分，对剥离了与物理世界的联系、剔除了直观感觉的纯粹抽象的数学深恶痛绝。请让我引用他演讲说的一段话（的中文译文）:<br>
+  source: <a href="https://www.uni-muenster.de/Physik.TP/~munsteg/arnold.html">英文译文</a>和<a href="https://baike.baidu.com/item/%E5%BC%97%E6%8B%89%E5%9F%BA%E7%B1%B3%E5%B0%94%C2%B7%E9%98%BF%E8%AF%BA%E5%BE%B7/3486413">中文译文</a></p>
+  </blockquote>
+  <blockquote data-line="28" class="code-line">
+  <p data-line="28" class="code-line">数学是物理的一部分。物理学是一门实验科学，它是自然科学的一部分。而数学是物理学中只需要花费较少的代价进行实验的那一部分。例如 Jacobi 恒等式（保证三角形三条高交于一点）就是一个实验事实，正如同地球是圆的（即同胚于球体）这样的事实一样。但是发现前者却要比发现后者需要较少的代价。在20世纪中叶，人们试图严格地区分物理与数学，其造成的后果是灾难性的……</p>
+  </blockquote>
+  <p data-line="30" class="code-line">言归正传，前面提到这个问题已经有这么多答案了，为什么我还要写这篇文章呢？</p>
+  <p data-line="32" class="code-line">因为这些回答有些公式多得让人眼花头疼，有些专用术语深奥得只能让本来就懂这个定理的人看懂，有的通俗易懂却偏偏缺失了关键地方的证明……我绝不敢说这篇文章能答得比这些答案好，但我承诺本文尽量不用超出中学水平的数学公式，尽量让最多的人能够看懂。<br>
+  有些数学证明可以不用公式甚至不用文字就能让人看懂（比如<a href="http://www.matrix67.com/blog/archives/2324">余弦定理的无字证明</a>），恰好的是，这个定理也堪堪让人不用公式就能理解其证明。</p>
+  <p data-line="35" class="code-line">其实，这个问题在两百年前就已经被人类解决了，还有个专门的定理，名字叫 Abel–Ruffini Theorem。这个定理的原始证明和知乎问题下的所有答案，本质上讲的都是一样的东西。</p>
+  <p data-line="37" class="code-line">这个定理的研究开始于大名鼎鼎的拉格朗日，（半）证明于鲁菲尼，完证于阿贝尔，升华于伽罗华。其中过程大家可以阅读北大院士丁伟岳写的<a href="https://lttt.vanabel.cn/wp-content/uploads/2013/09/theory.pdf">一篇文章</a>。阿贝尔和伽罗华都是两个颇具悲剧色彩的天才，都死于二十几岁，他们的思想因为超前于时代而生前不为人所重视，死后人们才渐渐发现其过人之处。特别是伽罗华，有人说，以他的天赋，如果不是年纪轻轻就死于决斗，本可能成为数学界的 GoAT (Greatest of All Time)。感兴趣的读者可以搜索了解两人的生平。</p>
+  <p data-line="39" class="code-line">当然，大家也不要忘记，是拉格朗日首先意识到根的置换起到的重要作用，开辟了这项研究的康庄大道，并提出了一般高次（五次及以上）方程没有求根公式的猜测（背景是人们发现一元三次及四次方程的求根公式后几百年内都没能发现五次及以上方程的求根公式）。</p>
+  <p data-line="41" class="code-line"><strong>正如文章题目所说，本文利用现代浏览器的高级功能，给出了这个定理的直观（动画）解释，读者甚至可以自己动手尝试和验证。为了确保文中的动画能够正常运行，请读者使用 PC 或 Mac 上的的现代浏览器（如 Chrome, Firefox, Safari 等）浏览本文。</strong></p>
+  <p data-line="43" class="code-line"><strong>本文主要参照的是姜子麟的回答，甚至可以说是那篇回答的补充说明。</strong></p>
+  <h2 data-line="45" class="code-line" id="%E5%A4%8D%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8">复数的本质</h2>
+  <blockquote data-line="46" class="code-line">
+  <p data-line="46" class="code-line">如果读者已经理解了复数的几何意义，可跳过本章。</p>
+  </blockquote>
+  <blockquote data-line="48" class="code-line">
+  <p data-line="48" class="code-line">Q：为什么要引入复数，难道就不能在实数范围内好好玩耍吗。。<br>
+  A：还真不能，后面会给出原因。</p>
+  </blockquote>
+  <blockquote data-line="51" class="code-line">
+  <p data-line="51" class="code-line">本文绝不会提到一个数的平方竟然会等于 -1 这么反人类的事。</p>
+  </blockquote>
+  <p data-line="53" class="code-line">我们先来定义一种结构和两个运算（不要被唬住了，都是很简单的运算）<br>
+  一种结构（a,b,c,d 都是实数）：<br>
+  <code>(a, b)</code><br>
+  两个运算：<br>
+  「加法」： <code>(a, b) + (c, d) = (a+c, b+d)</code><br>
+  「乘法」： <code>(a, b) · (c, d) = (ac-bd, ad+bc)</code></p>
+  <blockquote data-line="59" class="code-line">
+  <p data-line="59" class="code-line">Q：为啥要定义这么稀奇古怪的结构和运算？<br>
+  A：别急，后面会有说明。</p>
+  </blockquote>
+  <p data-line="62" class="code-line">大家一定会觉得第一个运算十分眼熟，这不就是向量的加法吗！可是第二个运算是什么东西，为啥结果不是 <code>ac + bd</code> ？</p>
+  <p data-line="64" class="code-line">管它是啥，带入几个简单的数字算算再说。<br>
+  <code>(1, 1) · (2, 1) = (1*2-1*1, 1*1+1*2) = (1, 3)</code></p>
+  <p data-line="67" class="code-line">有点意思，把这几个数画到坐标系上看看，括号中前的数字对应水平轴上的取值，后面的数字对应竖直轴的取值。<br>
+  <img src="file:///Users/william/Github/lab/abel/1.jpg" alt="1"><br>
+  似乎看不出什么明显规律？不过 (1, 1)的平方和乘以(2, 1)的平方和刚好等于(1, 3)的平方和。。<br>
+  另外注意三条线段和水平轴之间的夹角，会不会两条橙色线段与水平轴的夹角之和等于蓝色线段与水平轴的夹角？</p>
+  <p data-line="72" class="code-line">我们先来验证平方和：<br>
+  <img src="file:///Users/william/Github/lab/abel/2.jpg" alt=""></p>
+  <p data-line="75" class="code-line">关于夹角我们再举一个例子看看：<br>
+  <code>(1, 1) · (1, 1) = (0, 2)</code><br>
+  <img src="file:///Users/william/Github/lab/abel/3.jpg" alt=""><br>
+  两个45度角加起来刚好等于90度角！</p>
+  <p data-line="80" class="code-line">大胆假设后，值得我们求证一下了，由于我们只知道点的坐标而不知道角度，有必要请出三角函数（和差化积）来：<br>
+  <img src="file:///Users/william/Github/lab/abel/4.jpg" alt=""><br>
+  注意，此处证明并不严谨，因为 y = tan(x) 是一个周期函数，在一个周期内才是单调函数。</p>
+  <blockquote data-line="84" class="code-line">
+  <p data-line="84" class="code-line">Q：可是，这些东西又有什么用？<br>
+  A：<strong>把上述所有形如 <code>(a, b)</code> 的结构全部换成 <code>a + bi</code>，恭喜你，你已经理解了复数的本质！</strong></p>
+  </blockquote>
+  <blockquote data-line="87" class="code-line">
+  <p data-line="87" class="code-line">诉诸语言的话：<br>
+  如果把每一个复数看作是 x 轴为实部，y 轴为虚部的坐标系中的一个向量，那么</p>
+  <ul>
+  <li data-line="89" class="code-line">复数的加法就是向量的加法</li>
+  <li data-line="90" class="code-line"><strong>复数的乘法得出的结果所代表的向量，其模长等于两乘数的模长之积，其与实数轴的夹角等于两乘数与实数轴的夹角之和。</strong></li>
+  </ul>
+  </blockquote>
+  <p data-line="92" class="code-line">最漂亮的是，<strong>我们定义的运算和我们曾经学过的实数运算法则完全相容，也就是说，如果把以前所有学过的实数运算统统改成 (a, 0) 这种结构的运算，结果全都等价！</strong></p>
+  <p data-line="94" class="code-line">比如:<br>
+  <code>1 + 1 = 2</code> 对应 <code>(1, 0) + (1, 0) = (2, 0)</code><br>
+  <code>2 * 3 = 6</code> 对应 <code>(2, 0) · (3, 0) = (6-0, 0+0) = (6, 0)</code></p>
+  <p data-line="98" class="code-line">而且，我们定义的运算同样满足分配律和结合律！感兴趣的读者可以拿纸笔检验一下。<br>
+  思考题： 减法和除法怎么办？</p>
+  <h2 data-line="101" class="code-line" id="%E6%A0%B9%E5%8F%B7%E5%AF%B9%E5%A4%8D%E6%95%B0%E7%9A%84%E4%BD%9C%E7%94%A8">根号对复数的作用</h2>
+  <blockquote data-line="102" class="code-line">
+  <p data-line="102" class="code-line">√2 到底代表什么意思？</p>
+  </blockquote>
+  <p data-line="104" class="code-line">如果用中学老师教给我们的知识，我们知道它是一个平方等于 2 的无理数，其小数表达是 1.414...</p>
+  <blockquote data-line="106" class="code-line">
+  <p data-line="106" class="code-line">可它为什么不能代表 -1.414... ?</p>
+  </blockquote>
+  <p data-line="108" class="code-line">因为老师说它就是这么定义的。。</p>
+  <blockquote data-line="110" class="code-line">
+  <p data-line="110" class="code-line">已知 x^2 = 2，请问 x 等于多少？</p>
+  </blockquote>
+  <p data-line="112" class="code-line">在实数范围内，显然有两个数满足这个条件，分别是 √2 和 -√2。</p>
+  <blockquote data-line="114" class="code-line">
+  <p data-line="114" class="code-line">如果拓展到复数呢？</p>
+  </blockquote>
+  <p data-line="116" class="code-line">有哪些复数（所代表的向量），它乘以自身后会落在 (2, 0)这个点？<br>
+  这些复数必须满足以下条件：</p>
+  <ul>
+  <li data-line="118" class="code-line">它代表的向量与实数轴的夹角的两倍为 0（或 2π 的整数倍）</li>
+  <li data-line="119" class="code-line">它代表的向量的模长的平方等于 (2^2+0^2)^(1/2) = 2</li>
+  </ul>
+  <p data-line="121" class="code-line">依然只有两个数（向量）满足这个条件，分别是 (√2, 0) 和 (-√2, 0)，前者与实数轴的夹角为 0，两倍还是 0； 后者为 π，两倍后为 2π</p>
+  <blockquote data-line="123" class="code-line">
+  <p data-line="123" class="code-line">1 的四分之一次方在复数域是什么意思？</p>
+  </blockquote>
+  <p data-line="125" class="code-line">它代表了这么一个（些）数，这个数的四次方等于 (1, 0)<br>
+  即这个数所代表的向量应满足：</p>
+  <ul>
+  <li data-line="127" class="code-line">向量的模长等于 1</li>
+  <li data-line="128" class="code-line">向量与实数轴的夹角的 4 倍为 2π 的整数倍</li>
+  </ul>
+  <p data-line="130" class="code-line">以下四个数满足此条件<br>
+  <img src="file:///Users/william/Github/lab/abel/5.jpg" alt=""></p>
+  <blockquote data-line="133" class="code-line">
+  <p data-line="133" class="code-line">在复数域，给定一个数 a，a 的 (1/n) 次方（a 开 n 次方）的结果是这么一些数：</p>
+  </blockquote>
+  <ul>
+  <li data-line="134" class="code-line">这些数落在以圆心为原点的某个圆上，这个圆的半径的 n 次方等于 a 的模长</li>
+  <li data-line="135" class="code-line">这些数所代表的向量与实数轴之间的夹角的 n 倍等于数 a 所代表的向量夹角（加上 2π 的整数倍）</li>
+  <li data-line="136" class="code-line">可以很容易就得出一个推论：这些数把这个圆的圆周分成 n 等份</li>
+  </ul>
+  <p data-line="138" class="code-line">不知道读者有没有这样一种感觉：中学学到的实数域开根号其实「很差劲」，结果「不完整」，√a 竟然只落在数轴的正半边，而且 a 还不能小于 0。要表示平方等于 2 的数竟然还需要在 √2 前面加个正负号！</p>
+  <p data-line="140" class="code-line">如果用我们在复数域的定义，问题完美解决，√a 本身就蕴含了所有可能的解，而且我们完全不用管 a 的取值范围！</p>
+  <h2 data-line="142" class="code-line" id="%E6%A0%B9%E7%9A%84%E7%BD%AE%E6%8D%A2">根的置换</h2>
+  <blockquote data-line="143" class="code-line">
+  <p data-line="143" class="code-line">「置换」： 位置的变换</p>
+  </blockquote>
+  <p data-line="145" class="code-line">好了，基础知识已经补充完毕，读者可以直接打开<a href="https://www.zhihu.com/question/29316970/answer/151649630">姜子麟的回答</a>（必读），如果读者直接看懂了那篇回答，那就可以不用回来了，该干啥干啥去吧……或者你也可以看看下面动画的直观演示。</p>
+  <p data-line="147" class="code-line">如果没看懂或者有些地方不清楚，可以看看本文接下来的部分有没有解答。</p>
+  <p data-line="149" class="code-line">首先让我引用一段姜子麟回答中的原话，明确我们要讨论的问题：</p>
+  <p data-line="151" class="code-line"><img src="file:///Users/william/Github/lab/abel/7.jpg" alt="7"></p>
+  <blockquote data-line="153" class="code-line">
+  <p data-line="153" class="code-line">本文接下来的讨论默认都是在复数域</p>
+  </blockquote>
+  <p data-line="155" class="code-line">考虑方程 ax^2 + bx + c = 0 (a!=0)<br>
+  还记得我们曾经背得滚瓜烂熟的求根公式吗？</p>
+  <p data-line="158" class="code-line"><img src="file:///Users/william/Github/lab/abel/6.jpg" alt="6"></p>
+  <p data-line="160" class="code-line">注意，我们是在复数域中讨论求根公式！所以根号本身就代表了所有可能的解，不需要再画蛇添足地添加正负号了！</p>
+  <p data-line="162" class="code-line">我们发现，方程的根竟然只跟等式左边多项式的系数有关！在读者吐槽这不是显然的吗之前，请细想一下，这真的是显然的吗？</p>
+  <p data-line="164" class="code-line">对于任何一元二次方程 ax^2 + bx + c = 0 (a!=0)<br>
+  我们都可以将等式两边同时除以 a，消去一个变量，化成形如<br>
+  x^2 + dx + e = 0 的方程。所以我们只需要考虑</p>
+  <p data-line="168" class="code-line"><code>x^2 + dx + e = 0</code></p>
+  <p data-line="170" class="code-line">我们假设求得的两个根分别是 x1, x2，那么必然有<br>
+  0 = (x - x1)(x - x2)<br>
+  =  x^2 - (x1 + x2)x + x1x2<br>
+  =  x^2 + dx + e</p>
+  <p data-line="175" class="code-line">虽然从上面几乎可以断定 d 和 e，但是谨慎起见，根据<a href="https://zh.wikipedia.org/wiki/%E9%9F%A6%E8%BE%BE%E5%AE%9A%E7%90%86">韦达定理</a>，我们有</p>
+  <p data-line="177" class="code-line">d = -(x1 + x2)
+  e = x1 * x2</p>
+  <p data-line="180" class="code-line">我们发现： 方程左边多项式的系数只和方程的根有关！</p>
+  <p data-line="182" class="code-line">我们结合一下两个发现：</p>
+  <ul>
+  <li data-line="183" class="code-line">方程的根只和方程左边多项式的系数有关</li>
+  <li data-line="184" class="code-line">方程左边多项式的系数只和方程的根有关</li>
+  </ul>
+  <p data-line="186" class="code-line">得出推论： 方程的根只和方程的根有关。（这回是真的显然了）</p>
+  <p data-line="188" class="code-line">……等等，这不是死循环了吗。。<br>
+  别急，我们再来观察一下 d 和 e</p>
+  <p data-line="191" class="code-line">注意到： 如果把 x1 和 x2 交换位置，d 和 e 的值不变！</p>
+  <p data-line="193" class="code-line">这是巧合？还是必然？<br>
+  我们回到最开始的 (x - x1)(x - x2)<br>
+  根据乘法的交换律它完全可以写成 (x - x2)(x - x1) 嘛！</p>
+  <p data-line="197" class="code-line">换句话说，交换 x1 和 x2 的位置对这个表达式没有丝毫影响！<br>
+  也就是说，x1 和 x2 置换后，b 和 e 不变。<br>
+  对于更高次的方程也是同理，再乘以 (x - x3)(x - x4)...同样满足乘法的交换律。</p>
+  <p data-line="201" class="code-line">Excited! 我们已经掌握理解这个定理的钥匙了！</p>
+  <p data-line="203" class="code-line">在继续下一步之前，我们回顾一下已经掌握的信息：</p>
+  <ul>
+  <li data-line="204" class="code-line">方程的求根公式只和方程左边的多项式系数有关</li>
+  <li data-line="205" class="code-line">这些系数在方程根的置换下保持不变</li>
+  </ul>
+  <blockquote data-line="207" class="code-line">
+  <p data-line="207" class="code-line">Q: 我们先来思考这样一个问题：如果方程的求根公式不准用根号，会发生什么？<br>
+  A: 如果不用根号，那么一个表达式只能求出一个值，也就是说一个求根公式只能得出一个固定的值（点）。</p>
+  </blockquote>
+  <p data-line="210" class="code-line">好，我们假设对于一个一元n次方程（n&gt;=2)，我们已经知道了其中一个根的求根公式 x1 = (某个由多项式系数加减乘除组成的表达式)</p>
+  <p data-line="212" class="code-line">根据以上条件，我们知道：</p>
+  <ul>
+  <li data-line="213" class="code-line">x1 由这个方程的系数唯一确定</li>
+  <li data-line="214" class="code-line">这个方程的系数在方程根的置换下保持不变</li>
+  </ul>
+  <p data-line="216" class="code-line">于是几乎立刻就能得出矛盾：<br>
+  如果把 x1 和 x2 所对应的两个点移动置换，那么在 x1 向着 x2 移动（同时 x2 也在向着 x1 移动）的过程中，方程的系数（由方程的根决定）在不断发生变化，而由方程的系数组成的求根公式也在不断发生变化。</p>
+  <p data-line="219" class="code-line">如果这个求根公式是正确的话，那么我们期望这个求根公式求出来的解应该一直等于 x1(跟着 x1 跑)，可是，在置换完成后，由于「方程的系数在方程根的置换下保持不变」以及「x1 由这个方程的系数唯一确定」，这个求根公式依然求出的是原来 x1 的值！</p>
+  <p data-line="221" class="code-line">而此时占据原来 x1 位置的是 x2，x1 已经跑到原来 x2 的位置上去了！于是得出矛盾，所以一元二次及以上方程的求根公式中不能没有根号（一元一次方程则没有此限制，因为根据代数基本定理，它只有一个根，没法和别的根进行置换）。</p>
+  <p data-line="223" class="code-line">说了这么多，可能动画最直观，请（使用 chrome 等现代浏览器）看演示<br>
+  点击 move 按钮开始动画，关于输入框中的 2 1 3 4 5，意思是把 x1 和 x2 的位置互换，后面会有详细说明。将鼠标悬浮在图中任意点的上方，会出现此点的详细说明。<br>
+  左侧的图表示某个一元五次方程的 5 个根，右侧是我们假想的求根公式算出来的 x1 的位置，这个求根公式中没有根号，由方程左边的多项式系数加减乘除组成，而这些系数又根据左侧根的变化而变化，它与左侧 x1 不相等并不重要，我们只需注意它本身的位置，这才是我们导出矛盾的地方。</p>
+  <iframe src="./demo1.html" width="1100" height="550"></iframe>
+  <p data-line="229" class="code-line">我们注意到，在 x1 和 x2 交换的过程中，我们假想的不带根号的 x1 求根公式（刨根问底的话，是 b^2 - 4ac）只是装模作样的在外面逛了一圈，又回到了原来的位置！<br>
+  而如果这个求根公式是正确的话，它求出来的点应该一直等于 x1 才对，可是 x1 已经跑到之前 x2 的位置上去了，现在在 x1 位置的是 x2！</p>
+  <blockquote data-line="232" class="code-line">
+  <p data-line="232" class="code-line">关于根的置换，我们约定一套表达方法。假设有 5 个根的话，它们的初始位置表示为 1 2 3 4 5，我们实际上隐藏了一个很重要的信息就是这些数字的下标（即从左到右的顺序），如果把下标也写出来的话，那就是 1-&gt;1,2-&gt;2,3-&gt;3,4-&gt;4,5-&gt;5。<br>
+  同理，2 1 3 4 5 的完整表达式是 1-&gt;2,2-&gt;1,3-&gt;3,4-&gt;4,5-&gt;5，即把处在 1 位置的点移到 2 位置去，把 2 位置的点移到 1 位置来，其余点保持不动。<br>
+  读者可以尝试将输入框中的数字改成 12345 的任意排列，注意用空格或逗号分隔每个数字，然后点击 move 按钮观察效果。</p>
+  </blockquote>
+  <h2 data-line="236" class="code-line" id="%E6%A0%B9%E5%8F%B7%E7%9A%84%E9%AD%94%E6%B3%95">根号的魔法</h2>
+  <p data-line="238" class="code-line">我们已经知道一元二次及以上方程的求根公式不能没有根号了，那么根号起到了一个怎样的作用，能够避免上述我们制造的矛盾呢？</p>
+  <p data-line="240" class="code-line">我们以一元二次方程的求根公式为例，直接看演示：<br>
+  （由于我们只关心根号的作用，所以下面右侧的图暗含的求根公式为 (b^2 - 4ac)^(1/2) ）</p>
+  <iframe src="./demo2.html" width="1100" height="550"></iframe>
+  <p data-line="245" class="code-line">由于求根公式中带有二次根号，所以求出的解有两个，即右侧有两个蓝点（红点表示它们的原始位置）<br>
+  点击 move 按钮以后，我们发现随着左侧根的移动，右侧蓝点也在朝着对方移动！<br>
+  当左侧移动结束后，右侧两个蓝点刚好也调换了位置，说明求根公式求出的值一直是跟着原来那个根走的，而整个根号表达式没有变化——它求出的依然是原来的两个值！</p>
+  <p data-line="249" class="code-line">Excited! Excellent! Extraordinary！</p>
+  <p data-line="251" class="code-line">不过也许会有人钻牛角尖了：两个蓝点运动相交时，我怎么确定它们是穿过对方而不是撞一下就原地返回了？</p>
+  <p data-line="253" class="code-line">我们当然可以通过修改根的移动轨迹来使得它们两不相交，不过后面遇到更高次方程的时候它能够自动避免这个问题。
+  请看三次根号的演示（点击 start moving 开始动画）：</p>
+  <iframe src="./demo3.html" width="1100" height="550"></iframe>
+  <h2 data-line="258" class="code-line" id="%E6%A0%B9%E5%8F%B7%E7%9A%84%E5%B1%80%E9%99%90">根号的局限</h2>
+  <p data-line="260" class="code-line">看起来根号已经把我们前面制造的矛盾消弭于无形了，那么还有没有别的办法能导出矛盾？<br>
+  更关键的问题是，为什么一元二次三次四次方程有求根公式（根式解），而到了五次及以上就没有了？量变导致的质变究竟是什么？</p>
+  <p data-line="263" class="code-line">山穷水尽没路走时，就得靠天才的神来之笔了（关于究竟是谁最先想到下面方法的我没做考证，可能是 Arnold）。</p>
+  <p data-line="265" class="code-line">如果读者在前面动画中自己输入过根的置换序列，多玩几次可能就会发现：如果某次置换右侧的根也发生了置换的话，那么，这次输入上次置换序列的「反序列」，右侧的根的置换也会和上次恰恰相反！
+  比如，假设上次的置换序列是 <code>2 1 3 4 5</code><br>
+  那么它的反序列也是 <code>2 1 3 4 5</code><br>
+  因为上次交换了 x1 和 x2 的位置，这次我们再次交换 x1 和 x2 就把它们换回来了！</p>
+  <blockquote data-line="270" class="code-line">
+  <p data-line="270" class="code-line">如果读者懂代码，可以打开浏览器控制台（windows 下 chrome 的快捷键应该是 ctrl+shift+j, Mac 是 cmd+alt+j），输入 <code>invert([2,1,3,4,5])</code> 查看结果。<br>
+  不懂也没有关系，用纸笔做推算也是一样的，我们来试试找 <code>2 3 4 5 1</code> 的反序列</p>
+  </blockquote>
+  <p data-line="273" class="code-line">先写出它的完整表达</p>
+  <pre class="hljs"><code>
+  1 -&gt; 2
+  2 -&gt; 3
+  3 -&gt; 4
+  4 -&gt; 5
+  5 -&gt; 1
+  </code></pre>
+  <p data-line="282" class="code-line">那么我们只需要把箭头反过来，然后按右列从小到大排下序就行了：</p>
+  <pre class="hljs"><code>
+  5 &lt;- 1
+  1 &lt;- 2
+  2 &lt;- 3
+  3 &lt;- 4
+  4 &lt;- 5
+  </code></pre>
+  <p data-line="291" class="code-line">结果是 <code>5 1 2 3 4</code></p>
+  <p data-line="293" class="code-line">仔细想想，这几乎是显然的，因为我们的运算只和点的位置有关，和它的序号无关；求根公式才不管数的下标是多少，它只根据实部和虚部来做运算。</p>
+  <p data-line="295" class="code-line">回顾一下我们前面导出矛盾的方式：</p>
+  <ul>
+  <li data-line="296" class="code-line">移动左侧的根（根的置换）</li>
+  <li data-line="297" class="code-line">右侧求出的根没有发生任何变化<br>
+  矛盾。</li>
+  </ul>
+  <p data-line="300" class="code-line">根号解决矛盾的魔法：</p>
+  <ul>
+  <li data-line="301" class="code-line">置换左侧的根</li>
+  <li data-line="302" class="code-line">右侧的根也发生了置换</li>
+  </ul>
+  <p data-line="304" class="code-line">于是我们试图制造新的矛盾：</p>
+  <ul>
+  <li data-line="305" class="code-line">置换左侧的根</li>
+  <li data-line="306" class="code-line">右侧的根依然不发生任何变化</li>
+  </ul>
+  <p data-line="308" class="code-line">一次置换看起来是无法搞出什么大新闻了，我们试试多几次置换。<br>
+  不妨设某次置换的序列是 P，它的反序列记作 -P</p>
+  <p data-line="311" class="code-line">我们先做 P, 再做 -P<br>
+  根据前面的结论，右侧的蓝点都会回到原位。不过，左侧的点也和初始时一样。。但我们已经完成一半了！</p>
+  <p data-line="314" class="code-line">如果我们引入另外一个置换 Q，Q 的反序列记作 -Q<br>
+  我们先做 P，再做 Q，接着做 -P，最后做 -Q【我们称这一系列操作叫做交换子】</p>
+  <p data-line="317" class="code-line">请注意，在每一次置换后，如果我们不管每个数的下标，那么每次置换的初始和结束状态都是一样的，所以无所谓一次置换的反置换是不是紧跟着原置换，只要某种置换和它的反置换发生的次数一样多，那么它们的整体效果就相当于 1 2 3 4 5，也就是什么都不变！</p>
+  <p data-line="319" class="code-line">感兴趣的读者可以在纸上随便写两个置换，算出它们的反置换，然后推算它们的交换子的效果，看看 x1 x2 x3 x4 x5 最后的位置是不是不变。我在此直接给出结论：大部分交换子的最终效果，x1~x5的位置都和初始值不完全相同！</p>
+  <p data-line="321" class="code-line">下面右图是某个假想的开五次方的求根公式计算出来的结果。首先观察左图 x1~x5 的初始位置，然后点击 start 按钮（在停止运动之前不要再次点击，不然我也不知道会发生什么）开始动画，密切关注右图蓝点的运动，你会发现，右图蓝点运动彻底结束后会回到初始位置；而回过头来看左侧 x1~x5 的结束位置，发现它们和初始位置不一样，我们再次得出矛盾！</p>
+  <blockquote data-line="323" class="code-line">
+  <p data-line="323" class="code-line">提示，图中的图例是可以点击的，点击某个特定的点的图例会导致这个点消失，再次点击则又出现，读者可以借此观察蓝点是否和红点（初始位置）序号一致。本文动画皆由阿里出品的 G2 框架强力驱动，特此致谢，并吐槽 bug 还是不少。。</p>
+  </blockquote>
+  <iframe src="./demo4.html" width="1100" height="550"></iframe>
+  <p data-line="327" class="code-line">图中四次置换依序是：</p>
+  <table>
+  <thead>
+  <tr>
+  <th>置换记号</th>
+  <th>置换内容</th>
+  <th>右侧结果</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td>P</td>
+  <td>2 5 3 4 1</td>
+  <td>右图不变</td>
+  </tr>
+  <tr>
+  <td>Q</td>
+  <td>3 4 5 2 1</td>
+  <td>右图蓝点顺时针转1/5圈</td>
+  </tr>
+  <tr>
+  <td>-P</td>
+  <td>5 1 3 4 2</td>
+  <td>不变</td>
+  </tr>
+  <tr>
+  <td>-Q</td>
+  <td>5 4 1 2 3</td>
+  <td>蓝点逆时针转1/5圈</td>
+  </tr>
+  <tr>
+  <td>总体</td>
+  <td>2 3 4 5 1</td>
+  <td>不变</td>
+  </tr>
+  </tbody>
+  </table>
+  <p data-line="337" class="code-line">我们再次导出了矛盾：在四次置换下，x1 已经不在原来的位置（而在之前 x2 的位置）了，而求根公式的结果却没发生任何变化。</p>
+  <p data-line="339" class="code-line">再次回顾一下我们已经掌握的信息：</p>
+  <ul>
+  <li data-line="340" class="code-line">根的置换下多项式系数保持不变</li>
+  <li data-line="341" class="code-line">求根公式由多项式系数和各种运算（加减乘除和开方）组成</li>
+  <li data-line="342" class="code-line">不含根号的求根公式只能得出某个唯一的值（即多项式系数的加减乘除运算在根的任意置换下保持不变）</li>
+  <li data-line="343" class="code-line">开方运算在交换子的作用下保持不变</li>
+  </ul>
+  <p data-line="345" class="code-line">看起来我们似乎已经得到答案了？<br>
+  不过肯定有哪里不对，因为我们还是没有搞清为什么五次和四次就是不一样。</p>
+  <p data-line="348" class="code-line">注意到了吗，我们只处理了一层根号。打个比方的话就是，我们用一个交换子把根号中的东西剥出来了，使得根号运算降到了加减乘除的维度。</p>
+  <p data-line="350" class="code-line">而如果有两重或更多重根号呢？<br>
+  我们就用交换子的交换子！</p>
+  <p data-line="353" class="code-line">记得之前提过的吗，「每次置换的初始和结束状态都是一样的，所以无所谓一次置换的反置换是不是紧跟着原置换，只要某种置换和它的反置换发生的次数一样多，那么它们的整体结果就是 1 2 3 4 5」，交换子的交换子最终作用的结果同样也是对右侧蓝点没有影响的。</p>
+  <p data-line="355" class="code-line">请让我再次引用姜的回答的原话，因为没有比那说得更清楚的了：</p>
+  <p data-line="357" class="code-line"><img src="file:///Users/william/Github/lab/abel/8.jpg" alt="8"></p>
+  <h2 data-line="359" class="code-line" id="%E7%A8%8B%E5%BA%8F%E8%AF%81%E6%98%8E">程序证明</h2>
+  <p data-line="361" class="code-line">我们的终极目标是：</p>
+  <ul>
+  <li data-line="362" class="code-line">置换左侧的根</li>
+  <li data-line="363" class="code-line">右侧的根依然不发生任何变化</li>
+  </ul>
+  <p data-line="365" class="code-line">我们的工具有：</p>
+  <ul>
+  <li data-line="366" class="code-line">根的置换不改变多项式系数</li>
+  <li data-line="367" class="code-line">每一层交换子可以剥开一层根号（使这层根号的运算保持不变）</li>
+  </ul>
+  <p data-line="369" class="code-line">如果某个假想的求根公式有很多很多层根号呢？我们的组合子够不够用？</p>
+  <p data-line="371" class="code-line">先思考这个问题：对于 5 个根（根据代数基本定理，一元五次方程最多有 5 个根），一共有多少个置换？</p>
+  <p data-line="373" class="code-line">易知这个问题等价于 1 2 3 4 5 共有多少种排列，答案是 5! = 120 种</p>
+  <p data-line="375" class="code-line">每两个置换可以组成一个交换子，共有 120*119 = 14280 种组合，没有除以二是因为先做 P 再做 Q 和先做 Q 再做 P 最后得到的结果是不一样的，有兴趣的读者可以自行演算一下。每个交换子最终的（对于 x1~x5 的作用）结果都等价于某个置换，比如我们上面举的例子 2 5 3 4 1 和 3 4 5 2 1 组成的交换子最终的结果相当于置换 2 3 4 5 1</p>
+  <p data-line="377" class="code-line">显然这一万多种组合里大部分结果都是重复的。<br>
+  当我们把交换子组合成交换子时，需要排除掉这些重复结果的交换子。</p>
+  <p data-line="380" class="code-line">涉及到的计算量比较大，最好用程序来算，不过人脑推算也并非不可能，读者可参看韩京俊的<a href="https://www.zhihu.com/question/29316970/answer/80816396">论文</a>，论文的最后部分给出了推算的方法，其利用了对称性减少了大部分运算量，就是不太好懂。</p>
+  <p data-line="382" class="code-line">我把姜的答案中的 Ruby 代码重写成了 JavaScript，附在最下方，读者可以把代码复制到控制台执行看看，期望得到的结果是 <code>true</code>。</p>
+  <p data-line="384" class="code-line">看不懂代码完全没关系，这些都是无趣的大量重复性计算，只需要知道如果得到了 <code>true</code>（并且真的得到了）, 我们就利用程序证明了「所有交换子结果组成的集合」等价于「所有交换子的交换子的结果组成的集合」。值得一提的是这个集合中一共包括了 60 个置换。其中之一是 1 2 3 4 5，换句话说，其他 59 个置换都改变了 x1~x5 中至少两个根的位置。</p>
+  <p data-line="386" class="code-line">我们无意中得到了一个可以无限循环的递归——只要我们愿意，我们可以组成任意长的交换子的交换子的交换子的……可以想象成我们获得了一个可以折出无限把小刀的瑞士军刀，可以拆开无限个根号「盒子」。</p>
+  <p data-line="388" class="code-line">而我们在那 59 个置换中随意选一个，它可以表达为两个交换子的交换子，而这两个交换子也落在这个集合当中，所以同样可以拆成两个交换子的交换子，以此类推，「子子孙孙无穷尽也」。</p>
+  <p data-line="390" class="code-line">这样，我们就达成了终极目标：<strong>对于任意重根号的任意表达式，改变左侧的根的位置的同时，使得右侧的根依然不发生任何变化。</strong></p>
+  <pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">powerset</span> (<span class="hljs-params">permutation</span>) </span>{ <span class="hljs-comment">// copied from https://stackoverflow.com/a/37580979/3469145</span>
+    <span class="hljs-keyword">var</span> length = permutation.length,
+      result = [permutation.slice()],
+      c = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(length).fill(<span class="hljs-number">0</span>),
+      i = <span class="hljs-number">1</span>, k, p
+  
+    <span class="hljs-keyword">while</span> (i &lt; length) {
+      <span class="hljs-keyword">if</span> (c[i] &lt; i) {
+        k = i % <span class="hljs-number">2</span> &amp;&amp; c[i]
+        p = permutation[i]
+        permutation[i] = permutation[k]
+        permutation[k] = p
+        ++c[i]
+        i = <span class="hljs-number">1</span>
+        result.push(permutation.slice())
+      } <span class="hljs-keyword">else</span> {
+        c[i] = <span class="hljs-number">0</span>
+        ++i
+      }
+    }
+    <span class="hljs-keyword">return</span> result
+  }
+  
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">compose</span> (<span class="hljs-params">a, b</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Array</span>(a.length).fill().map((v, i) =&gt; b[a[i] - <span class="hljs-number">1</span>])
+  }
+  
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">invert</span> (<span class="hljs-params">a</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Array</span>(a.length).fill().map((v, i) =&gt; a.indexOf(i + <span class="hljs-number">1</span>) + <span class="hljs-number">1</span>)
+  }
+  
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">commutate</span> (<span class="hljs-params">a, b</span>) </span>{
+    <span class="hljs-keyword">return</span> compose(compose(compose(a, b), invert(a)), invert(b))
+  }
+  
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getAllCommutators</span> (<span class="hljs-params">a</span>) </span>{
+    <span class="hljs-keyword">var</span> result = []
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> p1 <span class="hljs-keyword">of</span> a) {
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> p2 <span class="hljs-keyword">of</span> a) {
+        result.push(commutate(p1, p2).join(<span class="hljs-string">'-'</span>))
+      }
+    }
+    result = <span class="hljs-built_in">Array</span>.from(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>(result))
+    <span class="hljs-keyword">return</span> result.map(v =&gt; v.split(<span class="hljs-string">'-'</span>).map(vv =&gt; <span class="hljs-built_in">parseInt</span>(vv)))
+  }
+  
+  <span class="hljs-keyword">var</span> s5 = powerset([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]) <span class="hljs-comment">// 所有置换</span>
+  <span class="hljs-keyword">var</span> a5 = getAllCommutators(s5) <span class="hljs-comment">// 所有交换子的结果</span>
+  <span class="hljs-keyword">var</span> commutatorsOfA5 = getAllCommutators(a5) <span class="hljs-comment">// 所有交换子的交换子的结果</span>
+  <span class="hljs-keyword">var</span> t = a5.map(v =&gt; v.join(<span class="hljs-string">''</span>)).sort()
+  <span class="hljs-keyword">var</span> t2 = commutatorsOfA5.map(v =&gt; v.join(<span class="hljs-string">''</span>)).sort()
+  <span class="hljs-built_in">console</span>.log(t.join(<span class="hljs-string">'-'</span>) === t2.join(<span class="hljs-string">'-'</span>)) <span class="hljs-comment">// true, which proved a5 equals to commutatorsOfA5</span>
+  <span class="hljs-comment">// 最终我们证明了「所有交换子结果组成的集合」等价于「所有交换子的交换子的结果组成的集合」</span>
+  </div></code></pre>
+  <h2 data-line="448" class="code-line" id="%E6%8E%A8%E5%B9%BF%E5%88%B0%E5%85%B6%E4%BB%96%E6%AC%A1%E6%96%B9%E7%A8%8B">推广到其他次方程</h2>
+  <p data-line="450" class="code-line">我们现在只剩下一个问题了： 为什么是五次及以上方程无解？</p>
+  <p data-line="452" class="code-line">先来考虑大于五次的情况。</p>
+  <p data-line="454" class="code-line">我们已经知道，对于 5 个根的 120 种置换，能组成一个包含 60 个置换的「不变集合」</p>
+  <p data-line="456" class="code-line">那么对于更多根的情况，比如 6 个根，我们写成 (x1 x2 x3 x4 x5) x6，括号中表示那 5 个根的「不变集合」，括号外的根表示在所有置换中待在原地,显然，不变集合加上一个一直不动的根依然是不变集合。<br>
+  而我们之前已经讨论过了，这些根在位置上是平等的，可以任意交换它们的位置，所以我们同样可以写成 (x1 x2 x3 x4 x6) x5，还有其他四种类似的写法，也就是把 x1~x6 分别置于括号外面。</p>
+  <p data-line="459" class="code-line">于是我们很容易就得出结论：6 次方程的不动集合所包含的置换个数是 6*60 = 360 个。<br>
+  所以六次方程同样没有根式解。更高次也是同理。</p>
+  <p data-line="462" class="code-line">接下来考虑小于 5 次的情况。</p>
+  <p data-line="464" class="code-line">这里我们拿一元四次方程开刀（更低次也是同理），最多有 4 个根。<br>
+  4 的阶乘等于 24，不算很大的计算量。<br>
+  我们借助程序来看看它的不变集合（如果有的话）是怎样的。</p>
+  <p data-line="468" class="code-line">首先是它所有的根的置换：<br>
+  <img src="file:///Users/william/Github/lab/abel/9.jpg" alt="9"></p>
+  <p data-line="471" class="code-line">所有置换组成的交换子（去重后，下同）：<br>
+  <img src="file:///Users/william/Github/lab/abel/10.jpg" alt="10"></p>
+  <p data-line="474" class="code-line">所有交换子组成的交换子：<br>
+  <img src="file:///Users/william/Github/lab/abel/11.jpg" alt="11"></p>
+  <p data-line="477" class="code-line">所有交换子的交换子的交换子：<br>
+  <img src="file:///Users/william/Github/lab/abel/12.jpg" alt="12"></p>
+  <p data-line="480" class="code-line">所有交换子的交换子的交换子的交换子：<br>
+  <img src="file:///Users/william/Github/lab/abel/13.jpg" alt="13"></p>
+  <p data-line="483" class="code-line">最终我们得到的不变集合中只含有一个元素，那就是 1 2 3 4，而它表示的是 x1~x4 全都留在原地！<br>
+  而我们导出矛盾的方式要求 x1~x4 不能全都不动！</p>
+  <p data-line="486" class="code-line">这下我们进退两难了：如果某个求根公式有 3 重根号，为了保证我们一系列置换后右侧蓝点保持不变，我们需要交换子的交换子的交换子，而这么做的唯一结果是左侧的 x1~x4 也都纷纷回到初始位置。如果我们需要某个不是 1 2 3 4 的置换，那么它无法表达为交换子的交换子的交换子，也就无法保证在 3 重根号下右侧的蓝点保持不变了。。</p>
+  <p data-line="488" class="code-line">好在人类早就发现了一元四次方程的求根公式，其中正好含有三重根号，谢谢费拉里，谢谢所有的鱼。</p>
+  
+  </body></html>

@@ -1,7 +1,7 @@
 // rewrite in JS from ruby, source: https://www.zhihu.com/question/29316970/answer/151649630
 // see animation in https://www.youtube.com/watch?v=RhpVSV6iCko&feature=youtu.be
 
-function powerset (permutation) { // https://stackoverflow.com/a/37580979/3469145
+function powerset (permutation) { // copied from https://stackoverflow.com/a/37580979/3469145
   var length = permutation.length,
     result = [permutation.slice()],
     c = new Array(length).fill(0),

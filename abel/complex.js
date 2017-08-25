@@ -13,11 +13,11 @@ Array.prototype.times = function (b) {
 }
 
 // x1 = 2, x2 = 1+3i, x3 = 3, x4 = 3+2i, x5 = 1
-var x1 = [2, 0]
-var x2 = [1, 3]
-var x3 = [3, 0]
-var x4 = [3, 2]
-var x5 = [1, 0]
+// var x1 = [2, 0]
+// var x2 = [1, 3]
+// var x3 = [3, 0]
+// var x4 = [3, 2]
+// var x5 = [1, 0]
 // var xs = [x1, x2, x3, x4, x5]
 var xs = [
   [1, 2],
@@ -79,7 +79,7 @@ function getF (x1, x2, x3, x4, x5) {
   return x1.times(x2).times(x3).times(x4).times(x5).times([-1, 0])
 }
 
-// var f1 = (x1, x2, x3, x4, x5) => getB(x1, x2, x3, x4, x5).times(getB(x1, x2, x3, x4, x5)).plus(getA(x1, x2, x3, x4, x5).times(getC(x1, x2, x3, x4, x5)).times([-4, 0])) // b^2 - 4ac
+var f1 = (x1, x2, x3, x4, x5) => getB(x1, x2, x3, x4, x5).times(getB(x1, x2, x3, x4, x5)).plus(getA(x1, x2, x3, x4, x5).times(getC(x1, x2, x3, x4, x5)).times([-4, 0])) // b^2 - 4ac
 
 var f2 = (x1, x2, x3, x4, x5) => getF(x1, x2, x3, x4, x5).times([7, 0])
 
@@ -90,7 +90,7 @@ function sumOfSquares (arr) {
 function getRoots (arr, n) { // arr 即代表了实部和虚部的数组，n代表开n次方，一般可求得n个根
   var result = []
   var mochang = Math.pow(sumOfSquares(arr), 1 / n / 2)
-  var jiaodu = (1 / n) * Math.atan(arr[1] / arr[0])    
+  var jiaodu = (1 / n) * Math.atan(arr[1] / arr[0])
   if (arr[0] < 0) {
     jiaodu += Math.PI
   }
@@ -103,8 +103,10 @@ function getRoots (arr, n) { // arr 即代表了实部和虚部的数组，n代�
   return result
 }
 
-// function getAll (xs) {
-//   // console.table([getB(...xs), getC(...xs), getD(...xs), getE(...xs), getF(...xs), f2(...xs)])
-//   var rs = getRoots(f2(...xs), 3)
-//   console.log(rs[0][0], rs[0][1])
-// }
+function printInfo (info) {
+  // console.table([getB(...xs), getC(...xs), getD(...xs), getE(...xs), getF(...xs), f2(...xs)])
+  // var rs = getRoots(f2(...xs), 3)
+  // console.log(rs[0][0], rs[0][1])
+  console.table(info)
+  console.table(xs)
+}
