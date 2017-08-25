@@ -79,17 +79,17 @@
   <p data-line="64" class="code-line">管它是啥，带入几个简单的数字算算再说。<br>
   <code>(1, 1) · (2, 1) = (1*2-1*1, 1*1+1*2) = (1, 3)</code></p>
   <p data-line="67" class="code-line">有点意思，把这几个数画到坐标系上看看，括号中前的数字对应水平轴上的取值，后面的数字对应竖直轴的取值。<br>
-  <img src="file:///Users/william/Github/lab/abel/1.jpg" alt="1"><br>
+  <img src="http://code.viegg.com/lab/abel/1.jpg" alt="1"><br>
   似乎看不出什么明显规律？不过 (1, 1)的平方和乘以(2, 1)的平方和刚好等于(1, 3)的平方和。。<br>
   另外注意三条线段和水平轴之间的夹角，会不会两条橙色线段与水平轴的夹角之和等于蓝色线段与水平轴的夹角？</p>
   <p data-line="72" class="code-line">我们先来验证平方和：<br>
-  <img src="file:///Users/william/Github/lab/abel/2.jpg" alt=""></p>
+  <img src="http://code.viegg.com/lab/abel/2.jpg" alt=""></p>
   <p data-line="75" class="code-line">关于夹角我们再举一个例子看看：<br>
   <code>(1, 1) · (1, 1) = (0, 2)</code><br>
-  <img src="file:///Users/william/Github/lab/abel/3.jpg" alt=""><br>
+  <img src="http://code.viegg.com/lab/abel/3.jpg" alt=""><br>
   两个45度角加起来刚好等于90度角！</p>
   <p data-line="80" class="code-line">大胆假设后，值得我们求证一下了，由于我们只知道点的坐标而不知道角度，有必要请出三角函数（和差化积）来：<br>
-  <img src="file:///Users/william/Github/lab/abel/4.jpg" alt=""><br>
+  <img src="http://code.viegg.com/lab/abel/4.jpg" alt=""><br>
   注意，此处证明并不严谨，因为 y = tan(x) 是一个周期函数，在一个周期内才是单调函数。</p>
   <blockquote data-line="84" class="code-line">
   <p data-line="84" class="code-line">Q：可是，这些东西又有什么用？<br>
@@ -142,7 +142,7 @@
   <li data-line="128" class="code-line">向量与实数轴的夹角的 4 倍为 2π 的整数倍</li>
   </ul>
   <p data-line="130" class="code-line">以下四个数满足此条件<br>
-  <img src="file:///Users/william/Github/lab/abel/5.jpg" alt=""></p>
+  <img src="http://code.viegg.com/lab/abel/5.jpg" alt=""></p>
   <blockquote data-line="133" class="code-line">
   <p data-line="133" class="code-line">在复数域，给定一个数 a，a 的 (1/n) 次方（a 开 n 次方）的结果是这么一些数：</p>
   </blockquote>
@@ -160,13 +160,13 @@
   <p data-line="145" class="code-line">好了，基础知识已经补充完毕，读者可以直接打开<a href="https://www.zhihu.com/question/29316970/answer/151649630">姜子麟的回答</a>（必读），如果读者直接看懂了那篇回答，那就可以不用回来了，该干啥干啥去吧……或者你也可以看看下面动画的直观演示。</p>
   <p data-line="147" class="code-line">如果没看懂或者有些地方不清楚，可以看看本文接下来的部分有没有解答。</p>
   <p data-line="149" class="code-line">首先让我引用一段姜子麟回答中的原话，明确我们要讨论的问题：</p>
-  <p data-line="151" class="code-line"><img src="file:///Users/william/Github/lab/abel/7.jpg" alt="7"></p>
+  <p data-line="151" class="code-line"><img src="http://code.viegg.com/lab/abel/7.jpg" alt="7"></p>
   <blockquote data-line="153" class="code-line">
   <p data-line="153" class="code-line">本文接下来的讨论默认都是在复数域</p>
   </blockquote>
   <p data-line="155" class="code-line">考虑方程 ax^2 + bx + c = 0 (a!=0)<br>
   还记得我们曾经背得滚瓜烂熟的求根公式吗？</p>
-  <p data-line="158" class="code-line"><img src="file:///Users/william/Github/lab/abel/6.jpg" alt="6"></p>
+  <p data-line="158" class="code-line"><img src="http://code.viegg.com/lab/abel/6.jpg" alt="6"></p>
   <p data-line="160" class="code-line">注意，我们是在复数域中讨论求根公式！所以根号本身就代表了所有可能的解，不需要再画蛇添足地添加正负号了！</p>
   <p data-line="162" class="code-line">我们发现，方程的根竟然只跟等式左边多项式的系数有关！在读者吐槽这不是显然的吗之前，请细想一下，这真的是显然的吗？</p>
   <p data-line="164" class="code-line">对于任何一元二次方程 ax^2 + bx + c = 0 (a!=0)<br>
@@ -351,7 +351,7 @@
   我们就用交换子的交换子！</p>
   <p data-line="353" class="code-line">记得之前提过的吗，「每次置换的初始和结束状态都是一样的，所以无所谓一次置换的反置换是不是紧跟着原置换，只要某种置换和它的反置换发生的次数一样多，那么它们的整体结果就是 1 2 3 4 5」，交换子的交换子最终作用的结果同样也是对右侧蓝点没有影响的。</p>
   <p data-line="355" class="code-line">请让我再次引用姜的回答的原话，因为没有比那说得更清楚的了：</p>
-  <p data-line="357" class="code-line"><img src="file:///Users/william/Github/lab/abel/8.jpg" alt="8"></p>
+  <p data-line="357" class="code-line"><img src="http://code.viegg.com/lab/abel/8.jpg" alt="8"></p>
   <h2 data-line="359" class="code-line" id="%E7%A8%8B%E5%BA%8F%E8%AF%81%E6%98%8E">程序证明</h2>
   <p data-line="361" class="code-line">我们的终极目标是：</p>
   <ul>
@@ -442,15 +442,15 @@
   4 的阶乘等于 24，不算很大的计算量。<br>
   我们借助程序来看看它的不变集合（如果有的话）是怎样的。</p>
   <p data-line="468" class="code-line">首先是它所有的根的置换：<br>
-  <img src="file:///Users/william/Github/lab/abel/9.jpg" alt="9"></p>
+  <img src="http://code.viegg.com/lab/abel/9.jpg" alt="9"></p>
   <p data-line="471" class="code-line">所有置换组成的交换子（去重后，下同）：<br>
-  <img src="file:///Users/william/Github/lab/abel/10.jpg" alt="10"></p>
+  <img src="http://code.viegg.com/lab/abel/10.jpg" alt="10"></p>
   <p data-line="474" class="code-line">所有交换子组成的交换子：<br>
-  <img src="file:///Users/william/Github/lab/abel/11.jpg" alt="11"></p>
+  <img src="http://code.viegg.com/lab/abel/11.jpg" alt="11"></p>
   <p data-line="477" class="code-line">所有交换子的交换子的交换子：<br>
-  <img src="file:///Users/william/Github/lab/abel/12.jpg" alt="12"></p>
+  <img src="http://code.viegg.com/lab/abel/12.jpg" alt="12"></p>
   <p data-line="480" class="code-line">所有交换子的交换子的交换子的交换子：<br>
-  <img src="file:///Users/william/Github/lab/abel/13.jpg" alt="13"></p>
+  <img src="http://code.viegg.com/lab/abel/13.jpg" alt="13"></p>
   <p data-line="483" class="code-line">最终我们得到的不变集合中只含有一个元素，那就是 1 2 3 4，而它表示的是 x1~x4 全都留在原地！<br>
   而我们导出矛盾的方式要求 x1~x4 不能全都不动！</p>
   <p data-line="486" class="code-line">这下我们进退两难了：如果某个求根公式有 3 重根号，为了保证我们一系列置换后右侧蓝点保持不变，我们需要交换子的交换子的交换子，而这么做的唯一结果是左侧的 x1~x4 也都纷纷回到初始位置。如果我们需要某个不是 1 2 3 4 的置换，那么它无法表达为交换子的交换子的交换子，也就无法保证在 3 重根号下右侧的蓝点保持不变了。。</p>
