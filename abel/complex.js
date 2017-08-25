@@ -110,3 +110,5 @@ function printInfo (info) {
   console.table(info)
   console.table(xs)
 }
+
+G2.track(false)
