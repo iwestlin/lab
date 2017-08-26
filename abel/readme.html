@@ -1,8 +1,4 @@
 <!doctype html><html><head><meta charset='utf-8'>
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css"> -->
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css"> -->
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.2/katex.min.css"> -->
-  <link rel="stylesheet" href="./style.css">
   <title>一元五次方程无求根公式的直观解释</title>
   <style>
     body {
@@ -14,7 +10,9 @@
       border-radius: 5px;
       box-shadow: 0 0 10px #555;
     }
-  </style>  
+  </style>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./sets.js"></script>
   </head><body class="markdown-body">
   <h1 data-line="0" class="code-line" id="%E4%B8%80%E8%88%AC%E4%B8%80%E5%85%83%E4%BA%94%E6%AC%A1%EF%BC%88%E5%8F%8A%E4%BB%A5%E4%B8%8A%EF%BC%89%E6%96%B9%E7%A8%8B%E6%97%A0%E6%B1%82%E6%A0%B9%E5%85%AC%E5%BC%8F%E7%9A%84%E7%9B%B4%E8%A7%82%E8%A7%A3%E9%87%8A">一般一元五次（及以上）方程无求根公式的直观解释</h1>
   <blockquote data-line="2" class="code-line">
@@ -94,7 +92,7 @@
   需要注意的是，此处证明并不严谨，因为 y = tan(x) 是一个周期函数，在一个周期内才是单调函数。</p>
   <blockquote data-line="84" class="code-line">
   <p data-line="84" class="code-line">Q：可是，这些东西又有什么用？<br>
-  A：<strong>把上述所有形如 <code>(a, b)</code> 的结构全部换成 <code>a + bi</code>，恭喜你，你已经理解了复数的几何意义！</strong></p>
+  A：<strong>把上述所有形如 <code>(a, b)</code> 的结构全部换成 <code>a + bi</code>，恭喜你，你已经理解了复数的几何意义</strong></p>
   </blockquote>
   <blockquote data-line="87" class="code-line">
   <p data-line="87" class="code-line">诉诸语言的话：<br>
@@ -179,7 +177,7 @@
   =  x^2 - (x1 + x2)x + x1x2<br>
   =  x^2 + dx + e</p>
   <p data-line="175" class="code-line">虽然从上面几乎可以断定 d 和 e，但是谨慎起见，根据<a href="https://zh.wikipedia.org/wiki/%E9%9F%A6%E8%BE%BE%E5%AE%9A%E7%90%86">韦达定理</a>，我们有</p>
-  <p data-line="177" class="code-line">d = -(x1 + x2)
+  <p data-line="177" class="code-line">d = -(x1 + x2)<br>
   e = x1 * x2</p>
   <p data-line="180" class="code-line">我们发现： 方程左边多项式的系数只和方程的根有关！</p>
   <p data-line="182" class="code-line">我们结合一下两个发现：</p>
@@ -292,9 +290,9 @@
   <p data-line="311" class="code-line">我们先做 P, 再做 -P<br>
   根据前面的结论，右侧的蓝点都会回到原位。不过，左侧的点也和初始时一样。。但我们已经完成一半了！</p>
   <p data-line="314" class="code-line">如果我们引入另外一个置换 Q，Q 的反序列记作 -Q<br>
-  我们先做 P，再做 Q，接着做 -P，最后做 -Q【我们称这一系列操作叫做交换子】</p>
-  <p data-line="317" class="code-line">请注意，在每一次置换后，如果我们不管每个数的下标，那么每次置换的初始和结束状态都是一样的，所以无所谓一次置换的反置换是不是紧跟着原置换，只要某种置换和它的反置换发生的次数一样多，那么它们的整体效果就相当于 1 2 3 4 5，也就是什么都不变！</p>
-  <p data-line="319" class="code-line">感兴趣的读者可以在纸上随便写两个置换，算出它们的反置换，然后推算它们的交换子的效果，看看 x1 x2 x3 x4 x5 最后的位置是不是不变。我在此直接给出结论：大部分交换子的最终效果，x1~x5的位置都和初始值不完全相同！</p>
+  我们先做 P，再做 Q，接着做 -P，最后做 -Q（我们称这一系列操作叫做交换子）</p>
+  <p data-line="317" class="code-line">请注意，在每一次置换后，如果我们不管每个数的下标，那么每次置换的初始和结束状态都是一样的，所以无所谓一次置换的反置换是不是紧跟着原置换，只要某种置换和它的反置换发生的次数一样多，那么它们的对于右侧蓝点的整体效果就相当于什么都不变！</p>
+  <p data-line="319" class="code-line">感兴趣的读者可以在纸上随便写两个置换，算出它们的反置换，然后推算它们的交换子的效果，看看 x1 x2 x3 x4 x5 最后的位置是不是不变。我在此直接给出结论：大部分交换子的最终效果，x1~x5 的位置都和初始值不完全相同！</p>
   <p data-line="321" class="code-line">下面右图是某个假想的开五次方的求根公式计算出来的结果。首先观察左图 x1~x5 的初始位置，然后点击 start 按钮（在停止运动之前不要再次点击，不然我也不知道会发生什么）开始动画，密切关注右图蓝点的运动，你会发现，右图蓝点运动彻底结束后会回到初始位置；而回过头来看左侧 x1~x5 的结束位置，发现它们和初始位置不一样，我们再次得出矛盾！</p>
   <blockquote data-line="323" class="code-line">
   <p data-line="323" class="code-line">提示，图中的图例是可以点击的，点击某个特定的点的图例会导致这个点消失，再次点击则又出现，读者可以借此观察蓝点是否和红点（初始位置）序号一致。本文动画皆由阿里出品的 G2 框架强力驱动，特此致谢，并吐槽 bug 还是不少。。</p>
@@ -350,7 +348,7 @@
   <p data-line="348" class="code-line">注意到了吗，我们只处理了一层根号。打个比方的话就是，我们用一个交换子把根号中的东西剥出来了，使得根号运算降到了加减乘除的维度。</p>
   <p data-line="350" class="code-line">而如果有两重或更多重根号呢？<br>
   我们就用交换子的交换子！</p>
-  <p data-line="353" class="code-line">记得之前提过的吗，「每次置换的初始和结束状态都是一样的，所以无所谓一次置换的反置换是不是紧跟着原置换，只要某种置换和它的反置换发生的次数一样多，那么它们的整体结果就是 1 2 3 4 5」，交换子的交换子最终作用的结果同样也是对右侧蓝点没有影响的。</p>
+  <p data-line="353" class="code-line">记得之前提过的吗，「每次置换的初始和结束状态都是一样的，所以无所谓一次置换的反置换是不是紧跟着原置换，只要某种置换和它的反置换发生的次数一样多，那么它们对于右侧蓝点的整体结果就是什么都不变」，交换子的交换子最终作用的结果同样也是对右侧蓝点没有影响的。</p>
   <p data-line="355" class="code-line">请让我再次引用姜的回答的原话，因为没有比那说得更清楚的了：</p>
   <p data-line="357" class="code-line"><img src="http://code.viegg.com/lab/abel/8.jpg" alt="8"></p>
   <h2 data-line="359" class="code-line" id="%E7%A8%8B%E5%BA%8F%E8%AF%81%E6%98%8E">程序证明</h2>
@@ -456,18 +454,4 @@
   而我们导出矛盾的方式要求 x1~x4 不能全都不动！</p>
   <p data-line="486" class="code-line">这下我们进退两难了：如果某个求根公式有 3 重根号，为了保证我们一系列置换后右侧蓝点保持不变，我们需要交换子的交换子的交换子，而这么做的唯一结果是左侧的 x1~x4 也都纷纷回到初始位置。如果我们需要某个不是 1 2 3 4 的置换，那么它无法表达为交换子的交换子的交换子，也就无法保证在 3 重根号下右侧的蓝点保持不变了。。</p>
   <p data-line="488" class="code-line">好在人类早就发现了一元四次方程的求根公式，其中正好含有三重根号。</p>
-  
-  <script>
-  function compose (a, b) {
-    return Array(a.length).fill().map((v, i) => b[a[i] - 1])
-  }
-
-  function invert (a) {
-    return Array(a.length).fill().map((v, i) => a.indexOf(i + 1) + 1)
-  }
-
-  function commutate (a, b) {
-    return compose(compose(compose(a, b), invert(a)), invert(b))
-  }
-  </script>
   </body></html>
