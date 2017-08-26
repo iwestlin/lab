@@ -25,7 +25,7 @@
   <li data-line="6" class="code-line"><a href="#%E4%B8%80%E8%88%AC%E4%B8%80%E5%85%83%E4%BA%94%E6%AC%A1%E5%8F%8A%E4%BB%A5%E4%B8%8A%E6%96%B9%E7%A8%8B%E6%97%A0%E6%B1%82%E6%A0%B9%E5%85%AC%E5%BC%8F%E7%9A%84%E7%9B%B4%E8%A7%82%E8%A7%A3%E9%87%8A">一般一元五次（及以上）方程无求根公式的直观解释</a>
   <ul>
   <li data-line="7" class="code-line"><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
-  <li data-line="8" class="code-line"><a href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8">复数的本质</a></li>
+  <li data-line="8" class="code-line"><a href="#%E5%A4%8D%E6%95%B0%E7%9A%84%E5%87%A0%E4%BD%95%E6%84%8F%E4%B9%89">复数的几何意义</a></li>
   <li data-line="9" class="code-line"><a href="#%E6%A0%B9%E5%8F%B7%E5%AF%B9%E5%A4%8D%E6%95%B0%E7%9A%84%E4%BD%9C%E7%94%A8">根号对复数的作用</a></li>
   <li data-line="10" class="code-line"><a href="#%E6%A0%B9%E7%9A%84%E7%BD%AE%E6%8D%A2">根的置换</a></li>
   <li data-line="11" class="code-line"><a href="#%E6%A0%B9%E5%8F%B7%E7%9A%84%E9%AD%94%E6%B3%95">根号的魔法</a></li>
@@ -55,7 +55,7 @@
   <p data-line="39" class="code-line">当然，大家也不要忘记，是拉格朗日首先意识到根的置换起到的重要作用，开辟了这项研究的康庄大道，并提出了一般高次（五次及以上）方程没有求根公式的猜测（背景是人们发现一元三次及四次方程的求根公式后几百年内都没能发现五次及以上方程的求根公式）。</p>
   <p data-line="41" class="code-line"><strong>正如文章题目所说，本文利用现代浏览器的高级功能，给出了这个定理的直观（动画）解释，读者甚至可以自己动手尝试和验证。为了确保文中的动画能够正常运行，请读者使用 PC 或 Mac 上的的现代浏览器（如 Chrome, Firefox, Safari 等）浏览本文。</strong></p>
   <p data-line="43" class="code-line"><strong>本文主要参照的是姜子麟的回答，甚至可以说是那篇回答的补充说明。</strong></p>
-  <h2 data-line="45" class="code-line" id="%E5%A4%8D%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8">复数的本质</h2>
+  <h2 data-line="45" class="code-line" id="%E5%A4%8D%E6%95%B0%E7%9A%84%E5%87%A0%E4%BD%95%E6%84%8F%E4%B9%89">复数的几何意义</h2>
   <blockquote data-line="46" class="code-line">
   <p data-line="46" class="code-line">如果读者已经理解了复数的几何意义，可跳过本章。</p>
   </blockquote>
@@ -94,7 +94,7 @@
   需要注意的是，此处证明并不严谨，因为 y = tan(x) 是一个周期函数，在一个周期内才是单调函数。</p>
   <blockquote data-line="84" class="code-line">
   <p data-line="84" class="code-line">Q：可是，这些东西又有什么用？<br>
-  A：<strong>把上述所有形如 <code>(a, b)</code> 的结构全部换成 <code>a + bi</code>，恭喜你，你已经理解了复数的本质！</strong></p>
+  A：<strong>把上述所有形如 <code>(a, b)</code> 的结构全部换成 <code>a + bi</code>，恭喜你，你已经理解了复数的几何意义！</strong></p>
   </blockquote>
   <blockquote data-line="87" class="code-line">
   <p data-line="87" class="code-line">诉诸语言的话：<br>
@@ -457,4 +457,17 @@
   <p data-line="486" class="code-line">这下我们进退两难了：如果某个求根公式有 3 重根号，为了保证我们一系列置换后右侧蓝点保持不变，我们需要交换子的交换子的交换子，而这么做的唯一结果是左侧的 x1~x4 也都纷纷回到初始位置。如果我们需要某个不是 1 2 3 4 的置换，那么它无法表达为交换子的交换子的交换子，也就无法保证在 3 重根号下右侧的蓝点保持不变了。。</p>
   <p data-line="488" class="code-line">好在人类早就发现了一元四次方程的求根公式，其中正好含有三重根号。</p>
   
+  <script>
+  function compose (a, b) {
+    return Array(a.length).fill().map((v, i) => b[a[i] - 1])
+  }
+
+  function invert (a) {
+    return Array(a.length).fill().map((v, i) => a.indexOf(i + 1) + 1)
+  }
+
+  function commutate (a, b) {
+    return compose(compose(compose(a, b), invert(a)), invert(b))
+  }
+  </script>
   </body></html>
