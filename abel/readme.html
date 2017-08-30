@@ -377,28 +377,7 @@ e = x1 * x2</p>
 <p data-line="408" class="code-line">我们无意中得到了一个可以无限循环的递归——只要我们愿意，我们可以组成任意长的交换子的交换子的……的交换子。可以想象成我们获得了一个可以折出无限把小刀的瑞士军刀，可以拆开无限个根号「盒子」。</p>
 <p data-line="410" class="code-line">而我们在那 59 个置换中随意选一个，它可以表达为两个交换子的交换子，而这两个交换子也落在这个集合当中，所以同样可以拆成两个交换子的交换子，以此类推，「子子孙孙无穷尽也」。</p>
 <p data-line="412" class="code-line">这样，我们就达成了终极目标：<strong>对于任意重根号的任意表达式，改变左侧的根的位置的同时，使得右侧的根最终位置不发生任何变化。</strong></p>
-<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">powerset</span> (<span class="hljs-params">permutation</span>) </span>{ <span class="hljs-comment">// copied from https://stackoverflow.com/a/37580979/3469145</span>
-  <span class="hljs-keyword">var</span> length = permutation.length,
-    result = [permutation.slice()],
-    c = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(length).fill(<span class="hljs-number">0</span>),
-    i = <span class="hljs-number">1</span>, k, p
-
-  <span class="hljs-keyword">while</span> (i &lt; length) {
-    <span class="hljs-keyword">if</span> (c[i] &lt; i) {
-      k = i % <span class="hljs-number">2</span> &amp;&amp; c[i]
-      p = permutation[i]
-      permutation[i] = permutation[k]
-      permutation[k] = p
-      ++c[i]
-      i = <span class="hljs-number">1</span>
-      result.push(permutation.slice())
-    } <span class="hljs-keyword">else</span> {
-      c[i] = <span class="hljs-number">0</span>
-      ++i
-    }
-  }
-  <span class="hljs-keyword">return</span> result
-}
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> powerset = xs =&gt; xs.reduceRight((a, x) =&gt; a.concat(a.map(y =&gt; y.concat(x))), [[]])
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">compose</span> (<span class="hljs-params">a, b</span>) </span>{
   <span class="hljs-keyword">return</span> <span class="hljs-built_in">Array</span>(a.length).fill().map((v, i) =&gt; b[a[i] - <span class="hljs-number">1</span>])
