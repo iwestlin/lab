@@ -1,7 +1,4 @@
-// var months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
 var weights = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]
-// getLastNumber('13032319790626693') // 2
-// checkLastNumber('130323197906266932') // true
 
 function getLastNumber (s) {
   var a = s.split('').map(v => parseInt(v))
@@ -13,12 +10,6 @@ function getLastNumber (s) {
   return r === 10 ? 'X' : r.toString()
 }
 
-function checkLastNumber (s) {
-  var a = s.split('').map(v => parseInt(v))
-  var last = a.pop()
-  return last === getLastNumber(a.join(''))
-}
-
 function getRandomElement (a) {
   var i = Math.floor(Math.random() * a.length)
   return a[i]
@@ -27,17 +18,6 @@ function getRandomElement (a) {
 function getRandomAddressCode () {
   return getRandomElement(Object.keys(addressCodes))
 }
-
-// function getRandomYear (m, n) { // m, n 为年龄区间，不填默认为 1949 年及以后出生
-//   var d = new Date()
-//   var year = d.getFullYear()
-//   var m = m || 0
-//   var n = n || (year - 1949)
-//   var diff = Math.abs(n - m)
-//   var min = Math.min(m, n)
-//   var max = Math.max(m, n)
-//   return year - min - Math.round(Math.random() * diff)
-// }
 
 function getRandomBirthdayCode () { // 1944-09-09 及以后
   var now = new Date()
@@ -59,7 +39,7 @@ function fixDate (n) {
 }
 
 function getRandomIndex () {
-  var s =  Math.floor(Math.random() * 1000).toString()
+  var s = Math.floor(Math.random() * 1000).toString()
   var diff = 3 - s.length
   for (var i = 0; i < diff; i++) {
     s = '0' + s
@@ -85,7 +65,7 @@ function detectID (s) {
     return false
   }
   var addressCode = s.slice(0, 6)
-  var birthdayCode = s.slice(6,14)
+  var birthdayCode = s.slice(6, 14)
   var indexCode = s.slice(14, 17)
   var result = {}
   result.gender = parseInt(indexCode) % 2 === 0 ? '女' : '男'
