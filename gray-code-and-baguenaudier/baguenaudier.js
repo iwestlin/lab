@@ -1,4 +1,4 @@
-function nextStep (s) {
+function nextStepOf (s) {
   var a = s.split('').map(v => parseInt(v))
   var limit = a.length - 1
   expect(0, 0)
@@ -22,7 +22,7 @@ function nextStep (s) {
       expect(index + 1, 0)
     }
   }
-  function oneWithAllZero (index) { // 只有右边位是 1
+  function oneWithAllZero (index) { // index 位是 1, index 右边所有位都为 0
     if (!a[index]) return false
     for (var i = index + 1; i <= limit; i++) {
       if (a[i]) {
@@ -32,12 +32,12 @@ function nextStep (s) {
     return true
   }
 }
-// nextStep('1111') // '1101'
+// nextStepOf('1111') // '1101'
 
 function solve (start, final) {
   var result = [start]
   while (start !== final) {
-    start = nextStep(start)
+    start = nextStepOf(start)
     result.push(start)
   }
   return result
