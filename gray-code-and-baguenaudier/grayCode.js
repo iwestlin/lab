@@ -60,7 +60,7 @@ function binaryToGray (s) {
   }
   return r.join('')
 }
-binaryToGray('0101') // '0111'
+// binaryToGray('0101') // '0111'
 
 function nextStep (s) { // aka. lastNumber
   var b = grayToBinary(s)

@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>gray-code</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  text-decoration: none;
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 10px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  margin: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px #555;
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+<style type="text/css">
+/*
+ Solarized Color Schemes originally by Ethan Schoonover
+ http://ethanschoonover.com/solarized
+
+ Ported for PrismJS by Hector Matos
+ Website: https://krakendev.io
+ Twitter Handle: https://twitter.com/allonsykraken)
+*/
+
+/*
+SOLARIZED HEX
+--------- -------
+base03    #002b36
+base02    #073642
+base01    #586e75
+base00    #657b83
+base0     #839496
+base1     #93a1a1
+base2     #eee8d5
+base3     #fdf6e3
+yellow    #b58900
+orange    #cb4b16
+red       #dc322f
+magenta   #d33682
+violet    #6c71c4
+blue      #268bd2
+cyan      #2aa198
+green     #859900
+*/
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #657b83; /* base00 */
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	background: #073642; /* base02 */
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	background: #073642; /* base02 */
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background-color: #fdf6e3; /* base3 */
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #93a1a1; /* base1 */
+}
+
+.token.punctuation {
+	color: #586e75; /* base01 */
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #268bd2; /* blue */
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.url,
+.token.inserted {
+	color: #2aa198; /* cyan */
+}
+
+.token.entity {
+	color: #657b83; /* base00 */
+	background: #eee8d5; /* base2 */
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #859900; /* green */
+}
+
+.token.function {
+	color: #b58900; /* yellow */
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #cb4b16; /* orange */
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
+
+<style type="text/css">
+div.prism-show-language {
+	position: relative;
+}
+
+div.prism-show-language > div.prism-show-language-label {
+	color: black;
+	background-color: #CFCFCF;
+	display: inline-block;
+	position: absolute;
+	bottom: auto;
+	left: auto;
+	top: 0;
+	right: 0;
+	width: auto;
+	height: auto;
+	font-size: 0.9em;
+	border-radius: 0 0 0 5px;
+	padding: 0 0.5em;
+	text-shadow: none;
+	z-index: 1;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	-webkit-transform: none;
+	-moz-transform: none;
+	-ms-transform: none;
+	-o-transform: none;
+	transform: none;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<p><img src="nine.jpg" alt="九连环"></p>
+
+<ul class="toc">
+<li>
+<a href="#toc_0">九连环与格雷码</a>
+<ul>
+<li>
+<a href="#toc_1">前言</a>
+</li>
+<li>
+<a href="#toc_2">九连环的原理</a>
+</li>
+<li>
+<a href="#toc_3">四连环的所有步骤</a>
+</li>
+<li>
+<a href="#toc_4">程序解法</a>
+</li>
+<li>
+<a href="#toc_5">格雷码的生成方法</a>
+</li>
+<li>
+<a href="#toc_6">格雷码和二进制数的关系</a>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<h2 id="toc_0">九连环与格雷码</h2>
+
+<blockquote>
+<p>用九连环理解格雷码，用格雷码解开九连环</p>
+</blockquote>
+
+<h3 id="toc_1">前言</h3>
+
+<p>今天从抽屉里翻出一个九连环，上次玩这东西还是在几年前，不过我把玩几下就回忆起了解法，花了十来分钟解开，又花了十来分钟套上，虽然解九连环花的时间比一般的益智玩具多，但它的解法是最单调和乏味的。解开的过程中不小心发生了这么个情况：我稀里糊涂把 1～8 个环解开了，留下了最后一个环，结果发现自己给自己下了个套——我必须先把解开的 8 个环全部套上。。</p>
+
+<p>对于没玩过九连环的人来说这是非常反直觉的：当只剩下最后一个环时，解开它所需的步骤比解开所有 9 个环（也就是九连环的一般初始状态）还多。为什么会这样呢？那就要从九连环的原理说起了……</p>
+
+<h3 id="toc_2">九连环的原理</h3>
+
+<p>看到上面的图了吗，我拍的。。从图中我们可以看到，每个环有两种状态：套在横杠上和不在横杠上，前者我们记为 1，后者我们记为 0。横杠左边是出不去的，只有从右边出，所以我们把最左边称为「最里边」。由于每个环上连着的一根直杆的巧妙作用，每个环只有在某种特定情况下才能从右边脱离横杠。</p>
+
+<ul>
+<li>对于最右边的环，可以任意解开或套上</li>
+<li>对于其他环，只有在「右边环套上，右边的右边全部解开」的情况下，才能解开或套上</li>
+</ul>
+
+<p>用文字解释有点拗口，换成 1 和 0 来表达就是：只有当右边所有环的状态依次为 1(0...)，此环才能活动，(0...)表示任意多个 0，在九连环的情况下是 0~7 个。</p>
+
+<p>一般来讲，每次动作只能解开或套上一个环，但也有例外：最右边两个环可以同时活动（解开或套上），当然，也可以把这类动作分解开来，比如把「同时解开最右边的 11」分解为「先变成 10，再变成 00」。为了接来下分析的方便，我们默认每次都分解这类动作，也就是说，每次只活动一个环。当然，大家在实际玩的过程中，完全可以同时动作。</p>
+
+<h3 id="toc_3">四连环的所有步骤</h3>
+
+<p>由于每个环的状态只有解开和套上两种，我们很容易就想到二进制表达，解九连环的方法会和自然数的二进制表达类似吗？解九连环的全部步骤有 341 步，太多了，我们试试想象中的四连环是怎样解开的。</p>
+
+<p>四连环的初始状态是 1111，表示每个环都套在横杠上，我们要把他们全都解开，也就是变成 0000。</p>
+
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>序号的二进制表达</th>
+<th>四连环的状态</th>
+<th>四连环状态上下颠倒</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>0</td>
+<td>0000</td>
+<td>1111</td>
+<td>0000</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0001</td>
+<td>1101</td>
+<td>0001</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0010</td>
+<td>1100</td>
+<td>0011</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0011</td>
+<td>0100</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0100</td>
+<td>0101</td>
+<td>0110</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0101</td>
+<td>0111</td>
+<td>0111</td>
+</tr>
+<tr>
+<td>6</td>
+<td>0110</td>
+<td>0110</td>
+<td>0101</td>
+</tr>
+<tr>
+<td>7</td>
+<td>0111</td>
+<td>0010</td>
+<td>0100</td>
+</tr>
+<tr>
+<td>8</td>
+<td>1000</td>
+<td>0011</td>
+<td>1100</td>
+</tr>
+<tr>
+<td>9</td>
+<td>1001</td>
+<td>0001</td>
+<td>1101</td>
+</tr>
+<tr>
+<td>10</td>
+<td>1010</td>
+<td>0000</td>
+<td>1111</td>
+</tr>
+</tbody>
+</table>
+
+<p>很可惜，四连环状态的和步骤序号的二进制表达看起来没什么关系。不过我们注意到四连环相邻两个状态间有且只有一位不同，这是显然的，因为我们每次只活动一个环。<br>
+对于有经验的人，立马就会想到<a href="https://zh.wikipedia.org/wiki/%E6%A0%BC%E9%9B%B7%E7%A0%81">格雷码</a>，它的特征也是相邻两数之间只有一位不同。格雷码是一种「节省」的设计，举个例子，数字 7 变成 8 时计算机内数位的变化是 0111 -&gt; 1000，同时变化了 4 个位！而我们的格雷码任意相邻两位都只有一位发生了变化。</p>
+
+<p>格雷码后面再接着说，我们先来看看能不能用程序解开九连环，即用程序按顺序输出九连环从初始状态到最终状态之间的所有状态。</p>
+
+<h3 id="toc_4">程序解法</h3>
+
+<p>对于程序员，最先想到的应该是递归的方法，这里已经有人写过相关文章里，感兴趣的可以点击<a href="https://ericfu.me/solve-chinese-rings/">这里</a>。
+引用链接文章的原文：</p>
+
+<p><img src="nine2.jpg" alt="引用"></p>
+
+<p>关于上面这种方法，虽然程序上很好理解，但却不是我们人类解九连环的思考方式，我们来试试能不能用人类的思考方式写出解九连环的代码。</p>
+
+<p>当我们拿到一个别人玩过，或者自己之前玩了玩就放在一边现在重新拿起来玩的九连环，我们会思考：下一步应该怎么做？</p>
+
+<p>根据前面提到的九连环原理，我们能做的其实也不多，实际上可以分为两类：</p>
+
+<ul>
+<li>活动最右边的环</li>
+<li>活动右边状态为 1(0...) 的环</li>
+</ul>
+
+<p>我们思考的具体步骤如下（假设最里面的环还未解开）：</p>
+
+<ul>
+<li>彻底解开九连环必须解开最里面的环（我们称之为 r0, 其右边的环依次称为 r1/r2/.../r8）</li>
+<li>要解开 r0，我们期望 r1 状态为 1</li>
+<li>接下来要分情况讨论，如果 r1 为 1，那么我们期望 r2～r8 状态全都是 0；如果 r1 为 0，我们必须先把它变成 1，而要把 r1 变成 1，我们期望 r2~r8 的状态为 1(0...)</li>
+<li>以此类推……</li>
+</ul>
+
+<p>转换成程序语言是这样的：</p>
+
+<div><pre><code class="language-javascript">function nextStepOf (s) {
+  var a = s.split(&#39;&#39;).map(v =&gt; parseInt(v))
+  var limit = a.length - 1
+  expect(0, 0)
+  return a.join(&#39;&#39;)
+  function expect (index, value) { // 期望 a[index] 值为 value
+    if (index === limit) {
+      if (a[index] === value) {
+        a[index - 1] = a[index - 1] ^ 1
+      } else {
+        a[index] = value
+      }
+      return
+    }
+    if (a[index] !== value) {
+      if (oneWithAllZero(index + 1)) { // 右边状态为 1(0...)
+        a[index] = value
+      } else {
+        expect(index + 1, 1)
+      }
+    } else {
+      expect(index + 1, 0)
+    }
+  }
+  function oneWithAllZero (index) {
+    if (!a[index]) return false
+    for (var i = index + 1; i &lt;= limit; i++) {
+      if (a[i]) {
+        return false
+      }
+    }
+    return true
+  }
+}
+
+function solve (start, final) {
+  var result = [start]
+  while (start !== final) {
+    start = nextStepOf(start)
+    result.push(start)
+  }
+  return result
+}
+
+console.log(solve(&#39;1111&#39;,&#39;0000&#39;), solve(&#39;1000&#39;,&#39;0000&#39;))</code></pre></div>
+
+<p>复制代码到浏览器控制台执行结果如下：<br>
+<img src="nine3.jpg" alt="result"></p>
+
+<p>这样我们就可以清晰地看到为什么只剩下最里面一个环没解开的步骤比所有环都没解开的步骤还要多了。</p>
+
+<p>不懂 JavaScript 代码也没什么关系，问题的关键在于我们定义了一个函数 <code>expect</code>，它接收两个参数，一个是环的序号 <code>index</code>，另一个是期望的状态 <code>value</code>。前面提到我们期望 r1 的状态为 1，写成代码就是 <code>expect(1, 1)</code>，这样程序就和我们的思维一致了，我们都是从最里面的环开始思考的，所以代码中有一句 <code>expect(0, 0)</code>。有了这个函数，我们就能确定任意状态下的九连环下一步应该怎么做了！</p>
+
+<p>经过一系列推理演算，我们将这个 <code>expect</code> 函数的行为归纳如下：</p>
+
+<table>
+<thead>
+<tr>
+<th>expect</th>
+<th>期望值和环的实际状态相符</th>
+<th>期望值和环的实际状态不符</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>对于最外边的环</td>
+<td>活动第二外边的环</td>
+<td>活动最外边的环</td>
+</tr>
+<tr>
+<td>对于其它位置的环</td>
+<td>期望右边的环状态为 0，即 <code>expect(index+1, 0)</code></td>
+<td>若右边状态为 1(0...)，活动此环；否则期望右边的环状态为 1，即 <code>expect(index+1, 1)</code></td>
+</tr>
+</tbody>
+</table>
+
+<p>这里的演算比较麻烦，我写满了一页纸，就不在本文重新推算了，我用此代码检验了 1～19 连环的代码输出，结果正确无误。</p>
+
+<p>实际上，如果进一步推演（我分了四种情况，有些情况还要继续分情况……），你会发现<strong>「活动最右边的环」和「活动右边状态为 1(0...) 的环」这两种动作是交替进行的，与格雷码的一种生成方法不谋而合！也就是说，格雷码同样可以依序表达九连环的所有状态！</strong></p>
+
+<h3 id="toc_5">格雷码的生成方法</h3>
+
+<p>引用<a href="https://zh.wikipedia.org/wiki/%E6%A0%BC%E9%9B%B7%E7%A0%81">维基百科</a>的一段原话：</p>
+
+<blockquote>
+<p>以二进制为0值的格雷码为第零项，第一项改变最右边的位元，第二项改变右起第一个为1的位元的左边位元，第三、四项方法同第一、二项，如此反复，即可排列出n个位元的格雷码。</p>
+</blockquote>
+
+<p>此种方式代码实现如下：</p>
+
+<div><pre><code class="language-javascript">function generateGrayCode (n) {
+  var start = Array(n).fill(0)
+  var flag = true
+  var result = []
+  result.push(start.slice())
+  for (var i = 0; i &lt; (1 &lt;&lt; n) - 1; i++) {
+    if (flag) {
+      start = changeRightMost(start)
+      result.push(start.slice())
+    } else {
+      start = changeOther(start)
+      result.push(start.slice())
+    }
+    flag = !flag
+  }
+  return result
+}
+
+function changeRightMost (arr) { // 改变最右边的位元
+  arr[arr.length - 1] = arr[arr.length - 1] ^ 1
+  return arr
+}
+
+function changeOther (arr) { // 改变右起第一个为1的位元的左边位元
+  for (var i = arr.length - 1; i &gt; 0; i--) {
+    if (arr[i]) {
+      arr[i - 1] = arr[i - 1] ^ 1
+      break
+    }
+  }
+  return arr
+}
+
+console.table(generateGrayCode(4))</code></pre></div>
+
+<blockquote>
+<p>除此之外还有一种「镜射排列」的方式生成格雷码，通过这种方式，我们可以结合数学归纳法，比较方便地证明格雷码所有相邻两数都只有一个位元不同，感兴趣的读者可以查看维基并尝试证明。</p>
+</blockquote>
+
+<p>到目前为止，我们已经掌握了两种九连环的程序解法，还有没有更高科技的方法呢？<br>
+答案是有的，方法来自格雷码和二进制数的神奇联系。</p>
+
+<h3 id="toc_6">格雷码和二进制数的关系</h3>
+
+<p>引用维基原文：</p>
+
+<blockquote>
+<p>二进制码第n位 = 二进制码第（n+1）位+格雷码第n位。因为二进制码和格雷码皆有相同位数，所以二进制码可从最高位的左边位元取0，以进行计算。（注：遇到1+1时结果视为0）</p>
+</blockquote>
+
+<p><a href="https://testbook.com/blog/conversion-from-gray-code-to-binary-code-and-vice-versa/">这篇英文文章</a>有很生动的图像解释。</p>
+
+<p>我不太清楚这条性质是怎么推算出来的，不过理解它很容易，举例来说：</p>
+
+<blockquote>
+<p>对于某个四位二进制数 b3 b2 b1 b0，它对应的格雷码记为 g3 g2 g1 g0
+我们假设这个二进制数的下一个数没有发生进位，那么下一位可以表达为 b3 b2 b1 b0&#39;，其中 b0&#39; 表示 0 位与前一个数的 0 位不同，那么它对应的格雷码是 g3 g2 g1 g0&#39;，<strong>满足相邻的格雷码只有一位不同。</strong><br>
+如果下一个数发生了进位，不妨设进位一直进到了 b2, 那么其二进制表达为 b3 b2&#39; b1&#39; b0&#39;，对应的格雷码是 g3 g2&#39; g1 g0，只有 2 位发生了变化，同样满足相邻的格雷码只有一位不同。易知进位到其它位也是同理，所以<strong>用这套转换方法转换出来的格雷码满足相邻的格雷码只有一位不同。</strong>  </p>
+</blockquote>
+
+<p>有了这条性质以后我们就可以方便地将格雷码和二进制数相互转化了！代码实现如下：</p>
+
+<div><pre><code class="language-javascript">function grayToBinary (s) {
+  var r = [0]
+  for (var i = 1; i &lt;= s.length; i++) {
+    r[i] = r[i - 1] ^ s[i - 1]
+  }
+  r.shift()
+  return r.join(&#39;&#39;)
+}
+grayToBinary(&#39;0111&#39;) // &#39;0101&#39;
+
+function binaryToGray (s) {
+  var r = []
+  var a = s.split(&#39;&#39;).map(v =&gt; parseInt(v))
+  a.unshift(0)
+  for (var i = 0; i &lt; s.length; i++) {
+    r[i] = a[i] ^ a[i + 1]
+  }
+  return r.join(&#39;&#39;)
+}
+binaryToGray(&#39;0101&#39;) // &#39;0111&#39;</code></pre></div>
+
+<p>更妙的是，有了这两个转换方法，我们可以轻易构造出新的判断下一步状态的方法：先把九连环的状态（即格雷码）转换为二进制数，把二进制数加一，接着再转换回格雷码，最终得到的结果就是九连环下一步的状态了。</p>
+
+
+
+<script type="text/javascript">
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var l=r[e];if(2==arguments.length){a=arguments[1];for(var i in a)a.hasOwnProperty(i)&&(l[i]=a[i]);return l}var o={};for(var s in l)if(l.hasOwnProperty(s)){if(s==t)for(var i in a)a.hasOwnProperty(i)&&(o[i]=a[i]);o[s]=l[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var l in e)e.hasOwnProperty(l)&&(t.call(e,l,e[l],a||l),"Object"!==n.util.type(e[l])||r[n.util.objId(e[l])]?"Array"!==n.util.type(e[l])||r[n.util.objId(e[l])]||(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,l,r)):(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,l=a.elements||document.querySelectorAll(a.selector),i=0;r=l[i++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var l,i,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(l=(o.className.match(e)||[,""])[1],i=n.languages[l]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var s=t.textContent,u={element:t,language:l,grammar:i,code:s};if(!s||!i)return n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var c=new Worker(n.filename);c.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var l=n.tokenize(e,t);return a.stringify(n.util.encode(l),r)},tokenize:function(e,t){var a=n.Token,r=[e],l=t.rest;if(l){for(var i in l)t[i]=l[i];delete t.rest}e:for(var i in t)if(t.hasOwnProperty(i)&&t[i]){var o=t[i];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],c=u.inside,g=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var m=r[p];if(r.length>e.length)break e;if(!(m instanceof a)){u.lastIndex=0;var y=u.exec(m),v=1;if(!y&&h&&p!=r.length-1){var b=r[p+1].matchedStr||r[p+1],k=m+b;if(p<r.length-2&&(k+=r[p+2].matchedStr||r[p+2]),u.lastIndex=0,y=u.exec(k),!y)continue;var w=y.index+(g?y[1].length:0);if(w>=m.length)continue;var _=y.index+y[0].length,P=m.length+b.length;if(v=3,P>=_){if(r[p+1].greedy)continue;v=2,k=k.slice(0,P)}m=k}if(y){g&&(f=y[1].length);var w=y.index+f,y=y[0].slice(f),_=w+y.length,S=m.slice(0,w),O=m.slice(_),j=[p,v];S&&j.push(S);var A=new a(i,c?n.tokenize(y,c):y,d,y,h);j.push(A),O&&j.push(O),Array.prototype.splice.apply(r,j)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,l=0;r=a[l++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.matchedStr=a||null,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var l={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==l.type&&(l.attributes.spellcheck="true"),e.alias){var i="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(l.classes,i)}n.hooks.run("wrap",l);var o="";for(var s in l.attributes)o+=(o?" ":"")+s+'="'+(l.attributes[s]||"")+'"';return"<"+l.tag+' class="'+l.classes.join(" ")+'" '+o+">"+l.content+"</"+l.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,l=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),l&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",n.highlightAll)),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+</script>
+
+<script type="text/javascript">
+Prism.languages.clike={comment:[{pattern:/(^|[^\\])\/\*[\w\W]*?\*\//,lookbehind:!0},{pattern:/(^|[^\\:])\/\/.*/,lookbehind:!0}],string:{pattern:/(["'])(\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,greedy:!0},"class-name":{pattern:/((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/i,lookbehind:!0,inside:{punctuation:/(\.|\\)/}},keyword:/\b(if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,"boolean":/\b(true|false)\b/,"function":/[a-z0-9_]+(?=\()/i,number:/\b-?(?:0x[\da-f]+|\d*\.?\d+(?:e[+-]?\d+)?)\b/i,operator:/--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,punctuation:/[{}[\];(),.:]/};
+</script>
+
+<script type="text/javascript">
+Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|var|void|while|with|yield)\b/,number:/\b-?(0x[\dA-Fa-f]+|0b[01]+|0o[0-7]+|\d*\.?\d+([Ee][+-]?\d+)?|NaN|Infinity)\b/,"function":/[_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*(?=\()/i}),Prism.languages.insertBefore("javascript","keyword",{regex:{pattern:/(^|[^\/])\/(?!\/)(\[.+?]|\\.|[^\/\\\r\n])+\/[gimyu]{0,5}(?=\s*($|[\r\n,.;})]))/,lookbehind:!0,greedy:!0}}),Prism.languages.insertBefore("javascript","class-name",{"template-string":{pattern:/`(?:\\\\|\\?[^\\])*?`/,greedy:!0,inside:{interpolation:{pattern:/\$\{[^}]+\}/,inside:{"interpolation-punctuation":{pattern:/^\$\{|\}$/,alias:"punctuation"},rest:Prism.languages.javascript}},string:/[\s\S]+/}}}),Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{script:{pattern:/(<script[\w\W]*?>)[\w\W]*?(?=<\/script>)/i,lookbehind:!0,inside:Prism.languages.javascript,alias:"language-javascript"}}),Prism.languages.js=Prism.languages.javascript;
+</script>
+
+<script type="text/javascript">
+!function(){if("undefined"!=typeof self&&self.Prism&&self.document){var e={html:"HTML",xml:"XML",svg:"SVG",mathml:"MathML",css:"CSS",clike:"C-like",javascript:"JavaScript",abap:"ABAP",actionscript:"ActionScript",apacheconf:"Apache Configuration",apl:"APL",applescript:"AppleScript",asciidoc:"AsciiDoc",aspnet:"ASP.NET (C#)",autoit:"AutoIt",autohotkey:"AutoHotkey",basic:"BASIC",csharp:"C#",cpp:"C++",coffeescript:"CoffeeScript","css-extras":"CSS Extras",fsharp:"F#",glsl:"GLSL",http:"HTTP",inform7:"Inform 7",json:"JSON",latex:"LaTeX",lolcode:"LOLCODE",matlab:"MATLAB",mel:"MEL",nasm:"NASM",nginx:"nginx",nsis:"NSIS",objectivec:"Objective-C",ocaml:"OCaml",parigp:"PARI/GP",php:"PHP","php-extras":"PHP Extras",powershell:"PowerShell",jsx:"React JSX",rest:"reST (reStructuredText)",sas:"SAS",sass:"Sass (Sass)",scss:"Sass (Scss)",sql:"SQL",typescript:"TypeScript",vhdl:"VHDL",vim:"vim",wiki:"Wiki markup",yaml:"YAML"};Prism.hooks.add("before-highlight",function(s){var a=s.element.parentNode;if(a&&/pre/i.test(a.nodeName)){var t,i,r=a.getAttribute("data-language")||e[s.language]||s.language.substring(0,1).toUpperCase()+s.language.substring(1),l=a.previousSibling;l&&/\s*\bprism-show-language\b\s*/.test(l.className)&&l.firstChild&&/\s*\bprism-show-language-label\b\s*/.test(l.firstChild.className)?i=l.firstChild:(t=document.createElement("div"),i=document.createElement("div"),i.className="prism-show-language-label",t.className="prism-show-language",t.appendChild(i),a.parentNode.insertBefore(t,a)),i.innerHTML=r}})}}();
+</script>
+
+
+</body>
+
+</html>
