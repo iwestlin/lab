@@ -49,7 +49,7 @@ function grayToBinary (s) {
   r.shift()
   return r.join('')
 }
-grayToBinary('0111') // '0101'
+// grayToBinary('0111') // '0101'
 
 function binaryToGray (s) {
   var r = []
@@ -72,7 +72,7 @@ function nextStep (s) { // aka. lastNumber
   }
   return binaryToGray(b)
 }
-nextStep('0111') // '0110'
+// nextStep('0111') // '0110'
 
 function nextNumber (s) {
   var a = s.split('').map(v => parseInt(v))

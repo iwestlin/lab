@@ -5,10 +5,10 @@ function nextStepOf (s) {
   return a.join('')
   function expect (index, value) {
     if (index === limit) {
-      if (value === a[index]) {
+      if (a[index] === value) {
         a[index - 1] = a[index - 1] ^ 1
       } else {
-        a[index] = a[index] ^ 1
+        a[index] = value
       }
       return
     }
@@ -42,5 +42,5 @@ function solve (start, final) {
   }
   return result
 }
-// solve('11111', '00000')
+// console.log(solve('1111', '0000'))
 module.exports = solve
