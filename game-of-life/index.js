@@ -4,6 +4,7 @@ var inp = document.getElementById('inp')
 start(333)
 
 function delay (t) {
+  t = parseInt(t) || 333
   clearInterval(loop)
   loop = setInterval(refresh, t)
 }
