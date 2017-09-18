@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>生命游戏</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+  body {
+    text-align: center;
+  }
+
+  #main {
+    margin: auto;
+    line-height: 0em;
+  }
+
+  .tile {
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #ddd;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+    box-sizing: border-box;
+  }
+
+  </style>
+</head>
+
+<body>
+  <span>变化周期：</span>
+  <input type="range" min="100" max="1000" onchange="delay(this.value)">
+  <input type="text" id="inp" placeholder="初始状态每个格子可能为黑色的概率（百分比）" style="width: 300px;">
+  <!-- <input type="text" id="inp2" placeholder="变化周期（毫秒）"> -->
+  <button onclick="change()">random</button>
+  <hr>
+  <script type="text/javascript">
+  const HEIGHT = 50
+  const WIDTH = 70
+  initDOM()
+
+  function initDOM() {
+    var m = document.createElement('div')
+    m.id = 'main'
+    m.style.width = WIDTH * 10 + 'px';
+    for (var i = 0; i < WIDTH * HEIGHT; i++) {
+      var tile = document.createElement('span')
+      tile.className = 'tile'
+      m.appendChild(tile)
+    }
+    document.body.appendChild(m)
+  }
+
+  </script>
+  <script src="index.js"></script>
+</body>
+
+</html>
