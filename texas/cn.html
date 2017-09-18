@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>德州扑克 - 胜率计算器</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <noscript>你的浏览器不支持 JavaScript，请启用它或使用现代浏览器（如 chrome firefox 等）打开本网站。</noscript>
+  <div class="quote">
+    德州扑克全称 Texas Hold'em Poker，中文简称德扑。一共52张牌，没有王牌。开始的时候，每个玩家会有两张面朝下的底牌，然后荷官依次发出三张「翻牌」，一张「转牌」以及一张「河牌」，共五张公共牌。每次发公共牌前以及发完所有公共牌后会有一圈下注的机会，玩家们可以选择check、raise、call或者fold。经过所有押注圈后，若仍剩下两名及以上的玩家，游戏会进入“摊牌”阶段，也就是让所剩的玩家亮出各自的底牌以较高下，持大牌者获胜。
+  </div>
+  <br>
+  <div class="quote imp">
+    每次选择两张手牌，点击「手牌」按钮选定，可以添加二至多名玩家。然后选择 0～4 张公共牌。选完后点击计算按钮计算胜率。<b>由于性能问题不能穷举时，电脑会最多选出 10000 种情况，然后根据结果算出胜率，计算结果与真实胜率存在约 1% 以内的误差。</b>点击计算后大概几秒钟后会算出结果，请耐心等候。
+  </div>
+  <hr>
+  <div class="container">
+    <div id="spade_A" class="spade poker">A</div>
+    <div id="heart_A" class="heart poker">A</div>
+    <div id="club_A" class="club poker">A</div>
+    <div id="diamond_A" class="diamond poker">A</div>
+    <div id="spade_K" class="spade poker">K</div>
+    <div id="heart_K" class="heart poker">K</div>
+    <div id="club_K" class="club poker">K</div>
+    <div id="diamond_K" class="diamond poker">K</div>
+    <div id="spade_Q" class="spade poker">Q</div>
+    <div id="heart_Q" class="heart poker">Q</div>
+    <div id="club_Q" class="club poker">Q</div>
+    <div id="diamond_Q" class="diamond poker">Q</div>
+    <div id="spade_J" class="spade poker">J</div>
+    <div id="heart_J" class="heart poker">J</div>
+    <div id="club_J" class="club poker">J</div>
+    <div id="diamond_J" class="diamond poker">J</div>
+    <div id="spade_10" class="spade poker">10</div>
+    <div id="heart_10" class="heart poker">10</div>
+    <div id="club_10" class="club poker">10</div>
+    <div id="diamond_10" class="diamond poker">10</div>
+    <div id="spade_9" class="spade poker">9</div>
+    <div id="heart_9" class="heart poker">9</div>
+    <div id="club_9" class="club poker">9</div>
+    <div id="diamond_9" class="diamond poker">9</div>
+    <div id="spade_8" class="spade poker">8</div>
+    <div id="heart_8" class="heart poker">8</div>
+    <div id="club_8" class="club poker">8</div>
+    <div id="diamond_8" class="diamond poker">8</div>
+    <div id="spade_7" class="spade poker">7</div>
+    <div id="heart_7" class="heart poker">7</div>
+    <div id="club_7" class="club poker">7</div>
+    <div id="diamond_7" class="diamond poker">7</div>
+    <div id="spade_6" class="spade poker">6</div>
+    <div id="heart_6" class="heart poker">6</div>
+    <div id="club_6" class="club poker">6</div>
+    <div id="diamond_6" class="diamond poker">6</div>
+    <div id="spade_5" class="spade poker">5</div>
+    <div id="heart_5" class="heart poker">5</div>
+    <div id="club_5" class="club poker">5</div>
+    <div id="diamond_5" class="diamond poker">5</div>
+    <div id="spade_4" class="spade poker">4</div>
+    <div id="heart_4" class="heart poker">4</div>
+    <div id="club_4" class="club poker">4</div>
+    <div id="diamond_4" class="diamond poker">4</div>
+    <div id="spade_3" class="spade poker">3</div>
+    <div id="heart_3" class="heart poker">3</div>
+    <div id="club_3" class="club poker">3</div>
+    <div id="diamond_3" class="diamond poker">3</div>
+    <div id="spade_2" class="spade poker">2</div>
+    <div id="heart_2" class="heart poker">2</div>
+    <div id="club_2" class="club poker">2</div>
+    <div id="diamond_2" class="diamond poker">2</div>
+    <div id="mybutton">
+      <button id="chooseHandCards">手牌</button>
+      <button id="public">公牌</button>
+      <button id="calc">计算</button>
+      <button id="reset">重置</button>
+    </div>
+  </div>
+  <hr>
+  <div id="chosen"></div>
+  <table id="myTable">
+    <thead>
+      <tr>
+        <th>玩家</th>
+        <th>胜率 (包括平局)</th>
+      </tr>
+    </thead>
+    <tbody id="info"></tbody>
+  </table>
+
+  <script src="utils.js"></script>
+  <script src="detect.js"></script>
+  <script src="main.js"></script>
+  <script src="lang-cn.js"></script>
+</body>
+
+</html>

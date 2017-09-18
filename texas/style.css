@@ -1,0 +1,169 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+noscript {
+  text-align: center;
+  font-size: 1.5em;
+  color: red;
+}
+
+body {
+  width: 935px;
+  border: 1px dashed #666;
+  margin: 0 auto;
+  margin-top: 10px;
+  padding: 10px;
+  font-family: 'PingFang SC', Helvetica, Arial, Vernada, Tahoma, STXihei, "Microsoft YaHei", "Songti SC", SimSun, Heiti, sans-serif;
+  font-size: 16px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+hr {
+  margin-top: 10px;
+}
+
+button[disabled] {
+  cursor: not-allowed;
+}
+
+.link a {
+  text-decoration: none;
+  font-size: 1.5em;
+  border-bottom: 1px dashed blue;
+}
+.link {
+  margin: 10px;
+  text-align: center;
+}
+.quote {
+  border-left: 7px solid #b4d7e4;
+  padding-left: 10px;
+}
+
+.imp {
+  border-color: #a00;
+}
+
+.container {
+  position: relative;
+}
+
+.poker {
+  font-family: arial;
+  border: 1px solid #666;
+  border-radius: .1em;
+  box-shadow: .2em .2em .5em #333;
+  width: 66px;
+  height: 100px;
+  padding-left: 5px;
+  position: relative;
+  display: inline-block;
+  font-size: 1.5em;
+  margin-top: 7px;
+}
+
+.container .poker:hover {
+  cursor: pointer;
+}
+
+.poker:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  line-height: 100px;
+  font-size: 3em;
+}
+
+.spade {
+  color: black;
+}
+
+.spade:after {
+  content: '♠';
+}
+
+.heart {
+  color: red;
+}
+
+.heart:after {
+  content: '♥';
+}
+
+.club {
+  color: black;
+}
+
+.club:after {
+  content: '♣';
+}
+
+.diamond {
+  color: red;
+}
+
+.diamond:after {
+  content: '♦';
+}
+
+.container .selected {
+  background-color: rgba(0, 0, 0, .3);
+}
+
+#mybutton {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+#mybutton button {
+  width: 100px;
+  height: 100px;
+  background: #333;
+  color: #eee;
+  box-shadow: inset 0 0 1px 1px rgba(0, 0, 0, 0.1), 0 0 5px 1px rgba(90, 90, 90, 0.1), inset 0 35px 1px rgba(255, 255, 255, 0.1);
+  border: 7px dashed #ccc;
+  border-radius: 100px;
+  font-size: 1.5em;
+}
+
+.cards span {
+  font-size: 1.5em;
+  display: inline-block;
+  position: relative;
+  top: 30px;
+  left: 20px;
+  height: 100px;
+}
+
+#info {
+  padding: .3em;
+  font-family: sans-serif;
+}
+
+/* table */
+table#myTable {
+  background-color: #CDCDCD;
+  margin:10px 0pt 15px;
+  width: 100%;
+  text-align: left;
+}
+table#myTable thead tr th, table#myTable tfoot tr th {
+  background-color: #e6EEEE;
+  border: 1px solid #FFF;
+  padding: 4px;
+}
+table#myTable tbody td {
+  color: #3D3D3D;
+  padding: 4px;
+  background-color: #FFF;
+  vertical-align: top;
+}

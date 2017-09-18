@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Texas Holdem - Win Rate Calculator</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+  <script src="redirect.js"></script>
+</head>
+
+<body>
+  <noscript>Your browser doesn't support JavaScript, please enable it or change to a modern browser like chrome, firefox etc.</noscript>
+  <div class="quote">
+    <a href="https://en.wikipedia.org/wiki/Texas_hold_%27em">Texas Hold'em</a> (also known as Texas holdem, hold 'em, and holdem) is a variation of the card game of poker. Two cards, known as the hole cards, are dealt face down to each player, and then five community cards are dealt face up in three stages. The stages consist of a series of three cards ("the flop"), later an additional single card ("the turn" or "fourth street"), and a final card ("the river" or "fifth street"). Each player seeks the best five card poker hand from the combination of the community cards and their own hole cards. If a player's best five card poker hand consists only of the five community cards and none of the player's hole cards, it is called "playing the board". Players have betting options to check, call, raise, or fold. Rounds of betting take place before the flop is dealt and after each subsequent deal.
+  </div>
+  <br>
+  <div class="quote imp">
+    First, pick 2 hand cards each time, press 'hand cards' button to select cards for each player, players shoult be 2 or more. Then select 0~4 public cards, after that, click 'calc' button to calculate the win rate of every player. Computer will randomly pick left cards to join public cards and compare for 10000 times at most (due to efficiency). The mean error between result and the real rate should less than 1%.
+    It will take few seconds to get result, please be patient.
+  </div>
+  <hr>
+  <div class="container">
+    <div id="spade_A" class="spade poker">A</div>
+    <div id="heart_A" class="heart poker">A</div>
+    <div id="club_A" class="club poker">A</div>
+    <div id="diamond_A" class="diamond poker">A</div>
+    <div id="spade_K" class="spade poker">K</div>
+    <div id="heart_K" class="heart poker">K</div>
+    <div id="club_K" class="club poker">K</div>
+    <div id="diamond_K" class="diamond poker">K</div>
+    <div id="spade_Q" class="spade poker">Q</div>
+    <div id="heart_Q" class="heart poker">Q</div>
+    <div id="club_Q" class="club poker">Q</div>
+    <div id="diamond_Q" class="diamond poker">Q</div>
+    <div id="spade_J" class="spade poker">J</div>
+    <div id="heart_J" class="heart poker">J</div>
+    <div id="club_J" class="club poker">J</div>
+    <div id="diamond_J" class="diamond poker">J</div>
+    <div id="spade_10" class="spade poker">10</div>
+    <div id="heart_10" class="heart poker">10</div>
+    <div id="club_10" class="club poker">10</div>
+    <div id="diamond_10" class="diamond poker">10</div>
+    <div id="spade_9" class="spade poker">9</div>
+    <div id="heart_9" class="heart poker">9</div>
+    <div id="club_9" class="club poker">9</div>
+    <div id="diamond_9" class="diamond poker">9</div>
+    <div id="spade_8" class="spade poker">8</div>
+    <div id="heart_8" class="heart poker">8</div>
+    <div id="club_8" class="club poker">8</div>
+    <div id="diamond_8" class="diamond poker">8</div>
+    <div id="spade_7" class="spade poker">7</div>
+    <div id="heart_7" class="heart poker">7</div>
+    <div id="club_7" class="club poker">7</div>
+    <div id="diamond_7" class="diamond poker">7</div>
+    <div id="spade_6" class="spade poker">6</div>
+    <div id="heart_6" class="heart poker">6</div>
+    <div id="club_6" class="club poker">6</div>
+    <div id="diamond_6" class="diamond poker">6</div>
+    <div id="spade_5" class="spade poker">5</div>
+    <div id="heart_5" class="heart poker">5</div>
+    <div id="club_5" class="club poker">5</div>
+    <div id="diamond_5" class="diamond poker">5</div>
+    <div id="spade_4" class="spade poker">4</div>
+    <div id="heart_4" class="heart poker">4</div>
+    <div id="club_4" class="club poker">4</div>
+    <div id="diamond_4" class="diamond poker">4</div>
+    <div id="spade_3" class="spade poker">3</div>
+    <div id="heart_3" class="heart poker">3</div>
+    <div id="club_3" class="club poker">3</div>
+    <div id="diamond_3" class="diamond poker">3</div>
+    <div id="spade_2" class="spade poker">2</div>
+    <div id="heart_2" class="heart poker">2</div>
+    <div id="club_2" class="club poker">2</div>
+    <div id="diamond_2" class="diamond poker">2</div>
+    <div id="mybutton">
+      <button id="chooseHandCards">hand cards</button>
+      <button id="public">public cards</button>
+      <button id="calc">calc winrate</button>
+      <button id="reset">reset cards</button>
+    </div>
+  </div>
+  <hr>
+  <div id="chosen"></div>
+  <table id="myTable">
+    <thead>
+      <tr>
+        <th>Player</th>
+        <th>Win Rate (Including Tie)</th>
+      </tr>
+    </thead>
+    <tbody id="info"></tbody>
+  </table>
+
+  <script src="utils.js"></script>
+  <script src="detect.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
