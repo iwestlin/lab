@@ -2,6 +2,9 @@ var state, loop
 var tiles = document.getElementsByClassName('tile')
 var inp = document.getElementById('inp')
 start(333)
+// initState()
+// glinder()
+// paint()
 
 function delay (t) {
   t = parseInt(t) || 333
@@ -33,14 +36,14 @@ function initState (probability) {
   }
 }
 
-// function glinder () {
-//   state = state.map(v => Array(v.length).fill(0))
-//   state[0][2] = 1
-//   state[1][0] = 1
-//   state[1][2] = 1
-//   state[2][1] = 1
-//   state[2][2] = 1
-// }
+function glinder () {
+  state = state.map(v => Array(v.length).fill(0))
+  state[0][2] = 1
+  state[1][0] = 1
+  state[1][2] = 1
+  state[2][1] = 1
+  state[2][2] = 1
+}
 
 function paint () {
   for (var i = 0; i < HEIGHT; i++) {
@@ -78,11 +81,14 @@ function checkNeighbour (i, j) {
   var count = 0
   var nbs = [[-1, -1], [1, -1], [1, 1], [-1, 1], [-1, 0], [1, 0], [0, -1], [0, 1]]
   nbs.forEach(v => {
-    var ni = i + v[0]
-    var nj = j + v[1]
-    if (0 <= ni && ni < HEIGHT && 0 <= nj && nj < WIDTH) {
-      state[ni][nj] && count++
-    }
+    // var ni = i + v[0]
+    // var nj = j + v[1]
+    // if (0 <= ni && ni < HEIGHT && 0 <= nj && nj < WIDTH) {
+    //   state[ni][nj] && count++
+    // }
+    var ni = (i + v[0] + HEIGHT) % HEIGHT
+    var nj = (j + v[1] + WIDTH) % WIDTH
+    state[ni][nj] && count++
   })
   return count
 }
