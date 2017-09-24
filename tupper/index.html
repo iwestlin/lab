@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Tupper 自我指涉公式</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    body {
+      width: 920px;
+      margin: 0 auto;
+    }
+    pre {
+      text-align: center;
+    }
+    #haha {
+      transform: rotate(180deg);
+    }
+    #text {
+      font-family: monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <pre id="haha"></pre>
+  <textarea id="text" cols="112" rows="17" placeholder='输入字符' onchange='change(this.value)'></textarea>
+  <p id="num"></p>
+  <input type="text" onchange="decode(this.value)" placeholder="输入数字">
+  <pre id="hehe"></pre>
+
+  <script src="BigInteger.min.js"></script>
+  <script src="encode.js"></script>
+  <script type="text/javascript">
+    var width = 106
+    var height = 17
+    var k = '960939379918958884971672962127852754715004339660129306651505519271702802395266424689642842174350718121267153782770623355993237280874144307891325963941337723487857735749823926629715517173716995165232890538221612403238855866184013235585136048828693337902491454229288667081096184496091705183454067827731551705405381627380967602565625016981482083418783163849115590225610003652351370343874461848378737238198224849863465033159410054974700593138339226497249461751545728366702369745461014655997933798537483143786841806593422227898388722980000748404719'
+
+    function tupper (k) { // aka. decode
+      function f (x, y) {
+        x = bigInt(x)
+        y = bigInt(y)
+        var d = x.multiply(height).plus(y.mod(height))
+        var f = y.divide(height).divide(bigInt(2).pow(d))
+        var g = f.mod(2)
+        return g.value > 0.5
+      }
+
+      k = bigInt(k)
+      var result = ''
+      for (let i = k.minus(1).plus(height); i.greater(k.minus(1)); i = i.minus(1)) {
+        var line = ''
+        for (let j = 0; j < width; j++) {
+          if (f(j, i)) {
+            line += '*'
+          } else {
+            line += ' '
+          }
+        }
+        result += line + '\n'
+      }
+      return result
+    }
+    // console.log(tupper(k))
+    document.getElementById('haha').innerText = tupper(k)
+
+    function change (s) {
+      var a = getArray(s)
+      document.getElementById('num').innerText = getNumber(a)
+    }
+    function decode (n) {
+      var s = tupper(n)
+      document.getElementById('hehe').innerText = s
+    }
+  </script>
+</body>
+
+</html>
