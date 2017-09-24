@@ -1,5 +1,4 @@
 Lab for Web
 ---
-- http://lm.🐸🐸.ml  
-- https://paster.coding.me  
-- https://iwestlin.github.io/lab/
+
+visit https://paster.coding.me or http://code.viegg.com/lab/
