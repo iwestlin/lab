@@ -40,8 +40,8 @@
         x = bigInt(x)
         y = bigInt(y)
         var d = x.multiply(height).plus(y.mod(height))
-        var f = y.divide(height).divide(bigInt(2).pow(d))
-        var g = f.mod(2)
+        var f = y.divide(height).divide(bigInt(2).pow(d)) // 只保留整数部分
+        var g = f.mod(2) // 非 0 即 1
         return g.value > 0.5
       }
 
