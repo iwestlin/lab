@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>tupper</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    body {
+      text-align: center;
+    }
+    #container {
+      width: 1060px;
+      line-height: 0em;
+      margin: auto;
+      margin-top: 30px;
+    }
+    .tile {
+      width: 10px;
+      height: 10px;
+      display: inline-block;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      background-color: #ddd;
+      border-top: 1px solid white;
+      border-right: 1px solid white;
+    }
+    .black {
+      background-color: black;
+    }
+  </style>
+</head>
+<body>
+<input type="text" placeholder="填入数字">
+<button onclick="mydraw()">作画</button>
+<div id="container"></div>
+
+<script src="BigInteger.min.js"></script>
+<script type="text/javascript">
+  var width = 106
+  var height = 17
+  var k = '960939379918958884971672962127852754715004339660129306651505519271702802395266424689642842174350718121267153782770623355993237280874144307891325963941337723487857735749823926629715517173716995165232890538221612403238855866184013235585136048828693337902491454229288667081096184496091705183454067827731551705405381627380967602565625016981482083418783163849115590225610003652351370343874461848378737238198224849863465033159410054974700593138339226497249461751545728366702369745461014655997933798537483143786841806593422227898388722980000748404719'
+  var k2 = '4858450636189713423582095962494202044581400587983244549483093085061934704708809928450644769865524364849997247024915119110411605739177407856919754326571855442057210445735883681829823754139634338225199452191651284348332905131193199953502413758765239264874613394906870130562295813219481113685339535565290850023875092856892694555974281546386510730049106723058933586052544096664351265349363643957125565695936815184334857605266940161251266951421550539554519153785457525756590740540157929001765967965480064427829131488548259914721248506352686630476300'
+  var cont = document.getElementById('container')
+  init()
+  var tiles = document.getElementsByClassName('tile')
+
+  function mydraw () {
+    var v = document.getElementsByTagName('input')[0].value
+    v = v.replace(/\s/g, '')
+    draw(v)
+  }
+
+  function draw (k) {
+    var s = decode(k)
+    for (let i = 0; i < width * height; i++) {
+      if (s[i] === '*') {
+        tiles[i].classList.add('black')
+      } else {
+        tiles[i].classList.remove('black')
+      }
+    }
+  }
+
+  function init () {
+    var s = decode(k)
+    s = s.split('').reverse().join('')
+    for (let i = 0; i < width * height; i++) {
+      var tile = document.createElement('div')
+      tile.className = 'tile'
+      if (s[i] === '*') {
+        tile.classList.add('black')
+      }
+      cont.appendChild(tile)
+    }
+  }
+
+  function decode (k) {
+    var s = tupper(k)
+    return s.replace(/\n/g, '')
+  }
+
+  function tupper (k) {
+    function f (x, y) {
+      x = bigInt(x)
+      y = bigInt(y)
+      var d = x.multiply(height).plus(y.mod(height))
+      var f = y.divide(height).divide(bigInt(2).pow(d))
+      var g = f.mod(2)
+      return g.value > 0.5
+    }
+
+    k = bigInt(k)
+    var result = ''
+    for (let i = k.minus(1).plus(height); i.greater(k.minus(1)); i = i.minus(1)) {
+      var line = ''
+      for (let j = 0; j < width; j++) {
+        if (f(j, i)) {
+          line += '*'
+        } else {
+          line += ' '
+        }
+      }
+      result += line + '\n'
+    }
+    return result
+  }
+</script>
+</body>
+</html>
