@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>随机游走</title>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <script type="text/javascript">
+    var w = document.body.scrollWidth
+    var h = document.body.scrollHeight
+    var xmin = xmax = w/2
+    var ymin = ymax = h/2
+    var position = [w/2, h/2]
+
+    window.onload = function() {
+      var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+      // var vb = '0 0 ' + w + ' ' + h
+      // svg.setAttribute('viewBox', vb)
+      // svg.setAttribute('width', w)
+      // svg.setAttribute('height', h)
+      svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+      svg.setAttribute('version', '1.1')
+      document.body.appendChild(svg)
+      draw(1000)
+    }
+
+    function draw (n) {
+      // position = [0, 0]
+      position = [w/2, h/2]
+      // position = [w, h]
+      var svg = document.getElementsByTagName('svg')[0]
+      svg.innerHTML = ''
+      // svg.appendChild(createSvgLine(0,0,0,200))
+      // svg.appendChild(createSvgLine(0,0,200,0))
+      for (let i = 0; i < n; i++) {
+        var angle = randomAngle()
+        var x = cos(angle) * 20
+        var y = sin(angle) * 20
+        svg.appendChild(createSvgLine(position[0], position[1], position[0] + x, position[1] + y))
+        position[0] += x
+        position[1] += y
+        xmin = Math.min(xmin, position[0])
+        xmax = Math.max(xmax, position[0])
+        ymin = Math.min(ymin, position[1])
+        ymax = Math.max(ymax, position[1])
+      }
+      svg.appendChild(createSvgCircle(w/2, h/2, 5))
+      svg.appendChild(createSvgCircle(position[0], position[1], 5, 'blue'))
+      var width = xmax - xmin + 40
+      var height = ymax - ymin + 40
+      var vb = (xmin-20) + ' ' + (ymin-20) + ' ' + width + ' ' + height
+      // var vb = (xmin-20) + ' ' + (ymin-20) + ' ' + w + ' ' + h
+      svg.setAttribute('viewBox', vb)
+      svg.setAttribute('width', width)
+      svg.setAttribute('height', height)
+    }
+
+    function createSvgLine (x1, y1, x2, y2) {
+      var line = document.createElementNS('http://www.w3.org/2000/svg', 'polyline')
+      var points = '' + x1 + ',' + y1 + ' ' + x2 + ',' + y2
+      line.setAttribute('points', points)
+      line.setAttribute('fill', 'none')
+      line.setAttribute('stroke', 'black')
+      return line
+    }
+
+    function createSvgCircle (x, y, r, color) {
+      color = color || 'red'
+      var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
+      c.setAttribute('cx', x)
+      c.setAttribute('cy', y)
+      c.setAttribute('r', r)
+      c.setAttribute('fill', color)
+      c.setAttribute('opacity', 0.5)
+      return c
+    }
+
+    function generateTrigonFunctions (name) {
+      return (deg) => Math[name](deg/180 * Math.PI)
+    }
+
+    function randomAngle () {
+      return Math.random() * 360
+    }
+
+    var cos = generateTrigonFunctions('cos')
+    var sin = generateTrigonFunctions('sin')
+
+    function walk (n) {
+      var position = [0, 0]
+      for (let i = 0; i < n; i++) {
+        var angle = randomAngle()
+        position[0] += cos(angle)
+        position[1] += sin(angle)
+      }
+      return Math.sqrt(position[0] * position[0] + position[1] * position[1])
+    }
+
+    function repeat (n) {
+      var sum = 0
+      for (let i = 0; i < n; i++) {
+        sum += walk(10000)
+      }
+      return sum / n
+    }
+
+  </script>
+</body>
+
+</html>
