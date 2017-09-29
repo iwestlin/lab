@@ -10,8 +10,8 @@
   <svg></svg>
   <script type="text/javascript">
   window.onload = function() {
-      var w = document.body.scrollWidth
-      var h = document.body.scrollHeight
+      var w = document.documentElement.clientWidth
+      var h = document.documentElement.clientHeight
       var svg = document.createElement('svg')
       var vb = '0 0 ' + w + ' ' + h
       svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')

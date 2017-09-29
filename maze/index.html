@@ -17,8 +17,8 @@
   <div id="maze"></div>
   <script>
   var s = ''
-  var w = Math.floor(document.body.scrollWidth / 18)
-  var h = Math.floor(document.body.scrollHeight / 18)
+  var w = Math.floor(document.documentElement.clientWidth / 18)
+  var h = Math.floor(document.documentElement.clientHeight / 18)
   for (var i = 0; i < h; i++) {
     for (var j = 0; j < w; j++) {
       s += (Math.floor(Math.random() * 2)) ? "╱" : "╲";
