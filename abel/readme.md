@@ -1,10 +1,3 @@
-/*
- * @Author: william
- * @Date: 2017-10-06 08:02:54
- * @Last Modified by: william
- * @Last Modified time: 2017-10-06 08:05:52
- */
-
 # 一般一元五次（及以上）方程无求根公式的直观解释
 
 > 本文假定读者具有中学及以上数学基础
@@ -84,7 +77,8 @@ A：别急，后面会有说明。
 
 大胆假设后，值得我们求证一下了，由于我们只知道点的坐标而不知道角度，有必要请出三角函数（和差化积）来：  
 ![](./4.jpg)  
-需要注意的是，此处证明并不严谨，因为 y = tan(x) 是一个周期函数，在一个周期内才是单调函数。对于超出一个周期的情况，需要进行分类讨论，在此不做赘述，后面直接给出结论。
+需要注意的是，此处证明并不严谨，因为 y = tan(x) 是一个周期函数，在一个周期内才是单调函数。对于超出一个周期的情况，需要进行分类讨论，在此不做赘述，后面直接给出结论。  
+> 也可以参考[这篇文章][13]
 
 > Q：可是，这些东西又有什么用？  
 A：**把上述所有形如 `(a, b)` 的结构全部换成 `a + bi`，恭喜你，你已经理解了复数的几何意义**
@@ -509,3 +503,4 @@ console.log(t.join('-') === t2.join('-')) // true, which proved a5 equals to com
 [10]: https://lttt.vanabel.cn/wp-content/uploads/2013/09/theory.pdf
 [11]: https://zh.wikipedia.org/wiki/%E9%9F%A6%E8%BE%BE%E5%AE%9A%E7%90%86
 [12]: https://zh.wikipedia.org/wiki/%E9%98%BF%E8%B4%9D%E5%B0%94-%E9%B2%81%E8%8F%B2%E5%B0%BC%E5%AE%9A%E7%90%86
+[13]: http://www.ruanyifeng.com/blog/2012/09/imaginary_number.html
