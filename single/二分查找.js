@@ -13,14 +13,14 @@ function mySearch (num) {
   // console.log(num, a, getIndex(num, a), a.indexOf(num))
   return getIndex(num, a) === a.indexOf(num)
 }
-// Array(100).fill().forEach(v => mySearch(15) || alert('wrong'))
+Array(100).fill().forEach(v => mySearch(15) || alert('wrong'))
 
-function getIndex(v, a) {
+function getIndex (v, a) {
   var result = -1
   var start = 0
   var final = a.length - 1
-  function mustBeIn(start, final) {
-    while(start <= final) {
+  function mustBeIn (start, final) {
+    while (start <= final) {
       var middle = Math.floor((start + final) / 2)
       var am = a[middle]
       if (am < v) {

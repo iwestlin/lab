@@ -12,11 +12,6 @@ function shuffle (arr) {
   return arr
 }
 
-function genArr (n) {
-  n = parseInt(n) || 0
-  return Array(n).fill(0).map((v, i) => i + 1)
-}
-
 function p (k, n) {
   k = parseInt(k) || 0
   n = parseInt(n) || 0
@@ -25,7 +20,7 @@ function p (k, n) {
   }
   var x = k / n
   var sum = 0
-  for (let i = k + 1; i <= n ; i++) {
+  for (let i = k + 1; i <= n; i++) {
     sum += 1 / (i - 1)
   }
   return x * sum
@@ -36,7 +31,6 @@ function best (n) {
   if (n !== n || n <= 0) {
     throw new Error('n 必须是正整数')
   }
-  var a = genArr(n)
   var max = 0
   var index = 0
   for (let i = 1; i <= n; i++) {

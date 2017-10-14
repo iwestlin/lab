@@ -4,7 +4,7 @@ function paradox (input) { // 将 paradox 本身输入，将产生矛盾
   if (H(input, input)) {
     return // 如果 H(paradox, paradox) 为真，则直接返回，并不产生死循环，与 H 函数的定义相悖
   } else {
-    while(true) {} // 如果 H(paradox, paradox) 为假，产生死循环，与 H 相悖
+    while (true) {} // 如果 H(paradox, paradox) 为假，产生死循环，与 H 相悖
   }
 }
 

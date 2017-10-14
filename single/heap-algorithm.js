@@ -10,7 +10,7 @@ function swap (arr, x, y) {
 function heap (arr) { // 生成数组 arr 的全排列
   var len = arr.length
   var result = []
-  function generate(n) {
+  function generate (n) {
     if (n === 1) {
       result.push(arr.slice())
     } else {
@@ -28,4 +28,4 @@ function heap (arr) { // 生成数组 arr 的全排列
   return result
 }
 
-console.table(heap([1,2,3]))
+console.table(heap([1, 2, 3]))

@@ -36,6 +36,6 @@ function memoize2 (fn) {
   return memoize
 }
 
-fib = memoize(fib)
-fib2 = memoize2(fib2)
-console.log(fib(100), fib2(100))
+var myfib = memoize(fib)
+var myfib2 = memoize2(fib2)
+console.log(myfib(100), myfib2(100))

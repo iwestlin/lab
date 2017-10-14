@@ -1,5 +1,5 @@
 // https://github.com/chuduyunhuan/dataStructure-for-JS/issues/1
-function sameString(str1, str2) {
+function sameString (str1, str2) {
   var result = ''
   for (let i = 0; i < str1.length; i++) {
     let char = str1[i]
@@ -13,7 +13,7 @@ function sameString(str1, str2) {
       idx = str2.indexOf(char, idx + 1)
     }
   }
-  return result;
+  return result
 }
 
 var a = '1234helloworld2j3293gdgdg6464642093jdklwjflwewt423412897491274uhrf12rfr12'
