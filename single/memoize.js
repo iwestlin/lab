@@ -36,6 +36,16 @@ function memoize2 (fn) {
   return memoize
 }
 
-var myfib = memoize(fib)
-var myfib2 = memoize2(fib2)
-console.log(myfib(100), myfib2(100))
+fib = memoize(fib)
+fib2 = memoize2(fib2)
+console.log(fib(100), fib2(100))
+
+var test = memoize(n => {
+  n = parseInt(n) || 1
+  if (n < 3) {
+    return 1
+  } else {
+    return test(n - 1) + test(n - 2)
+  }
+})
+test(100)
