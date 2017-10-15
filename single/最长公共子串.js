@@ -26,7 +26,7 @@ function longestCommonSubstring (a, b) {
   function lcs (m, n) {
     var r = ''
     for (let i = m; i < a.length; i++) {
-      if (a[i] === b[n]) {
+      if (a[i] === b[n] && a[i] !== undefined) {
         r += a[i]
         n++
       } else {
