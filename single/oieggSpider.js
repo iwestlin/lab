@@ -6,65 +6,69 @@ function getPosts (doc) {
   var posts = doc.getElementsByClassName('mainbox')
   posts = Array.prototype.slice.call(posts)
   posts.forEach(v => {
-    var author = v.querySelector('cite a')
-    if (author === null) {
-      author = '匿名'
-    } else {
-      author = author.innerText.fuckme()
-    }
-    var floor = v.querySelector('.postinfo strong').innerText.fuckme()
-    var date = v.getElementsByClassName('postinfo')[0].innerText.fuckme()
-    date = date.match(/\d+-\d+-\d+ \d+:\d+/)[0]
-    var content = v.getElementsByClassName('t_msgfont')[0]
-    var text = ''
-    var children = Array.prototype.slice.call(content.childNodes)
-    children.forEach(v => {
-      switch (v.nodeName.toLowerCase()) {
-        case 'a':
-          text += '[' + v.innerText.fuckme() + '](' + v.href + ')  \n'
-          break
-        case '#text':
-          text += v.data.replace(/[\s[\]]+/g, '') ? (v.data.fuckme() + '  \n') : ''
-          break
-        case 'img':
-          text += '![](' + v.src + ')' + '  \n'
-          break
-        case 'div':
-          if (v.className === 'quote') {
-            var s = v.innerText.fuckme().trim()
-            text += '<blockquote>' + s + '</blockquote>\n'
-          } else if (v.className === 'blockcode') {
-            s = v.getElementsByTagName('code')[0].innerText.fuckme().trim()
-            s = s.replace(/\n+/g, '\n')
-            text += '<pre>' + s + '</pre>\n'
-          }
-          break
-        case 'embed':
-          break
-        default:
-          text += v.innerText.fuckme().replace(/\s+/g, '') ? (v.innerText.fuckme() + '  \n') : ''
+    try {
+      var author = v.querySelector('cite a')
+      if (author === null) {
+        author = '匿名'
+      } else {
+        author = '[' + author.innerText.fuckme() + '](' + author.href + ')'
       }
-    })
-    var comments = v.getElementsByTagName('fieldset')
-    if (comments.length) {
-      text += '<blockquote>' + comments[0].innerText.fuckme().replace(/\t/g, '') + '</blockquote>\n'
+      var floor = v.querySelector('.postinfo strong').innerText
+      var date = v.getElementsByClassName('postinfo')[0].innerText
+      date = date.match(/\d+-\d+-\d+ \d+:\d+/)[0]
+      var content = v.getElementsByClassName('defaultpost')[0]
+      var text = getDivText(content).replace(/\n[\s\-]+\n/g, '\n\n')
+      var attachments = v.querySelectorAll('a[href^=attachment]')
+      attachments = Array.prototype.slice.call(attachments)
+      attachments = attachments.map(v => v.href)
+      attachments = arrayUnique(attachments)
+      attachments = attachments.map((v, i) => '[' + (i + 1) + '](' + v + ')')
+      result.push({author, date, floor, text, attachments})
+    } catch (e) {
+      console.log(e)
     }
-    text = text.replace(/\n\n\n+/g, '\n\n')
-    var attachments = v.querySelectorAll('a[href^=attachment]')
-    attachments = Array.prototype.slice.call(attachments)
-    attachments = attachments.map(v => v.href)
-    attachments = arrayUnique(attachments)
-    attachments = attachments.map((v, i) => '[' + (i + 1) + '](' + v + ')')
-    result.push({author, date, floor, text, attachments})
-    // var text = content.innerText.fuckme()
-    // var imgs = content.querySelectorAll('.t_msgfont>img')
-    // imgs = Array.prototype.slice.call(imgs)
-    // imgs = imgs.map(v => v.src)
-    // result.push({author, date, text, imgs})
   })
   return result
-  // console.log(result)
-  // copy(JSON.stringify(result))
+}
+
+function getDivText (div) {
+  var text = ''
+  var children = Array.prototype.slice.call(div.childNodes)
+  children.forEach(v => {
+    switch (v.nodeName.toLowerCase()) {
+      case 'a':
+        text += '[' + v.innerText.fuckme() + '](' + v.href + ')  \n'
+        break
+      case '#text':
+        text += v.data.replace(/[\s[\]]+/g, '') ? (v.data + '  \n') : ''
+        break
+      case 'img':
+        text += '![](' + v.src + ')' + '  \n'
+        break
+      case 'fieldset':
+        text += '<blockquote>' + v.innerText.fuckme().replace(/\t/g, '') + '</blockquote>\n'
+        break
+      case 'div':
+        if (v.className === 'notice') {
+          text += '<blockquote>' + v.innerText + '</blockquote>\n'
+        } else if (v.className === 'quote') {
+          var s = v.innerText.trim().fuckme()
+          text += '<blockquote>' + s + '</blockquote>\n'
+        } else if (v.className === 'blockcode') {
+          s = v.getElementsByTagName('code')[0].innerText.trim().fuckme()
+          s = s.replace(/\n+/g, '\n')
+          text += '<pre>' + s + '</pre>\n'
+        } else {
+          text += getDivText(v) + '  \n'
+        }
+        break
+      case 'embed':
+        break
+      default:
+        text += v.innerText.fuckme().replace(/\t/g, '') + '  \n'
+    }
+  })
+  return text
 }
 
 function arrayUnique (arr) {
@@ -76,9 +80,9 @@ function arrayFlatten (arr) {
   return arr.reduce((a, b) => a.concat(Array.isArray(b) ? arrayFlatten(b) : b), [])
 }
 
-function toMarkdown (arr) {
+function toMarkdown (arr, title, link) {
   arr = arrayFlatten(arr)
-  var r = '# ' + document.getElementsByTagName('h1')[0].innerText.fuckme() + '\n\n'
+  var r = '# [' + title + '](' + link + ')\n\n'
   arr.forEach(v => {
     var temp = '<b>作者： ' + v.author + ' '
     temp += '日期： ' + v.date + ' '
@@ -91,15 +95,13 @@ function toMarkdown (arr) {
   })
   return r
 }
-// var result = getPosts(document)
-// copy(toMarkdown(result))
 
 function getPageNumber () {
   var pgs = document.querySelector('.pages_btns .pages')
   if (pgs === null) {
     return 1
   } else {
-    var n = pgs.getElementsByTagName('em')[0].innerText.fuckme().trim()
+    var n = pgs.getElementsByTagName('em')[0].innerText.trim()
     n = parseInt(n)
     n = Math.ceil(n / 15)
     return n
@@ -137,6 +139,7 @@ function download (filename, text) {
 
 function start (pageLimit) {
   var all = []
+  var title = document.getElementsByTagName('h1')[0].innerText.fuckme()
   var tid = document.location.href.match(/tid=(\d+)/)[1]
   var pageNumber = pageLimit || getPageNumber()
   var pages = Array(pageNumber).fill(1).map((v, i) => v + i)
@@ -148,14 +151,14 @@ function start (pageLimit) {
         doc.innerHTML = html
         try {
           all[v - 1] = getPosts(doc)
-        } catch (e) {}
+        } catch (e) {
+          console.log(e)
+        }
       })
     }, v * 1000)
   })
 
   setTimeout(() => {
-    var title = document.getElementsByTagName('h1')[0].innerText.fuckme()
-    var md = toMarkdown(all)
-    download(title, md)
+    download(title, toMarkdown(all, title, document.location.href))
   }, pageNumber * 1000 + 2000)
 }
