@@ -1,4 +1,5 @@
 String.prototype.fuckme = function () { return this.replace(/</g, '&lt;').replace(/>/g, '&gt;') }
+start()
 
 function getPosts (doc) {
   var result = []
@@ -13,7 +14,7 @@ function getPosts (doc) {
     }
     var floor = v.querySelector('.postinfo strong').innerText.fuckme()
     var date = v.getElementsByClassName('postinfo')[0].innerText.fuckme()
-    date = date.match(/\d+\-\d+\-\d+ \d+:\d+/)[0]
+    date = date.match(/\d+-\d+-\d+ \d+:\d+/)[0]
     var content = v.getElementsByClassName('t_msgfont')[0]
     var text = ''
     var children = Array.prototype.slice.call(content.childNodes)
@@ -23,7 +24,7 @@ function getPosts (doc) {
           text += '[' + v.innerText.fuckme() + '](' + v.href + ')  \n'
           break
         case '#text':
-          text += v.data.replace(/[\s\[\]]+/g, '') ? (v.data.fuckme() + '  \n') : ''
+          text += v.data.replace(/[\s[\]]+/g, '') ? (v.data.fuckme() + '  \n') : ''
           break
         case 'img':
           text += '![](' + v.src + ')' + '  \n'
@@ -33,7 +34,7 @@ function getPosts (doc) {
             var s = v.innerText.fuckme().trim()
             text += '<blockquote>' + s + '</blockquote>\n'
           } else if (v.className === 'blockcode') {
-            var s = v.getElementsByTagName('code')[0].innerText.fuckme().trim()
+            s = v.getElementsByTagName('code')[0].innerText.fuckme().trim()
             s = s.replace(/\n+/g, '\n')
             text += '<pre>' + s + '</pre>\n'
           }
@@ -46,7 +47,7 @@ function getPosts (doc) {
     })
     var comments = v.getElementsByTagName('fieldset')
     if (comments.length) {
-      text += '<blockquote>' + comments[0].innerText.fuckme().replace(/\t/g,'') + '</blockquote>\n'
+      text += '<blockquote>' + comments[0].innerText.fuckme().replace(/\t/g, '') + '</blockquote>\n'
     }
     text = text.replace(/\n\n\n+/g, '\n\n')
     var attachments = v.querySelectorAll('a[href^=attachment]')
@@ -147,8 +148,7 @@ function start (pageLimit) {
         doc.innerHTML = html
         try {
           all[v - 1] = getPosts(doc)
-        }
-        catch (e) {}
+        } catch (e) {}
       })
     }, v * 1000)
   })
@@ -159,4 +159,3 @@ function start (pageLimit) {
     download(title, md)
   }, pageNumber * 1000 + 2000)
 }
-start()
