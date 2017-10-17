@@ -43,7 +43,7 @@ function getDivText (div) {
         text += v.data.replace(/[\s[\]]+/g, '') ? (v.data + '  \n') : ''
         break
       case 'img':
-        text += '![](' + v.src + ')' + '  \n'
+        text += '![](' + v.src + ')'
         break
       case 'fieldset':
         text += '<blockquote>' + v.innerText.fuckme().replace(/\t/g, '') + '</blockquote>\n'
