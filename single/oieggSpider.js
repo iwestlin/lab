@@ -104,7 +104,7 @@ function getPageNumber () {
     var n = pgs.getElementsByTagName('em')[0].innerText.trim()
     n = parseInt(n)
     n = Math.ceil(n / 15)
-    return n
+    return n || 1
   }
 }
 
