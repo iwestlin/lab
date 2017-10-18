@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>PT站做种魔力值公式</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    body {
+      text-align: center;
+    }
+    .chart {
+      margin: 0 auto;
+    }
+  </style>
+  <script src="https://cdn.bootcss.com/echarts/3.6.2/echarts.common.js"></script>
+</head>
+
+<body>
+  <div class="chart" id="main" style="width: 100%;height:250px;"></div>
+  <div class="chart" id="two" style="width: 100%;height:250px;"></div>
+  <div class="chart" id="three" style="width: 100%;height:250px;"></div>
+  <img src="./formula.png" alt="bonus formula">
+
+  <script src="bonus.js"></script>
+  <script type="text/javascript">
+  var myChart = echarts.init(document.getElementById('main'))
+  var two = echarts.init(document.getElementById('two'))
+  var three = echarts.init(document.getElementById('three'))
+
+  var option = {
+    color: ['#3398DB'],
+    tooltip: {},
+    xAxis: {
+      data: a,
+      name: '大小(GB)'
+    },
+    yAxis: {
+      name: '每小时获取的魔力值'
+    },
+    series: [{
+      name: '魔力值',
+      type: 'bar',
+      data: sizeChange
+    }]
+  }
+  myChart.setOption(option)
+  option.series[0].data = weeksChange
+  option.xAxis.name = '周数'
+  two.setOption(option)
+  option.series[0].data = seedersChange
+  option.xAxis.name = '做种人数'
+  three.setOption(option)
+  </script>
+</body>
+
+</html>
