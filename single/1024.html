@@ -43,6 +43,7 @@
   const WIDTH = 32
   var loop
   var paused = true
+  initDOM()
   var tiles = document.getElementsByClassName('tile')
   var state = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -78,7 +79,6 @@
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ]
-  initDOM()
   paint()
 
   function initDOM() {
@@ -146,11 +146,14 @@
       [0, 1]
     ]
     nbs.forEach(v => {
-      var ni = i + v[0]
-      var nj = j + v[1]
-      if (0 <= ni && ni < HEIGHT && 0 <= nj && nj < WIDTH) {
-        state[ni][nj] && count++
-      }
+      // var ni = i + v[0]
+      // var nj = j + v[1]
+      // if (0 <= ni && ni < HEIGHT && 0 <= nj && nj < WIDTH) {
+      //   state[ni][nj] && count++
+      // }
+      var ni = (i + v[0] + HEIGHT) % HEIGHT
+      var nj = (j + v[1] + WIDTH) % WIDTH
+      state[ni][nj] && count++
     })
     return count
   }
