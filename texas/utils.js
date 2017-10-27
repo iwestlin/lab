@@ -93,8 +93,38 @@ function arrayize (arr) {
     }
   }
   return [mysuits, myvalues]
+  // like [[2,1,2,0], [1,1,1,1,1,0,0,0,0,0,0,0,0]]
+  // which means 2 spades, 1 heart, 2 club, with value of A,K,Q,J,10
 }
 
-function getCardsValue (arr) {
-  return detect(arrayize(arr))[1]
+// function getCardsValue (arr) {
+//   return detect(arrayize(arr))[1]
+// }
+
+function gen () {
+  var cache = {}
+  function getCardsValue (arr) {
+    arr = arrayize(arr)
+    var flush = isFlush(arr[0])
+    var index = getIndex(flush, arr[1])
+    var cached = cache[index]
+    if (cached) return cached
+    var value = detect(arr)[1]
+    cache[index] = value
+    return value
+  }
+  return getCardsValue
+}
+
+var getCardsValue = gen()
+
+function isFlush (arr) {
+  return Math.max(...arr) === 5
+}
+
+function getIndex (bool, arr) {
+  var s = '0123456789abc'
+  var result = bool ? '1' : '0'
+  // return result += arr.map((v, i) => (v ? Array(v).fill(s[i]).join('') : '')).join('')
+  return result += arr.join('')
 }
