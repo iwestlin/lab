@@ -1,3 +1,4 @@
+!function() {
 String.prototype.fuckme = function () { return this.replace(/</g, '&lt;').replace(/>/g, '&gt;') }
 start()
 
@@ -11,7 +12,8 @@ function getPosts (doc) {
       if (author === null) {
         author = '匿名'
       } else {
-        author = '[' + author.innerText.fuckme() + '](' + author.href + ')'
+        // author = '[' + author.innerText.fuckme() + '](' + author.href + ')'
+        author = author.innerText.fuckme()
       }
       var floor = v.querySelector('.postinfo strong').innerText
       var date = v.getElementsByClassName('postinfo')[0].innerText
@@ -40,7 +42,7 @@ function getDivText (div) {
         text += '[' + v.innerText.fuckme() + '](' + v.href + ')  \n'
         break
       case '#text':
-        text += v.data.replace(/[\s[\]]+/g, '') ? (v.data + '  \n') : ''
+        text += v.data.replace(/[\s[\]]+/g, '') ? v.data : ''
         break
       case 'img':
         text += '![](' + v.src + ')'
@@ -49,7 +51,9 @@ function getDivText (div) {
         text += '<blockquote>' + v.innerText.fuckme().replace(/\t/g, '') + '</blockquote>\n'
         break
       case 'div':
-        if (v.className === 'notice') {
+        if (v.className === 'box postattachlist') {
+          break
+        } else if (v.className === 'notice') {
           text += '<blockquote>' + v.innerText + '</blockquote>\n'
         } else if (v.className === 'quote') {
           var s = v.innerText.trim().fuckme()
@@ -65,7 +69,7 @@ function getDivText (div) {
       case 'embed':
         break
       default:
-        text += v.innerText.fuckme().replace(/\t/g, '') + '  \n'
+        text += v.innerText.fuckme().replace(/\t/g, '') + ' '
     }
   })
   return text
@@ -84,9 +88,9 @@ function toMarkdown (arr, title, link) {
   arr = arrayFlatten(arr)
   var r = '# [' + title + '](' + link + ')\n\n'
   arr.forEach(v => {
-    var temp = '<b>作者： ' + v.author + ' '
-    temp += '日期： ' + v.date + ' '
-    temp += '楼层： ' + v.floor + '</b>  \n'
+    var temp = '<b>' + v.author + ' &nbsp;'
+    temp += v.date + ' &nbsp;'
+    temp += v.floor + '</b>  \n'
     temp += v.text + '  \n'
     if (v.attachments.length) {
       temp += '附件： ' + v.attachments.join(' ')
@@ -162,3 +166,4 @@ function start (pageLimit) {
     download(title, toMarkdown(all, title, document.location.href))
   }, pageNumber * 1000 + 2000)
 }
+}()
