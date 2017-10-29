@@ -1,0 +1,168 @@
+<!doctype html>
+<!-- http://www.idea7.cn/demo/ktv-lyric/xpg.html -->
+<html class="play">
+
+<head>
+  <meta charset="utf-8">
+  <title>用CSS3动画（animation）制作KTV歌词高亮涂抹效果</title>
+  <style>
+  body {
+    text-align: center;
+  }
+  
+  p {
+    position: relative;
+    width: 80%;
+    margin: 2% auto 0;
+    color: #999;
+    font-size: 60px;
+    line-height: 1.8em;
+    text-align: left;
+  }
+  
+  p b {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    color: #F00;
+    font-weight: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-shadow: 0 0 10px #F60;
+  }
+  
+  .play p:nth-of-type(1) b {
+    animation: light1 3.3s linear forwards;
+  }
+  
+  .play p:nth-of-type(2) b {
+    animation: light2 3.3s linear 3.8s forwards;
+  }
+  
+  .play p:nth-of-type(3) b {
+    animation: light3 3.8s linear 7.3s forwards;
+  }
+  
+  .play p:nth-of-type(4) b {
+    animation: light4 1.7s linear 11.5s forwards;
+  }
+  
+  .huo {
+    display: inline-block;
+    width: 6.2em;
+    margin-left: 0.5em;
+    color: rgba(255, 255, 255, 0);
+    font-weight: bold;
+    text-indent: -1em;
+    white-space: nowrap;
+  }
+  
+  .play .huo1 {
+    animation: huo1 1.3s ease-out 13.4s forwards;
+  }
+  
+  @keyframes huo1 {
+    0% {
+      text-shadow: 0 0 0 rgba(255, 0, 0, 0);
+    }
+    20% {
+      text-shadow: 1em 0 0 rgba(255, 0, 0, 1), 1em 0 10px #F60;
+    }
+    30% {
+      text-shadow: 1em 0 0 rgba(255, 0, 0, 1), 1em 0 10px #F60, 2.3em 0 0 rgba(255, 0, 0, 1), 2.3em 0 10px #F60;
+    }
+    45% {
+      text-shadow: 1em 0 0 rgba(255, 0, 0, 1), 1em 0 10px #F60, 2.3em 0 0 rgba(255, 0, 0, 1), 2.3em 0 10px #F60, 3.6em 0 0 rgba(255, 0, 0, 1), 3.6em 0 10px #F60;
+    }
+    60% {
+      text-shadow: 1em 0 0 rgba(255, 0, 0, 1), 1em 0 10px #F60, 2.3em 0 0 rgba(255, 0, 0, 1), 2.3em 0 10px #F60, 3.6em 0 0 rgba(255, 0, 0, 1), 3.6em 0 10px #F60, 4.9em 0 0 rgba(255, 0, 0, 1), 4.9em 0 10px #F60;
+    }
+    100% {
+      text-shadow: 1em 0 0px rgba(255, 0, 0, 1), 1em 0 10px #F60, 2.3em 0 0px rgba(255, 0, 0, 1), 2.3em 0 10px #F60, 3.6em 0 0px rgba(255, 0, 0, 1), 3.6em 0 10px #F60, 4.9em 0 0px rgba(255, 0, 0, 1), 4.9em 0 10px #F60, 6.2em 0 0px rgba(255, 0, 0, 1), 6.2em 0 10px #F60;
+    }
+  }
+  
+  @keyframes light1 {
+    0 {
+      width: 0;
+    }
+    60% {
+      width: 4em;
+    }
+    85% {
+      width: 7.5em;
+    }
+    90% {
+      width: 8em;
+    }
+    100% {
+      width: 9em;
+    }
+  }
+  
+  @keyframes light2 {
+    0 {
+      width: 0;
+    }
+    60% {
+      width: 4em;
+    }
+    85% {
+      width: 7em;
+    }
+    100% {
+      width: 8em;
+    }
+  }
+  
+  @keyframes light3 {
+    0 {
+      width: 0;
+    }
+    24.3% {
+      width: 3em;
+    }
+    60% {
+      width: 7em;
+    }
+    70% {
+      width: 8em;
+    }
+    80% {
+      width: 9em;
+    }
+    90% {
+      width: 10em;
+    }
+    100% {
+      width: 11em;
+    }
+  }
+  
+  @keyframes light4 {
+    0 {
+      width: 0;
+    }
+    40% {
+      width: 2.1em;
+    }
+    55% {
+      width: 3em;
+    }
+    100% {
+      width: 6em;
+    }
+  }
+  </style>
+</head>
+
+<body>
+  code from <a href="http://www.idea7.cn/demo/ktv-lyric/xpg.html">here</a>
+  <p>你是我的小呀小苹果<b>你是我的小呀小苹果</b></p>
+  <p>怎么爱你都不嫌多<b>怎么爱你都不嫌多</b></p>
+  <p>红红的小脸温暖我的心窝<b>红红的小脸温暖我的心窝</b></p>
+  <p>点亮我生命的<b>点亮我生命的</b><span class="huo huo1">火</span></p>
+</body>
+
+</html>
