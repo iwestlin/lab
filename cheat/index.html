@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>天才枪手作弊方式升级版</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    body {
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <p>idea 来自 <a href="https://www.zhihu.com/question/65949119/answer/250824571">爱熬夜的程序员@知乎</a></p>
+  <input type="text" id="abcd" placeholder="此处填写ABCD选项" value="CAADBADDACBCDABDDCCA">
+  <input type="text" id="hex" placeholder="此处填写十六进制码" value="834F26C7E8">
+  <script src="main.js"></script>
+  <script type="text/javascript">
+    var abcd = document.getElementById('abcd')
+    var hex = document.getElementById('hex')
+    abcd.onkeyup = function () {
+      hex.value = myEncode(this.value)
+    }
+    hex.onkeyup = function () {
+      abcd.value = myDecode(this.value)
+    }
+  </script>
+</body>
+
+</html>
