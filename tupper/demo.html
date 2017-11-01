@@ -54,6 +54,12 @@
   cont.addEventListener('mouseup', function () {
     mousedown = false
   })
+  cont.addEventListener('mouseover', function (e) {
+    mousedown && e.target.classList.add('black')
+  })
+  cont.addEventListener('click', function (e) {
+    e.target.classList.toggle('black')
+  })
 
   function getK () {
     var a = getArray()
@@ -86,12 +92,12 @@
       if (s[i] === '*') {
         tile.classList.add('black')
       }
-      tile.addEventListener('mouseover', function () {
-        mousedown && this.classList.add('black')
-      })
-      tile.addEventListener('click', function () {
-        this.classList.toggle('black')
-      })
+      // tile.addEventListener('mouseover', function () {
+      //   mousedown && this.classList.add('black')
+      // })
+      // tile.addEventListener('click', function () {
+      //   this.classList.toggle('black')
+      // })
       cont.appendChild(tile)
     }
   }
