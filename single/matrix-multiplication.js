@@ -2,7 +2,8 @@ var a = [
   [0, 1],
   [1, 1]
 ]
-console.table(matrixPower(a, 10))
+console.table(matrixPower(a, 10)) // 斐波那契数列
+// https://www.zhihu.com/question/25217301
 
 function matrixPower (a, n) {
   var copy = a.map(v => v.slice())
@@ -26,7 +27,8 @@ function times (m1, m2) {
   if (isMatrix(m1) && isMatrix(m2) && m1[0].length === m2.length) {
     return Array(m1.length).fill().map((_, i) => Array(m2[0].length).fill().map((v, j) => time(m1[i], getColumn(m2, j))))
   } else {
-    console.log('arguments must be 2 square matrixes with same order!')
+    // console.log('arguments must be 2 square matrixes with same order!')
+    throw new Error('Can not multiply!')
   }
 }
 
