@@ -31,8 +31,8 @@ function times (m1, m2) {
 }
 
 function isMatrix (a) {
-  if (a.length > 1) {
-    var len = a[0].length
+  if (a.length > 0) {
+    var len = a[0].length || 1
     for (let i = 1; i < a.length; i++) {
       if (a[i].length !== len) {
         return false
