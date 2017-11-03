@@ -22,12 +22,25 @@ function getColumn (m, j) {
 }
 
 function times (m1, m2) {
-  if (!isSquareMatrix(m1) || !isSquareMatrix(m2)) {
-    console.log('arguments must be square matrixes!')
+  // if (isSquareMatrix(m1) && isSquareMatrix(m2) && m1.length === m2.length) {
+  if (isMatrix(m1) && isMatrix(m2) && m1[0].length === m2.length) {
+    return Array(m1.length).fill().map((_, i) => Array(m2[0].length).fill().map((v, j) => time(m1[i], getColumn(m2, j))))
   } else {
-    var len = m1.length
-    return Array(len).fill().map((_, i) => Array(len).fill().map((v, j) => time(m1[i], getColumn(m2, j))))
+    console.log('arguments must be 2 square matrixes with same order!')
   }
+}
+
+function isMatrix (a) {
+  if (a.length > 1) {
+    var len = a[0].length
+    for (let i = 1; i < a.length; i++) {
+      if (a[i].length !== len) {
+        return false
+      }
+    }
+    return true
+  }
+  return false
 }
 
 function isSquareMatrix (a) {
