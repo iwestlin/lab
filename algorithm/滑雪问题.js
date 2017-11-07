@@ -6,15 +6,13 @@ var board = [
   [14,23,22,21,8],
   [13,12,11,10,9]
 ]
-var directions = [[-1, 0], [1, 0], [0, -1], [0, 1]]
-
 getLongestSteps(board) // 24
 
 function getLongestSteps (board) {
   var HEIGHT = board.length
   var WIDTH = board[0].length
   var cache = Array(board.length).fill().map(v => Array(board[0].length).fill(0))
-  traversal(cache, board)
+  iteration(cache, board)
   console.table(cache)
   return Math.max(...flatten(cache))
 }
@@ -27,7 +25,8 @@ function getValue (x, y, board) {
   return (0 <= x && x < board.length && 0 <= y && y < board[0].length) ? board[x][y] : Infinity
 }
 
-function traversal (cache, board) {
+function iteration (cache, board) {
+  var directions = [[-1, 0], [1, 0], [0, -1], [0, 1]]
   var changed = false
   directions.forEach(xy => {
     for (let i = 0; i < board.length; i++) {
@@ -43,7 +42,7 @@ function traversal (cache, board) {
       }
     }
   })
-  changed && traversal(cache, board)
+  changed && iteration(cache, board)
 }
 
 // function generateBoard (height, width) {
