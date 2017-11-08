@@ -1,4 +1,5 @@
 !function() {
+const DELAY = 500
 String.prototype.fuckme = function () { return this.replace(/</g, '&lt;').replace(/>/g, '&gt;') }
 start()
 
@@ -45,7 +46,8 @@ function getDivText (div) {
         text += v.data.replace(/[\s[\]]+/g, '') ? v.data : ''
         break
       case 'img':
-        text += '![](' + v.src + ')'
+        // text += '![](' + v.src + ')'
+        text += '![](' + v.dataset.src.replace(/^\/\/file/g, 'https://www') + ')'
         break
       case 'fieldset':
         text += '<blockquote>' + v.innerText.fuckme().replace(/\t/g, '') + '</blockquote>\n'
@@ -151,6 +153,7 @@ function start (pageLimit) {
     var url = generateURL(tid, v)
     setTimeout(() => {
       httpRequest(url, html => {
+        html = html.replace(/<img src=/g, '<img data-src=')
         var doc = document.createElement('html')
         doc.innerHTML = html
         try {
@@ -159,11 +162,11 @@ function start (pageLimit) {
           console.log(e)
         }
       })
-    }, v * 1000)
+    }, v * DELAY)
   })
 
   setTimeout(() => {
     download(title, toMarkdown(all, title, document.location.href))
-  }, pageNumber * 1000 + 2000)
+  }, pageNumber * DELAY + 1000)
 }
 }()
