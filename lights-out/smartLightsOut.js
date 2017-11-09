@@ -1,4 +1,7 @@
 // https://github.com/njpipeorgan/LightsOut
+Array.prototype.xor = function (arr) {
+  return this.map((v, i) => v ^ arr[i])
+}
 
 Array.prototype.times = function (arr) {
   return this.map((v, i) => v * arr[i])
@@ -85,31 +88,26 @@ function initB (n) {
 // A(n,·) = B(n,·) ^ A(n-1,·) ^ A(n,·) ^ A(n+1,·)
 // B(n,·) = A(n,·) ^ ( 0 0 ... 0 | 1 )
 function iteration (n) {
-  var a = initA(n).map(v => {
-    v = v.join('')
-    return parseInt(v, 2)
-  })
-  var b = initB(n).map(v => {
-    v = v.join('')
-    return parseInt(v, 2)
-  })
+  var a = initA(n)
+  var b = initB(n)
   for (let count = 0; count < n - 1; count++) {
-    var bCopy = b.slice()
+    var bCopy = b.map(v => v.slice())
     b = b.map((v, i) => {
-      return a[i] ^ 1
+      var temp = Array(n).fill(0).concat(1)
+      return a[i].xor(temp)
     })
     a = a.map((v, i) => {
-      var result = v ^ bCopy[i]
+      var result = v.xor(bCopy[i])
       if (i - 1 >= 0) {
-        result ^= a[i - 1]
+        result = result.xor(a[i - 1])
       }
       if (i + 1 < a.length) {
-        result ^= a[i + 1]
+        result = result.xor(a[i + 1])
       }
       return result
     })
   }
-  return a.map(v => v.toString(2)).map(v => Array(n + 1 - v.length).fill('0').join('') + v)
+  return a.map(v => v.join(''))
 }
 // console.table(iteration(5))
 
