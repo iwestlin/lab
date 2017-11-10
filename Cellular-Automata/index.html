@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>元胞自动机</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+  body {
+    text-align: center;
+  }
+  #result {
+    line-height: 1em;
+  }
+  </style>
+</head>
+
+<body>
+  <input type="text" id="rule" placeholder="rule number 0~255">
+  <button onclick="change()">change rule</button>
+  <button onclick="stop(this)">stop</button>
+  <hr>
+  <pre id="result"></pre>
+  <script src="main.js"></script>
+  <script type="text/javascript">
+  var WIDTH = 50
+  var ruleNumber = 110
+  var loop
+  var start = Array(WIDTH).fill('1').join('')
+  var result = document.getElementById('result')
+  var rule = document.getElementById('rule')
+  var status = drawLines(start, ruleNumber, WIDTH)
+  result.innerText = trans(status)
+
+  function trans(s) {
+    return s.replace(/1/g, '●').replace(/0/g, '○')
+  }
+
+  function change (s) {
+    ruleNumber = parseInt(rule.value) || 0
+  }
+
+  function nextStepOf (s) {
+    s = s.trim()
+    s = s.split('\n')
+    var lastLine = s[s.length - 1]
+    var newLine = nextLine(lastLine, ruleNumber)
+    s.shift()
+    s.push(newLine)
+    return s.join('\n')
+  }
+
+  function play (delay) {
+    delay = delay || 200
+    loop = setInterval(() => {
+      status = nextStepOf(status)
+      result.innerText = trans(status)
+    }, delay)
+  }
+  play()
+
+  function stop (that) {
+    if (that.paused) {
+      play()
+      that.innerText = 'stop'
+    } else {
+      clearInterval(loop)
+      that.innerText = 'play'
+    }
+    that.paused = !that.paused
+  }
+  </script>
+</body>
+
+</html>

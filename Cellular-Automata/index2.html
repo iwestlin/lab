@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>元胞自动机</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+  body {
+    text-align: center;
+  }
+  #result {
+    line-height: 1em;
+  }
+  </style>
+</head>
+
+<body>
+  <input type="text" id="rule" placeholder="rule number 0~255">
+  <input type="text" id="lineNumber" placeholder="line number">
+  <button onclick="change()">change rule</button>
+  <hr>
+  <pre id="result"></pre>
+  <script src="main.js"></script>
+  <script type="text/javascript">
+  var start = Array(100).fill('1').join('')
+  var result = document.getElementById('result')
+  var rule = document.getElementById('rule')
+  var lineNumber = document.getElementById('lineNumber')
+  result.innerText = trans(drawLines(start, 110, 100))
+
+  function trans(s) {
+    return s.replace(/1/g, '●').replace(/0/g, '○')
+  }
+
+  function change () {
+    var len = parseInt(lineNumber.value) || 100
+    result.innerText = trans(drawLines(start, rule.value, len))
+  }
+  </script>
+</body>
+
+</html>
