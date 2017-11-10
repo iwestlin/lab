@@ -94,9 +94,9 @@ function toMarkdown (arr, title, link) {
     temp += v.date + ' &nbsp;'
     temp += v.floor + '</b>  \n'
     temp += v.text + '  \n'
-    if (v.attachments.length) {
-      temp += '附件： ' + v.attachments.join(' ')
-    }
+    // if (v.attachments.length) {
+    //   temp += '附件： ' + v.attachments.join(' ')
+    // }
     r += temp + '\n<hr>\n'
   })
   return r
@@ -167,6 +167,6 @@ function start (pageLimit) {
 
   setTimeout(() => {
     download(title, toMarkdown(all, title, document.location.href))
-  }, pageNumber * DELAY + 1000)
+  }, pageNumber * DELAY + 2000)
 }
 }()
