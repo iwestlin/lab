@@ -43,7 +43,7 @@ function getDivText (div) {
         text += '[' + v.innerText.fuckme() + '](' + v.href + ')  \n'
         break
       case '#text':
-        text += v.data.replace(/[\s[\]]+/g, '') ? v.data : ''
+        text += v.data.replace(/[\s[\]]+/g, '') ? v.data.fuckme() : ''
         break
       case 'img':
         // text += '![](' + v.src + ')'
