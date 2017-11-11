@@ -28,7 +28,7 @@
   var WIDTH = 50
   var ruleNumber = 110
   var loop
-  var start = Array(WIDTH).fill('1').join('')
+  var start = Array(WIDTH).fill().map(v => Math.round(Math.random())).join('')
   var result = document.getElementById('result')
   var rule = document.getElementById('rule')
   var status = drawLines(start, ruleNumber, WIDTH)
