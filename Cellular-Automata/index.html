@@ -11,11 +11,14 @@
   #result {
     line-height: 1em;
   }
+  #rule {
+    width: 300px;
+  }
   </style>
 </head>
 
 <body>
-  <input type="text" id="rule" placeholder="rule number 0~255">
+  <input type="text" id="rule" placeholder="rule number 0~255, defalut 110">
   <button onclick="change()">change rule</button>
   <button onclick="stop(this)">stop</button>
   <hr>
@@ -30,6 +33,7 @@
   var rule = document.getElementById('rule')
   var status = drawLines(start, ruleNumber, WIDTH)
   result.innerText = trans(status)
+  play()
 
   function trans(s) {
     return s.replace(/1/g, '●').replace(/0/g, '○')
@@ -56,7 +60,6 @@
       result.innerText = trans(status)
     }, delay)
   }
-  play()
 
   function stop (that) {
     if (that.paused) {
