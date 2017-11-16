@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>尽量不重复的随机</title>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <a href="https://www.zhihu.com/question/68086281">参考这个问题</a>
+  <script type="text/javascript">
+  count2(shuffle2(lottery2(100)))
+
+  function abcd () {
+    var n = Math.random()
+    if (n < 0.25) {
+      return 'a'
+    } else if (n < 0.75) {
+      return 'b'
+    } else if (n < 0.875) {
+      return 'c'
+    } else {
+      return 'd'
+    }
+  }
+
+  function lottery2 (n) {
+    var result = []
+    for (let i = 0; i < n; i++) {
+      result.push(abcd())
+    }
+    return result
+  }
+
+  function shuffle2 (arr) {
+    // console.log(arr.join(''))
+    var len = arr.length
+    for (let i = 1; i < len - 1; i++) {
+      if (arr[i] === arr[i - 1]) {
+        for (let j = i + 1; j < len; j++) {
+          if (arr[j] !== arr[i - 1]) {
+            var temp = arr[i]
+            arr[i] = arr[j]
+            arr[j] = temp
+            break
+          }
+        }
+      }
+    }
+    // console.log(arr.join(''))
+    for (let i = len - 1; i > 0; i--) {
+      if (arr[i] === arr[i - 1]) {
+        for (let j = 0; j < len; j++) {
+          if (arr[j] !== arr[i] && arr[j + 1] !== arr[i]) {
+            arr.splice(j + 1, 0, arr[i])
+            i++
+            break
+          }
+        }
+      } else {
+        break
+      }
+    }
+    // console.log(arr.join(''))
+    return arr.slice(0, len)
+  }
+
+  // 有问题 可能会遇到最后连续相同的情况 导致卡死
+  function shuffle (arr) {
+    var limit = arr.length - 1 // 3
+    for (let i = 0; i < limit - 1;) { // i = 0,1
+      if (arr[i] === arr[i + 1]) {
+        var n = myRandom(i + 2, limit)
+        // [arr[i + 1], arr[n]] = [arr[n], arr[i + 1]]
+        var temp = arr[i + 1]
+        arr[i + 1] = arr[n]
+        arr[n] = temp
+      } else {
+        i++
+      }
+    }
+    return arr
+  }
+
+  function myRandom (x, y) {
+    var range = y - x
+    var n = Math.round(Math.random() * range)
+    return x + n
+  }
+
+  function lottery (n) { // 有问题，最后概率与预期不符
+    var last
+    var result = []
+    for (let i = 0; i < n; i++) {
+      var s = abcd()
+      if (s !== last) {
+        result.push(s)
+        last = s
+      } else {
+        i--
+      }
+    }
+    return result
+  }
+
+  function count (arr) {
+    var result = {}
+    Array.from(new Set(arr)).sort().forEach(v => {
+      result[v] = 0
+    })
+    arr.forEach(v => {
+      result[v] += 1
+    })
+    return result
+  }
+
+  function count2 (arr, step) {
+    console.log(arr.join(''), count(arr))
+    var matches = arr.join('').match(/(\w)\1+/g)
+    console.log('连续字符出现次数：' + (matches ? matches.length : 0))
+    step = step || 10
+    var result = []
+    for (let i = 0; i < arr.length; i += step) {
+      var temp = { a: 0, b: 0, c: 0, d: 0 }
+      for (let j = i; j < i + step; j++) {
+        if (j >= arr.length) break
+        temp[arr[j]] += 1
+      }
+      result[i + '~' + (i + step)] = temp
+    }
+    console.table(result)
+  }
+
+  </script>
+</body>
+
+</html>
