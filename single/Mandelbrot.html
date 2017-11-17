@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>document</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+  #result {
+    font-size: 10px;
+    text-align: center;
+    line-height: 0.7em;
+    font-family: monospace;
+  }
+  </style>
+</head>
+
+<body>
+  <pre id="result"></pre>
+  <script type="text/javascript">
+  function plus(a, b) {
+    return [a[0] + b[0], a[1] + b[1]]
+  }
+
+  function time(a, b) {
+    return [a[0] * b[0] - a[1] * b[1], a[0] * b[1] + a[1] * b[0]]
+  }
+
+  function len(arr) {
+    return Math.sqrt(arr[0] * arr[0] + arr[1] * arr[1])
+  }
+
+  Array.prototype.plus = function(b) {
+    return plus(this, b)
+  }
+  Array.prototype.time = function(b) {
+    return time(this, b)
+  }
+
+  function isMand(arr, limit) {
+    limit = limit || 100
+    var copy = arr.slice()
+    for (let i = 0; i < limit; i++) {
+      arr = arr.time(arr).plus(copy)
+      if (len(arr) > 2) return 0
+    }
+    return 1
+  }
+
+  function genArr(xStart, xEnd, yStart, yEnd, step) {
+    var result = []
+    for (let y = yEnd; y >= yStart; y -= step) {
+      var temp = []
+      for (let x = xStart; x <= xEnd; x += step) {
+        temp.push([x, y])
+      }
+      result.push(temp)
+    }
+    return result
+  }
+
+  var test = genArr(-2, 0.5, -0.9, 0.9, 0.02).map(row => row.map(v => isMand(v)))
+  var pre = document.getElementById('result')
+  pre.innerText = test.map(row => row.join('')).join('\n')
+  </script>
+</body>
+
+</html>
