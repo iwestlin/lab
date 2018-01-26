@@ -112,7 +112,7 @@
     }
 
     // if (detectGaopai(arr[0], arr[1])) { // 高牌，可比
-    if (detectAllSingle(arr[1]) && detectTonghua(arr[0]) && detectShunzi(arr[1]) && detectAShunzi(arr[1])) {
+    if (detectAllSingle(arr[1]) && !detectTonghua(arr[0]) && !detectShunzi(arr[1]) && !detectAShunzi(arr[1])) {
       return [high, myArrValue]
     } else if (detectDuizi(arr[1])) { // 对子，不可比
       high = 1
