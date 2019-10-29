@@ -9,7 +9,7 @@
     "email": "westlin@foxmail.com"
   },
   "dependencies": {
-    "request": "~2.11.4",
+    "request": "~2.88.0",
     "rss": "~0.0.4"
   },
   "engines": {
