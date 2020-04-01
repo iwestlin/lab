@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>24点求解</title>
+</head>
+<body>
+<input type="text" id="inp" />
+<button onclick="solve()">solve</button>
+<br><br>
+<textarea name="result" id="result" cols="20" rows="40"></textarea>
+
+<script>
+const equal_to_24 = n => Math.abs(24 - n) < 1e-10
+
+const jia = (a, b) => a + b
+const jian = (a, b) => a - b
+const chen = (a, b) => a * b
+const chu = (a, b) => a / b
+
+const oprators = [jia, jian, chen, chu]
+const op_texts = {
+  [jia]: '+',
+  [jian]: '-',
+  [chen]: 'x',
+  [chu]: '/'
+}
+
+function solve () {
+  let arr = document.getElementById('inp').value.trim()
+  arr = arr.split(' ').map(v => parseInt(v))
+  if (arr.length !== 4) return alert('请输入1-13之间的4个整数，以空格分隔')
+  const allows = [1,2,3,4,5,6,7,8,9,10,11,12,13]
+  for (let n of arr) {
+    if (!allows.includes(n)) return alert('请输入1-13之间的4个整数，以空格分隔')
+  }
+  const results = check_all(arr)
+  document.getElementById('result').value = results.length ? results.join('\n') : '无解'
+}
+
+function catalan (arr) {
+  const [a, b, c, d] = arr
+  const ops = oprators.map(v => {
+    return oprators.map(vv => {
+      return oprators.map(vvv => [vvv, vv])
+    }).reduce((acc, val) => acc.concat(val), []).map(arr => arr.concat(v))
+  }).reduce((acc, val) => acc.concat(val), [])
+
+  return ops.map(([op1, op2, op3]) => {
+    const op1_t = op_texts[op1]
+    const op2_t = op_texts[op2]
+    const op3_t = op_texts[op3]
+    const r1 = op1(a, op2(b, op3(c, d)))
+    const t1 = `${a} ${op1_t} (${b} ${op2_t} (${c} ${op3_t} ${d}))`
+    const r2 = op1(a, op2(op3(b, c), d))
+    const t2 = `${a} ${op1_t} ((${b} ${op3_t} ${c}) ${op2_t} ${d})`
+    const r3 = op1(op2(a, b), op3(c, d))
+    const t3 = `(${a} ${op2_t} ${b}) ${op1_t} (${c} ${op3_t} ${d})`
+    const r4 = op1(op2(a, op3(b, c)), d)
+    const t4 = `(${a} ${op2_t} (${b} ${op3_t} ${c})) ${op1_t} ${d}`
+    const r5 = op1(op2(op3(a, b), c), d)
+    const t5 = `((${a} ${op3_t} ${b}) ${op2_t} ${c}) ${op1_t} ${d}`
+    return [
+      {value: r1, text: t1},
+      {value: r2, text: t2},
+      {value: r3, text: t3},
+      {value: r4, text: t4},
+      {value: r5, text: t5},
+    ]
+  }).reduce((acc, val) => acc.concat(val), [])
+}
+
+// console.log('check(8,3,8,3):', check([8,3,8,3]))
+function check (arr) {
+  const results = catalan(arr)
+  return results.filter(v => equal_to_24(v.value))
+}
+
+// console.log('check_all([1,2,3,4]):', check_all([1,2,3,4]))
+function check_all (cards) {
+  let all = permutateWithoutRepetitions(cards)
+  const exists = {}
+  all = all.filter(arr => {
+    const key = arr.join()
+    if (exists[key]) {
+      return false
+    } else {
+      return exists[key] = true
+    }
+  })
+  all = all.map(check)
+  return all.filter(arr => arr.length).reduce((acc, val) => acc.concat(val), []).map(v => v.text)
+}
+
+// https://github.com/trekhleb/javascript-algorithms/blob/master/src/algorithms/sets/permutations/permutateWithoutRepetitions.js
+function permutateWithoutRepetitions(permutationOptions) {
+  if (permutationOptions.length === 1) {
+    return [permutationOptions];
+  }
+  // Init permutations array.
+  const permutations = [];
+  // Get all permutations for permutationOptions excluding the first element.
+  const smallerPermutations = permutateWithoutRepetitions(permutationOptions.slice(1));
+  // Insert first option into every possible position of every smaller permutation.
+  const firstOption = permutationOptions[0];
+  for (let permIndex = 0; permIndex < smallerPermutations.length; permIndex += 1) {
+    const smallerPermutation = smallerPermutations[permIndex];
+    // Insert first option into every possible position of smallerPermutation.
+    for (let positionIndex = 0; positionIndex <= smallerPermutation.length; positionIndex += 1) {
+      const permutationPrefix = smallerPermutation.slice(0, positionIndex);
+      const permutationSuffix = smallerPermutation.slice(positionIndex);
+      permutations.push(permutationPrefix.concat([firstOption], permutationSuffix));
+    }
+  }
+  return permutations;
+}
+ 
+</script>
+</body>
+</html>

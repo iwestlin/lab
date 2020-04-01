@@ -54,15 +54,13 @@ function check (arr) {
 // console.log(check_all([1,1,1,11])) // (1 + 1) * (1 + 11) true
 function check_all (cards) {
   let all = permutateWithoutRepetitions(cards)
-  const t = []
+  const exists = {}
   all = all.filter(arr => {
-    const [a, b, c, d] = arr
-    const value = a * 1000000 + b * 10000 + c * 100 + d
-    if (t.includes(value)) {
+    const key = arr.join()
+    if (exists[key]) {
       return false
     } else {
-      t.push(value)
-      return true
+      return exists[key] = true
     }
   })
   // console.log(all)
