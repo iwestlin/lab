@@ -14,17 +14,26 @@ const ops = oprators.map(v => {
   }).reduce((acc, val) => acc.concat(val), []).map(arr => arr.concat(v))
 }).reduce((acc, val) => acc.concat(val), [])
 // console.log(ops)
+let total
+const counts = {}
+main()
 
-// 各操作符只能用一次
-// const ops = oprators.map(v => [v]).map(arr => {
-//   const lefts = oprators.filter(v => v !== arr[0])
-//   return lefts.map(left => arr.concat(left))
-// }).reduce((acc, val) => acc.concat(val), []).map(arr => {
-//   const lefts = oprators.filter(v => !arr.includes(v))
-//   return lefts.map(left => arr.concat(left))
-// }).reduce((acc, val) => acc.concat(val), [])
+function main () {
+  const now = Date.now()
+  const all_cards = get_all()
+  let not_goods = all_cards.filter(cards => !check_all(cards))
+  const all_bad_counts = not_goods.map(v => {
+    const key = v.join()
+    return counts[key]
+  }).reduce((acc, val) => acc + val)
+  console.log('all done, bad cards:', not_goods.length) // 458
+  console.log('all_bad_counts:', all_bad_counts) // 52908
+  console.log('total:', total) // 270725
+  console.log('percent:', all_bad_counts / total) // 0.19543078769969527
+  console.log('time spent:', Date.now() - now) // 879ms
+}
 
-const catalan = arr => {
+function catalan (arr) {
   const [a, b, c, d] = arr
   return ops.map(([op1, op2, op3]) => {
     const r1 = op1(a, op2(b, op3(c, d)))
@@ -57,43 +66,24 @@ function check_all (cards) {
     }
   })
   // console.log(all)
-
-  // return all.map(check)
   for (let arr of all) {
     if (check(arr).length) return true
   }
   return false
 }
 
-main()
-function main () {
-  const now = Date.now()
-  const all_cards = get_all()
-  // for (let cards of all_cards) {
-  //   if (!check_all(cards)) console.log(cards)
-  // }
-  let not_goods = all_cards.filter(cards => !check_all(cards))
-  // not_goods = not_goods.sort()
-  console.log('all done, bad cards:', not_goods.length)
-  console.log('time spent:', Date.now() - now)
-}
-
-// function get_all () {
-//   const cards = Array(13).fill(1).map((v, i) => v + i)
-//   const all = []
-//   const four_in_one = cards.map(v => ([v, v, v, v]))
-//   const three_in_one = cards.map(v => ([v, v, v])).map(arr => {
-//     return cards.map(v => v === arr[0] ? false : arr.concat(v)).filter(v => v)
-//   }).reduce((acc, val) => acc.concat(val), [])
-//   const two_in_one = cards.map(v => ([v, v])).map(arr => {
-//   })
-// }
-
-// console.log(get_all().length) // 1820
 function get_all () {
   const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-  let result = k_combinations(cards.concat(cards, cards, cards), 4)
-  result = result.map(arr => arr.sort()).map(arr => arr.join())
+  const all = k_combinations(cards.concat(cards, cards, cards), 4)
+  total = all.length
+  let result = all.map(arr => arr.sort()).map(arr => arr.join())
+  for (let v of result) {
+    if (counts[v]) {
+      counts[v] += 1
+    } else {
+      counts[v] = 1
+    }
+  }
   result = new Set(result)
   return Array.from(result).map(v => v.split(',')).map(arr => arr.map(Number))
 }
