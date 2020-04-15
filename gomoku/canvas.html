@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>五子棋sgf转gif</title>
+</head>
+<body>
+<input type="file" onchange="readSGF(this.files)">
+<button onclick="downgif()">download gif</button>
+<a style="margin-left: 100px" href="demo.sgf" target="_blank" download>demo.sgf</a>
+<br><br>
+<canvas width="561" height="561"></canvas>
+<canvas width="561" height="561" style="display: none;"></canvas>
+
+<script src="gif.js"></script>
+<script src="gif.worker.js"></script>
+<script>
+  const gif = new GIF({
+    // workers: 2,
+    quality: 10,
+    width: 561,
+    height: 561
+  })
+  gif.on('finished', function(blob) {
+    window.open(URL.createObjectURL(blob));
+  });
+
+  const canvasEl = document.getElementsByTagName("canvas")[0];
+  const ctx = canvasEl.getContext('2d');
+  const gap = 500 // ms
+  let steps, blob
+
+  draw_board(ctx)
+
+  function downgif () {
+    if (window.blob) return download_blob(window.blob)
+    if (!steps) return alert('请先加载sgf文件')
+    const canvasEl = document.getElementsByTagName("canvas")[1];
+    const ctx = canvasEl.getContext('2d');
+    const gif = new GIF({
+      workers: 2,
+      quality: 10,
+      width: 561,
+      height: 561
+    })
+    gif.on('finished', blob => {
+      window.blob = blob
+      // window.open(URL.createObjectURL(blob))
+      download_blob(blob)
+    })
+    draw_board(ctx)
+    gif.addFrame(ctx, {copy: true})
+    steps.forEach((v, index) => {
+      const [i, j, color] = v
+      draw_stone(ctx, color, i, j, ++index)
+      gif.addFrame(ctx, {copy: true})
+    })
+    gif.render({width: 561, height: 561})
+  }
+
+  function download_blob (blob) {
+    const a = document.createElement('a')
+    a.target = '_blank'
+    a.download = Date.now () + '.gif'
+    a.href = URL.createObjectURL(window.blob)
+    a.click()
+  }
+
+  function readSGF (files) {
+    // clear()
+    var file = files[0]
+    var reader = new FileReader()
+    reader.onload = function (file) {
+      const arr = parse(this.result)
+      steps = arr
+      arr.forEach((v, index) => {
+        const [i, j, color] = v
+        setTimeout(() => {
+          draw_stone(ctx, color, i, j, ++index)
+          gif.addFrame(ctx, {copy: true})
+        }, index * gap)
+      })
+      // setTimeout(() => gif.render({width: 561, height: 561}), arr.length * gap)
+    }
+    reader.readAsText(file)
+  }
+
+  function parse (str) {
+    var game = []
+    var reg = /[BW]\[([a-s]{2})\]/g
+    var line = 'abcdefghijklmnopqrs'
+    const colors = {B: 'black', W: 'white'}
+    var r
+    while (r = reg.exec(str)) {
+      const position = r[1]
+      const color = r[0][0]
+      game.push([line.indexOf(position[0]), line.indexOf(position[1]), colors[color]])
+    }
+    return game
+  }
+
+  // main()
+  function main () {
+    draw_board(ctx)
+    for (let i = 0; i < 15; i++) {
+      for (let j = 0; j < 15; j++) {
+        const color = Math.random() > 0.5 ? 'black' : 'white'
+        if (Math.random() > 0.2) draw_stone(ctx, color, i, j)
+        // draw_stone(ctx, color, i, j)
+      }
+    }
+  }
+
+  function draw_stone (ctx, color, i, j, number) {
+    // const number = 15 * i + j + 1
+    // ctx.fillStyle= "#dbb870";
+    // ctx.fillRect(0, 0, canvasEl.width, canvasEl.height);
+    const offset_x = 35*(i+1)
+    const offset_y = 35*(j+1)
+    const gradient = ctx.createRadialGradient(offset_x, offset_y, 12, offset_x - 5, offset_y - 5, 20);
+    if (color === 'white') { // 白子样式
+      gradient.addColorStop(0, "#fff");
+      gradient.addColorStop(1, "#bbb");
+    } else { // 黑子
+      gradient.addColorStop(0, "#404040");
+      gradient.addColorStop(1, "#0d0d0d");
+    }
+    // 棋子边线
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(offset_x, offset_y, 15, 0, 2*Math.PI)
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.fillStyle = color === 'white' ? 'black' : 'white'
+    // ctx.font = "16px Helvetica"
+    // ctx.fillText('1', 11, 20) // 1-9
+
+    // ctx.font = "14px Helvetica"
+    // ctx.fillText('99', 7, 20) // 10-99
+
+    const font_size = number < 10 ? 16 : (number < 100 ? 14 : 12)
+    const text_x = number < 10 ? 11 : (number < 100 ? 7 : 5)
+    const text_y = number < 10 ? 20 : (number < 100 ? 20 : 19)
+    ctx.font = font_size + 'px Helvetica'
+    ctx.fillText(number, offset_x - 15 + text_x, offset_y - 15 + text_y)
+  }
+
+  function draw_board (ctx) {
+    ctx.fillStyle= "#dbb870";
+    ctx.fillRect(0, 0, canvasEl.width, canvasEl.height);
+    for (let i = 0; i <= 14; i++) {
+      ctx.beginPath();
+      ctx.strokeStyle = "black";
+      ctx.moveTo(i*35 + 35.5,0 + 35.5);
+      ctx.lineTo(i*35 + 35.5, 35*15);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.strokeStyle = "black";
+      ctx.moveTo(0 + 35.5, i*35 + 35.5);
+      ctx.lineTo(35*15, i*35 + 35.5);
+      ctx.stroke();
+      ctx.closePath();
+    }
+    ctx.fillStyle = "black";
+    ctx.fillRect(35*3+32, 35*3+32, 6, 6);
+    ctx.fillRect(35*11+32, 35*3+32, 6, 6);
+    ctx.fillRect(35*7+32, 35*7+32, 6, 6);
+    ctx.fillRect(35*3+32, 35*11+32, 6, 6);
+    ctx.fillRect(35*11+32, 35*11+32, 6, 6);
+  }
+</script>
+</body>
+</html>
