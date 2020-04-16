@@ -15,16 +15,6 @@
 <script src="gif.js"></script>
 <script src="gif.worker.js"></script>
 <script>
-  const gif = new GIF({
-    // workers: 2,
-    quality: 10,
-    width: 561,
-    height: 561
-  })
-  gif.on('finished', function(blob) {
-    window.open(URL.createObjectURL(blob));
-  });
-
   const canvasEl = document.getElementsByTagName("canvas")[0];
   const ctx = canvasEl.getContext('2d');
   const gap = 500 // ms
@@ -77,7 +67,7 @@
         const [i, j, color] = v
         setTimeout(() => {
           draw_stone(ctx, color, i, j, ++index)
-          gif.addFrame(ctx, {copy: true})
+          // gif.addFrame(ctx, {copy: true})
         }, index * gap)
       })
       // setTimeout(() => gif.render({width: 561, height: 561}), arr.length * gap)
