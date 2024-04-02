@@ -40,11 +40,13 @@ function solve () {
 
 function catalan (arr) {
   const [a, b, c, d] = arr
-  const ops = oprators.map(v => {
-    return oprators.map(vv => {
-      return oprators.map(vvv => [vvv, vv])
-    }).reduce((acc, val) => acc.concat(val), []).map(arr => arr.concat(v))
-  }).reduce((acc, val) => acc.concat(val), [])
+  // 从4种操作符中任选3次组成数组，可重复挑选，区分位置，共64种组合方法
+  const ops = oprators.map(v => 
+    oprators.map(vv => oprators.map(vvv => [vvv, vv]))
+      .reduce((acc, val) => acc.concat(val), [])
+      .map(arr => arr.concat(v))
+  ).reduce((acc, val) => acc.concat(val), [])
+  // console.log(ops.map(arr => arr.map(fn => op_texts[fn])))
 
   return ops.map(([op1, op2, op3]) => {
     const op1_t = op_texts[op1]
