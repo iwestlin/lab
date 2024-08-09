@@ -415,7 +415,28 @@ Excited! Excellent! Extraordinary！
 这样，我们就达成了终极目标：**对于任意重根号的任意表达式，改变左侧的根的位置的同时，使得右侧的根最终位置不发生任何变化。**
 
 ```javascript
-var powerset = xs => xs.reduceRight((a, x) => a.concat(a.map(y => y.concat(x))), [[]])
+function permute (permutation) { // https://stackoverflow.com/a/37580979
+  var length = permutation.length,
+    result = [permutation.slice()],
+    c = new Array(length).fill(0),
+    i = 1, k, p
+
+  while (i < length) {
+    if (c[i] < i) {
+      k = i % 2 && c[i]
+      p = permutation[i]
+      permutation[i] = permutation[k]
+      permutation[k] = p
+      ++c[i]
+      i = 1
+      result.push(permutation.slice())
+    } else {
+      c[i] = 0
+      ++i
+    }
+  }
+  return result
+}
 
 function compose (a, b) {
   return Array(a.length).fill().map((v, i) => b[a[i] - 1])
@@ -440,7 +461,7 @@ function getAllCommutators (a) {
   return result.map(v => v.split('-').map(vv => parseInt(vv)))
 }
 
-var s5 = powerset([1, 2, 3, 4, 5]) // 所有置换
+var s5 = permute([1, 2, 3, 4, 5]) // 所有置换
 var a5 = getAllCommutators(s5) // 所有交换子的结果
 var commutatorsOfA5 = getAllCommutators(a5) // 所有交换子的交换子的结果
 var t = a5.map(v => v.join('')).sort()
